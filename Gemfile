@@ -11,11 +11,11 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'dotenv-rails'
+gem 'faker' # Use in all environments until we have a real API
 
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'faker'
   gem 'factory_girl_rails'
 end
 
