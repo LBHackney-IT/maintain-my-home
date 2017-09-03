@@ -17,7 +17,7 @@ Style/FrozenStringLiteralComment:
 Style/NumericLiterals:
     Enabled: false
 
-Style/TrailingBlankLines:
+Layout/TrailingBlankLines:
     Enabled: false
 
 Style/TrailingCommaInLiteral:
@@ -29,3 +29,11 @@ Style/TrailingCommaInArguments:
 Style/Documentation:
     Enabled: false
 
+Metrics/LineLength:
+    Max: 80
+    Exclude:
+      - 'spec/**/*'
+
+Metrics/BlockLength:
+    Exclude:
+      - 'spec/**/*'
