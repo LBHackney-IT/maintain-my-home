@@ -1,0 +1,8 @@
+= simple_form_for @address_search, url: address_search_path, method: :get do |f|
+  = f.input :postcode
+  = f.button :submit
+
+= simple_form_for @address, method: :put do |f|
+  #address-search-results
+    = f.collection_radio_buttons :address, [['P01234', 'Flat 1, 8 Hoxton Square, N1 6NU']], :first, :last
+    = f.button :submit
