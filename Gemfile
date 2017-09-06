@@ -27,7 +27,9 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'climate_control'
+  gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
 end
