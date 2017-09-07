@@ -1,9 +1,17 @@
 class AddressFinder
-  def find(_form)
-    [
-      Result.new('P01234', 'Flat 1, 8 Hoxton Square, N1 6NU'),
-    ]
+  def initialize(api)
+    @api = api
   end
 
-  Result = Struct.new(:property_reference, :short_address)
+  def find(form)
+    properties = @api.list_properties(form.data[:postcode])
+    properties.map do |property|
+      Property.new(
+        property['property_reference'],
+        property['short_address']
+      )
+    end
+  end
+
+  Property = Struct.new(:property_reference, :short_address)
 end
