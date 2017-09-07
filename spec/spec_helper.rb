@@ -94,3 +94,7 @@ RSpec.configure do |config|
   #   # value as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+# Add the root of the project to the load path so that we can
+# explicitly load dependent files in isolated specs
+$LOAD_PATH << File.expand_path('../../', __FILE__)
