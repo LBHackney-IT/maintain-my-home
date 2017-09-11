@@ -1,12 +1,19 @@
 require 'rails_helper'
 
 RSpec.feature 'Resident can locate a problem' do
+  scenario 'viewing the address search form' do
+    visit '/address_search/'
+
+    expect(page).to have_no_css('#address-search-results')
+  end
+
   scenario 'when they are a Hackney Council Tenant' do
     properties = [
       { 'property_reference' => 'abc123', 'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU' },
     ]
-    fake_api = double(list_properties: properties)
-    allow(HackneyApi).to receive(:new).and_return(fake_api)
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return(properties)
+    allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address_search/'
 

@@ -9,7 +9,7 @@ RSpec.describe AddressFinder do
 
       AddressFinder.new(api).find(form)
 
-      expect(api).to have_received(:list_properties).with('N1 6NU')
+      expect(api).to have_received(:list_properties).with(postcode: 'N1 6NU')
     end
 
     it 'wraps the result of the api call in an object' do
