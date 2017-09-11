@@ -9,14 +9,26 @@ RSpec.describe JsonApi do
       expect { json_api.get('asfasf') }.not_to raise_error
     end
 
-    it 'returns a fixed response' do
-      json_api = JsonApi.new
+    context 'with a path matching properties?postcode=' do
+      it 'returns a valid response' do
+        json_api = JsonApi.new
 
-      results = [
-        { 'property_reference' => 'zxc987', 'short_address' => '221B Aardvark Road, A1 1AA' },
-      ]
+        result = json_api.get('properties?postcode=A1 1AA')
 
-      expect(json_api.get('not/a/real/path')).to eq(results)
+        expect(result).to be_an(Array)
+        expect(result.first.keys).to include('property_reference', 'short_address')
+      end
+    end
+
+    context 'with a path matching properties/:property_reference' do
+      it 'returns a valid response' do
+        json_api = JsonApi.new
+
+        result = json_api.get('properties/zxc098')
+
+        expect(result).to be_a(Hash)
+        expect(result.keys).to include('property_reference', 'short_address', 'uprn')
+      end
     end
   end
 end

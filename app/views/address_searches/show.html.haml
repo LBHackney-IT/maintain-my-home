@@ -5,5 +5,5 @@
 - unless @first_visit
   = simple_form_for @address, method: :put do |f|
     #address-search-results
-      = f.collection_radio_buttons :address, @address_search_results, :property_reference, :short_address
+      = f.collection_radio_buttons :property_reference, @address_search_results, :property_reference, :short_address
       = f.button :submit

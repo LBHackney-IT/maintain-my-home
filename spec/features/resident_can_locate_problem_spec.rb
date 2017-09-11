@@ -8,11 +8,20 @@ RSpec.feature 'Resident can locate a problem' do
   end
 
   scenario 'when they are a Hackney Council Tenant' do
-    properties = [
-      { 'property_reference' => 'abc123', 'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU' },
-    ]
+    tenant_property = {
+      'property_reference' => 'abc123',
+      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+    }
+    other_property = {
+      'property_reference' => 'def456',
+      'short_address' => 'Flat 7, 12 Hoxton Square, N1 6NU',
+    }
+
+    matching_properties = [other_property, tenant_property]
+
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return(properties)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return(matching_properties)
+    allow(fake_api).to receive(:get).with('properties/abc123').and_return(tenant_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address_search/'
