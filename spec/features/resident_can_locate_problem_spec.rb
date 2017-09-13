@@ -56,4 +56,13 @@ RSpec.feature 'Resident can locate a problem' do
       expect(page).to have_content t('address_search.not_found')
     end
   end
+
+  scenario 'when an invalid postcode is entered' do
+    visit '/address_search/'
+
+    fill_in :address_search_postcode, with: ' '
+    click_button t('helpers.submit.address_search.create')
+
+    expect(page).to have_content "Postcode can't be blank"
+  end
 end
