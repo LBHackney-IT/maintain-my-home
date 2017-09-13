@@ -41,4 +41,19 @@ RSpec.feature 'Resident can locate a problem' do
       expect(page).to have_content 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
   end
+
+  scenario "when the address couldn't be found" do
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    visit '/address_search/'
+
+    fill_in :address_search_postcode, with: 'N1 6NU'
+    click_button t('helpers.submit.address_search.create')
+
+    within '#address-search-results' do
+      expect(page).to have_content t('address_search.not_found')
+    end
+  end
 end

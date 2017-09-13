@@ -1,5 +1,7 @@
 ---
 en:
+  address_search:
+    not_found: No addresses found
   appointments:
     new:
       title: Book a repair appointment
