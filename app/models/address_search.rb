@@ -6,7 +6,13 @@ class AddressSearch
   validates :postcode, presence: true, postcode: { allow_blank: true }
 
   def data
-    { postcode: postcode }
+    { postcode: normalised_postcode }
+  end
+
+  private
+
+  def normalised_postcode
+    postcode.strip.gsub(/\s+/, ' ').upcase
   end
 end
 
