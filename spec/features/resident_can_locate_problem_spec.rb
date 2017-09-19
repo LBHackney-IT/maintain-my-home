@@ -83,7 +83,7 @@ RSpec.feature 'Resident can locate a problem' do
 
     expect(page).to have_content('N1 6AA')
 
-    click_button 'Change'
+    click_button t('address_search.change')
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')

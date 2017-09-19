@@ -1,6 +1,7 @@
 ---
 en:
   address_search:
+    change: Change
     not_found: No addresses found
   appointments:
     new:
