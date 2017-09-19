@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :address_search, only: :show
+  resource :address_search, only: %i[show update]
   resource :addresses, only: [:update]
   resources :appointments, only: [:new]
 

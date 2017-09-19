@@ -1,11 +1,15 @@
 class AddressSearchesController < ApplicationController
   def show
+    @address_search = AddressSearch.new
+  end
+
+  def update
     @address_search = AddressSearch.new(address_search_params[:address_search])
 
-    first_visit = address_search_params.empty?
-    @show_results = !first_visit && @address_search.valid?
-
-    return unless @show_results
+    unless @address_search.valid?
+      render :show
+      return
+    end
 
     address_finder = AddressFinder.new(HackneyApi.new)
     @address_search_results = address_finder.find(@address_search)
