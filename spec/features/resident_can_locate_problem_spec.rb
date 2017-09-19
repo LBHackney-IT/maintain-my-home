@@ -74,4 +74,20 @@ RSpec.feature 'Resident can locate a problem' do
 
     expect(page).to have_content "Postcode can't be blank"
   end
+
+  scenario 'changing the postcode after searching' do
+    visit '/address_search/'
+
+    fill_in :address_search_postcode, with: 'N1 6AA'
+    click_button t('helpers.submit.address_search.create')
+
+    expect(page).to have_content('N1 6AA')
+
+    click_button 'Change'
+
+    fill_in :address_search_postcode, with: 'N1 6NU'
+    click_button t('helpers.submit.address_search.create')
+
+    expect(page).to have_content('N1 6NU')
+  end
 end
