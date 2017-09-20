@@ -91,7 +91,31 @@ RSpec.feature 'Resident can locate a problem' do
     expect(page).to have_content('N1 6NU')
   end
 
-  scenario 'performing a search, but not selecting any address' do
+  scenario 'performing a search and not selecting an address, prevents form submission', js: true do
+    matching_property = {
+      'property_reference' => 'abc123',
+      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+    }
+
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([matching_property])
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    visit '/address_search/'
+
+    fill_in :address_search_postcode, with: 'N1 6NU'
+    click_button t('helpers.submit.address_search.create')
+
+    expect(page).to have_no_button t('helpers.submit.address.create')
+
+    within '#address-search-results' do
+      choose 'Flat 1, 8 Hoxton Square, N1 6NU'
+    end
+
+    expect(page).to have_button t('helpers.submit.address.create')
+  end
+
+  scenario 'performing a search and not selecting an address' do
     matching_property = {
       'property_reference' => 'abc123',
       'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
