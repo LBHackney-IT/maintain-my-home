@@ -33,6 +33,7 @@ group :test do
   gem 'capybara'
   gem 'climate_control'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'webmock'
 end
