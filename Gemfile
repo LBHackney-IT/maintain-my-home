@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 gem 'faker' # Use in all environments until we have a real API
+gem 'govuk_elements_rails'
+gem 'govuk_frontend_toolkit'
 gem 'haml-rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'

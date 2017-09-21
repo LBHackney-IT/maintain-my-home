@@ -5,6 +5,6 @@ RSpec.feature 'Users understand the purpose of the service' do
     visit '/'
 
     expect(page).to have_content 'Maintain my home'
-    expect(page).to have_button 'Start'
+    expect(page).to have_link 'Start'
   end
 end
