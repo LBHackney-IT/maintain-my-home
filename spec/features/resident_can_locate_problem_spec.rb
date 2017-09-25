@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Resident can locate a problem' do
   scenario 'viewing the address search form' do
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     expect(page).to have_no_css('#address-search-results')
   end
@@ -24,7 +24,7 @@ RSpec.feature 'Resident can locate a problem' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(tenant_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')
@@ -47,7 +47,7 @@ RSpec.feature 'Resident can locate a problem' do
     allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')
@@ -58,7 +58,7 @@ RSpec.feature 'Resident can locate a problem' do
   end
 
   scenario 'when an invalid postcode is entered' do
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'NNN1 1AAA'
     click_button t('helpers.submit.address_search.create')
@@ -67,7 +67,7 @@ RSpec.feature 'Resident can locate a problem' do
   end
 
   scenario 'when no postcode is entered' do
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: '  '
     click_button t('helpers.submit.address_search.create')
@@ -76,14 +76,14 @@ RSpec.feature 'Resident can locate a problem' do
   end
 
   scenario 'changing the postcode after searching' do
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6AA'
     click_button t('helpers.submit.address_search.create')
 
     expect(page).to have_content('N1 6AA')
 
-    click_button t('address_search.change')
+    click_link t('address_search.change')
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')
@@ -101,7 +101,7 @@ RSpec.feature 'Resident can locate a problem' do
     allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([matching_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')
@@ -125,7 +125,7 @@ RSpec.feature 'Resident can locate a problem' do
     allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([matching_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    visit '/address_search/'
+    visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')

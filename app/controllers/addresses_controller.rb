@@ -1,8 +1,8 @@
 class AddressesController < ApplicationController
-  def update
+  def create
     if property_reference.empty?
-      return redirect_back(
-        fallback_location: address_search_path,
+      return redirect_to(
+        new_address_search_path,
         alert: 'Please choose your address to continue'
       )
     end

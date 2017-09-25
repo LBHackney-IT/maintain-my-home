@@ -1,13 +1,13 @@
 class AddressSearchesController < ApplicationController
-  def show
+  def new
     @address_search = AddressSearch.new
   end
 
-  def update
+  def create
     @address_search = AddressSearch.new(address_search_params[:address_search])
 
     unless @address_search.valid?
-      render :show
+      render :new
       return
     end
 

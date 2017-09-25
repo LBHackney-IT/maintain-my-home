@@ -1,14 +1,14 @@
 - if @address_search.errors
   = @address_search.errors.full_messages.join(', ')
 
-= simple_form_for @address_search, url: address_search_path, method: :get do |f|
+%p
   = @address_search.postcode
-  = f.button :submit, t('address_search.change')
+  = link_to t('address_search.change'), new_address_search_path
 
 - if @address_search_results
   #address-search-results
     - if @address_search_results.any?
-      = simple_form_for @address, method: :put do |f|
+      = simple_form_for @address, url: address_path do |f|
         = f.collection_radio_buttons :property_reference, @address_search_results, :property_reference, :short_address
         = f.button :submit
     - else
