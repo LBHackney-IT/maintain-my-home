@@ -11,6 +11,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.3'
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
@@ -27,7 +28,9 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'climate_control'
+  gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
 end

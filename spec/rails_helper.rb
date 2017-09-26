@@ -1,4 +1,8 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_group 'Queries', 'app/queries'
+end
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -9,6 +13,7 @@ if Rails.env.production?
 end
 
 require 'rspec/rails'
+require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,6 +36,8 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include AbstractController::Translation
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

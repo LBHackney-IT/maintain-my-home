@@ -33,6 +33,7 @@ Metrics/LineLength:
     Max: 80
     Exclude:
       - 'spec/**/*'
+      - 'config/initializers/simple_form.rb'
 
 Metrics/BlockLength:
     Exclude:
