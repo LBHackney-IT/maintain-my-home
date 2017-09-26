@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resource :address_search, only: :show
-  resource :addresses, only: [:update]
+  resource :address_search, only: %i[new create]
+  resource :address, only: [:create]
   resources :appointments, only: [:new]
 
   root to: 'start#index'

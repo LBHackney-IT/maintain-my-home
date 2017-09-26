@@ -9,6 +9,7 @@ gem 'faker' # Use in all environments until we have a real API
 gem 'govuk_elements_rails'
 gem 'govuk_frontend_toolkit'
 gem 'haml-rails'
+gem 'jquery-rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.3'
@@ -33,6 +34,7 @@ group :test do
   gem 'capybara'
   gem 'climate_control'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'webmock'
 end
