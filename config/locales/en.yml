@@ -1,4 +1,3 @@
----
 en:
   address_search:
     change: Change
@@ -15,3 +14,10 @@ en:
         create: Use this address
       address_search:
         create: Find my address
+      create: Continue
+  simple_form:
+    options:
+      start_form:
+        priority_repair:
+          'yes': 'Yes'
+          'no': 'No'
