@@ -20,6 +20,11 @@ RSpec.describe AddressSearch do
       expect(AddressSearch.new(params).data).to eq(postcode: 'N16 8QR')
     end
 
+    it 'adds a space in the middle' do
+      params = { postcode: 'N168QR' }
+      expect(AddressSearch.new(params).data).to eq(postcode: 'N16 8QR')
+    end
+
     it 'converts postcodes to upper case' do
       params = { postcode: 'n16 8qr' }
       expect(AddressSearch.new(params).data).to eq(postcode: 'N16 8QR')

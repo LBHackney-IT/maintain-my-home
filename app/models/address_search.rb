@@ -12,7 +12,7 @@ class AddressSearch
   private
 
   def normalised_postcode
-    postcode.strip.gsub(/\s+/, ' ').upcase
+    postcode.strip.gsub(/\s+/, '').insert(-4, ' ').upcase
   end
 end
 
