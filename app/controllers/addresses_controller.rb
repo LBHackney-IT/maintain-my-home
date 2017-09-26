@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
     if property_reference.blank?
       return redirect_to(
         new_address_search_path,
-        alert: 'Please choose your address to continue'
+        alert: t('addresses.errors.blank')
       )
     end
 

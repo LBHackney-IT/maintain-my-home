@@ -131,6 +131,6 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
     click_button t('helpers.submit.address.create')
 
-    expect(page).to have_content('Please choose your address to continue')
+    expect(page).to have_content(t('addresses.errors.blank'))
   end
 end
