@@ -7,4 +7,12 @@ RSpec.feature 'Users understand the purpose of the service' do
     expect(page).to have_content 'Maintain my home'
     expect(page).to have_link 'Start'
   end
+
+  scenario 'sees the first question upon clicking the button' do
+    visit '/'
+
+    click_on 'Start'
+
+    expect(page).to have_content 'Is your problem one of these?'
+  end
 end
