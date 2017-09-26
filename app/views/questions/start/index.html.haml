@@ -13,5 +13,5 @@
 
 .answers
   = simple_form_for @form, url: questions_start_submit_path do |f|
-    = f.input :priority_repair, collection: [:yes, :no], as: :radio_buttons
-    = f.button :submit
+    = f.input :priority_repair, collection: [:yes, :no], as: :radio_buttons, label: ''
+    = f.button :submit, class: 'button'

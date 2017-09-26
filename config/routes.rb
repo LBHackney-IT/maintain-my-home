@@ -8,5 +8,9 @@ Rails.application.routes.draw do
     post '/start', to: 'start#submit', as: 'start_submit'
   end
 
+  get '/emergency-contact',
+      to: 'pages#emergency_contact',
+      as: 'emergency_contact'
+
   root to: 'start#index'
 end
