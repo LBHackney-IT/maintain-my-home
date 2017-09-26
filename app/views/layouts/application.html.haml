@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
+    %title Maintain my home
+
+    = csrf_meta_tags
+    %link{ href: 'https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel: 'stylesheet' }/
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+
+  %body
+    %header
+      .wrapper
+        %a{ href: '/' }
+          %h1
+            Hackney
+
+    %main
+      #content{ role: 'main' }
+        = yield
+
+    %footer
+      .wrapper
+        %ul{ role: 'contentinfo' }
+          %li
+            %a{ href: 'https://www.hackney.gov.uk/accessibility-help' } Accessibility
+            %a{ href: 'https://www.hackney.gov.uk/apps' } Apps
+            %a{ href: 'https://www.hackney.gov.uk/a-to-z' } A to Z
+            %a{ href: 'https://www.hackney.gov.uk/contact' } Contact us
+            %a{ href: 'https://www.hackney.gov.uk/email-alerts' } Email alerts
+            %a{ href: 'https://www.hackney.gov.uk/help' } Help
+            %a{ href: 'https://www.hackney.gov.uk/News' } News
+            %a{ href: 'https://www.hackney.gov.uk/privacy' } Privacy statement
+            %a{ href: 'https://www.hackney.gov.uk/disclaimer' } Terms and conditions
+
+        %ul.social
+          %li
+            %a.social-twitter{ href: 'https://www.twitter.com/hackneycouncil' } Twitter
+            %a.social-facebook{ href: 'https://www.facebook.com/hackneycouncil' } Facebook
+            %a.social-youtube{ href: 'https://www.youtube.com/hackneycouncil' } YouTube
+            %a.social-instagram{ href: 'https://www.instagram.com/hackneycouncil' } Instagram

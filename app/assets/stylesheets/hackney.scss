@@ -1,0 +1,98 @@
+@import 'variables';
+@import 'grid_layout';
+@import 'typography';
+
+body {
+  background-color: $hackney-dark-grey;
+  font-family: $font-stack;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  @extend %site-width-container;
+}
+
+header {
+  background-color: $hackney-dark-grey;
+  border-bottom: 4px solid $hackney-green;
+  color: $white;
+  padding: 1em;
+
+  h1 {
+    background: asset-url('logo.png') 0 0 no-repeat;
+    height: 54px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    width: 300px;
+  }
+
+  a {
+    color: $white;
+  }
+}
+
+main {
+  background-color: $white;
+  padding: 1em 0;
+
+  #main-content {
+    @extend %site-width-container;
+  }
+
+  h1 {
+    @include heading-48;
+
+    color: $hackney-green;
+    font-weight: bold;
+  }
+
+  h2 {
+    @include heading-36;
+  }
+
+  .button {
+    background-color: $hackney-green;
+
+    &:hover, &:focus {
+      background-color: $hackney-light-green;
+    }
+  }
+}
+
+footer {
+  background-color: $hackney-dark-grey;
+  border-top: 5px solid $hackney-green;
+  color: $white;
+  font-size: 14px;
+  padding: 2em;
+  position: relative;
+
+  a {
+    color: $white;
+    padding: 7px;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    padding: 1em 0;
+    text-align: center;
+  }
+
+  &::before, &::after {
+    background-color: $hackney-light-green;
+    content: '';
+    display: block;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+}
