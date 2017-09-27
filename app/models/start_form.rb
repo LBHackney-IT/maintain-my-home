@@ -1,9 +1,13 @@
 class StartForm
   include ActiveModel::Model
 
-  attr_accessor :priority_repair
+  attr_reader :priority_repair
 
   validate :mandatory_fields_present
+
+  def initialize(hash = {})
+    @priority_repair = hash[:priority_repair]
+  end
 
   def priority_repair?
     priority_repair == 'yes'
