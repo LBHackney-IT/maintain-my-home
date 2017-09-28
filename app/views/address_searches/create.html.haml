@@ -9,8 +9,14 @@
   #address-search-results
     - if @address_search_results.any?
       = simple_form_for @address, url: address_path do |f|
-        = f.collection_radio_buttons :property_reference, @address_search_results, :property_reference, :short_address
-        = f.button :submit
+        = f.input :property_reference,
+          as: :radio_buttons,
+          collection: @address_search_results,
+          label_method: :short_address,
+          value_method: :property_reference,
+          label: false
+
+        = f.button :submit, class: 'button'
     - else
       = t('address_search.not_found')
 
