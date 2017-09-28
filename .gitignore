@@ -16,3 +16,4 @@
 /tags
 /tmp/*
 /yarn-error.log
+/spec/failures.txt
