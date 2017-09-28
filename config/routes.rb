@@ -16,5 +16,8 @@ Rails.application.routes.draw do
       to: 'pages#address_isnt_here',
       as: 'address_isnt_here'
 
+  get '/describe-repair', to: 'describe_repair#index', as: 'describe_repair'
+  post '/describe-repair', to: 'describe_repair#submit'
+
   root to: 'start#index'
 end
