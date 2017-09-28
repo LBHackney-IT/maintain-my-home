@@ -17,3 +17,4 @@
 /tmp/*
 /yarn-error.log
 /spec/failures.txt
+.env
