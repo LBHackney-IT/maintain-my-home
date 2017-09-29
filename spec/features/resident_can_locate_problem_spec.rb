@@ -42,7 +42,7 @@ RSpec.feature 'Resident can locate a problem' do
     end
   end
 
-  scenario "when the address couldn't be found" do
+  scenario 'when the address search returned no results' do
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
     allow(JsonApi).to receive(:new).and_return(fake_api)
@@ -137,5 +137,29 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address.create')
 
     expect(page).to have_content(t('addresses.errors.blank'))
+  end
+
+  scenario "user's address isn't listed" do
+    other_property = {
+      'property_reference' => 'abc123',
+      'short_address' => '99 Abersham Road',
+    }
+
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([other_property])
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    visit '/address_search/new/'
+
+    fill_in :address_search_postcode, with: 'N1 6NU'
+    click_button t('helpers.submit.address_search.create')
+
+    within '#address-search-results' do
+      choose_radio_button t('simple_form.options.address.property_reference.address_isnt_here')
+    end
+
+    click_button t('helpers.submit.address.create')
+
+    expect(page).to have_content 'We cannot find your address'
   end
 end
