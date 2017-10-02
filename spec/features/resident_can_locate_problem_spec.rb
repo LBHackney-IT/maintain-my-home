@@ -30,7 +30,7 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
 
     within '#address-search-results' do
-      choose 'Flat 1, 8 Hoxton Square, N1 6NU'
+      choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
 
     click_button t('helpers.submit.address.create')
@@ -114,7 +114,7 @@ RSpec.feature 'Resident can locate a problem' do
     expect(page).to have_no_button t('helpers.submit.address.create')
 
     within '#address-search-results' do
-      choose 'Flat 1, 8 Hoxton Square, N1 6NU'
+      choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
 
     expect(page).to have_button t('helpers.submit.address.create')
