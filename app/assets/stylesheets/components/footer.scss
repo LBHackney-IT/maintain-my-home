@@ -1,0 +1,43 @@
+footer {
+  background-color: $hackney-dark-grey;
+  border-top: 5px solid $hackney-green;
+  color: $white;
+  font-size: 14px;
+  padding: 2em;
+  position: relative;
+
+  &::before, &::after {
+    background-color: $hackney-light-green;
+    content: '';
+    display: block;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+
+  a {
+    color: $white;
+    padding: 7px;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:link, &:visited, &:active, &:hover, &:focus {
+      color: $white;
+    }
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      color: $black;
+    }
+  }
+
+  ul {
+    padding: 1em 0;
+    text-align: center;
+  }
+}

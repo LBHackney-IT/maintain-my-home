@@ -17,6 +17,8 @@ en:
       address_search:
         create: Find my address
       create: Continue
+      dummy_form:
+        submit: Continue
   simple_form:
     labels:
       address:

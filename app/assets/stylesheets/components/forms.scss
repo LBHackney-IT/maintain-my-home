@@ -1,0 +1,26 @@
+.question {
+  padding-bottom: 30px;
+}
+
+.radio {
+  @extend .multiple-choice;
+}
+
+textarea {
+  @extend .form-control;
+
+  width: 100%;
+  height: 10em;
+}
+
+input.string {
+  @extend .form-control;
+}
+
+.button {
+  background-color: $hackney-green;
+
+  &:hover, &:focus {
+    background-color: $hackney-light-green;
+  }
+}

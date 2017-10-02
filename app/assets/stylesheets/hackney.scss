@@ -1,11 +1,43 @@
 @import 'variables';
+
+/* From GDS's alphagov/govuk_frontend_toolkit */
+@import 'font_stack';
+@import 'measurements';
+@import 'conditionals';
+@import 'device-pixels';
 @import 'grid_layout';
 @import 'typography';
+@import 'shims';
 
-@import 'colours/palette';
+@import 'design-patterns/alpha-beta';
+@import 'design-patterns/buttons';
+@import 'design-patterns/breadcrumbs';
 
+/* From GDS's alphagov/govuk_elements */
+@import 'elements/govuk-template-base';
+@import 'elements/helpers';
+@import 'elements/reset';
+@import 'elements/layout';
+@import 'elements/elements-typography';
+@import 'elements/buttons';
+@import 'elements/icons';
+@import 'elements/lists';
 @import 'elements/forms';
 @import 'elements/forms/form-multiple-choice';
+@import 'elements/forms/form-validation';
+@import 'elements/breadcrumbs';
+@import 'elements/phase-banner';
+@import 'elements/components';
+
+/* Include our components */
+@import 'components/header';
+@import 'components/main';
+@import 'components/footer';
+@import 'components/forms';
+
+html {
+  background-color: $hackney-dark-grey;
+}
 
 body {
   background-color: $hackney-dark-grey;
@@ -18,117 +50,3 @@ body {
   @extend %site-width-container;
 }
 
-header {
-  background-color: $hackney-dark-grey;
-  border-bottom: 4px solid $hackney-green;
-  color: $white;
-  padding: 1em;
-
-  h1 {
-    background: asset-url('logo.png') 0 0 no-repeat;
-    display: inline-block;
-    height: 54px;
-    overflow: hidden;
-    text-indent: 100%;
-    vertical-align: middle;
-    white-space: nowrap;
-    width: 300px;
-  }
-
-  a {
-    color: $white;
-    text-decoration: none;
-  }
-
-  h2 {
-    @include heading-24;
-    display: inline-block;
-    margin-left: 1em;
-    vertical-align: middle;
-
-    @include media(mobile) {
-      margin-left: 0;
-    }
-  }
-}
-
-main {
-  background-color: $white;
-  padding: 1em 0;
-
-  #main-content {
-    @extend %site-width-container;
-  }
-
-  strong {
-    font-weight: bold;
-  }
-
-  h1 {
-    @include heading-48;
-
-    color: $hackney-green;
-    font-weight: bold;
-  }
-
-  h2 {
-    @include heading-36;
-  }
-
-  ul {
-    list-style-type: disc;
-    padding-left: 20px;
-  }
-
-  .question {
-    padding-bottom: 30px;
-  }
-
-  .radio {
-    @extend .multiple-choice;
-  }
-
-  .button {
-    background-color: $hackney-green;
-
-    &:hover, &:focus {
-      background-color: $hackney-light-green;
-    }
-  }
-}
-
-footer {
-  background-color: $hackney-dark-grey;
-  border-top: 5px solid $hackney-green;
-  color: $white;
-  font-size: 14px;
-  padding: 2em;
-  position: relative;
-
-  a {
-    color: $white;
-    padding: 7px;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
-
-  ul {
-    padding: 1em 0;
-    text-align: center;
-  }
-
-  &::before, &::after {
-    background-color: $hackney-light-green;
-    content: '';
-    display: block;
-    height: 3px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 5px;
-  }
-}

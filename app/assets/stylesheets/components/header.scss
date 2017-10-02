@@ -1,0 +1,34 @@
+header {
+  background-color: $hackney-dark-grey;
+  border-bottom: 4px solid $hackney-green;
+  color: $white;
+  padding: 1em;
+
+  h1 {
+    background: asset-url('logo.png') 0 0 no-repeat;
+    display: inline-block;
+    height: 54px;
+    overflow: hidden;
+    text-indent: 100%;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 300px;
+  }
+
+  a, a:link, a:visited, a:hover {
+    background-color: $hackney-dark-grey;
+    color: $white;
+    text-decoration: none;
+  }
+
+  h2 {
+    @include heading-24;
+    display: inline-block;
+    margin-left: 1em;
+    vertical-align: middle;
+
+    @include media(mobile) {
+      margin-left: 0;
+    }
+  }
+}
