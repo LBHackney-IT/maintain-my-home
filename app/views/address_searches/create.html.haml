@@ -20,7 +20,14 @@
             as: :radio_buttons,
             collection: @address_search_results,
             label_method: :short_address,
-            value_method: :property_reference
+            value_method: :property_reference,
+            label: false
+
+          = f.input :property_reference,
+            as: :radio_buttons,
+            collection: [:address_isnt_here],
+            label: false,
+            include_hidden: false
 
           = f.button :submit, class: 'button'
     - else

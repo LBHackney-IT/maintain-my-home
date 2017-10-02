@@ -12,5 +12,9 @@ Rails.application.routes.draw do
       to: 'pages#emergency_contact',
       as: 'emergency_contact'
 
+  get '/address-isnt-here',
+      to: 'pages#address_isnt_here',
+      as: 'address_isnt_here'
+
   root to: 'start#index'
 end

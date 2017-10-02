@@ -7,6 +7,10 @@ class AddressesController < ApplicationController
       )
     end
 
+    if property_reference == 'address_isnt_here'
+      return redirect_to address_isnt_here_path
+    end
+
     api = HackneyApi.new
     address = api.get_property(property_reference: property_reference)
 

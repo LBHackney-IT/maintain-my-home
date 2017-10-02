@@ -23,6 +23,9 @@ en:
         new:
           property_reference: Select your address
     options:
+      address:
+        property_reference:
+          address_isnt_here: "My address isn't here"
       start_form:
         priority_repair:
           'yes': 'Yes'
