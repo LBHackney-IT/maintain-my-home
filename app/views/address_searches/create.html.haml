@@ -1,22 +1,28 @@
+%h1
+  What is your address?
+
 - if @address_search.errors
   = @address_search.errors.full_messages.join(', ')
 
-%p
-  = @address_search.postcode
+%p.form-label
+  Postcode
+  %br/
+  %strong
+    = @address_search.postcode.upcase
   = link_to t('address_search.change'), new_address_search_path
 
 - if @address_search_results
   #address-search-results
     - if @address_search_results.any?
       = simple_form_for @address, url: address_path do |f|
-        = f.input :property_reference,
-          as: :radio_buttons,
-          collection: @address_search_results,
-          label_method: :short_address,
-          value_method: :property_reference,
-          label: false
+        %fieldset
+          = f.input :property_reference,
+            as: :radio_buttons,
+            collection: @address_search_results,
+            label_method: :short_address,
+            value_method: :property_reference
 
-        = f.button :submit, class: 'button'
+          = f.button :submit, class: 'button'
     - else
       = t('address_search.not_found')
 

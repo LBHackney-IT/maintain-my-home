@@ -18,6 +18,10 @@ en:
         create: Find my address
       create: Continue
   simple_form:
+    labels:
+      address:
+        new:
+          property_reference: Select your address
     options:
       start_form:
         priority_repair:
