@@ -2,7 +2,8 @@
 %html
   %head
     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
-    %title Maintain my home
+    %title
+      = t('title')
 
     = csrf_meta_tags
     %link{ href: 'https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel: 'stylesheet' }/
@@ -15,6 +16,8 @@
         %a{ href: '/' }
           %h1
             Hackney
+          %h2
+            = t('title')
 
     %main
       #content{ role: 'main' }
