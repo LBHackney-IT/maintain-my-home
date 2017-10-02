@@ -76,6 +76,11 @@ RSpec.feature 'Resident can locate a problem' do
   end
 
   scenario 'changing the postcode after searching' do
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6AA').and_return([])
+    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
     visit '/address_search/new/'
 
     fill_in :address_search_postcode, with: 'N1 6AA'

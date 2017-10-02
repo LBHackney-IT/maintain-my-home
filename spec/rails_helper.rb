@@ -40,6 +40,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist
 
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   config.include AbstractController::Translation
 
