@@ -6,6 +6,7 @@ header {
 
   h1 {
     background: asset-url('logo.png') 0 0 no-repeat;
+    background-size: contain;
     display: inline-block;
     height: 54px;
     overflow: hidden;
