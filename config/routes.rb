@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :questions do
     get '/start', to: 'start#index', as: 'start'
-    post '/start', to: 'start#submit', as: 'start_submit'
+    post '/start', to: 'start#submit'
   end
 
   get '/emergency-contact',
