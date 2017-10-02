@@ -2,6 +2,11 @@
 @import 'grid_layout';
 @import 'typography';
 
+@import 'colours/palette';
+
+@import 'elements/forms';
+@import 'elements/forms/form-multiple-choice';
+
 body {
   background-color: $hackney-dark-grey;
   font-family: $font-stack;
@@ -50,6 +55,19 @@ main {
 
   h2 {
     @include heading-36;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  .question {
+    padding-bottom: 30px;
+  }
+
+  .radio {
+    @extend .multiple-choice;
   }
 
   .button {

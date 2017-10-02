@@ -1,0 +1,18 @@
+= simple_form_for @form, url: questions_start_submit_path do |f|
+  %fieldset
+    %legend.question
+      %h1 Is your problem one of these?
+
+      %p
+        Before we start we need to check if your problem is one of the following:
+
+      %ul
+        %li flooding / uncontrollable water leak
+        %li my only toilet is blocked
+        %li no electricity
+        %li water dripping over a power socket or light
+        %li I cannot access my property
+
+    .answers
+      = f.input :priority_repair, collection: [:yes, :no], as: :radio_buttons, label: ''
+      = f.button :submit, class: 'button'
