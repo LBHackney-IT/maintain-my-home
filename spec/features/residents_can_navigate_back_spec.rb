@@ -94,9 +94,20 @@ RSpec.feature 'Resident can navigate back' do
     expect(page).to have_content 'What is your address?'
   end
 
+  scenario 'going back from the Emergency exit page' do
+    visit '/'
+    click_on 'Start'
+
+    # Emergency page:
+    choose_radio_button 'Yes'
+    click_on 'Continue'
+
+    click_on t('back_links.questions/start')
+    expect(page).to have_content 'Is your problem one of these?'
+  end
+
   scenario 'going back from both address pages (search and selection)'
   scenario 'going back from the describe unknown repair page'
   scenario 'going back TO the describe unknown repair page'
-  scenario 'going back from the Emergency exit page'
   scenario 'going back from the My address is not here exit page'
 end
