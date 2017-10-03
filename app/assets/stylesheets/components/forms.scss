@@ -6,6 +6,11 @@
   @extend .multiple-choice;
 }
 
+label span.optional {
+  color: $hackney-dark-grey;
+  font-size: 0.8em;
+}
+
 textarea {
   @extend .form-control;
 

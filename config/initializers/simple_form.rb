@@ -1,3 +1,8 @@
+require Rails.root.join('lib', 'simple_form', 'optional_labels')
+
+SimpleForm::Components::Labels.prepend SimpleForm::Components::OptionalLabels
+SimpleForm::Components::Labels::ClassMethods.include SimpleForm::Components::OptionalLabels::ClassMethods
+
 SimpleForm.setup do |config|
   config.wrappers :default, tag: 'div',
                             class: 'form-group', error_class: 'has-error' do |b|
@@ -36,7 +41,7 @@ SimpleForm.setup do |config|
   config.error_notification_class = 'error_notification'
 
   # Whether attributes are required by default (or not). Default is true.
-  # config.required_by_default = true
+  config.required_by_default = false
 
   # Tell browsers whether to use the native HTML5 validations (novalidate form option).
   # These validations are enabled in SimpleForm's internal config but disabled by default
@@ -47,4 +52,7 @@ SimpleForm.setup do |config|
 
   # Define the default class of the input wrapper of the boolean input.
   config.boolean_label_class = 'checkbox'
+
+  # Append 'optional' label instead of prepending
+  config.label_text = ->(label, optional, _explicit_label) { "#{label}#{optional}" }
 end
