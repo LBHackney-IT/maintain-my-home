@@ -29,3 +29,8 @@ input.string {
     background-color: $hackney-light-green;
   }
 }
+
+// Hide bullet points in error summaries
+ul.error-summary-list {
+  list-style-type: none;
+}

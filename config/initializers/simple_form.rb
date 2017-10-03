@@ -5,15 +5,15 @@ SimpleForm::Components::Labels::ClassMethods.include SimpleForm::Components::Opt
 
 SimpleForm.setup do |config|
   config.wrappers :default, tag: 'div',
-                            class: 'form-group', error_class: 'has-error' do |b|
+                            class: 'form-group', error_class: 'form-group-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label, class: 'form-label'
+    b.use :full_error, wrap_with: { tag: 'span', class: 'error-message' }
 
     b.wrapper tag: 'div' do |ba|
       ba.use :input
-      ba.use :error, wrap_with: { tag: 'span', class: 'form-inline' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'form-help' }
+      ba.use :hint, wrap_with: { tag: 'p', class: 'form-help' }
     end
   end
 
@@ -27,7 +27,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :inline
 
   # Default class for buttons
-  config.button_class = 'btn'
+  config.button_class = 'button'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
