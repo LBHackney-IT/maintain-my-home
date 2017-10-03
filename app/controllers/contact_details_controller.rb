@@ -4,6 +4,7 @@ class ContactDetailsController < ApplicationController
     @selected_answers = selected_answer_store.selected_answers['address']
 
     @form = ContactDetailsForm.new
+    @back = Back.new(controller_name: 'address_searches')
   end
 
   def submit

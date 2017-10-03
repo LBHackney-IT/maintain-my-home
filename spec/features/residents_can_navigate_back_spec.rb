@@ -30,13 +30,13 @@ RSpec.feature 'Resident can navigate back' do
     click_on 'Continue'
 
     # Contact details - last page before confirmation:
-    click_on 'Back to address search'
+    click_on t('back_links.address_searches')
     expect(page).to have_content 'What is your address?'
 
-    click_on 'Back to problem details'
+    click_on t('back_links.describe_repair')
     expect(page).to have_content 'Is there anything else we should know about this problem?'
 
-    click_on 'Back to start'
+    click_on t('back_links.questions/start')
     expect(page).to have_content 'Is your problem one of these?'
   end
 
@@ -55,7 +55,7 @@ RSpec.feature 'Resident can navigate back' do
     fill_in 'Postcode', with: ''
     click_on 'Find my address'
 
-    click_on 'Back to problem details'
+    click_on t('back_links.describe_repair')
     expect(page).to have_content 'Is there anything else we should know about this problem?'
   end
 
