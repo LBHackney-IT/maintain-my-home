@@ -35,7 +35,7 @@ RSpec.feature 'Resident can locate a problem' do
 
     click_button t('helpers.submit.address.create')
 
-    expect(page).to have_content t('appointments.new.title')
+    expect(page).to have_content t('contact-details.title')
 
     within '#progress' do
       expect(page).to have_content 'Flat 1, 8 Hoxton Square, N1 6NU'
