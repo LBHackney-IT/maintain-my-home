@@ -19,11 +19,25 @@ main {
 
   h2 {
     @include heading-24;
+
+    font-weight: bold;
+  }
+
+  h3 {
+    font-weight: bold;
   }
 
   ul {
     list-style-type: disc;
     padding-left: 20px;
+  }
+
+  .box-highlight {
+    margin: 1em 0;
+    padding: 2em 1em;
+    color: $white;
+    background-color: $hackney-green;
+    text-align: center;
   }
 }
 
