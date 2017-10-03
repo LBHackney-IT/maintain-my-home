@@ -1,0 +1,12 @@
+= simple_form_for :dummy_form, url: request.fullpath do |f|
+  %fieldset
+    %legend.question
+      %h1 Who should we contact about this repair?
+
+      %p We will contact you within one working day to book an appointment for your repair.
+
+    .answers
+      = f.input :full_name
+      = f.input :telephone_number
+      = f.input :callback_time, collection: [:morning, :afternoon], as: :check_boxes
+      = f.button :submit, class: 'button'

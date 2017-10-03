@@ -25,5 +25,8 @@ Rails.application.routes.draw do
       as: 'describe_unknown_repair'
   post '/describe-unknown-repair', to: 'describe_unknown_repair#submit'
 
+  get '/contact-details', to: 'contact_details#index', as: 'contact_details'
+  post '/contact-details', to: 'contact_details#submit'
+
   root to: 'start#index'
 end
