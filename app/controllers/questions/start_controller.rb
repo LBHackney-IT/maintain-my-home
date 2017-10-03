@@ -14,7 +14,7 @@ module Questions
 
       return redirect_to emergency_contact_path if @form.priority_repair?
 
-      render :submit
+      redirect_to describe_repair_path
     end
 
     private
