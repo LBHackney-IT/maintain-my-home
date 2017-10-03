@@ -137,7 +137,30 @@ RSpec.feature 'Resident can navigate back' do
     expect(page).to have_content 'What is your address?'
   end
 
-  scenario 'going back from both address pages (search and selection)'
+  scenario 'going back from the address selection page' do
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([])
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    visit '/'
+    click_on 'Start'
+
+    # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Describe problem:
+    click_on 'Continue'
+
+    # Address search:
+    fill_in 'Postcode', with: 'E8 5TQ'
+    click_on 'Find my address'
+
+    # Address selection:
+    click_on t('back_links.describe_repair')
+    expect(page).to have_content 'Is there anything else we should know about this problem?'
+  end
+
   scenario 'going back from the describe unknown repair page'
   scenario 'going back TO the describe unknown repair page'
 end

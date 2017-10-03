@@ -8,6 +8,7 @@ class AddressesController < ApplicationController
       address_finder = AddressFinder.new(HackneyApi.new)
       @address_search_results = address_finder.find(@address_search)
 
+      @back = Back.new(controller_name: 'describe_repair')
       return render 'address_searches/create'
     end
 
