@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :address_search, only: %i[new create]
+  get '/address-search', to: 'address_searches#index', as: 'address_search'
+  post '/address-search', to: 'address_searches#create'
+
   resource :address, only: [:create]
   resources :confirmations, only: [:show]
 

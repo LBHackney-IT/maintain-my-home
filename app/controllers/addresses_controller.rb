@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
   def create
     if property_reference.blank?
       return redirect_to(
-        new_address_search_path,
+        address_search_path,
         alert: t('addresses.errors.blank')
       )
     end
