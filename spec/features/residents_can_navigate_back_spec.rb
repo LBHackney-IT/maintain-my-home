@@ -40,6 +40,25 @@ RSpec.feature 'Resident can navigate back' do
     expect(page).to have_content 'Is your problem one of these?'
   end
 
+  scenario 'when the search was invalid' do
+    visit '/'
+    click_on 'Start'
+
+    # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Describe problem:
+    click_on 'Continue'
+
+    # Address search:
+    fill_in 'Postcode', with: ''
+    click_on 'Find my address'
+
+    click_on 'Back to problem details'
+    expect(page).to have_content 'Is there anything else we should know about this problem?'
+  end
+
   scenario 'going back from both address pages (search and selection)'
   scenario 'going back after validation errors'
   scenario 'going back from the describe unknown repair page'
