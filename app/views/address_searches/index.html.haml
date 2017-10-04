@@ -1,11 +1,10 @@
-%h1
-  What is your address?
-
-- if @address_search.errors
-  = @address_search.errors.full_messages.join(', ')
-
 = simple_form_for @address_search, url: address_search_path do |f|
   %fieldset
-    = f.input :postcode
-    = f.button :submit, class: 'button'
+    %legend.question
+      %h1
+        What is your address?
+
+    .answers
+      = f.input :postcode
+      = f.button :submit
 
