@@ -1,7 +1,9 @@
 class ConfirmationsController < ApplicationController
   def show
-    @confirmation = Confirmation.new(params[:id])
+    answers = SelectedAnswerStore.new(session).selected_answers
+    @confirmation = Confirmation.new(
+      repair_request_id: params[:id],
+      answers: answers
+    )
   end
-
-  Confirmation = Struct.new(:repair_request_id)
 end

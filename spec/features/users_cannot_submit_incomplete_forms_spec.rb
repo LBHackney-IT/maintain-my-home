@@ -5,6 +5,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     matching_property = {
       'property_reference' => 'zzz',
       'short_address' => '8A Abersham Road',
+      'postcode' => 'E5 8TE',
     }
 
     fake_api = instance_double(JsonApi)
