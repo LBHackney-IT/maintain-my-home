@@ -20,13 +20,13 @@ en:
       address:
         new:
           property_reference: Select your address
-      dummy_form:
+      contact_details_form:
         callback_time: What time is best to call you?
     options:
       address:
         property_reference:
           address_isnt_here: "My address isn't here"
-      dummy_form:
+      contact_details_form:
         callback_time:
           morning: "morning (8am - 12pm)"
           afternoon: "afternoon (12pm - 5pm)"

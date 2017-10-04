@@ -1,4 +1,4 @@
-= simple_form_for :dummy_form, url: request.fullpath do |f|
+= simple_form_for @form, url: request.fullpath do |f|
   %fieldset
     %legend.question
       %h1 Please describe what needs to be fixed
@@ -11,5 +11,5 @@
         %li how does it impact your household?
 
     .answers
-      = f.input :description, as: :text, label: false
-      = f.button :submit, class: 'button'
+      = f.input :description, as: :text
+      = f.button :submit
