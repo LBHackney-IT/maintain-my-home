@@ -39,12 +39,12 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
 
     expect(page).to have_content 'Your reference number is abc123'
 
-    expect(page).to have_content "Description: The bath won't drain"
+    expect(page).to have_content t('confirmation.summary.description', description: "The bath won't drain")
 
-    expect(page).to have_content 'Name: John Smith'
-    expect(page).to have_content 'Phone: 01234 567 890'
-    expect(page).to have_content 'Address: Ross Court 30, E5 8TE'
+    expect(page).to have_content t('confirmation.summary.name', name: 'John Smith')
+    expect(page).to have_content t('confirmation.summary.phone', phone: '01234 567 890')
+    expect(page).to have_content t('confirmation.summary.address', address: 'Ross Court 30, E5 8TE')
 
-    expect(page).to have_content 'Time: afternoon (12pm - 5pm)'
+    expect(page).to have_content t('confirmation.summary.time', time: 'afternoon (12pm - 5pm)')
   end
 end

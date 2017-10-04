@@ -31,15 +31,13 @@
     %h2 Summary
 
     %h3 Problem
-    %p Description: The bath won't drain
+    %p= t('confirmation.summary.description', description: "The bath won't drain")
 
     %h3 Your details
-    %p Name: John Smith
-    %p Phone: 01234 567 890
-    %p
-      Address:
-      = @confirmation.address
+    %p= t('confirmation.summary.name', name: 'John Smith')
+    %p= t('confirmation.summary.phone', phone: '01234 567 890')
+    %p= t('confirmation.summary.address', address: @confirmation.address)
 
     %h3 Callback time
-    %p Time: afternoon (12pm - 5pm)
+    %p= t('confirmation.summary.time', time: 'afternoon (12pm - 5pm)')
 
