@@ -5,7 +5,6 @@ class ContactDetailsController < ApplicationController
   end
 
   def submit
-    # redirect_to 'next_form'
-    render body: 'not implemented'
+    redirect_to confirmation_path('abc123')
   end
 end
