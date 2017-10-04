@@ -1,4 +1,18 @@
 en:
+  activemodel:
+    attributes:
+      contact_details_form:
+        callback_time: Best time to call you
+      describe_unknown_repair_form:
+        description: Problem description
+      dummy_form:
+        description: Problem description
+    errors:
+      models:
+        contact_details_form:
+          attributes:
+            callback_time:
+              blank: is required
   address_search:
     change: Change
     not_found: No addresses found
