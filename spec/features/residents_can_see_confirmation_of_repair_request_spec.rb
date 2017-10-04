@@ -20,6 +20,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Describe problem:
+    fill_in 'dummy_form_description', with: "The bath won't drain"
     click_on 'Continue'
 
     # Address search:
@@ -28,12 +29,22 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
 
     # Address selection:
     choose_radio_button 'Ross Court 30'
-    click_on 'Use this address'
+    click_on 'Continue'
 
     # Contact details - last page before confirmation:
+    fill_in 'Full name', with: 'John Smith'
+    fill_in 'Telephone number', with: '01234567890'
+    check 'afternoon (12pm - 5pm)'
     click_on 'Continue'
 
     expect(page).to have_content 'Your reference number is abc123'
+
+    expect(page).to have_content "Description: The bath won't drain"
+
+    expect(page).to have_content 'Name: John Smith'
+    expect(page).to have_content 'Phone: 01234 567 890'
     expect(page).to have_content 'Address: Ross Court 30, E5 8TE'
+
+    expect(page).to have_content 'Time: afternoon (12pm - 5pm)'
   end
 end
