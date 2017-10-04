@@ -13,4 +13,34 @@ class Confirmation
       address_answer.fetch('postcode'),
     ].join(', ')
   end
+
+  def full_name
+    contact_details_answer.fetch('full_name')
+  end
+
+  def telephone_number
+    number = contact_details_answer.fetch('telephone_number')
+    format_telephone_number(number)
+  end
+
+  def callback_time
+    case contact_details_answer.fetch('callback_time')
+    when ['morning']
+      'morning (8am - 12pm)'
+    when ['afternoon']
+      'afternoon (12pm - 5pm)'
+    when %w[morning afternoon]
+      'working hours (8am - 5pm)'
+    end
+  end
+
+  private
+
+  def contact_details_answer
+    @answers.fetch('contact_details')
+  end
+
+  def format_telephone_number(number)
+    number.delete("\s")
+  end
 end

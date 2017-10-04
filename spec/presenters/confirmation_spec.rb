@@ -23,4 +23,74 @@ RSpec.describe Confirmation do
         .to eq 'Ross Court 25, E5 8TE'
     end
   end
+
+  describe 'full_name' do
+    it 'returns the stored name' do
+      fake_answers = {
+        'contact_details' => {
+          'full_name' => 'Alan Groves',
+        },
+      }
+
+      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).full_name)
+        .to eq 'Alan Groves'
+    end
+  end
+
+  describe 'telephone_number' do
+    it 'strips out any spaces from stored phone numbers' do
+      # TODO: this is an intial simple implementaion for simplicity.
+      # At some point we should format numbers nicely, which will make it easier
+      # to see if a mistake has been made
+      fake_answers = {
+        'contact_details' => {
+          'telephone_number' => ' 0201 357 9753',
+        },
+      }
+
+      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).telephone_number)
+        .to eq '02013579753'
+    end
+  end
+
+  describe 'callback_time' do
+    context 'when the stored callback time was morning' do
+      it 'returns a user-readable string based on the stored callback time' do
+        fake_answers = {
+          'contact_details' => {
+            'callback_time' => ['morning'],
+          },
+        }
+
+        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+          .to eq 'morning (8am - 12pm)'
+      end
+    end
+
+    context 'when the stored callback time was afternoon' do
+      it 'returns a user-readable string based on the stored callback time' do
+        fake_answers = {
+          'contact_details' => {
+            'callback_time' => ['afternoon'],
+          },
+        }
+
+        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+          .to eq 'afternoon (12pm - 5pm)'
+      end
+    end
+
+    context 'when the stored callback time was both morning and afternoon' do
+      it 'returns a user-readable string based on the stored callback time' do
+        fake_answers = {
+          'contact_details' => {
+            'callback_time' => %w[morning afternoon],
+          },
+        }
+
+        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+          .to eq 'working hours (8am - 5pm)'
+      end
+    end
+  end
 end
