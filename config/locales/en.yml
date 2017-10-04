@@ -5,9 +5,8 @@ en:
   addresses:
     errors:
       blank: Please choose your address to continue
-  appointments:
-    new:
-      title: Book a repair appointment
+  contact-details:
+    title: Who should we contact about this repair?
   errors:
     no_selection: Please choose an answer before continuing.
   helpers:

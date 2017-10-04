@@ -1,5 +1,5 @@
 class AddressSearchesController < ApplicationController
-  def new
+  def index
     @address_search = AddressSearch.new
   end
 
@@ -7,7 +7,7 @@ class AddressSearchesController < ApplicationController
     @address_search = AddressSearch.new(address_search_params[:address_search])
 
     unless @address_search.valid?
-      render :new
+      render :index
       return
     end
 
