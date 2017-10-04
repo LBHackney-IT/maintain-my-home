@@ -34,10 +34,10 @@
     %p= t('confirmation.summary.description', description: "The bath won't drain")
 
     %h3 Your details
-    %p= t('confirmation.summary.name', name: 'John Smith')
-    %p= t('confirmation.summary.phone', phone: '01234 567 890')
+    %p= t('confirmation.summary.name', name: @confirmation.full_name)
+    %p= t('confirmation.summary.phone', phone: @confirmation.telephone_number)
     %p= t('confirmation.summary.address', address: @confirmation.address)
 
     %h3 Callback time
-    %p= t('confirmation.summary.time', time: 'afternoon (12pm - 5pm)')
+    %p= t('confirmation.summary.time', time: @confirmation.callback_time)
 
