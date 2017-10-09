@@ -12,11 +12,7 @@ class Back
   private
 
   def text
-    "#{prefix} #{page_description}"
-  end
-
-  def prefix
-    I18n.t 'back_links.prefix'
+    I18n.t 'back_links.prefix', page_description: page_description
   end
 
   def page_description

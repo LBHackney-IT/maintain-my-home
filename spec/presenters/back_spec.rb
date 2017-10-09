@@ -12,12 +12,12 @@ RSpec.describe Back do
         .and_return('/describe-repair')
       allow(I18n)
         .to receive(:t)
-        .with('back_links.prefix')
-        .and_return('Back to')
-      allow(I18n)
-        .to receive(:t)
         .with('describe_repair', scope: :back_links)
         .and_return('problem details')
+      allow(I18n)
+        .to receive(:t)
+        .with('back_links.prefix', page_description: 'problem details')
+        .and_return('Back to problem details')
 
       expect(Back.new(controller_name: 'describe_repair', routes: fake_routes).link)
         .to eq '<a href="/describe-repair">Back to problem details</a>'
