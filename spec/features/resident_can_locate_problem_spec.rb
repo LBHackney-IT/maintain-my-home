@@ -136,7 +136,9 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
     click_button t('helpers.submit.create')
 
-    expect(page).to have_content(t('addresses.errors.blank'))
+    within '.address_form_property_reference .error-message' do
+      expect(page).to have_content t('errors.messages.blank')
+    end
   end
 
   scenario "user's address isn't listed" do
@@ -155,7 +157,7 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
 
     within '#address-search-results' do
-      choose_radio_button t('simple_form.options.address.property_reference.address_isnt_here')
+      choose_radio_button t('simple_form.options.address_form.property_reference.address_isnt_here')
     end
 
     click_button t('helpers.submit.create')

@@ -1,6 +1,8 @@
 en:
   activemodel:
     attributes:
+      address_form:
+        property_reference: Address
       contact_details_form:
         callback_time: Best time to call you
       describe_unknown_repair_form:
@@ -37,7 +39,7 @@ en:
       contact_details_form:
         callback_time: What time is best to call you?
     options:
-      address:
+      address_form:
         property_reference:
           address_isnt_here: "My address isn't here"
       contact_details_form:

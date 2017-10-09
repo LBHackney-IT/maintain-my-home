@@ -5,16 +5,12 @@ class AddressSearchesController < ApplicationController
 
   def create
     @address_search = AddressSearch.new(address_search_params[:address_search])
-
-    unless @address_search.valid?
-      render :index
-      return
-    end
+    return render :index unless @address_search.valid?
 
     address_finder = AddressFinder.new(HackneyApi.new)
     @address_search_results = address_finder.find(@address_search)
 
-    @address = Address.new
+    @form = AddressForm.new
   end
 
   private

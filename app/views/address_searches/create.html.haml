@@ -14,7 +14,8 @@
 - if @address_search_results
   #address-search-results
     - if @address_search_results.any?
-      = simple_form_for @address, url: address_path do |f|
+      = simple_form_for @form, url: address_path do |f|
+        = f.hidden_field :postcode, value: @address_search.postcode
         %fieldset
           = f.input :property_reference,
             as: :radio_buttons,
@@ -27,7 +28,8 @@
             as: :radio_buttons,
             collection: [:address_isnt_here],
             label: false,
-            include_hidden: false
+            include_hidden: false,
+            error: false
 
           = f.button :submit, class: 'button'
     - else
