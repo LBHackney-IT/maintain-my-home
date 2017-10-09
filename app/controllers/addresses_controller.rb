@@ -1,18 +1,20 @@
 class AddressesController < ApplicationController
   def create
-    if property_reference.blank?
-      return redirect_to(
-        address_search_path,
-        alert: t('addresses.errors.blank')
-      )
+    @form = AddressForm.new(address_form_params)
+
+    if @form.invalid?
+      @address_search = AddressSearch.new(postcode: @form.postcode)
+
+      address_finder = AddressFinder.new(HackneyApi.new)
+      @address_search_results = address_finder.find(@address_search)
+
+      return render 'address_searches/create'
     end
 
-    if property_reference == 'address_isnt_here'
-      return redirect_to address_isnt_here_path
-    end
+    return redirect_to address_isnt_here_path if @form.address_isnt_here?
 
     api = HackneyApi.new
-    address = api.get_property(property_reference: property_reference)
+    address = api.get_property(property_reference: @form.property_reference)
 
     SelectedAnswerStore.new(session).store_selected_answers('address', address)
 
@@ -21,11 +23,7 @@ class AddressesController < ApplicationController
 
   private
 
-  def update_params
-    params.require(:address).permit(:property_reference)
-  end
-
-  def property_reference
-    update_params[:property_reference]
+  def address_form_params
+    params.require(:address_form).permit(:property_reference, :postcode)
   end
 end

@@ -20,14 +20,15 @@ RSpec.feature 'Users can answer repair questions' do
     visit '/questions/start/'
     click_continue
 
-    within '.flash-alert' do
-      expect(page).to have_content t('errors.no_selection')
+    within '.start_form_answer' do
+      expect(page).to have_css '.error-message'
+      expect(page).to have_content t('errors.messages.blank')
     end
   end
 
   scenario "Users can choose 'Yes' and get shown the emergency contact page" do
     visit '/questions/start/'
-    choose_radio_button t('simple_form.options.start_form.priority_repair.yes')
+    choose_radio_button t('simple_form.options.start_form.answer.yes')
     click_continue
 
     expect(page).to have_content 'Please call our repair centre'
@@ -35,7 +36,7 @@ RSpec.feature 'Users can answer repair questions' do
 
   scenario "Users can choose 'No' and is shown the next question" do
     visit '/questions/start/'
-    choose_radio_button t('simple_form.options.start_form.priority_repair.no')
+    choose_radio_button t('simple_form.options.start_form.answer.no')
     click_continue
 
     within '.question' do

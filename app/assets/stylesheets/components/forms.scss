@@ -6,6 +6,11 @@
   @extend .multiple-choice;
 }
 
+label span.optional {
+  color: $hackney-dark-grey;
+  font-size: 0.8em;
+}
+
 textarea {
   @extend .form-control;
 
@@ -23,4 +28,9 @@ input.string {
   &:hover, &:focus {
     background-color: $hackney-light-green;
   }
+}
+
+// Hide bullet points in error summaries
+ul.error-summary-list {
+  list-style-type: none;
 }

@@ -7,11 +7,7 @@ module Questions
     def submit
       @form = StartForm.new(start_form_params)
 
-      unless @form.valid?
-        flash.now[:alert] = @form.errors.full_messages
-        return render :index
-      end
-
+      return render :index unless @form.valid?
       return redirect_to emergency_contact_path if @form.priority_repair?
 
       redirect_to describe_repair_path
