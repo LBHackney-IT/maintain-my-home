@@ -11,6 +11,8 @@ class ContactDetailsController < ApplicationController
     selected_answer_store = SelectedAnswerStore.new(session)
     @selected_answers = selected_answer_store.selected_answers['address']
 
+    @back = Back.new(controller_name: 'address_searches')
+
     @form = ContactDetailsForm.new(contact_details_form_params)
     return render :index unless @form.valid?
 
