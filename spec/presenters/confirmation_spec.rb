@@ -92,5 +92,31 @@ RSpec.describe Confirmation do
           .to eq 'working hours (8am - 5pm)'
       end
     end
+
+    context 'when the stored callback time was a string (not an array)' do
+      it 'raises an exception' do
+        fake_answers = {
+          'contact_details' => {
+            'callback_time' => 'morning',
+          },
+        }
+
+        expect { Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time }
+          .to raise_error(Confirmation::InvalidCallbackTimeError)
+      end
+    end
+
+    context 'when the stored callback time was not recognised' do
+      it 'raises an exception' do
+        fake_answers = {
+          'contact_details' => {
+            'callback_time' => %w[teatime],
+          },
+        }
+
+        expect { Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time }
+          .to raise_error(Confirmation::InvalidCallbackTimeError)
+      end
+    end
   end
 end

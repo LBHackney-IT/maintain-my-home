@@ -1,4 +1,6 @@
 class Confirmation
+  class InvalidCallbackTimeError < StandardError; end
+
   attr_reader :repair_request_id
 
   def initialize(repair_request_id:, answers:)
@@ -31,6 +33,8 @@ class Confirmation
       'afternoon (12pm - 5pm)'
     when %w[morning afternoon]
       'working hours (8am - 5pm)'
+    else
+      raise InvalidCallbackTimeError
     end
   end
 
