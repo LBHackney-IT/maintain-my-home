@@ -119,4 +119,17 @@ RSpec.describe Confirmation do
       end
     end
   end
+
+  describe 'description' do
+    it 'Returns the stored description' do
+      fake_answers = {
+        'description' => {
+          'description' => 'My bath is broken',
+        },
+      }
+
+      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).description)
+        .to eq 'My bath is broken'
+    end
+  end
 end

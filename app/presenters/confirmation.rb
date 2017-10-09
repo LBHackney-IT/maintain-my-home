@@ -38,6 +38,10 @@ class Confirmation
     end
   end
 
+  def description
+    @answers.fetch('description').fetch('description')
+  end
+
   private
 
   def contact_details_answer
