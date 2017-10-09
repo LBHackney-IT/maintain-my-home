@@ -28,7 +28,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     fill_in :address_search_postcode, with: 'E5 8TE'
     click_button t('helpers.submit.address_search.create')
     choose_radio_button '8A Abersham Road'
-    click_button t('helpers.submit.address.create')
+    click_button t('helpers.submit.create')
 
     # Submit empty contact details form
     click_continue

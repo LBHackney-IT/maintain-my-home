@@ -45,7 +45,7 @@ en:
           morning: "morning (8am - 12pm)"
           afternoon: "afternoon (12pm - 5pm)"
       start_form:
-        priority_repair:
+        answer:
           'yes': 'Yes'
           'no': 'No'
   title: Maintain my home
