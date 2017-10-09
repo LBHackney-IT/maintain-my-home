@@ -7,6 +7,11 @@ class DescribeRepairController < ApplicationController
   def submit
     @form = DescriptionForm.new(description_form_params)
 
+    SelectedAnswerStore.new(session).store_selected_answers(
+      :description,
+      description: @form.description
+    )
+
     redirect_to address_search_path
   end
 

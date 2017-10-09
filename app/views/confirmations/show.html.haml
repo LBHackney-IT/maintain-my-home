@@ -31,7 +31,7 @@
     %h2 Summary
 
     %h3 Problem
-    %p= t('confirmation.summary.description', description: "The bath won't drain")
+    %p= t('confirmation.summary.description', description: @confirmation.description)
 
     %h3 Your details
     %p= t('confirmation.summary.name', name: @confirmation.full_name)
