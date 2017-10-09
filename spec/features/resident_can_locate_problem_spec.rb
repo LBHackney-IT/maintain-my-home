@@ -33,7 +33,7 @@ RSpec.feature 'Resident can locate a problem' do
       choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
 
-    click_button t('helpers.submit.address.create')
+    click_button t('helpers.submit.create')
 
     expect(page).to have_content t('contact-details.title')
 
@@ -117,7 +117,7 @@ RSpec.feature 'Resident can locate a problem' do
       choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
 
-    expect(page).to have_button t('helpers.submit.address.create')
+    expect(page).to have_button t('helpers.submit.create')
   end
 
   scenario 'performing a search and not selecting an address' do
@@ -134,7 +134,7 @@ RSpec.feature 'Resident can locate a problem' do
 
     fill_in :address_search_postcode, with: 'N1 6NU'
     click_button t('helpers.submit.address_search.create')
-    click_button t('helpers.submit.address.create')
+    click_button t('helpers.submit.create')
 
     expect(page).to have_content(t('addresses.errors.blank'))
   end
@@ -158,7 +158,7 @@ RSpec.feature 'Resident can locate a problem' do
       choose_radio_button t('simple_form.options.address.property_reference.address_isnt_here')
     end
 
-    click_button t('helpers.submit.address.create')
+    click_button t('helpers.submit.create')
 
     expect(page).to have_content 'We cannot find your address'
   end

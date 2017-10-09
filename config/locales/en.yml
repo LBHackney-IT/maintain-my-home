@@ -11,13 +11,10 @@ en:
     no_selection: Please choose an answer before continuing.
   helpers:
     submit:
-      address:
-        create: Use this address
       address_search:
         create: Find my address
       create: Continue
-      dummy_form:
-        submit: Continue
+      submit: Continue
   simple_form:
     labels:
       address:
