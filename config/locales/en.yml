@@ -32,7 +32,7 @@ en:
       name: 'Name: %{name}'
       phone: 'Phone number: %{phone}'
       address: 'Address: %{address}'
-      time: 'Time: %{time}'
+      callback_time: 'Callback time: %{callback_time}'
   contact-details:
     title: Who should we contact about this repair?
   errors:
