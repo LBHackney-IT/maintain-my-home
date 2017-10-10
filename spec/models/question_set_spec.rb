@@ -22,16 +22,10 @@ RSpec.describe QuestionSet do
   describe '#find' do
     it 'returns the requested question' do
       store = QuestionSet.new('spec/fixtures/basic_question.yml')
+      question = store.find('example')
 
-      expected = {
-        'question' => 'Is this an example?',
-        'answers' => [
-          { 'text' => 'Definitely' },
-          { 'text' => 'Probably' },
-        ],
-      }
-
-      expect(store.find('example')).to eql expected
+      expect(question).to be_a(Question)
+      expect(question.title).to eql 'Is this an example?'
     end
 
     it 'raises an error if the requestion question was not found' do
