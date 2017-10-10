@@ -21,6 +21,11 @@ en:
   addresses:
     errors:
       blank: Please choose your address to continue
+  back_links:
+    prefix: Back to %{page_description}
+    questions/start: start
+    address_searches: find my address
+    describe_repair: problem description
   contact-details:
     title: Who should we contact about this repair?
   errors:
