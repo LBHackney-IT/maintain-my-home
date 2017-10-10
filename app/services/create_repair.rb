@@ -4,7 +4,8 @@ class CreateRepair
   end
 
   def call(answers:)
-    @api.create_repair(create_repair_params(answers))
+    result = @api.create_repair(create_repair_params(answers))
+    Result.new(result)
   end
 
   private
@@ -33,6 +34,16 @@ class CreateRepair
 
     def priority
       'N'
+    end
+  end
+
+  class Result
+    def initialize(result)
+      @result = result
+    end
+
+    def request_reference
+      @result.fetch('requestReference')
     end
   end
 end

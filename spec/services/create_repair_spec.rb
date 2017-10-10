@@ -27,5 +27,31 @@ RSpec.describe CreateRepair do
           propertyRef: '00034713',
         )
     end
+
+    it 'returns a result containing the request reference' do
+      fake_api = instance_double('HackneyApi')
+      allow(fake_api).to receive(:create_repair)
+        .and_return(
+          'requestReference' => '03153917',
+          'problem' => 'My bath is broken',
+          'priority' => 'N',
+          'propertyRef' => '00034713',
+        )
+
+      fake_answers = {
+        'address' => {
+          'property_reference' => '00034713',
+          'short_address' => 'Ross Court 25',
+          'postcode' => 'E5 8TE',
+        },
+        'describe_repair' => {
+          'description' => 'My bath is broken',
+        },
+      }
+
+      service = CreateRepair.new(api: fake_api)
+      expect(service.call(answers: fake_answers).request_reference)
+        .to eq '03153917'
+    end
   end
 end
