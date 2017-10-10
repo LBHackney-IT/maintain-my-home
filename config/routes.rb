@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     post '/start', to: 'start#submit'
   end
 
+  get '/questions/:id', to: 'questions#show', as: 'questions'
+  post '/questions/:id', to: 'questions#submit'
+
   get '/emergency-contact',
       to: 'pages#emergency_contact',
       as: 'emergency_contact'
