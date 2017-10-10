@@ -10,5 +10,15 @@ class Question
   def answers_for_collection
     answers.map { |answer| answer['text'] }
   end
+
+  def redirect_path_for_answer(chosen_answer)
+    answer_hash = answers.detect { |answer| answer['text'] == chosen_answer }
+
+    if answer_hash.key?('next')
+      Rails.application.routes.url_helpers.questions_path(answer_hash['next'])
+    else
+      Rails.application.routes.url_helpers.describe_repair_path
+    end
+  end
 end
 

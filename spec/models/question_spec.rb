@@ -32,4 +32,20 @@ RSpec.describe Question do
       expect(question.answers_for_collection).to include('Antelope', 'Badger')
     end
   end
+
+  describe '#redirect_path_for_answer' do
+    it 'returns the path to the next question, if answer has "next" key' do
+      question = Question.new(
+        'question' => 'Where do you want to go?',
+        'answers' => [
+          {
+            'text' => 'London',
+            'next' => 'next',
+          },
+        ],
+      )
+
+      expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
+    end
+  end
 end
