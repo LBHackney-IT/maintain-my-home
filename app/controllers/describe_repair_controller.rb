@@ -8,7 +8,7 @@ class DescribeRepairController < ApplicationController
     @form = DescriptionForm.new(description_form_params)
 
     SelectedAnswerStore.new(session).store_selected_answers(
-      :description,
+      :describe_repair,
       description: @form.description
     )
 

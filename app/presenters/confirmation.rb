@@ -39,7 +39,7 @@ class Confirmation
   end
 
   def description
-    @answers.fetch('description').fetch('description')
+    @answers.fetch('describe_repair').fetch('description')
   end
 
   private

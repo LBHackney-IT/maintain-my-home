@@ -123,7 +123,7 @@ RSpec.describe Confirmation do
   describe 'description' do
     it 'Returns the stored description' do
       fake_answers = {
-        'description' => {
+        'describe_repair' => {
           'description' => 'My bath is broken',
         },
       }
