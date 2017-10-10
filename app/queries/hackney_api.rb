@@ -10,4 +10,8 @@ class HackneyApi
   def get_property(property_reference:)
     @json_api.get('properties/' + property_reference)
   end
+
+  def create_repair(repair_params)
+    @json_api.post('repairs', repair_params)
+  end
 end

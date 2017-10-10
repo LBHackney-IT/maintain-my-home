@@ -27,4 +27,38 @@ describe HackneyApi do
       expect(api.get_property(property_reference: 'cre045')).to eql results
     end
   end
+
+  describe '#create_repair' do
+    it 'sends repair creation parameters' do
+      json_api = instance_double('JsonApi')
+      allow(json_api).to receive(:post).with('repairs', anything)
+
+      api = HackneyApi.new(json_api)
+      repair_params = {
+        priority: 'U',
+        problem: 'It is broken',
+        property_reference: '01234567',
+      }
+      api.create_repair(repair_params)
+
+      expect(json_api).to have_received(:post)
+        .with(
+          'repairs',
+          priority: 'U',
+          problem: 'It is broken',
+          property_reference: '01234567',
+        )
+    end
+
+    it 'returns the result from the api call' do
+      json_api = instance_double('JsonApi')
+      result = double('api result')
+      allow(json_api).to receive(:post)
+        .with('repairs', anything)
+        .and_return result
+
+      api = HackneyApi.new(json_api)
+      expect(api.create_repair(double)).to eq result
+    end
+  end
 end
