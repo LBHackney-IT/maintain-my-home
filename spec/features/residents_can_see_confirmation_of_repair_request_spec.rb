@@ -38,15 +38,20 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     aggregate_failures do
-      expect(page).to have_content 'Your reference number is abc123'
+      within '#confirmation' do
+        expect(page).to have_content 'Your reference number is abc123'
+        expect(page).to have_content 'between 8am and 12pm'
+      end
 
-      expect(page).to have_content t('confirmation.summary.description', description: 'My sink is blocked')
+      within '#summary' do
+        expect(page).to have_content t('confirmation.summary.description', description: 'My sink is blocked')
 
-      expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')
-      expect(page).to have_content t('confirmation.summary.phone', phone: '07898765432')
-      expect(page).to have_content t('confirmation.summary.address', address: 'Ross Court 23, E5 8TE')
+        expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')
+        expect(page).to have_content t('confirmation.summary.phone', phone: '07898765432')
+        expect(page).to have_content t('confirmation.summary.address', address: 'Ross Court 23, E5 8TE')
 
-      expect(page).to have_content t('confirmation.summary.callback_time', callback_time: 'morning (8am - 12pm)')
+        expect(page).to have_content t('confirmation.summary.callback_time', callback_time: 'between 8am and 12pm')
+      end
     end
   end
 end

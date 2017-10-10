@@ -1,5 +1,5 @@
 .grid-row
-  .column-two-thirds
+  %section#confirmation.column-two-thirds
     %h1
       Thank you
       = @confirmation.full_name
@@ -14,7 +14,7 @@
 
     %p
       We will call you within one working day, between
-      %strong 12pm and 5pm
+      %strong= @confirmation.callback_time
       to arrange a repair appointment.
 
     %p
@@ -28,7 +28,7 @@
       We are open Monday to Friday 8am - 7pm and Saturdays 9am - 1pm.
 
 .grid-row
-  .column-two-thirds
+  %section#summary.column-two-thirds
     %h2 Summary
 
     %h3 Problem

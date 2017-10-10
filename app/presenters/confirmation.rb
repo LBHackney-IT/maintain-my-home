@@ -28,11 +28,11 @@ class Confirmation
   def callback_time
     case contact_details_answer.fetch('callback_time')
     when ['morning']
-      'morning (8am - 12pm)'
+      'between 8am and 12pm'
     when ['afternoon']
-      'afternoon (12pm - 5pm)'
+      'between 12pm and 5pm'
     when %w[morning afternoon]
-      'working hours (8am - 5pm)'
+      'between 8am and 5pm'
     else
       raise InvalidCallbackTimeError
     end

@@ -63,7 +63,7 @@ RSpec.describe Confirmation do
         }
 
         expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
-          .to eq 'morning (8am - 12pm)'
+          .to eq 'between 8am and 12pm'
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe Confirmation do
         }
 
         expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
-          .to eq 'afternoon (12pm - 5pm)'
+          .to eq 'between 12pm and 5pm'
       end
     end
 
@@ -89,7 +89,7 @@ RSpec.describe Confirmation do
         }
 
         expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
-          .to eq 'working hours (8am - 5pm)'
+          .to eq 'between 8am and 5pm'
       end
     end
 
