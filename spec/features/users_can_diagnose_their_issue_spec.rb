@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can diagnose their issue' do
-  scenario 'viewing the first question' do
+  scenario 'viewing a multiple-choice question' do
     allow_any_instance_of(QuestionSet)
       .to receive(:questions)
       .and_return(
@@ -19,6 +19,20 @@ RSpec.feature 'Users can diagnose their issue' do
 
     expect(page).to have_unchecked_field 'Yeah'
     expect(page).to have_unchecked_field 'Nope'
+  end
+
+  scenario 'viewing a question which requires text input' do
+    allow_any_instance_of(QuestionSet)
+      .to receive(:questions)
+      .and_return(
+        'first' => {
+          'question' => 'Please describe your first pet',
+        }
+      )
+    visit '/questions/first'
+
+    expect(page).to have_content 'Please describe your first pet'
+    expect(page).to have_field 'form_answer', type: 'textarea'
   end
 
   scenario 'choosing an answer that moves on to another question' do

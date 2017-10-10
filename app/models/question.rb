@@ -4,7 +4,7 @@ class Question
 
   def initialize(question_hash)
     @title = question_hash['question']
-    @answers = question_hash['answers']
+    @answers = question_hash['answers'] || []
   end
 
   def answers_for_collection
@@ -21,6 +21,10 @@ class Question
     else
       Rails.application.routes.url_helpers.describe_repair_path
     end
+  end
+
+  def multiple_choice?
+    answers.any?
   end
 end
 
