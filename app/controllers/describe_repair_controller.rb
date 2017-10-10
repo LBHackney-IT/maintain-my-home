@@ -1,11 +1,11 @@
 class DescribeRepairController < ApplicationController
   def index
-    @form = DescriptionForm.new
+    @form = DescribeRepairForm.new
     @back = Back.new(controller_name: 'questions/start')
   end
 
   def submit
-    @form = DescriptionForm.new(description_form_params)
+    @form = DescribeRepairForm.new(describe_repair_form_params)
 
     SelectedAnswerStore.new(session).store_selected_answers(
       :describe_repair,
@@ -17,7 +17,7 @@ class DescribeRepairController < ApplicationController
 
   private
 
-  def description_form_params
-    params.require(:description_form).permit!
+  def describe_repair_form_params
+    params.require(:describe_repair_form).permit!
   end
 end

@@ -20,7 +20,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Describe problem:
-    fill_in 'description_form_description', with: 'My sink is blocked'
+    fill_in 'describe_repair_form_description', with: 'My sink is blocked'
     click_on 'Continue'
 
     # Address search:
