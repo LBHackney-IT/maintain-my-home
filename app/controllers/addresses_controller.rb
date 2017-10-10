@@ -12,7 +12,9 @@ class AddressesController < ApplicationController
       return render 'address_searches/create'
     end
 
-    return redirect_to address_isnt_here_path if @form.address_isnt_here?
+    if @form.address_isnt_here?
+      return redirect_to page_path('address_isnt_here')
+    end
 
     api = HackneyApi.new
     address = api.get_property(property_reference: @form.property_reference)

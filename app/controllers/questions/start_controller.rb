@@ -8,7 +8,10 @@ module Questions
       @form = StartForm.new(start_form_params)
 
       return render :index unless @form.valid?
-      return redirect_to emergency_contact_path if @form.priority_repair?
+
+      if @form.priority_repair?
+        return redirect_to page_path('emergency_contact')
+      end
 
       redirect_to describe_repair_path
     end
