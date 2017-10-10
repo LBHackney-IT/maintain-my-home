@@ -88,4 +88,43 @@ RSpec.describe JsonApi do
       end
     end
   end
+
+  describe '#post' do
+    it 'sends a JSON payload' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      request_params = { priority: 'N', problem: 'It is broken', property_reference: '00001234' }
+      request_json = request_params.to_json
+      stub_request(:post, 'http://hackney.api:8000/repairs')
+        .with(body: request_json)
+
+      json_api.post('repairs', request_params)
+
+      expect(a_request(:post, 'http://hackney.api:8000/repairs')
+        .with(
+          body: request_json,
+          headers: { content_type: 'application/json' }
+        )).to have_been_made.once
+    end
+
+    it 'parses a JSON response' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      response_params = { repair_request_id: '00045678' }
+      stub_request(:post, 'http://hackney.api:8000/repairs')
+        .to_return(body: response_params.to_json)
+
+      result = json_api.post('repairs', {})
+      expect(result).to eq('repair_request_id' => '00045678')
+    end
+
+    context 'when the response was not valid JSON' do
+      it 'raises an exception' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:post, 'http://hackney.api:8000/repairs')
+          .to_return(body: 'not found')
+
+        expect { json_api.post('/repairs', {}) }
+          .to raise_error(JsonApi::InvalidResponseError, "765: unexpected token at 'not found'")
+      end
+    end
+  end
 end

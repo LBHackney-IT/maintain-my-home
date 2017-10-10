@@ -17,4 +17,14 @@ class JsonApi
   rescue Faraday::ParsingError => e
     raise InvalidResponseError, e.message
   end
+
+  def post(path, params)
+    response = @connection.post(path) do |request|
+      request.body = params.to_json
+      request.headers['Content-Type'] = 'application/json'
+    end
+    response.body
+  rescue Faraday::ParsingError => e
+    raise InvalidResponseError, e.message
+  end
 end
