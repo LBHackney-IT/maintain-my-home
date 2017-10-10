@@ -47,5 +47,19 @@ RSpec.describe Question do
 
       expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
     end
+
+    it 'returns the path to a static page, if answer has "page" key' do
+      question = Question.new(
+        'question' => 'Where do you want to go?',
+        'answers' => [
+          {
+            'text' => 'London',
+            'page' => 'info',
+          },
+        ],
+      )
+
+      expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
+    end
   end
 end

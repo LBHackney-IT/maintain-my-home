@@ -16,6 +16,8 @@ class Question
 
     if answer_hash.key?('next')
       Rails.application.routes.url_helpers.questions_path(answer_hash['next'])
+    elsif answer_hash.key?('page')
+      Rails.application.routes.url_helpers.page_path(answer_hash['page'])
     else
       Rails.application.routes.url_helpers.describe_repair_path
     end

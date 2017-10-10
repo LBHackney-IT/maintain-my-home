@@ -54,6 +54,29 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_unchecked_field 'Absolutely!'
   end
 
+  scenario 'choosing an answer that requires the user to see some static content' do
+    allow_any_instance_of(QuestionSet)
+      .to receive(:questions)
+      .and_return(
+        'flood' => {
+          'question' => 'Is there a danger of flooding?',
+          'answers' => [
+            {
+              'text' => 'Yes',
+              'page' => 'emergency_contact',
+            },
+          ],
+        }
+      )
+
+    visit '/questions/flood'
+    choose_radio_button 'Yes'
+    click_on 'Continue'
+
+    expect(page.current_path).to eql '/pages/emergency_contact'
+    expect(page).to have_content 'Please call our repair centre'
+  end
+
   scenario 'choosing an answer redirects to the describe repair page by default' do
     allow_any_instance_of(QuestionSet)
       .to receive(:questions)
