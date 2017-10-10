@@ -1,1 +1,191 @@
 ---
+location:
+  question: Where is the problem located?
+  answers:
+    - text: In a communal area
+      next: describe_communal_problem
+
+    - text: In my home
+      next: which_room
+
+describe_communal_problem:
+  question: Describe the problem
+
+which_room:
+  question: Which room?
+  answers:
+    - text: Kitchen
+      next: kitchen_problem
+
+    - text: Bathroom
+      next: bathroom_problem
+
+    - text: Other
+      next: other_problem
+
+kitchen_problem:
+  question: What is the problem in your kitchen?
+  answers:
+    - text: Cupboards
+
+    - text: Sink
+      next: is_sink_blocked
+
+    - text: Damp or mould
+      next: describe_kitchen_damp
+
+    - text: Taps
+      next: kitchen_flooding_danger
+
+    - text: Sockets
+
+    - text: Extractor fan
+
+    - text: Other
+      next: kitchen_other_problem
+
+bathroom_problem:
+  question: What is the problem in your bathroom?
+  answers:
+    - text: Toilet
+      next: toilet_problem
+
+    - text: Taps
+    - text: Bath
+    - text: Damp or mould
+    - text: Basin
+    - text: Extractor fan
+
+    - text: Lights
+      next: water_dripping_into_light
+
+    - text: Something else
+
+other_problem:
+  question: What is the problem?
+  answers:
+   - text: Electrical
+     next: electrical_problem
+
+   - text: Heating
+
+   - text: Damp or mould
+
+   - text: Gas
+
+   - text: Windows
+     next: window_problem
+
+   - text: External doors
+     next: external_doors_problem
+
+   - text: Internal doors
+
+   - text: Something else
+     next: describe_unknown_repair
+
+describe_unknown_repair:
+  question: Please describe the problem you need repairing...
+
+electrical_problem:
+  question: Is your electrical problem one of these?
+  answers:
+    - text: Lights
+    - text: Smoke detector
+    - text: Broken socket
+
+window_problem:
+  question: Are you able to close the window securely?
+  answers:
+    - text: 'Yes'
+      next: window_material
+
+    - text: 'No'
+      page: emergency_contact
+
+window_material:
+  question: Is your door made out of...
+  answers:
+    - text: Wood
+    - text: PVC
+
+external_doors_problem:
+  question: Are you able to secure access to your property?
+  answers:
+    - text: 'Yes'
+      next: fire_door
+
+    - text: 'No'
+      page: emergency_contact
+
+fire_door:
+  question: Is it a fire door?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+    - text: 'No'
+      next: describe_external_door_problem
+
+describe_external_door_problem:
+  question: Please describe the problem with the external door...
+
+water_dripping_into_light:
+  question: Is there water dripping into the light?
+  answers:
+    - text: 'Yes'
+      next: who_fitted_light
+    - text: 'No'
+
+who_fitted_light:
+  question: Did you fit the bathroom light yourself?
+  answers:
+    - text: 'Yes'
+      page: repair_your_responsibility
+    - text: 'No'
+
+toilet_problem:
+  question: What's wrong with your toilet?
+  answers:
+    - text: Blocked or not flushing
+      next: blocked_only_toilet
+
+    - text: It's cracked
+
+    - text: Leaking
+      next: toilet_flood_danger
+
+toilet_flood_danger:
+  question: Is there danger of flooding?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+blocked_only_toilet:
+  question: Is this your only toilet?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+    - text: 'No'
+      page: toilet_unblock_info
+
+is_sink_blocked:
+  question: Is your sink blocked?
+  answers:
+    - text: 'Yes'
+    - text: 'No'
+
+describe_kitchen_damp:
+  question: Describe the problem
+
+kitchen_flooding_danger:
+  question: Is there a danger of flooding?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+kitchen_other_problem:
+  question: What is the problem in your kitchen?

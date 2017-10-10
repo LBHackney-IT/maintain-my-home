@@ -13,7 +13,7 @@ module Questions
         return redirect_to page_path('emergency_contact')
       end
 
-      redirect_to describe_repair_path
+      redirect_to questions_path('location')
     end
 
     private

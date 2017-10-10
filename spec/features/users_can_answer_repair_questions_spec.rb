@@ -40,7 +40,7 @@ RSpec.feature 'Users can answer repair questions' do
     click_continue
 
     within '.question' do
-      expect(page).to have_content 'Is there anything else we should know?'
+      expect(page).to have_content 'Where is the problem located?'
     end
   end
 

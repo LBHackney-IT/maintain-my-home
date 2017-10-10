@@ -7,9 +7,9 @@ class QuestionsController < ApplicationController
   def submit
     questions = QuestionSet.new
     question = questions.find(params[:id])
-    chosen_answer = form_params['answer']
 
     if question.multiple_choice?
+      chosen_answer = form_params['answer']
       return redirect_to question.redirect_path_for_answer(chosen_answer)
     end
 

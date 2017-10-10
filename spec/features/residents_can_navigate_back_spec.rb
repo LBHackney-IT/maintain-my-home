@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.feature 'Resident can navigate back' do
+  before(:each) do
+    allow_any_instance_of(QuestionSet)
+      .to receive(:questions)
+      .and_return(
+        'location' => {
+          'question' => 'Dummy question',
+          'answers' => [
+            { 'text' => 'skip' },
+          ],
+        }
+      )
+  end
+
   scenario 'taking a full happy path through the forms' do
     property = {
       'property_reference' => 'abc123',
@@ -18,8 +31,12 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'No'
     click_on 'Continue'
 
-    # Describe problem:
-    click_on 'Continue'
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
+    click_continue
 
     # Address search:
     fill_in 'Postcode', with: 'E8 5TQ'
@@ -48,8 +65,12 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'No'
     click_on 'Continue'
 
-    # Describe problem:
-    click_on 'Continue'
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
+    click_continue
 
     # Address search:
     fill_in 'Postcode', with: ''
@@ -76,8 +97,12 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'No'
     click_on 'Continue'
 
-    # Describe problem:
-    click_on 'Continue'
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
+    click_continue
 
     # Address search:
     fill_in 'Postcode', with: 'E8 5TQ'
@@ -122,8 +147,12 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'No'
     click_on 'Continue'
 
-    # Describe problem:
-    click_on 'Continue'
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
+    click_continue
 
     # Address search:
     fill_in 'Postcode', with: 'E8 5TQ'
@@ -149,8 +178,12 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'No'
     click_on 'Continue'
 
-    # Describe problem:
-    click_on 'Continue'
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
+    click_continue
 
     # Address search:
     fill_in 'Postcode', with: 'E8 5TQ'
@@ -163,4 +196,10 @@ RSpec.feature 'Resident can navigate back' do
 
   scenario 'going back from the describe unknown repair page'
   scenario 'going back TO the describe unknown repair page'
+
+  private
+
+  def click_continue
+    click_button t('helpers.submit.create')
+  end
 end

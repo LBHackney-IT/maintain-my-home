@@ -20,11 +20,26 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    allow_any_instance_of(QuestionSet)
+      .to receive(:questions)
+      .and_return(
+        'location' => {
+          'question' => 'Dummy question',
+          'answers' => [
+            { 'text' => 'skip' },
+          ],
+        }
+      )
+
     visit '/'
     click_on 'Start'
 
     # Emergency page:
     choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Fake decision tree
+    choose_radio_button 'skip'
     click_on 'Continue'
 
     # Describe problem:
