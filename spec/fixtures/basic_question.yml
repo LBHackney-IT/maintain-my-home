@@ -1,0 +1,6 @@
+---
+example:
+  question: Is this an example?
+  answers:
+    - text: Definitely
+    - text: Probably
