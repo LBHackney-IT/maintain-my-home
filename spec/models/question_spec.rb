@@ -18,4 +18,18 @@ RSpec.describe Question do
       expect(question.answers[1]['text']).to eql 'Nope'
     end
   end
+
+  describe '#answers_for_collection' do
+    it 'returns the answers in a format suitable for SimpleForm' do
+      question = Question.new(
+        'question' => 'Favourite animal?',
+        'answers' => [
+          { 'text' => 'Antelope' },
+          { 'text' => 'Badger' },
+        ],
+      )
+
+      expect(question.answers_for_collection).to include('Antelope', 'Badger')
+    end
+  end
 end

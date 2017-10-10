@@ -7,10 +7,17 @@ RSpec.feature 'Users can diagnose their issue' do
       .and_return(
         'first' => {
           'question' => 'Is there a danger of flooding?',
+          'answers' => [
+            { 'text' => 'Yeah' },
+            { 'text' => 'Nope' },
+          ],
         }
       )
     visit '/questions/first'
 
     expect(page).to have_content 'Is there a danger of flooding?'
+
+    expect(page).to have_unchecked_field 'Yeah'
+    expect(page).to have_unchecked_field 'Nope'
   end
 end
