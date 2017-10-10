@@ -9,7 +9,11 @@ class QuestionsController < ApplicationController
     question = questions.find(params[:id])
     chosen_answer = form_params['answer']
 
-    redirect_to question.redirect_path_for_answer(chosen_answer)
+    if question.multiple_choice?
+      return redirect_to question.redirect_path_for_answer(chosen_answer)
+    end
+
+    redirect_to question.redirect_path
   end
 
   private

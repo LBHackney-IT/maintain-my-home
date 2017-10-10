@@ -63,6 +63,17 @@ RSpec.describe Question do
     end
   end
 
+  describe '#redirect_path' do
+    it 'returns the path to the next question, if question has "next" key' do
+      question = Question.new(
+        'question' => 'Please describe your problem',
+        'next' => 'another'
+      )
+
+      expect(question.redirect_path).to eql '/questions/another'
+    end
+  end
+
   describe '#multiple_choice?' do
     it 'is true when the question has possible answers' do
       question = Question.new(
