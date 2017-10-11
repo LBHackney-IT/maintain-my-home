@@ -55,6 +55,10 @@ RSpec.feature 'Resident can locate a problem' do
     within '#address-search-results' do
       expect(page).to have_content t('address_search.not_found')
     end
+
+    click_button t('helpers.submit.create')
+
+    expect(page).to have_content 'We cannot find your address'
   end
 
   scenario 'when an invalid postcode is entered' do
