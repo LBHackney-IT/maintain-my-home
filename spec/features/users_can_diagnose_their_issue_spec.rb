@@ -32,7 +32,7 @@ RSpec.feature 'Users can diagnose their issue' do
     visit '/questions/first'
 
     expect(page).to have_content 'Please describe your first pet'
-    expect(page).to have_field 'form_answer', type: 'textarea'
+    expect(page).to have_field 'question_form_answer', type: 'textarea'
   end
 
   scenario 'choosing an answer that moves on to another question' do
@@ -108,5 +108,23 @@ RSpec.feature 'Users can diagnose their issue' do
     click_on 'Continue'
 
     expect(page).to have_content 'Is there anything else we should know?'
+  end
+
+  scenario 'not choosing an answer redisplays the form with an error' do
+    allow_any_instance_of(QuestionSet)
+      .to receive(:questions)
+      .and_return(
+        'preferences' => {
+          'question' => 'Do you like errors?',
+          'answers' => [
+            { 'text' => 'No' },
+          ],
+        }
+      )
+
+    visit '/questions/preferences'
+    click_on 'Continue'
+
+    expect(page).to have_content 'Do you like errors?'
   end
 end
