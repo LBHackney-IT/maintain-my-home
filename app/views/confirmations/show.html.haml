@@ -1,7 +1,8 @@
 .grid-row
-  .column-two-thirds
+  %section#confirmation.column-two-thirds
     %h1
-      Thank you John Smith
+      Thank you
+      = @confirmation.full_name
 
     %p
       Your repair request has been successfully submitted.
@@ -13,7 +14,7 @@
 
     %p
       We will call you within one working day, between
-      %strong 12pm and 5pm
+      %strong= @confirmation.callback_time
       to arrange a repair appointment.
 
     %p
@@ -27,18 +28,17 @@
       We are open Monday to Friday 8am - 7pm and Saturdays 9am - 1pm.
 
 .grid-row
-  .column-two-thirds
+  %section#summary.column-two-thirds
     %h2 Summary
 
     %h3 Problem
-    %p Type: Blocked bath
-    %p Description: The bath won't drain
+    %p= t('confirmation.summary.description', description: @confirmation.description)
 
     %h3 Your details
-    %p Name: John Smith
-    %p Phone: 01234 567 890
-    %p Address: Flat 1, 8 Hoxton Square, N1 6NU
+    %p= t('confirmation.summary.name', name: @confirmation.full_name)
+    %p= t('confirmation.summary.phone', phone: @confirmation.telephone_number)
+    %p= t('confirmation.summary.address', address: @confirmation.address)
 
     %h3 Callback time
-    %p Time: afternoon, 12pm - 5pm
+    %p= t('confirmation.summary.callback_time', callback_time: @confirmation.callback_time)
 

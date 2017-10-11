@@ -26,6 +26,13 @@ en:
     questions/start: start
     address_searches: find my address
     describe_repair: problem description
+  confirmation:
+    summary:
+      description: 'Description: %{description}'
+      name: 'Name: %{name}'
+      phone: 'Phone number: %{phone}'
+      address: 'Address: %{address}'
+      callback_time: 'Callback time: %{callback_time}'
   contact-details:
     title: Who should we contact about this repair?
   errors:

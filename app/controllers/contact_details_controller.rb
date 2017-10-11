@@ -14,7 +14,10 @@ class ContactDetailsController < ApplicationController
     @back = Back.new(controller_name: 'address_searches')
 
     @form = ContactDetailsForm.new(contact_details_form_params)
-    return render :index unless @form.valid?
+
+    contact_details_saver =
+      ContactDetailsSaver.new(selected_answer_store: selected_answer_store)
+    return render :index unless contact_details_saver.save(@form)
 
     redirect_to confirmation_path('abc123')
   end
