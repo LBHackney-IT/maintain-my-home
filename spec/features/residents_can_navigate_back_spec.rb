@@ -37,7 +37,7 @@ RSpec.feature 'Resident can navigate back' do
     expect(page).to have_content 'Is there anything else we should know about this problem?'
 
     click_on t('back_links.questions/start')
-    expect(page).to have_content 'Is your problem one of these?'
+    expect(page).to have_content 'Do any of the following apply to you:'
   end
 
   scenario 'when the address search was invalid' do
@@ -103,7 +103,7 @@ RSpec.feature 'Resident can navigate back' do
     click_on 'Continue'
 
     click_on t('back_links.questions/start')
-    expect(page).to have_content 'Is your problem one of these?'
+    expect(page).to have_content 'Do any of the following apply to you:'
   end
 
   scenario 'going back from the My address is not here exit page' do

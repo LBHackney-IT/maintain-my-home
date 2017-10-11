@@ -1,17 +1,20 @@
 = simple_form_for @form, url: request.fullpath do |f|
   %fieldset
     %legend.question
-      %h1 Is your problem one of these?
+      %h1 Before we start
 
       %p
-        Before we start we need to check if your problem is one of the following:
+        Do any of the following apply to you:
 
       %ul
-        %li flooding / uncontrollable water leak
-        %li my only toilet is blocked
-        %li no electricity
-        %li water dripping over a power socket or light
+        %li I have no electricity
+        %li I have no water
+        %li I have no heating
+        %li I have a water leak which I cannot contain
+        %li My only toilet is blocked
         %li I cannot access my property
+        %li I cannot secure an exterior door or window
+        %li My home has been adapted for my disability
 
     .answers
       = f.input :answer, collection: [:yes, :no], as: :radio_buttons, label: false
