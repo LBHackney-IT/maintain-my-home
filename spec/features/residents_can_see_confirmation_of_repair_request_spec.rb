@@ -10,6 +10,14 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E5 8TE').and_return([property])
     allow(fake_api).to receive(:get).with('properties/00000503').and_return(property)
+    allow(fake_api).to receive(:post)
+      .with('repairs', anything)
+      .and_return(
+        'requestReference' => '00367923',
+        'priority' => 'N',
+        'problem' => 'My sink is blocked',
+        'propertyRef' => '00000503',
+      )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/'
@@ -39,7 +47,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
 
     aggregate_failures do
       within '#confirmation' do
-        expect(page).to have_content 'Your reference number is abc123'
+        expect(page).to have_content 'Your reference number is 00367923'
         expect(page).to have_content 'between 8am and 12pm'
       end
 
@@ -53,5 +61,12 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         expect(page).to have_content t('confirmation.summary.callback_time', callback_time: 'between 8am and 12pm')
       end
     end
+
+    expect(fake_api).to have_received(:post).with(
+      'repairs',
+      priority: 'N',
+      problem: 'My sink is blocked',
+      propertyRef: '00000503',
+    )
   end
 end

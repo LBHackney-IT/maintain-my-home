@@ -19,7 +19,10 @@ class ContactDetailsController < ApplicationController
       ContactDetailsSaver.new(selected_answer_store: selected_answer_store)
     return render :index unless contact_details_saver.save(@form)
 
-    redirect_to confirmation_path('abc123')
+    result =
+      CreateRepair.new.call(answers: selected_answer_store.selected_answers)
+
+    redirect_to confirmation_path(result.request_reference)
   end
 
   private
