@@ -4,7 +4,7 @@ RSpec.feature 'Users understand the purpose of the service' do
   scenario 'sees the start page when visiting the root path' do
     visit '/'
 
-    expect(page).to have_content 'Maintain my home'
+    expect(page).to have_content 'Report a repair'
     expect(page).to have_link 'Start'
   end
 
@@ -13,6 +13,6 @@ RSpec.feature 'Users understand the purpose of the service' do
 
     click_on 'Start'
 
-    expect(page).to have_content 'Is your problem one of these?'
+    expect(page).to have_content 'Do any of the following apply to you:'
   end
 end
