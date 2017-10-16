@@ -2,16 +2,20 @@ require 'rails_helper'
 
 RSpec.feature 'Resident can navigate back' do
   before(:each) do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+
+    allow(fake_question_set)
+      .to receive(:find)
       .and_return(
-        'location' => {
+        Question.new(
           'question' => 'Dummy question',
           'answers' => [
             { 'text' => 'skip' },
           ],
-        }
+        )
       )
+
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
   end
 
   scenario 'taking a full happy path through the forms' do

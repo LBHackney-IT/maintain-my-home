@@ -13,16 +13,19 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     allow(fake_api).to receive(:get).with('properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('location')
       .and_return(
-        'location' => {
+        Question.new(
           'question' => 'Dummy question',
           'answers' => [
             { 'text' => 'skip' },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/'
 

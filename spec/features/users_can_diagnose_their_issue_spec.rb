@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.feature 'Users can diagnose their issue' do
   scenario 'viewing a multiple-choice question' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('first')
       .and_return(
-        'first' => {
+        Question.new(
           'question' => 'Is there a danger of flooding?',
           'answers' => [
             { 'text' => 'Yeah' },
             { 'text' => 'Nope' },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+
     visit '/questions/first'
 
     expect(page).to have_content 'Is there a danger of flooding?'
@@ -22,13 +26,17 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'viewing a question which requires text input' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('first')
       .and_return(
-        'first' => {
+        Question.new(
           'question' => 'Please describe your first pet',
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+
     visit '/questions/first'
 
     expect(page).to have_content 'Please describe your first pet'
@@ -36,10 +44,12 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'choosing an answer that moves on to another question' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('first')
       .and_return(
-        'first' => {
+        Question.new(
           'question' => 'Are you having fun yet?',
           'answers' => [
             {
@@ -50,14 +60,20 @@ RSpec.feature 'Users can diagnose their issue' do
               'text' => 'No',
             },
           ],
-        },
-        'second' => {
+        )
+      )
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('second')
+      .and_return(
+        Question.new(
           'question' => 'Are you sure?',
           'answers' => [
             { 'text' => 'Absolutely!' },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/questions/first'
     choose_radio_button 'Yes'
@@ -69,10 +85,12 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'choosing an answer that requires the user to see some static content' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('flood')
       .and_return(
-        'flood' => {
+        Question.new(
           'question' => 'Is there a danger of flooding?',
           'answers' => [
             {
@@ -80,8 +98,9 @@ RSpec.feature 'Users can diagnose their issue' do
               'page' => 'emergency_contact',
             },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/questions/flood'
     choose_radio_button 'Yes'
@@ -92,16 +111,19 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'choosing an answer redirects to the describe repair page by default' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('where')
       .and_return(
-        'where' => {
+        Question.new(
           'question' => 'Where does this question go?',
           'answers' => [
             { 'text' => 'Nowhere' },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/questions/where'
     choose_radio_button 'Nowhere'
@@ -111,16 +133,19 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'not choosing an answer redisplays the form with an error' do
-    allow_any_instance_of(QuestionSet)
-      .to receive(:questions)
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('preferences')
       .and_return(
-        'preferences' => {
+        Question.new(
           'question' => 'Do you like errors?',
           'answers' => [
             { 'text' => 'No' },
           ],
-        }
+        )
       )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/questions/preferences'
     click_on 'Continue'
