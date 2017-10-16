@@ -36,13 +36,13 @@ RSpec.feature 'Resident can navigate back' do
     click_on 'Continue'
 
     # Contact details
-    click_on t('back_links.address_searches')
+    click_on t('back_link')
     expect(page).to have_content 'What is your address?'
+    click_on t('back_link')
 
-    click_on t('back_links.describe_repair')
     expect(page).to have_content 'Is there anything else we should know?'
+    click_on t('back_link')
 
-    click_on t('back_links.questions/start')
     expect(page).to have_content 'Do any of the following apply to you:'
   end
 
@@ -81,13 +81,13 @@ RSpec.feature 'Resident can navigate back' do
     click_on 'Continue'
 
     # Contact details with callback - last page before confirmation:
-    click_on t('back_links.address_searches')
+    click_on t('back_link')
     expect(page).to have_content 'What is your address?'
 
-    click_on t('back_links.describe_repair')
+    click_on t('back_link')
     expect(page).to have_content 'Is there anything else we should know?'
 
-    click_on t('back_links.questions/start')
+    click_on t('back_link')
     expect(page).to have_content 'Do any of the following apply to you:'
   end
 
@@ -112,7 +112,7 @@ RSpec.feature 'Resident can navigate back' do
     fill_in 'Postcode', with: ''
     click_on 'Find my address'
 
-    click_on t('back_links.describe_repair')
+    click_on t('back_link')
     expect(page).to have_content 'Is there anything else we should know?'
   end
 
@@ -153,7 +153,8 @@ RSpec.feature 'Resident can navigate back' do
     # Contact details - submit an empty form
     click_on 'Continue'
 
-    click_on t('back_links.address_searches')
+    click_on t('back_link')
+
     expect(page).to have_content 'What is your address?'
   end
 
@@ -194,7 +195,7 @@ RSpec.feature 'Resident can navigate back' do
     # Contact details - submit an empty form
     click_on 'Continue'
 
-    click_on t('back_links.address_searches')
+    click_on t('back_link')
     expect(page).to have_content 'What is your address?'
   end
 
@@ -206,7 +207,7 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button 'Yes'
     click_on 'Continue'
 
-    click_on t('back_links.previous')
+    click_on t('back_link')
     expect(page).to have_content 'Do any of the following apply to you:'
   end
 
@@ -243,7 +244,7 @@ RSpec.feature 'Resident can navigate back' do
     choose_radio_button "My address isn't here"
     click_on 'Continue'
 
-    click_on t('back_links.address_searches')
+    click_on t('back_link')
     expect(page).to have_content 'What is your address?'
   end
 
@@ -273,7 +274,7 @@ RSpec.feature 'Resident can navigate back' do
     click_on 'Find my address'
 
     # Address selection:
-    click_on t('back_links.describe_repair')
+    click_on t('back_link')
     expect(page).to have_content 'Is there anything else we should know?'
   end
 

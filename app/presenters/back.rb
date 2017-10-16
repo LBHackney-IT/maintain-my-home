@@ -12,10 +12,6 @@ class Back
   private
 
   def text
-    I18n.t 'back_links.prefix', page_description: page_description
-  end
-
-  def page_description
-    I18n.t @controller_name, scope: :back_links
+    I18n.t 'back_link'
   end
 end
