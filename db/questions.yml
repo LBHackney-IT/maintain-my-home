@@ -9,7 +9,26 @@ location:
       next: which_room
 
 describe_communal_problem:
-  question: Please describe the problem in the communal area
+  question: What is the problem in the communal grounds?
+  answers:
+    - text: A light is not working
+      next: faulty_lamp_post
+
+    - text: The main entrance door is damaged or not closing
+    - text: The intercom is not working for my property
+    - text: The lift is faulty
+    - text: There are pests or rodents
+    - text: There is a blocked drain or gully
+    - text: The rubbish chute is blocked or damaged
+    - text: Something else
+
+faulty_lamp_post:
+  question: Are you reporting a faulty lamp post?
+  answers:
+    - text: 'Yes'
+
+    - text: 'No'
+      page: cleaners_responsibility
 
 which_room:
   question: Which room?
