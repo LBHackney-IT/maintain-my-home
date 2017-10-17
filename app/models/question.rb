@@ -1,4 +1,6 @@
 class Question
+  class InvalidAnswerError < StandardError; end
+
   attr_reader :title
   attr_reader :answers
   attr_reader :next_question
@@ -11,6 +13,12 @@ class Question
 
   def answers_for_collection
     answers.map { |answer| answer['text'] }
+  end
+
+  def answer_data(chosen_answer)
+    answers.detect { |answer| answer['text'] == chosen_answer }.tap do |data|
+      raise InvalidAnswerError if data.nil?
+    end
   end
 
   def redirect_path_for_answer(chosen_answer)
@@ -37,4 +45,3 @@ class Question
     answers.any?
   end
 end
-

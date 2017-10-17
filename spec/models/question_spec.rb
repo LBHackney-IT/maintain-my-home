@@ -33,6 +33,39 @@ RSpec.describe Question do
     end
   end
 
+  describe '#answer_data' do
+    it 'returns data for the given answer' do
+      question = Question.new(
+        'question' => 'Favourite animal?',
+        'answers' => [
+          { 'text' => 'Antelope', 'next' => 'cooking_style' },
+          { 'text' => 'Badger', 'sor_code' => '012345' },
+        ],
+      )
+
+      antelope = question.answer_data('Antelope')
+      expect(antelope['text']).to eql 'Antelope'
+      expect(antelope['next']).to eql 'cooking_style'
+
+      badger = question.answer_data('Badger')
+      expect(badger['text']).to eql 'Badger'
+      expect(badger['sor_code']).to eql '012345'
+    end
+
+    context 'when the answer is not valid' do
+      it 'raises an error' do
+        question = Question.new(
+          'question' => 'Favourite animal?',
+          'answers' => [
+            { 'text' => 'Antelope', 'next' => 'cooking_style' },
+          ],
+        )
+
+        expect { question.answer_data('skink') }.to raise_error(Question::InvalidAnswerError)
+      end
+    end
+  end
+
   describe '#redirect_path_for_answer' do
     it 'returns the path to the next question, if answer has "next" key' do
       question = Question.new(
