@@ -10,13 +10,8 @@ Rails.application.routes.draw do
     post '/start', to: 'start#submit'
   end
 
-  get '/emergency-contact',
-      to: 'pages#emergency_contact',
-      as: 'emergency_contact'
-
-  get '/address-isnt-here',
-      to: 'pages#address_isnt_here',
-      as: 'address_isnt_here'
+  get '/questions/:id', to: 'questions#show', as: 'questions'
+  post '/questions/:id', to: 'questions#submit'
 
   get '/describe-repair', to: 'describe_repair#index', as: 'describe_repair'
   post '/describe-repair', to: 'describe_repair#submit'
@@ -28,6 +23,4 @@ Rails.application.routes.draw do
 
   get '/contact-details', to: 'contact_details#index', as: 'contact_details'
   post '/contact-details', to: 'contact_details#submit'
-
-  root to: 'start#index'
 end

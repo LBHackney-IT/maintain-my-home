@@ -1,0 +1,14 @@
+= simple_form_for @form, url: request.fullpath do |f|
+  %fieldset
+    %legend.question
+      %h1= @question.title
+
+    .answers
+      - if @question.multiple_choice?
+        = f.input :answer, collection: @question.answers_for_collection, as: :radio_buttons, label: false
+      - else
+        = f.input :answer, as: :text, label: false
+
+      = f.button :submit, class: 'button'
+
+

@@ -1,0 +1,342 @@
+---
+location:
+  question: Where is the problem located?
+  answers:
+    - text: In a communal area
+      next: describe_communal_problem
+
+    - text: In my home
+      next: which_room
+
+describe_communal_problem:
+  question: Please describe the problem in the communal area
+
+which_room:
+  question: Which room?
+  answers:
+    - text: Kitchen
+      next: kitchen_problem
+
+    - text: Bathroom
+      next: bathroom_problem
+
+    - text: Other
+      next: other_problem
+
+kitchen_problem:
+  question: What is the problem in your kitchen?
+  answers:
+    - text: Cupboards
+
+    - text: Sink
+      next: is_sink_blocked
+
+    - text: Damp or mould
+      next: describe_kitchen_damp
+
+    - text: Taps
+      next: is_kitchen_tap_stuck_open
+
+    - text: Electrical
+      next: kitchen_electrical_problem
+
+    - text: Other
+      next: kitchen_other_problem
+
+is_kitchen_tap_stuck_open:
+  question: Is the tap stuck open?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+kitchen_electrical_problem:
+  question: Is your problem one of these?
+  answers:
+    - text: Extractor fan
+      next: is_fan_leaking_water
+
+    - text: Lights
+      next: bathroom_lights_problem
+      todo: SHOULD GO SOMEWHERE ELSE?
+
+    - text: Smoke detector
+
+    - text: Sockets
+      page: electrical_hazard_warning
+
+other_electrical_problem:
+  question: Is your problem one of these?
+  answers:
+    - text: Light fitting
+      next: water_leaking_into_light
+
+    - text: Light switches
+      page: electrical_hazard_warning
+
+    - text: Carbon monoxide detector
+
+    - text: Smoke detector
+
+    - text: Broken power socket
+      page: electrical_hazard_warning
+
+bathroom_problem:
+  question: What is the problem in your bathroom?
+  answers:
+    - text: Toilet
+      next: toilet_problem
+
+    - text: Taps
+      next: is_bathroom_tap_stuck_open
+
+    - text: Bath
+      next: is_bath_leaking
+
+    - text: Damp or mould
+      next: describe_bathroom_damp
+
+    - text: Basin
+      next: is_basin_leaking_or_cracked
+
+    - text: Extractor fan
+      next: is_fan_leaking_water
+
+    - text: Lights
+      next: bathroom_lights_problem
+
+    - text: Something else
+      next: bathroom_other_problem
+
+is_basin_leaking_or_cracked:
+  question: Is the basin leaking or cracked?
+  answers:
+    - text: 'Yes'
+
+    - text: 'No'
+      next: is_basin_blocked
+
+is_basin_blocked:
+  question: Is the basin blocked?
+  answers:
+    - text: 'Yes'
+    - text: 'No'
+
+is_fan_leaking_water:
+  question: Is there water leaking into or from the fan?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+is_bathroom_tap_stuck_open:
+  question: Is the tap stuck open?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+is_bath_leaking:
+  question: Is your bath leaking?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+      next: is_bath_blocked_or_cracked
+
+is_bath_blocked_or_cracked:
+  question: Is your bath blocked or cracked?
+  answers:
+    - text: 'Yes'
+    - text: 'No'
+
+bathroom_lights_problem:
+  question: Is the problem with the...
+  answers:
+    - text: Light fitting
+      next: water_leaking_into_light
+
+    - text: Light switch
+      page: electrical_hazard_warning
+
+bathroom_other_problem:
+  question: Are you electrics safe?
+  answers:
+    - text: 'Yes'
+
+    - text: 'No'
+      page: emergency_contact
+
+other_problem:
+  question: What is the problem?
+  answers:
+   - text: Electrical
+     next: other_electrical_problem
+
+   - text: Heating
+
+   - text: Damp or mould
+     todo: DESCRIBE MOULD
+
+   - text: Gas
+     page: emergency_contact
+
+   - text: Windows
+     next: window_problem
+
+   - text: External doors
+     next: external_doors_problem
+
+   - text: Internal doors
+
+   - text: Something else
+     next: describe_unknown_repair
+     todo: UNSAFE ELECTRICS?
+
+describe_unknown_repair:
+  question: Please describe the problem you need repairing...
+
+window_problem:
+  question: Are you able to close the window securely?
+  answers:
+    - text: 'Yes'
+      next: window_glass_damaged
+
+    - text: 'No'
+      page: emergency_contact
+
+window_glass_damaged:
+  question: Is there damage to the glass?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+      next: window_material
+
+window_material:
+  question: Is your door made out of...
+  answers:
+    - text: Wood
+    - text: PVC
+
+external_doors_problem:
+  question: Are you able to secure access to your property?
+  answers:
+    - text: 'Yes'
+      next: fire_door
+
+    - text: 'No'
+      page: emergency_contact
+
+fire_door:
+  question: Is it a fire door?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+    - text: 'No'
+      next: describe_external_door_problem
+
+describe_external_door_problem:
+  question: Please describe the problem with the external door...
+
+water_leaking_into_light:
+  question: Is there water leaking into or from the light?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+      next: who_fitted_light
+
+who_fitted_light:
+  question: Did you fit the light yourself?
+  answers:
+    - text: 'Yes'
+      page: repair_your_responsibility
+
+    - text: 'No'
+      next: light_check_trip_switches
+
+light_check_trip_switches:
+  question: Have you checked the trip switches?
+  answers:
+    - text: 'Yes'
+      next: is_lightbulb_changed
+
+    - text: 'No'
+      page: check_fusebox
+
+is_lightbulb_changed:
+  question: Have you tried changing the lightbulb, and the light is still not working?
+  answers:
+    - text: 'Yes, I have and the light is still not working'
+
+    - text: 'No'
+      page: repair_your_responsibility
+
+toilet_problem:
+  question: Is your toilet...?
+  answers:
+    - text: Blocked
+      next: blocked_only_toilet
+
+    - text: Not flushing
+
+    - text: Cracked
+
+    - text: Leaking
+      next: toilet_flood_danger
+
+toilet_flood_danger:
+  question: Is there danger of flooding?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+
+blocked_only_toilet:
+  question: Is this your only toilet?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+    - text: 'No'
+      page: toilet_unblock_info
+
+is_sink_blocked:
+  question: Is your sink blocked?
+  answers:
+    - text: 'Yes'
+      page: kitchen_sink_unblock_info
+
+    - text: 'No'
+      next: is_sink_leaking
+
+is_sink_leaking:
+  question: Is your sink leaking?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+      next: describe_sink_problem
+
+describe_sink_problem:
+  question: Please describe the problem with your sink
+
+describe_kitchen_damp:
+  question: Please give details of the damp in your kitchen
+
+describe_bathroom_damp:
+  question: Please give details of the damp in your bathroom
+
+kitchen_other_problem:
+  question: What is the problem in your kitchen?
+
+bathroom_other_problem:
+  question: What is the problem in your bathroom?

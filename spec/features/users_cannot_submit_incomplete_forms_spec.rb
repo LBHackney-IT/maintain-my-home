@@ -13,6 +13,20 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     allow(fake_api).to receive(:get).with('properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('location')
+      .and_return(
+        Question.new(
+          'question' => 'Dummy question',
+          'answers' => [
+            { 'text' => 'skip' },
+          ],
+        )
+      )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+
     visit '/'
 
     # Start page
@@ -22,7 +36,11 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     choose_radio_button 'No'
     click_continue
 
-    # Problem description
+    # Fake decision tree
+    choose_radio_button 'skip'
+    click_continue
+
+    # Describe repair
     click_continue
 
     # Choose address
