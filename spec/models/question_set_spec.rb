@@ -2,20 +2,16 @@ require 'rails_helper'
 
 RSpec.describe QuestionSet do
   describe '#initialize' do
-    it 'loads and parses questions from a YAML file into a hash' do
-      store = QuestionSet.new('spec/fixtures/basic_question.yml')
+    it 'throws an error if the YAML file is not in the correct format' do
+      expect do
+        QuestionSet.new('spec/fixtures/broken.yml')
+      end.to raise_error(QuestionSet::BadlyFormattedYaml)
+    end
 
-      expected = {
-        'example' => {
-          'question' => 'Is this an example?',
-          'answers' => [
-            { 'text' => 'Definitely' },
-            { 'text' => 'Probably' },
-          ],
-        },
-      }
-
-      expect(store.questions).to eql expected
+    it 'throws an error if the YAML file links to a missing question' do
+      expect do
+        QuestionSet.new('spec/fixtures/missing_questions.yml')
+      end.to raise_error(QuestionSet::MissingQuestions)
     end
   end
 
@@ -28,7 +24,7 @@ RSpec.describe QuestionSet do
       expect(question.title).to eql 'Is this an example?'
     end
 
-    it 'raises an error if the requestion question was not found' do
+    it 'raises an error if the requested question was not found' do
       store = QuestionSet.new('spec/fixtures/basic_question.yml')
 
       expect { store.find('wrong') }.to raise_error QuestionSet::UnknownQuestion

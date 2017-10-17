@@ -1,0 +1,7 @@
+---
+start:
+  question: Where is the problem located?
+  answers:
+    - text: In a communal area
+      next: missing_question
+
