@@ -2,7 +2,6 @@ class Question
   class InvalidAnswerError < StandardError; end
 
   attr_reader :title
-  attr_reader :answers
   attr_reader :next_question
 
   def initialize(question_hash)
@@ -12,17 +11,17 @@ class Question
   end
 
   def answers_for_collection
-    answers.map { |answer| answer['text'] }
+    @answers.map { |answer| answer['text'] }
   end
 
   def answer_data(chosen_answer)
-    answers.detect { |answer| answer['text'] == chosen_answer }.tap do |data|
+    @answers.detect { |answer| answer['text'] == chosen_answer }.tap do |data|
       raise InvalidAnswerError if data.nil?
     end
   end
 
   def redirect_path_for_answer(chosen_answer)
-    answer_hash = answers.detect { |answer| answer['text'] == chosen_answer }
+    answer_hash = answer_data(chosen_answer)
 
     if answer_hash.key?('next')
       Rails.application.routes.url_helpers.questions_path(answer_hash['next'])
@@ -42,6 +41,6 @@ class Question
   end
 
   def multiple_choice?
-    answers.any?
+    @answers.any?
   end
 end
