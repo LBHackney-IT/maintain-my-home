@@ -2,11 +2,14 @@
 location:
   question: Where is the problem located?
   answers:
-    - text: In a communal area
-      next: describe_communal_problem
-
     - text: In my home
       next: which_room
+
+    - text: Outside my home
+      next: describe_outside_problem
+
+    - text: In a communal area
+      next: describe_communal_problem
 
 describe_communal_problem:
   question: What is the problem in the communal grounds?
@@ -29,6 +32,17 @@ faulty_lamp_post:
 
     - text: 'No'
       page: cleaners_responsibility
+
+describe_outside_problem:
+  question: What is the problem outside your home?
+  answers:
+    - text: The guttering or downpipe is blocked or damaged
+    - text: A drain is blocked
+    - text: Paving is broken or coming loose
+    - text: The roof is leaking
+    - text: A light is not working
+    - text: I have pests or rodents in or near my home
+    - text: Something else
 
 which_room:
   question: Which room?
