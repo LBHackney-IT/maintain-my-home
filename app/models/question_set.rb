@@ -3,8 +3,6 @@ class QuestionSet
   class BadlyFormattedYaml < StandardError; end
   class MissingQuestions < StandardError; end
 
-  attr_reader :questions
-
   def initialize(filename = 'db/questions.yml')
     yaml_data = File.read(Rails.root.join(filename))
 
@@ -20,19 +18,19 @@ class QuestionSet
   end
 
   def find(id)
-    unless questions.key?(id)
+    unless @questions.key?(id)
       raise UnknownQuestion, "Cannot find question with id '#{id}'"
     end
 
-    Question.new(questions.fetch(id))
+    Question.new(@questions.fetch(id))
   end
 
   private
 
   def validate_questions
-    question_ids = questions.map { |k, _v| k }.uniq
+    question_ids = @questions.map { |k, _v| k }.uniq
 
-    next_ids = questions
+    next_ids = @questions
                .map { |_k, v| Array(v['answers']).map { |a| a['next'] } }
                .flatten
                .compact
