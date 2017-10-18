@@ -4,17 +4,21 @@
       %h1 Before we start
 
       %p
-        Do any of the following apply to you:
+        %strong
+          Do any of the following apply to you:
 
       %ul
         %li I have no electricity
         %li I have no water
         %li I have no heating
         %li I have a water leak which I cannot contain
-        %li My only toilet is blocked
         %li I cannot access my property
-        %li I cannot secure an exterior door or window
-        %li My home has been adapted for my disability
+
+      %p
+        or
+
+      %ul
+        %li my home has been adapted for my disability
 
     .answers
       = f.input :answer, collection: [:yes, :no], as: :radio_buttons, label: false
