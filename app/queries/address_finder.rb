@@ -1,5 +1,5 @@
 class AddressFinder
-  def initialize(api)
+  def initialize(api = HackneyApi.new)
     @api = api
   end
 

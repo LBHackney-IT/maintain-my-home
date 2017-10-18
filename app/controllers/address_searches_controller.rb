@@ -10,8 +10,7 @@ class AddressSearchesController < ApplicationController
 
     return render :index unless @address_search.valid?
 
-    address_finder = AddressFinder.new(HackneyApi.new)
-    @address_search_results = address_finder.find(@address_search)
+    @address_search_results = AddressFinder.new.find(@address_search)
 
     @form = AddressForm.new
   end

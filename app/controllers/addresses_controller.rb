@@ -4,11 +4,10 @@ class AddressesController < ApplicationController
 
     if @form.invalid?
       @address_search = AddressSearch.new(postcode: @form.postcode)
-
-      address_finder = AddressFinder.new(HackneyApi.new)
-      @address_search_results = address_finder.find(@address_search)
-
       @back = Back.new(controller_name: 'describe_repair')
+
+      @address_search_results = AddressFinder.new.find(@address_search)
+
       return render 'address_searches/create'
     end
 
