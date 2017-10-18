@@ -4,22 +4,33 @@ class CreateRepair
   end
 
   def call(answers:)
-    result = @api.create_repair(create_repair_params(answers))
+    params = RepairParams.new(answers)
+    result = @api.create_repair(create_repair_params(params))
     Result.new(result)
   end
 
   private
 
-  def create_repair_params(answers)
-    params = Params.new(answers)
+  def create_repair_params(params)
     {
       priority: params.priority,
       problem: params.problem,
       propertyRef: params.property_reference,
-    }
+    }.tap do |hash|
+      hash[:repairOrders] = create_work_order_params(params) if params.sor_code
+    end
   end
 
-  class Params
+  def create_work_order_params(params)
+    [
+      {
+        jobCode: params.sor_code,
+        propertyReference: params.property_reference,
+      },
+    ]
+  end
+
+  class RepairParams
     def initialize(answers)
       @answers = answers
     end
@@ -38,6 +49,10 @@ class CreateRepair
     def priority
       'N'
     end
+
+    def sor_code
+      @answers.fetch('diagnosis', {})['sor_code']
+    end
   end
 
   class Result
@@ -46,7 +61,7 @@ class CreateRepair
     end
 
     def request_reference
-      @result.fetch('requestReference')
+      @result.fetch('requestReference', @result.fetch('repairRequestReference'))
     end
   end
 end

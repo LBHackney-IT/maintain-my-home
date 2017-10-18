@@ -8,7 +8,13 @@ class QuestionsController < ApplicationController
     @form = QuestionForm.new(question_form_params)
     @question = QuestionSet.new.find(params[:id])
 
-    return render :show unless @form.valid?
+    question_saver =
+      QuestionSaver.new(
+        question: @question,
+        selected_answer_store: SelectedAnswerStore.new(session),
+      )
+
+    return render :show unless question_saver.save(@form)
 
     if @question.multiple_choice?
       return redirect_to @question.redirect_path_for_answer(@form.answer)
