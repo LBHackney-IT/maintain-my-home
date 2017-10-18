@@ -16,18 +16,10 @@ RSpec.describe ContactDetailsForm do
       expect(form.errors.details[:telephone_number]).to include(error: :blank)
     end
 
-    it 'is invalid when callback_time is blank' do
-      form = ContactDetailsForm.new
-      form.valid?
-
-      expect(form.errors.details[:callback_time]).to include(error: :blank)
-    end
-
     it 'is valid when the required parameters are provided' do
       form = ContactDetailsForm.new(
         full_name: 'Robin Hood',
         telephone_number: '0115 123 4567',
-        callback_time: :afternoon
       )
 
       expect(form).to be_valid
