@@ -57,7 +57,7 @@ RSpec.describe Confirmation do
     context 'when the stored callback time was morning' do
       it 'returns a user-readable string based on the stored callback time' do
         fake_answers = {
-          'contact_details' => {
+          'callback_time' => {
             'callback_time' => ['morning'],
           },
         }
@@ -70,7 +70,7 @@ RSpec.describe Confirmation do
     context 'when the stored callback time was afternoon' do
       it 'returns a user-readable string based on the stored callback time' do
         fake_answers = {
-          'contact_details' => {
+          'callback_time' => {
             'callback_time' => ['afternoon'],
           },
         }
@@ -83,7 +83,7 @@ RSpec.describe Confirmation do
     context 'when the stored callback time was both morning and afternoon' do
       it 'returns a user-readable string based on the stored callback time' do
         fake_answers = {
-          'contact_details' => {
+          'callback_time' => {
             'callback_time' => %w[morning afternoon],
           },
         }
@@ -96,7 +96,7 @@ RSpec.describe Confirmation do
     context 'when the stored callback time was a string (not an array)' do
       it 'raises an exception' do
         fake_answers = {
-          'contact_details' => {
+          'callback_time' => {
             'callback_time' => 'morning',
           },
         }
@@ -109,7 +109,7 @@ RSpec.describe Confirmation do
     context 'when the stored callback time was not recognised' do
       it 'raises an exception' do
         fake_answers = {
-          'contact_details' => {
+          'callback_time' => {
             'callback_time' => %w[teatime],
           },
         }

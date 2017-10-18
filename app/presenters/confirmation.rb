@@ -26,7 +26,7 @@ class Confirmation
   end
 
   def callback_time
-    case contact_details_answer.fetch('callback_time')
+    case @answers.fetch('callback_time').fetch('callback_time')
     when ['morning']
       'between 8am and 12pm'
     when ['afternoon']
