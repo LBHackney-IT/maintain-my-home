@@ -61,7 +61,7 @@ class CreateRepair
     end
 
     def request_reference
-      @result.fetch('requestReference')
+      @result.fetch('requestReference', @result.fetch('repairRequestReference'))
     end
   end
 end
