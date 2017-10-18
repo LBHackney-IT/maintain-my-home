@@ -6,7 +6,7 @@ RSpec.describe ContactDetailsSaver do
     it 'persists form data to the selected answer store' do
       fake_answer_store = instance_double('SelectedAnswerStore')
       allow(fake_answer_store).to receive(:store_selected_answers)
-      fake_form = instance_double('ContactDetailsForm',
+      fake_form = instance_double('ContactDetailsWithCallbackForm',
                                   valid?: true,
                                   full_name: 'Alan Stubbs',
                                   telephone_number: '0456765432',
@@ -27,7 +27,7 @@ RSpec.describe ContactDetailsSaver do
     it 'returns true' do
       fake_answer_store = instance_double('SelectedAnswerStore')
       allow(fake_answer_store).to receive(:store_selected_answers)
-      fake_form = instance_double('ContactDetailsForm',
+      fake_form = instance_double('ContactDetailsWithCallbackForm',
                                   valid?: true,
                                   full_name: 'Alan Stubbs',
                                   telephone_number: '0456765432',
@@ -41,7 +41,7 @@ RSpec.describe ContactDetailsSaver do
       it 'does not persist the form data' do
         fake_answer_store = instance_double('SelectedAnswerStore')
         allow(fake_answer_store).to receive(:store_selected_answers)
-        fake_form = instance_double('ContactDetailsForm',
+        fake_form = instance_double('ContactDetailsWithCallbackForm',
                                     valid?: false,
                                     full_name: '',
                                     telephone_number: '',
@@ -56,7 +56,7 @@ RSpec.describe ContactDetailsSaver do
       it 'returns false' do
         fake_answer_store = instance_double('SelectedAnswerStore')
         allow(fake_answer_store).to receive(:store_selected_answers)
-        fake_form = instance_double('ContactDetailsForm',
+        fake_form = instance_double('ContactDetailsWithCallbackForm',
                                     valid?: false,
                                     full_name: '',
                                     telephone_number: '',

@@ -20,7 +20,7 @@ class AddressesController < ApplicationController
 
     SelectedAnswerStore.new(session).store_selected_answers('address', address)
 
-    redirect_to contact_details_path
+    redirect_to contact_details_with_callback_path
   end
 
   private

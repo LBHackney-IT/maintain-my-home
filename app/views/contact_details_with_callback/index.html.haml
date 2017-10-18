@@ -1,4 +1,4 @@
-= simple_form_for @form, url: request.fullpath do |f|
+= simple_form_for @form, as: :contact_details_form, url: request.fullpath do |f|
   %fieldset
     %legend.question
       %h1= t('contact-details.title')
