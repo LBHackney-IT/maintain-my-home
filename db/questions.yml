@@ -299,18 +299,10 @@ light_check_trip_switches:
   question: Have you checked the trip switches?
   answers:
     - text: 'Yes'
-      next: is_lightbulb_changed
+      page: replace_lightbulb
 
     - text: 'No'
       page: check_fusebox
-
-is_lightbulb_changed:
-  question: Have you tried changing the lightbulb, and the light is still not working?
-  answers:
-    - text: 'Yes, I have and the light is still not working'
-
-    - text: 'No'
-      page: repair_your_responsibility
 
 toilet_problem:
   question: Is your toilet...?
