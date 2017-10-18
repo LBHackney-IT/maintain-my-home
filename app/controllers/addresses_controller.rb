@@ -18,9 +18,14 @@ class AddressesController < ApplicationController
     api = HackneyApi.new
     address = api.get_property(property_reference: @form.property_reference)
 
-    SelectedAnswerStore.new(session).store_selected_answers('address', address)
+    selected_answer_store = SelectedAnswerStore.new(session)
+    selected_answer_store.store_selected_answers('address', address)
 
-    redirect_to contact_details_with_callback_path
+    if RepairParams.new(selected_answer_store.selected_answers).sor_code
+      redirect_to contact_details_path
+    else
+      redirect_to contact_details_with_callback_path
+    end
   end
 
   private
