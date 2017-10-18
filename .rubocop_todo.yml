@@ -12,4 +12,3 @@ Metrics/AbcSize:
     - app/controllers/addresses_controller.rb
     - app/controllers/contact_details_controller.rb
     - app/controllers/questions_controller.rb
-    - app/models/question.rb

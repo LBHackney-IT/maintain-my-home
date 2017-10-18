@@ -8,6 +8,8 @@ class Question
     @title = question_hash['question']
     @answers = question_hash['answers'] || []
     @next_question = question_hash['next']
+
+    @route_helpers = Rails.application.routes.url_helpers
   end
 
   def answers_for_collection
@@ -24,11 +26,11 @@ class Question
     answer_hash = answer_data(chosen_answer)
 
     if answer_hash.key?('next')
-      Rails.application.routes.url_helpers.questions_path(answer_hash['next'])
+      @route_helpers.questions_path(answer_hash['next'])
     elsif answer_hash.key?('page')
-      Rails.application.routes.url_helpers.page_path(answer_hash['page'])
+      @route_helpers.page_path(answer_hash['page'])
     else
-      Rails.application.routes.url_helpers.describe_repair_path
+      @route_helpers.describe_repair_path
     end
   end
 
