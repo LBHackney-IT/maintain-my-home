@@ -25,7 +25,10 @@ class CreateRepair
     end
 
     def problem
-      @answers.fetch('describe_repair').fetch('description')
+      problem = @answers.fetch('describe_repair').fetch('description')
+
+      return 'n/a' if problem.blank?
+      problem
     end
 
     def property_reference

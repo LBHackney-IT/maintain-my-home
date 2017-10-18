@@ -54,4 +54,28 @@ RSpec.describe CreateRepair do
         .to eq '03153917'
     end
   end
+
+  it 'posts a default description, if none was provided' do
+    fake_api = instance_double('HackneyApi')
+    expect(fake_api).to receive(:create_repair)
+      .with(
+        priority: 'N',
+        problem: 'n/a',
+        propertyRef: '00034713'
+      )
+
+    fake_answers = {
+      'address' => {
+        'property_reference' => '00034713',
+        'short_address' => 'Ross Court 25',
+        'postcode' => 'E5 8TE',
+      },
+      'describe_repair' => {
+        'description' => '',
+      },
+    }
+
+    service = CreateRepair.new(api: fake_api)
+    service.call(answers: fake_answers)
+  end
 end
