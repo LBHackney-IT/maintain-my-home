@@ -1,9 +1,9 @@
-class ContactDetailsController < ApplicationController
+class ContactDetailsWithCallbackController < ApplicationController
   def index
     selected_answer_store = SelectedAnswerStore.new(session)
     @selected_answers = selected_answer_store.selected_answers['address']
 
-    @form = ContactDetailsForm.new
+    @form = ContactDetailsWithCallbackForm.new
     @back = Back.new(controller_name: 'address_searches')
   end
 
@@ -13,7 +13,7 @@ class ContactDetailsController < ApplicationController
 
     @back = Back.new(controller_name: 'address_searches')
 
-    @form = ContactDetailsForm.new(contact_details_form_params)
+    @form = ContactDetailsWithCallbackForm.new(contact_details_form_params)
 
     contact_details_saver =
       ContactDetailsSaver.new(selected_answer_store: selected_answer_store)
