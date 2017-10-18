@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'app/services/contact_details_saver'
+require 'app/services/callback_time_saver'
 
-RSpec.describe ContactDetailsSaver do
+RSpec.describe CallbackTimeSaver do
   describe '.save' do
     it 'persists form data to the selected answer store' do
       fake_answer_store = instance_double('SelectedAnswerStore')
@@ -12,15 +12,14 @@ RSpec.describe ContactDetailsSaver do
                                   telephone_number: '0456765432',
                                   callback_time: ['morning'])
 
-      saver = ContactDetailsSaver.new(selected_answer_store: fake_answer_store)
+      saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
       saver.save(fake_form)
 
       expect(fake_answer_store)
         .to have_received(:store_selected_answers)
         .with(
-          :contact_details,
-          full_name: 'Alan Stubbs',
-          telephone_number: '0456765432',
+          :callback_time,
+          callback_time: ['morning'],
         )
     end
 
@@ -33,7 +32,7 @@ RSpec.describe ContactDetailsSaver do
                                   telephone_number: '0456765432',
                                   callback_time: ['morning'])
 
-      saver = ContactDetailsSaver.new(selected_answer_store: fake_answer_store)
+      saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
       expect(saver.save(fake_form)).to eq true
     end
 
@@ -47,7 +46,7 @@ RSpec.describe ContactDetailsSaver do
                                     telephone_number: '',
                                     callback_time: [])
 
-        saver = ContactDetailsSaver.new(selected_answer_store: fake_answer_store)
+        saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
         saver.save(fake_form)
 
         expect(fake_answer_store).to_not have_received(:store_selected_answers)
@@ -62,7 +61,7 @@ RSpec.describe ContactDetailsSaver do
                                     telephone_number: '',
                                     callback_time: [])
 
-        saver = ContactDetailsSaver.new(selected_answer_store: fake_answer_store)
+        saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
         expect(saver.save(fake_form)).to eq false
       end
     end
