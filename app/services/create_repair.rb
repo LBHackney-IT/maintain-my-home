@@ -61,7 +61,9 @@ class CreateRepair
     end
 
     def request_reference
-      @result.fetch('requestReference', @result.fetch('repairRequestReference'))
+      @result.fetch('requestReference') do |_key|
+        @result.fetch('repairRequestReference')
+      end
     end
   end
 end
