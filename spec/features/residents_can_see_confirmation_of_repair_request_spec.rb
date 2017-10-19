@@ -178,8 +178,6 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')
         expect(page).to have_content t('confirmation.summary.phone', phone: '07898765432')
         expect(page).to have_content t('confirmation.summary.address', address: 'Ross Court 23, E5 8TE')
-
-        expect(page).to have_content t('confirmation.summary.callback_time', callback_time: 'between 8am and 12pm')
       end
     end
 
