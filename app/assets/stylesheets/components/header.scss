@@ -1,19 +1,29 @@
 header {
   background-color: $hackney-dark-grey;
-  border-bottom: 4px solid $hackney-green;
+  border-bottom: 8px solid $hackney-green;
   color: $white;
-  padding: 1em;
+  padding: $gutter-half 0;
+
+  @include media(mobile) {
+    border-bottom-width: 0;
+    padding: ($gutter-half / 2) 0;
+  }
 
   h1 {
     background: asset-url('logo.png') 0 0 no-repeat;
     background-size: contain;
     display: inline-block;
-    height: 54px;
+    height: 62px;
     overflow: hidden;
     text-indent: 100%;
     vertical-align: middle;
     white-space: nowrap;
     width: 300px;
+
+    @include media(mobile) {
+      height: 35px;
+      width: 170px;
+    }
   }
 
   a, a:link, a:visited, a:hover {
@@ -25,11 +35,7 @@ header {
   h2 {
     @include heading-24;
     display: inline-block;
-    margin-left: 1em;
+    margin-left: $gutter-half;
     vertical-align: middle;
-
-    @include media(mobile) {
-      margin-left: 0;
-    }
   }
 }
