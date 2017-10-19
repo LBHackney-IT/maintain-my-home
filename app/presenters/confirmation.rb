@@ -25,17 +25,9 @@ class Confirmation
     format_telephone_number(number)
   end
 
-  def callback_time
-    case @answers.fetch('callback_time').fetch('callback_time')
-    when ['morning']
-      'between 8am and 12pm'
-    when ['afternoon']
-      'between 12pm and 5pm'
-    when %w[morning afternoon]
-      'between 8am and 5pm'
-    else
-      raise InvalidCallbackTimeError
-    end
+  def scheduled_action
+    time_slot = @answers.fetch('callback_time').fetch('callback_time')
+    Callback.new(time_slot: time_slot, request_reference: @request_reference)
   end
 
   def description
