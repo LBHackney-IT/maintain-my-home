@@ -11,8 +11,10 @@ class ContactDetailsController < ApplicationController
     contact_details_saver =
       ContactDetailsSaver.new(selected_answer_store: selected_answer_store)
     contact_details_saver.save(@form)
+    result =
+      CreateRepair.new.call(answers: selected_answer_store.selected_answers)
 
-    redirect_to confirmation_path('WORK_ORDER_REFERENCE')
+    redirect_to confirmation_path(result.work_order_reference)
   end
 
   private
