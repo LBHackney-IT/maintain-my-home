@@ -10,7 +10,7 @@
     .box-highlight.lede
       Your reference number is
       = succeed "." do
-        %strong= @confirmation.repair_request_id
+        %strong= @confirmation.request_reference
 
     %p
       We will call you within one working day, between
@@ -24,7 +24,7 @@
           = link_to "020 8356 3691", "tel:+02083563691"
       and quote your reference number
       = succeed "." do
-        %strong= @confirmation.repair_request_id
+        %strong= @confirmation.request_reference
       We are open Monday to Friday 8am - 7pm and Saturdays 9am - 1pm.
 
 .grid-row
