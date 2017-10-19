@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'app/presenters/callback'
 require 'app/presenters/confirmation'
 
 RSpec.describe Confirmation do
@@ -53,69 +54,16 @@ RSpec.describe Confirmation do
     end
   end
 
-  describe 'callback_time' do
-    context 'when the stored callback time was morning' do
-      it 'returns a user-readable string based on the stored callback time' do
+  describe 'scheduled_action' do
+    context 'when there was a callback time' do
+      it 'returns a renderable object' do
         fake_answers = {
           'callback_time' => {
             'callback_time' => ['morning'],
           },
         }
-
-        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
-          .to eq 'between 8am and 12pm'
-      end
-    end
-
-    context 'when the stored callback time was afternoon' do
-      it 'returns a user-readable string based on the stored callback time' do
-        fake_answers = {
-          'callback_time' => {
-            'callback_time' => ['afternoon'],
-          },
-        }
-
-        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
-          .to eq 'between 12pm and 5pm'
-      end
-    end
-
-    context 'when the stored callback time was both morning and afternoon' do
-      it 'returns a user-readable string based on the stored callback time' do
-        fake_answers = {
-          'callback_time' => {
-            'callback_time' => %w[morning afternoon],
-          },
-        }
-
-        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
-          .to eq 'between 8am and 5pm'
-      end
-    end
-
-    context 'when the stored callback time was a string (not an array)' do
-      it 'raises an exception' do
-        fake_answers = {
-          'callback_time' => {
-            'callback_time' => 'morning',
-          },
-        }
-
-        expect { Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time }
-          .to raise_error(Confirmation::InvalidCallbackTimeError)
-      end
-    end
-
-    context 'when the stored callback time was not recognised' do
-      it 'raises an exception' do
-        fake_answers = {
-          'callback_time' => {
-            'callback_time' => %w[teatime],
-          },
-        }
-
-        expect { Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time }
-          .to raise_error(Confirmation::InvalidCallbackTimeError)
+        action = Confirmation.new(request_reference: '00000000', answers: fake_answers).scheduled_action
+        expect(action.to_partial_path).to eq '/confirmations/callback'
       end
     end
   end
