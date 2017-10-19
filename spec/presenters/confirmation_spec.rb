@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'app/presenters/confirmation'
 
 RSpec.describe Confirmation do
-  describe '#repair_request_id' do
+  describe '#request_reference' do
     it 'is the value passed when the confirmation is built' do
-      expect(Confirmation.new(repair_request_id: '00004578', answers: {}).repair_request_id)
+      expect(Confirmation.new(request_reference: '00004578', answers: {}).request_reference)
         .to eq '00004578'
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).address)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).address)
         .to eq 'Ross Court 25, E5 8TE'
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).full_name)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).full_name)
         .to eq 'Alan Groves'
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).telephone_number)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).telephone_number)
         .to eq '02013579753'
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe Confirmation do
           },
         }
 
-        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
           .to eq 'between 8am and 12pm'
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe Confirmation do
           },
         }
 
-        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
           .to eq 'between 12pm and 5pm'
       end
     end
@@ -88,7 +88,7 @@ RSpec.describe Confirmation do
           },
         }
 
-        expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time)
+        expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time)
           .to eq 'between 8am and 5pm'
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe Confirmation do
           },
         }
 
-        expect { Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time }
+        expect { Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time }
           .to raise_error(Confirmation::InvalidCallbackTimeError)
       end
     end
@@ -114,7 +114,7 @@ RSpec.describe Confirmation do
           },
         }
 
-        expect { Confirmation.new(repair_request_id: '00000000', answers: fake_answers).callback_time }
+        expect { Confirmation.new(request_reference: '00000000', answers: fake_answers).callback_time }
           .to raise_error(Confirmation::InvalidCallbackTimeError)
       end
     end
@@ -128,7 +128,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(repair_request_id: '00000000', answers: fake_answers).description)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).description)
         .to eq 'My bath is broken'
     end
   end

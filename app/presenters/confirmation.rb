@@ -1,10 +1,10 @@
 class Confirmation
   class InvalidCallbackTimeError < StandardError; end
 
-  attr_reader :repair_request_id
+  attr_reader :request_reference
 
-  def initialize(repair_request_id:, answers:)
-    @repair_request_id = repair_request_id
+  def initialize(request_reference:, answers:)
+    @request_reference = request_reference
     @answers = answers
   end
 
