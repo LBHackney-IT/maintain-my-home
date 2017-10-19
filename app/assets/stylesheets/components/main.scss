@@ -39,11 +39,19 @@ main {
 
   ul {
     list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 1em;
+    padding-left: 25px;
 
     li {
-      margin-bottom: 0.5em;
+      margin-bottom: $gutter-half;
+    }
+  }
+
+  ol {
+    padding-left: 25px;
+    list-style-type: decimal;
+
+    li {
+      margin-bottom: $gutter-half;
     }
   }
 
