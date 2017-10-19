@@ -19,6 +19,18 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'problem' => 'My sink is blocked',
         'propertyRef' => '00000503',
       )
+    allow(fake_api).to receive(:get)
+      .with('repair_appointments')
+      .and_return(
+        [
+          { 'startTime' => '2017-10-11T08:00:00Z', 'endTime' => '2017-10-11T12:00:00Z' },
+          { 'startTime' => '2017-10-11T12:00:00Z', 'endTime' => '2017-10-11T17:00:00Z' },
+          { 'startTime' => '2017-10-12T08:00:00Z', 'endTime' => '2017-10-11T12:00:00Z' },
+        ]
+      )
+    allow(fake_api).to receive(:post)
+      .with('repair_appointments', anything)
+      .and_return nil # TODO: return a realistic response
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)
@@ -75,14 +87,20 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     choose_radio_button 'Ross Court 23'
     click_on 'Continue'
 
-    # Contact details - last page before confirmation:
+    # Contact details:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
     click_on 'Continue'
 
+    # Appointments:
+    choose_radio_button 'Thursday Afternoon (11th October)'
+    click_on 'Book this appointment'
+
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 09124578'
+        expect(page).to have_content 'Thursday the 11th of October'
+        expect(page).to have_content 'between 12pm and 5pm'
       end
 
       within '#summary' do
@@ -102,6 +120,13 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       repairOrders: [
         { jobCode: '0078965', propertyReference: '00000503' },
       ]
+    )
+
+    expect(fake_api).to have_received(:post).with(
+      'repair_appointments',
+      jobCode: '0078965',
+      startTime: '2017-10-11T12:00:00Z',
+      endTime: '2017-10-11T17:00:00Z',
     )
   end
 
