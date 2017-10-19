@@ -66,6 +66,16 @@ RSpec.describe Confirmation do
         expect(action.to_partial_path).to eq '/confirmations/callback'
       end
     end
+
+    context 'when there was an appointment' do
+      it 'returns a renderable object' do
+        fake_answers = {
+          'appointment' => double, # TODO: replace with a more realistic value
+        }
+        action = Confirmation.new(request_reference: '00000000', answers: fake_answers).scheduled_action
+        expect(action.to_partial_path).to eq '/confirmations/appointment'
+      end
+    end
   end
 
   describe 'description' do

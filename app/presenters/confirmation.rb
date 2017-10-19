@@ -26,8 +26,13 @@ class Confirmation
   end
 
   def scheduled_action
-    time_slot = @answers.fetch('callback_time').fetch('callback_time')
-    Callback.new(time_slot: time_slot, request_reference: @request_reference)
+    callback = @answers['callback_time']
+    if callback
+      time_slot = callback.fetch('callback_time')
+      Callback.new(time_slot: time_slot, request_reference: @request_reference)
+    else
+      Appointment.new
+    end
   end
 
   def description
