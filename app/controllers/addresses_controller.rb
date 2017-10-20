@@ -2,20 +2,17 @@ class AddressesController < ApplicationController
   def create
     @form = AddressForm.new(address_form_params)
 
-    if @form.invalid?
-      @address_search = AddressSearch.new(postcode: @form.postcode)
-      return render 'address_searches/create'
-    end
-
     if @form.address_isnt_here?
       return redirect_to page_path('address_isnt_here')
     end
 
-    api = HackneyApi.new
-    address = api.get_property(property_reference: @form.property_reference)
-
     selected_answer_store = SelectedAnswerStore.new(session)
-    selected_answer_store.store_selected_answers('address', address)
+    saver = AddressSaver.new(selected_answer_store: selected_answer_store)
+
+    unless saver.save(@form)
+      @address_search = AddressSearch.new(postcode: @form.postcode)
+      return render 'address_searches/create'
+    end
 
     if RepairParams.new(selected_answer_store.selected_answers).sor_code
       redirect_to contact_details_path
