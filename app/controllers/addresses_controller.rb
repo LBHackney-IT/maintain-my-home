@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
     @form = AddressForm.new(address_form_params)
 
     if @form.invalid?
-      @address_search = AddressSearch.new(postcode: @form.postcode)
+      @address_search = AddressSearchForm.new(postcode: @form.postcode)
       @back = Back.new(controller_name: 'describe_repair')
 
       @address_search_results = AddressFinder.new.find(@address_search)
