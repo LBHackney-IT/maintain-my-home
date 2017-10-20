@@ -124,18 +124,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'skip' },
-          ],
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
