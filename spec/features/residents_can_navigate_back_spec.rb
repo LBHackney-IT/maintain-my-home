@@ -1,23 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Resident can navigate back' do
-  before(:each) do
-    fake_question_set = instance_double(QuestionSet)
-
-    allow(fake_question_set)
-      .to receive(:find)
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'skip' },
-          ],
-        )
-      )
-
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
-  end
-
   scenario 'when the repair was diagnosed' do
     property = {
       'property_reference' => 'abc123',
@@ -28,18 +11,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'diagnose', 'sor_code' => '12345678' },
-          ],
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+    stub_one_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
 
     visit '/'
     click_on 'Start'
@@ -84,6 +56,8 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+
     visit '/'
     click_on 'Start'
 
@@ -118,6 +92,8 @@ RSpec.feature 'Resident can navigate back' do
   end
 
   scenario 'when the address search was invalid' do
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+
     visit '/'
     click_on 'Start'
 
@@ -150,18 +126,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'diagnose', 'sor_code' => '12345678' },
-          ],
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+    stub_one_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
 
     visit '/'
     click_on 'Start'
@@ -201,6 +166,8 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -252,6 +219,8 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+
     visit '/'
     click_on 'Start'
 
@@ -283,6 +252,8 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+
     visit '/'
     click_on 'Start'
 
@@ -305,9 +276,6 @@ RSpec.feature 'Resident can navigate back' do
     click_on t('back_links.describe_repair')
     expect(page).to have_content 'Is there anything else we should know?'
   end
-
-  scenario 'going back from the describe unknown repair page'
-  scenario 'going back TO the describe unknown repair page'
 
   private
 

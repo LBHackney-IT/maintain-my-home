@@ -13,19 +13,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     allow(fake_api).to receive(:get).with('properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .with('location')
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'skip' },
-          ],
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
 
@@ -82,19 +70,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     allow(fake_api).to receive(:get).with('properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .with('location')
-      .and_return(
-        Question.new(
-          'question' => 'Dummy question',
-          'answers' => [
-            { 'text' => 'skip', 'sor_code' => 'fake_code' },
-          ],
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+    stub_one_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => 'fake_code' }])
 
     visit '/'
 
@@ -106,7 +82,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     click_continue
 
     # Fake decision tree
-    choose_radio_button 'skip'
+    choose_radio_button 'diagnose'
     click_continue
 
     # Describe repair
