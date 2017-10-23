@@ -42,7 +42,7 @@ class CreateRepair
     end
 
     def work_order_reference
-      @result.fetch('workOrderReference')
+      @result.fetch('orderReference')
     end
   end
 end

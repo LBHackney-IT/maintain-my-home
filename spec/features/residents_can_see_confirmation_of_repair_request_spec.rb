@@ -14,7 +14,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('repairs', anything)
       .and_return(
         'requestReference' => '00367923',
-        'workOrderReference' => '09124578',
+        'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => 'My sink is blocked',
         'propertyRef' => '00000503',

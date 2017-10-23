@@ -118,7 +118,7 @@ RSpec.describe CreateRepair do
       allow(fake_api).to receive(:create_repair)
         .and_return(
           'requestReference' => '03153917',
-          'workOrderReference' => '09876543',
+          'orderReference' => '09876543',
           'problem' => 'My bath is broken',
           'priority' => 'N',
           'propertyRef' => '00034713',
