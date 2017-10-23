@@ -11,11 +11,11 @@ class Callback
   def time
     case @time_slot
     when ['morning']
-      'between 8am and 12pm'
+      '8am and 12pm'
     when ['afternoon']
-      'between 12pm and 5pm'
+      '12pm and 5pm'
     when %w[morning afternoon]
-      'between 8am and 5pm'
+      '8am and 5pm'
     else
       raise InvalidCallbackTimeError
     end
