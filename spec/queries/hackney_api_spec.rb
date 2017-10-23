@@ -61,4 +61,21 @@ describe HackneyApi do
       expect(api.create_repair(double)).to eq result
     end
   end
+
+  describe '#get_repair' do
+    it 'returns an individual repair' do
+      result = {
+        'requestReference' => '00045678',
+        'orderReference' => '00412371',
+        'problem' => 'My bath is broken',
+        'priority' => 'N',
+        'propertyRef' => '00034713',
+      }
+      json_api = instance_double('JsonApi')
+      allow(json_api).to receive(:get).with('repairs/00045678').and_return(result)
+      api = HackneyApi.new(json_api)
+
+      expect(api.get_repair(repair_request_reference: '00045678')).to eql result
+    end
+  end
 end

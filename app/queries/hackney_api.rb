@@ -14,4 +14,8 @@ class HackneyApi
   def create_repair(repair_params)
     @json_api.post('repairs', repair_params)
   end
+
+  def get_repair(repair_request_reference:)
+    @json_api.get('repairs/' + repair_request_reference)
+  end
 end
