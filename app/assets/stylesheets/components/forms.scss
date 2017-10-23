@@ -1,5 +1,6 @@
 .question {
-  padding-bottom: 30px;
+  margin-bottom: $gutter-half;
+  max-width: 640px;
 }
 
 .radio, span.checkbox {
@@ -24,6 +25,11 @@ input.string {
 
 .button {
   background-color: $hackney-green;
+  margin-bottom: $gutter-half;
+
+  &:visited {
+    background-color: $hackney-green;
+  }
 
   &:hover, &:focus {
     background-color: $hackney-light-green;

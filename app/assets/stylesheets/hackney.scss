@@ -28,6 +28,7 @@
 @import 'elements/breadcrumbs';
 @import 'elements/phase-banner';
 @import 'elements/components';
+@import 'elements/panels';
 
 /* Include our components */
 @import 'components/header';
@@ -41,9 +42,9 @@ html {
 
 body {
   background-color: $hackney-dark-grey;
-  font-family: $font-stack;
   margin: 0;
   padding: 0;
+  text-rendering: optimizeLegibility;
 }
 
 .wrapper {

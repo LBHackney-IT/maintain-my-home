@@ -11,29 +11,47 @@ main {
   }
 
   h1 {
-    @include heading-36;
+    @include heading-48;
 
     color: $hackney-green;
     font-weight: bold;
+    letter-spacing: -1px;
   }
 
   h2 {
-    @include heading-24;
+    @include heading-27;
 
     font-weight: bold;
+    letter-spacing: -1px;
   }
 
   h3 {
     font-weight: bold;
   }
 
+  p {
+    line-height: 1.5em;
+  }
+
+  ul, ol, .panel, .notice {
+    margin: $gutter 0;
+  }
+
   ul {
     list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 1em;
+    padding-left: 25px;
 
     li {
-      margin-bottom: 0.5em;
+      margin-bottom: $gutter-half;
+    }
+  }
+
+  ol {
+    padding-left: 25px;
+    list-style-type: decimal;
+
+    li {
+      margin-bottom: $gutter-half;
     }
   }
 
