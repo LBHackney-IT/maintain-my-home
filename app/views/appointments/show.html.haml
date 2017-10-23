@@ -1,0 +1,3 @@
+= simple_form_for :dummy_form, url: request.fullpath do |f|
+  = f.input :answer, collection: @appointments.slots_for_collection, as: :radio_buttons, label: false
+  = f.button :submit, 'Book this appointment', class: 'button'

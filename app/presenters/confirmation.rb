@@ -1,10 +1,10 @@
 class Confirmation
   class InvalidCallbackTimeError < StandardError; end
 
-  attr_reader :repair_request_id
+  attr_reader :request_reference
 
-  def initialize(repair_request_id:, answers:)
-    @repair_request_id = repair_request_id
+  def initialize(request_reference:, answers:)
+    @request_reference = request_reference
     @answers = answers
   end
 
@@ -25,16 +25,13 @@ class Confirmation
     format_telephone_number(number)
   end
 
-  def callback_time
-    case contact_details_answer.fetch('callback_time')
-    when ['morning']
-      'between 8am and 12pm'
-    when ['afternoon']
-      'between 12pm and 5pm'
-    when %w[morning afternoon]
-      'between 8am and 5pm'
+  def scheduled_action
+    callback = @answers['callback_time']
+    if callback
+      time_slot = callback.fetch('callback_time')
+      Callback.new(time_slot: time_slot, request_reference: @request_reference)
     else
-      raise InvalidCallbackTimeError
+      Appointment.new
     end
   end
 

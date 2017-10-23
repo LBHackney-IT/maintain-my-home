@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'active_support/core_ext/object/blank'
+require 'app/models/repair_params'
 require 'app/services/create_repair'
 
 RSpec.describe CreateRepair do
@@ -110,6 +111,34 @@ RSpec.describe CreateRepair do
             { jobCode: '002034', propertyReference: '00034713' },
           ],
         )
+    end
+
+    it 'returns a result which exposes work order data' do
+      fake_api = instance_double('HackneyApi')
+      allow(fake_api).to receive(:create_repair)
+        .and_return(
+          'requestReference' => '03153917',
+          'workOrderReference' => '09876543',
+          'problem' => 'My bath is broken',
+          'priority' => 'N',
+          'propertyRef' => '00034713',
+        )
+      fake_answers = {
+        'address' => {
+          'property_reference' => '00034713',
+          'short_address' => 'Ross Court 25',
+          'postcode' => 'E5 8TE',
+        },
+        'describe_repair' => {
+          'description' => 'My bath is broken',
+        },
+        'diagnosis' => {
+          'sor_code' => '002034',
+        },
+      }
+
+      service = CreateRepair.new(api: fake_api)
+      expect(service.call(answers: fake_answers).work_order_reference).to eq '09876543'
     end
   end
 end
