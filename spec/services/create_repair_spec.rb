@@ -114,7 +114,7 @@ RSpec.describe CreateRepair do
         )
     end
 
-    it 'returns a result which exposes work order data' do
+    it 'returns a result which exposes the request reference' do
       fake_api = instance_double('HackneyApi')
       allow(fake_api).to receive(:create_repair)
         .and_return(
@@ -139,7 +139,7 @@ RSpec.describe CreateRepair do
       }
 
       service = CreateRepair.new(api: fake_api)
-      expect(service.call(answers: fake_answers).work_order_reference).to eq '09876543'
+      expect(service.call(answers: fake_answers).request_reference).to eq '03153917'
     end
   end
 end

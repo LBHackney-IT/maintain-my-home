@@ -1,12 +1,42 @@
 require 'spec_helper'
+require 'app/models/repair'
 require 'app/presenters/callback'
+require 'app/presenters/appointment'
 require 'app/presenters/confirmation'
 
 RSpec.describe Confirmation do
   describe '#request_reference' do
-    it 'is the value passed when the confirmation is built' do
-      expect(Confirmation.new(request_reference: '00004578', answers: {}).request_reference)
-        .to eq '00004578'
+    context 'when there is a work order' do
+      it 'is the work order reference' do
+        fake_api = instance_double('HackneyApi')
+        allow(fake_api).to receive(:get_repair)
+          .with(repair_request_reference: '00004578')
+          .and_return(
+            'requestReference' => '00004578',
+            'orderReference' => '00412371',
+            'problem' => 'My bath is broken',
+            'priority' => 'N',
+            'propertyRef' => '00034713',
+          )
+        expect(Confirmation.new(request_reference: '00004578', answers: {}, api: fake_api).request_reference)
+          .to eq '00412371'
+      end
+    end
+
+    context 'when there are no work orders' do
+      it 'is the repair request reference' do
+        fake_api = instance_double('HackneyApi')
+        allow(fake_api).to receive(:get_repair)
+          .with(repair_request_reference: '00004578')
+          .and_return(
+            'requestReference' => '00004578',
+            'problem' => 'My bath is broken',
+            'priority' => 'N',
+            'propertyRef' => '00034713',
+          )
+        expect(Confirmation.new(request_reference: '00004578', answers: {}, api: fake_api).request_reference)
+          .to eq '00004578'
+      end
     end
   end
 
@@ -20,7 +50,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).address)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).address)
         .to eq 'Ross Court 25, E5 8TE'
     end
   end
@@ -33,7 +63,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).full_name)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).full_name)
         .to eq 'Alan Groves'
     end
   end
@@ -49,7 +79,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).telephone_number)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).telephone_number)
         .to eq '02013579753'
     end
   end
@@ -62,7 +92,7 @@ RSpec.describe Confirmation do
             'callback_time' => ['morning'],
           },
         }
-        action = Confirmation.new(request_reference: '00000000', answers: fake_answers).scheduled_action
+        action = Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).scheduled_action
         expect(action.to_partial_path).to eq '/confirmations/callback'
       end
     end
@@ -72,7 +102,7 @@ RSpec.describe Confirmation do
         fake_answers = {
           'appointment' => double, # TODO: replace with a more realistic value
         }
-        action = Confirmation.new(request_reference: '00000000', answers: fake_answers).scheduled_action
+        action = Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).scheduled_action
         expect(action.to_partial_path).to eq '/confirmations/appointment'
       end
     end
@@ -86,7 +116,7 @@ RSpec.describe Confirmation do
         },
       }
 
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers).description)
+      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).description)
         .to eq 'My bath is broken'
     end
   end

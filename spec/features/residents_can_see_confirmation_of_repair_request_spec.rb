@@ -19,6 +19,15 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'problem' => 'My sink is blocked',
         'propertyRef' => '00000503',
       )
+    allow(fake_api).to receive(:get)
+      .with('repairs/00367923')
+      .and_return(
+        'requestReference' => '00367923',
+        'orderReference' => '09124578',
+        'priority' => 'N',
+        'problem' => 'My sink is blocked',
+        'propertyRef' => '00000503',
+      )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)
@@ -116,6 +125,14 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:get).with('properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
+      .and_return(
+        'requestReference' => '00367923',
+        'priority' => 'N',
+        'problem' => 'My sink is blocked',
+        'propertyRef' => '00000503',
+      )
+    allow(fake_api).to receive(:get)
+      .with('repairs/00367923')
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',

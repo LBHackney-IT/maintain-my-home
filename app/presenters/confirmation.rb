@@ -1,11 +1,18 @@
 class Confirmation
   class InvalidCallbackTimeError < StandardError; end
 
-  attr_reader :request_reference
-
-  def initialize(request_reference:, answers:)
+  def initialize(request_reference:, answers:, api: HackneyApi.new)
     @request_reference = request_reference
     @answers = answers
+    @api = api
+  end
+
+  def request_reference
+    repair = Repair.new(
+      @api.get_repair(repair_request_reference: @request_reference)
+    )
+
+    repair.work_order_reference || repair.request_reference
   end
 
   def address
