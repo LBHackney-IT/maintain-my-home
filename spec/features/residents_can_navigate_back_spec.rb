@@ -11,7 +11,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
 
     visit '/'
     click_on 'Start'
@@ -56,7 +56,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -92,7 +92,7 @@ RSpec.feature 'Resident can navigate back' do
   end
 
   scenario 'when the address search was invalid' do
-    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -126,7 +126,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
 
     visit '/'
     click_on 'Start'
@@ -167,7 +167,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -219,7 +219,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -252,7 +252,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_one_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'

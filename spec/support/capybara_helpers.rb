@@ -3,7 +3,7 @@ module CapybaraHelpers
     find(:label, text: label).click
   end
 
-  def stub_one_diagnosis_question(answers:, question: 'Dummy question', id: 'location')
+  def stub_diagnosis_question(answers:, question: 'Dummy question', id: 'location')
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
       .to receive(:find)

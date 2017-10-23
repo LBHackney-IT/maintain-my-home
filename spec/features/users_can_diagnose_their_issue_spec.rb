@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Users can diagnose their issue' do
   scenario 'viewing a multiple-choice question' do
-    stub_one_diagnosis_question(
+    stub_diagnosis_question(
       question: 'Is there a danger of flooding?',
       id: 'first',
       answers: [
@@ -79,7 +79,7 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'choosing an answer that requires the user to see some static content' do
-    stub_one_diagnosis_question(
+    stub_diagnosis_question(
       question: 'Is there a danger of flooding?',
       id: 'flood',
       answers: [
@@ -99,7 +99,7 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'choosing an answer redirects to the describe repair page by default' do
-    stub_one_diagnosis_question(
+    stub_diagnosis_question(
       question: 'Where does this question go?',
       id: 'where',
       answers: [{ 'text' => 'Nowhere' }]
@@ -113,7 +113,7 @@ RSpec.feature 'Users can diagnose their issue' do
   end
 
   scenario 'not choosing an answer redisplays the form with an error' do
-    stub_one_diagnosis_question(
+    stub_diagnosis_question(
       question: 'Do you like errors?',
       id: 'preferences',
       answers: [{ 'text' => 'No' }]
