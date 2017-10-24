@@ -27,6 +27,8 @@ class Question
       @route_helpers.questions_path(answer_hash['next'])
     elsif answer_hash.key?('page')
       @route_helpers.page_path(answer_hash['page'])
+    elsif answer_hash.key?('desc')
+      @route_helpers.describe_unknown_repair_path(details: answer_hash['desc'])
     else
       @route_helpers.describe_repair_path
     end

@@ -107,6 +107,22 @@ RSpec.describe Question do
         expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
       end
     end
+
+    context 'if answer has "desc" key' do
+      it 'returns the path to a describe repair page' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'desc' => 'travel_details',
+            },
+          ],
+        )
+
+        expect(question.redirect_path_for_answer('London')).to eql '/describe-unknown-repair?details=travel_details'
+      end
+    end
   end
 
   describe '#redirect_path' do

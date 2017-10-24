@@ -112,6 +112,25 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_content 'Is there anything else we should know?'
   end
 
+  scenario 'choosing an answer with a special describe repair page' do
+    stub_diagnosis_question(
+      question: 'Where does this question go?',
+      id: 'where',
+      answers: [{ 'text' => 'Somewhere special', 'desc' => 'damp' }]
+    )
+
+    visit '/questions/where'
+    choose_radio_button 'Somewhere special'
+    click_on 'Continue'
+
+    expect(page).to have_content 'Please give details of the damp or mould'
+
+    # Submit invalid details - the same text should display
+    click_on 'Continue'
+
+    expect(page).to have_content 'Please give details of the damp or mould'
+  end
+
   scenario 'not choosing an answer redisplays the form with an error' do
     stub_diagnosis_question(
       question: 'Do you like errors?',

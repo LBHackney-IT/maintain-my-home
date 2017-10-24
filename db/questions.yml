@@ -62,7 +62,7 @@ kitchen_problem:
     - text: Cupboards or Worktop
 
     - text: Damp or Mould
-      next: describe_damp
+      desc: damp
 
     - text: Electrical
       next: kitchen_electrical_problem
@@ -77,7 +77,7 @@ kitchen_problem:
       next: window_problem
 
     - text: Something else
-      next: kitchen_other_problem
+      desc: kitchen_problem
 
 kitchen_electrical_problem:
   question: Is your problem one of these?
@@ -98,7 +98,7 @@ kitchen_electrical_problem:
       page: electrical_hazard_warning
 
     - text: Something else
-      next: kitchen_other_problem
+      desc: kitchen_problem
 
 heating_problem:
   question: Is your problem one of these?
@@ -116,7 +116,7 @@ heating_problem:
     - text: Radiator is leaking - containable
 
     - text: Something else
-      next: describe_heating_problem
+      desc: heating_problem
 
 sink_problem:
   question: Is your problem one of these?
@@ -133,7 +133,7 @@ sink_problem:
     - text: Tap is broken
 
     - text: Something else
-      next: describe_sink_problem
+      desc: sink_problem
 
 bathroom_problem:
   question: What is the problem in your bathroom?
@@ -145,7 +145,7 @@ bathroom_problem:
       next: bath_problem
 
     - text: Damp or mould
-      next: describe_damp
+      desc: damp
 
     - text: Electrical
       next: bathroom_electrical_problem
@@ -157,7 +157,7 @@ bathroom_problem:
       next: toilet_problem
 
     - text: Something else
-      next: bathroom_other_problem
+      desc: bathroom_problem
 
 is_fan_leaking_water:
   question: Is there water leaking into or from the fan?
@@ -182,7 +182,7 @@ basin_problem:
     - text: Tap is broken
 
     - text: Something else
-      next: describe_sink_problem
+      desc: sink_problem
 
 bath_problem:
   question: Is your problem one of these?
@@ -199,7 +199,7 @@ bath_problem:
     - text: Tap is broken
 
     - text: Something else
-      next: describe_bath_problem
+      desc: bath_problem
 
 bathroom_electrical_problem:
   question: Is your problem one of these?
@@ -214,14 +214,14 @@ bathroom_electrical_problem:
       page: electrical_hazard_warning
 
     - text: Something else
-      next: bathroom_other_problem
+      desc: bathroom_problem
 
 other_problem:
   question: What is the problem?
   answers:
 
    - text: Damp or mould
-     next: describe_damp
+     desc: damp
 
    - text: Electrical
      next: other_electrical_problem
@@ -241,7 +241,7 @@ other_problem:
      next: window_problem
 
    - text: Something else
-     next: describe_unknown_repair
+     desc: describe_problem
 
 
 other_electrical_problem:
@@ -266,10 +266,7 @@ other_electrical_problem:
       page: electrical_hazard_warning
 
     - text: Something else
-      next: other_electrical_problem
-
-describe_unknown_repair:
-  question: Please describe the problem you need repairing...
+      desc: electrical_problem
 
 window_problem:
   question: Is your problem one of these?
@@ -279,20 +276,17 @@ window_problem:
     - text: Minor damage to glazing
 
     - text: Something else
-      next: describe_window_problem
+      desc: window_problem
 
 
 external_doors_problem:
   question: Are you able to secure access to your property?
   answers:
     - text: 'Yes'
-      next: describe_external_door_problem
+      desc: external_doors_problem
 
     - text: 'No'
       page: emergency_contact
-
-describe_external_door_problem:
-  question: Please describe the problem with the external door...
 
 water_leaking_into_light:
   question: Is there water leaking into or from the light?
@@ -327,31 +321,4 @@ toilet_problem:
     - text: Toilet is leaking - containable
 
     - text: Something else
-      next: describe_toilet_problem
-
-describe_sink_problem:
-  question: Please describe the problem with your sink / basin
-
-describe_bath_problem:
-  question: Please describe the problem with your bath
-
-describe_toilet_problem:
-  question: Please describe the problem with your toilet
-
-describe_heating_problem:
-  question: Please describe the problem with your heating
-
-describe_window_problem:
-  question: Please describe the problem with your kitchen window
-
-describe_damp:
-  question: Please give details of the damp or mould
-
-kitchen_other_problem:
-  question: What is the problem in your kitchen?
-
-bathroom_other_problem:
-  question: What is the problem in your bathroom?
-
-other_elecrical_problem:
-  question: What is the problem with your electrics?
+      desc: toilet_problem
