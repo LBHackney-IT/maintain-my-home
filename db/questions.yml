@@ -6,12 +6,12 @@ location:
       next: which_room
 
     - text: Outside my home
-      next: describe_outside_problem
+      next: outside_problem
 
     - text: In a communal area
-      next: describe_communal_problem
+      next: communal_problem
 
-describe_communal_problem:
+communal_problem:
   question: What is the problem in the communal grounds?
   answers:
     - text: A light is not working
@@ -33,7 +33,7 @@ faulty_lamp_post:
     - text: 'No'
       page: cleaners_responsibility
 
-describe_outside_problem:
+outside_problem:
   question: What is the problem outside your home?
   answers:
     - text: The guttering or downpipe is blocked or damaged
@@ -328,7 +328,6 @@ toilet_problem:
 
     - text: Something else
       next: describe_toilet_problem
-
 
 describe_sink_problem:
   question: Please describe the problem with your sink / basin
