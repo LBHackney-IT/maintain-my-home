@@ -23,4 +23,10 @@ Rails.application.routes.draw do
 
   get '/contact-details', to: 'contact_details#index', as: 'contact_details'
   post '/contact-details', to: 'contact_details#submit'
+
+  get '/contact-details-with-callback',
+      to: 'contact_details_with_callback#index',
+      as: 'contact_details_with_callback'
+  post '/contact-details-with-callback',
+       to: 'contact_details_with_callback#submit'
 end

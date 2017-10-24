@@ -3,15 +3,11 @@
     %legend.question
       %h1= t('contact-details.title')
 
-      %p We will contact you within one working day to book an appointment for your repair.
+      %p Who should we contact about this repair?
 
     .answers
       = f.input :full_name
       = f.input :telephone_number
-      = f.input :callback_time, collection: [:morning, :afternoon], as: :check_boxes, include_hidden: false
       = f.button :submit
-
-%aside#progress
-  = @selected_answers['short_address']
 
 %p= @back.link

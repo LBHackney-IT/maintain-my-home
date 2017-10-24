@@ -6,7 +6,7 @@ class CreateRepair
   def call(answers:)
     params = RepairParams.new(answers)
     result = @api.create_repair(create_repair_params(params))
-    Result.new(result)
+    Repair.new(result)
   end
 
   private
@@ -28,42 +28,5 @@ class CreateRepair
         propertyReference: params.property_reference,
       },
     ]
-  end
-
-  class RepairParams
-    def initialize(answers)
-      @answers = answers
-    end
-
-    def problem
-      problem = @answers.fetch('describe_repair').fetch('description')
-
-      return 'n/a' if problem.blank?
-      problem
-    end
-
-    def property_reference
-      @answers.fetch('address').fetch('property_reference')
-    end
-
-    def priority
-      'N'
-    end
-
-    def sor_code
-      @answers.fetch('diagnosis', {})['sor_code']
-    end
-  end
-
-  class Result
-    def initialize(result)
-      @result = result
-    end
-
-    def request_reference
-      @result.fetch('requestReference') do |_key|
-        @result.fetch('repairRequestReference')
-      end
-    end
   end
 end

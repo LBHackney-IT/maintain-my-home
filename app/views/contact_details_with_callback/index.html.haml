@@ -1,0 +1,17 @@
+= simple_form_for @form, as: :contact_details_form, url: request.fullpath do |f|
+  %fieldset
+    %legend.question
+      %h1= t('contact-details.title')
+
+      %p We will contact you within one working day to book an appointment for your repair.
+
+    .answers
+      = f.input :full_name
+      = f.input :telephone_number
+      = f.input :callback_time, collection: [:morning, :afternoon], as: :check_boxes, include_hidden: false
+      = f.button :submit
+
+%aside#progress
+  = @selected_answers['short_address']
+
+%p= @back.link
