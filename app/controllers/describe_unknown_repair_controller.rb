@@ -1,18 +1,23 @@
 class DescribeUnknownRepairController < ApplicationController
   def index
     @form = DescribeUnknownRepairForm.new
+    @partial = 'describe_problem'
+
+    render 'describe_repair/index'
   end
 
   def submit
-    @form = DescribeUnknownRepairForm.new(describe_unknown_repair_form_params)
-    return render :index unless @form.valid?
+    @form = DescribeUnknownRepairForm.new(describe_repair_form_params)
+    @partial = 'describe_problem'
+
+    return render 'describe_repair/index' unless @form.valid?
 
     redirect_to address_search_path
   end
 
   private
 
-  def describe_unknown_repair_form_params
-    params.require(:describe_unknown_repair_form).permit!
+  def describe_repair_form_params
+    params.require(:describe_repair_form).permit!
   end
 end

@@ -1,6 +1,7 @@
 class DescribeRepairController < ApplicationController
   def index
     @form = DescribeRepairForm.new
+    @partial = 'anything_else'
   end
 
   def submit
