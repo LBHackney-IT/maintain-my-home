@@ -78,4 +78,27 @@ describe HackneyApi do
       expect(api.get_repair(repair_request_reference: '00045678')).to eql result
     end
   end
+
+  describe '#list_available_appointments' do
+    it 'returns a list of available appointments for a work order' do
+      result = [
+        {
+          'beginDate' => '2017-11-01T08:00:00Z',
+          'endDate' => '2017-11-01T12:00:00Z',
+          'bestSlot' => true,
+        },
+        {
+          'beginDate' => '2017-11-01T12:00:00Z',
+          'endDate' => '2017-11-01T16:15:00Z',
+          'bestSlot' => false,
+        },
+      ]
+
+      json_api = instance_double('JsonApi')
+      allow(json_api).to receive(:get).with('work_orders/00412371/appointments').and_return(result)
+      api = HackneyApi.new(json_api)
+
+      expect(api.list_available_appointments(work_order_reference: '00412371')).to eql result
+    end
+  end
 end

@@ -18,4 +18,10 @@ class HackneyApi
   def get_repair(repair_request_reference:)
     @json_api.get('repairs/' + repair_request_reference)
   end
+
+  def list_available_appointments(work_order_reference:)
+    @json_api.get(
+      'work_orders/' + work_order_reference + '/appointments'
+    )
+  end
 end
