@@ -1,3 +1,5 @@
+= back_link
+
 = simple_form_for @form, url: request.fullpath do |f|
   %fieldset
     %legend.question
@@ -12,5 +14,3 @@
     .answers
       = f.input :description, as: :text
       = f.button :submit, class: 'button'
-
-= back_link
