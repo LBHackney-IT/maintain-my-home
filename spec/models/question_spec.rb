@@ -93,13 +93,23 @@ RSpec.describe Question do
   end
 
   describe '#redirect_path' do
-    it 'returns the path to the next question, if question has "next" key' do
+    it 'redirects to the address search' do
       question = Question.new(
         'question' => 'Please describe your problem',
-        'next' => 'another'
       )
 
-      expect(question.redirect_path).to eql '/questions/another'
+      expect(question.redirect_path).to eql '/address-search'
+    end
+
+    context 'when question has "next" key' do
+      it 'returns the path to the next question' do
+        question = Question.new(
+          'question' => 'Please describe your problem',
+          'next' => 'another'
+        )
+
+        expect(question.redirect_path).to eql '/questions/another'
+      end
     end
   end
 
