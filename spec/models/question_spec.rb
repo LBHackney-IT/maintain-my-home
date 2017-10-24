@@ -63,32 +63,49 @@ RSpec.describe Question do
   end
 
   describe '#redirect_path_for_answer' do
-    it 'returns the path to the next question, if answer has "next" key' do
+    it 'is the path to the describe repair page by default' do
       question = Question.new(
         'question' => 'Where do you want to go?',
         'answers' => [
           {
             'text' => 'London',
-            'next' => 'next',
           },
         ],
       )
 
-      expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
+      expect(question.redirect_path_for_answer('London')).to eql '/describe-repair'
     end
 
-    it 'returns the path to a static page, if answer has "page" key' do
-      question = Question.new(
-        'question' => 'Where do you want to go?',
-        'answers' => [
-          {
-            'text' => 'London',
-            'page' => 'info',
-          },
-        ],
-      )
+    context 'if answer has "next" key' do
+      it 'returns the path to the next question' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'next' => 'next',
+            },
+          ],
+        )
 
-      expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
+        expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
+      end
+    end
+
+    context 'if answer has "page" key' do
+      it 'returns the path to a static page' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'page' => 'info',
+            },
+          ],
+        )
+
+        expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
+      end
     end
   end
 
