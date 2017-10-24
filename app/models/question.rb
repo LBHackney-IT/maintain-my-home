@@ -33,12 +33,4 @@ class Question
       @route_helpers.describe_repair_path
     end
   end
-
-  def redirect_path
-    @route_helpers.address_search_path
-  end
-
-  def multiple_choice?
-    @answers.any?
-  end
 end

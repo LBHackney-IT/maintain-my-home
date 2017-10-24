@@ -14,13 +14,11 @@ class QuestionsController < ApplicationController
         selected_answer_store: selected_answer_store,
       )
 
-    return render :show unless question_saver.save(@form)
-
-    if @question.multiple_choice?
-      return redirect_to @question.redirect_path_for_answer(@form.answer)
+    if question_saver.save(@form)
+      redirect_to @question.redirect_path_for_answer(@form.answer)
+    else
+      render :show
     end
-
-    redirect_to @question.redirect_path
   end
 
   private

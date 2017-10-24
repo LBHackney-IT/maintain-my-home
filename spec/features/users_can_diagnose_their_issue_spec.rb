@@ -19,24 +19,6 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_unchecked_field 'Nope'
   end
 
-  scenario 'viewing a question which requires text input' do
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .with('first')
-      .and_return(
-        Question.new(
-          'question' => 'Please describe your first pet',
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
-
-    visit '/questions/first'
-
-    expect(page).to have_content 'Please describe your first pet'
-    expect(page).to have_field 'question_form_answer', type: 'textarea'
-  end
-
   scenario 'choosing an answer that moves on to another question' do
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)

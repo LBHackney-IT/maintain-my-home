@@ -124,36 +124,4 @@ RSpec.describe Question do
       end
     end
   end
-
-  describe '#redirect_path' do
-    it 'redirects to the address search' do
-      question = Question.new(
-        'question' => 'Please describe your problem',
-      )
-
-      expect(question.redirect_path).to eql '/address-search'
-    end
-  end
-
-  describe '#multiple_choice?' do
-    it 'is true when the question has possible answers' do
-      question = Question.new(
-        'question' => 'Cat or dog?',
-        'answers' => [
-          { 'text': 'Cat' },
-          { 'text': 'Dog' },
-        ],
-      )
-
-      expect(question.multiple_choice?).to be_truthy
-    end
-
-    it 'is false when the question has no answers' do
-      question = Question.new(
-        'question' => 'Please describe your cat?'
-      )
-
-      expect(question.multiple_choice?).to be_falsey
-    end
-  end
 end
