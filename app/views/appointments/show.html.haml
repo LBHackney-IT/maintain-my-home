@@ -1,3 +1,9 @@
-= simple_form_for :dummy_form, url: request.fullpath do |f|
-  = f.input :answer, collection: @appointments.slots_for_collection, as: :radio_buttons, label: false
-  = f.button :submit, 'Book this appointment', class: 'button'
+= simple_form_for @form, url: request.fullpath do |f|
+  %fieldset
+    %legend.question
+      %h1
+        Please choose a date and time that suits you
+
+    .answers
+      = f.input :appointment_id, collection: @appointments, label_method: :description, as: :radio_buttons, label: false
+      = f.button :submit, class: 'button'

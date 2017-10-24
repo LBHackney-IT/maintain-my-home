@@ -29,16 +29,15 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'propertyRef' => '00000503',
       )
     allow(fake_api).to receive(:get)
-      .with('repair_work_orders/09124578/appointments')
+      .with('work_orders/09124578/appointments')
       .and_return(
         [
-          { 'appointmentId' => '1000', 'startDate' => '2017-10-11', 'slotTypeCode' => 'morning' },
-          { 'appointmentId' => '1001', 'startDate' => '2017-10-11', 'slotTypeCode' => 'afternoon' },
-          { 'appointmentId' => '1002', 'startDate' => '2017-10-12', 'slotTypeCode' => 'morning' },
+          { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false },
+          { 'beginDate' => '2017-10-11T12:00:00Z', 'endDate' => '2017-10-11T17:00:00Z', 'bestSlot' => false },
         ]
       )
     allow(fake_api).to receive(:post)
-      .with('repair_work_orders/09124578/appointments', anything)
+      .with('work_orders/09124578/appointments', anything)
       .and_return nil # TODO: return a realistic response
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
@@ -119,7 +118,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Appointments:
-    choose_radio_button 'Wednesday afternoon (11th October)'
+    choose_radio_button 'Wednesday 12:00pm-5:00pm (11th October)'
     click_on 'Continue'
 
     aggregate_failures do
