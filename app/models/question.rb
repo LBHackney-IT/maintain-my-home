@@ -7,8 +7,6 @@ class Question
   def initialize(question_hash)
     @title = question_hash['question']
     @answers = question_hash['answers'] || []
-    @next_question = question_hash['next']
-
     @route_helpers = Rails.application.routes.url_helpers
   end
 
@@ -35,11 +33,7 @@ class Question
   end
 
   def redirect_path
-    if next_question.nil?
-      return Rails.application.routes.url_helpers.address_search_path
-    end
-
-    Rails.application.routes.url_helpers.questions_path(next_question)
+    @route_helpers.address_search_path
   end
 
   def multiple_choice?

@@ -100,17 +100,6 @@ RSpec.describe Question do
 
       expect(question.redirect_path).to eql '/address-search'
     end
-
-    context 'when question has "next" key' do
-      it 'returns the path to the next question' do
-        question = Question.new(
-          'question' => 'Please describe your problem',
-          'next' => 'another'
-        )
-
-        expect(question.redirect_path).to eql '/questions/another'
-      end
-    end
   end
 
   describe '#multiple_choice?' do
