@@ -120,7 +120,7 @@ RSpec.describe Question do
           ],
         )
 
-        expect(question.redirect_path_for_answer('London')).to eql '/describe-unknown-repair?details=travel_details'
+        expect(question.redirect_path_for_answer('London')).to eql '/describe-repair?details=travel_details'
       end
     end
   end

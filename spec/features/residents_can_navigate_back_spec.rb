@@ -79,6 +79,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Problem description', with: 'Things are broken'
     click_continue
 
     # Address search:
@@ -100,7 +101,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Is there anything else we should know?'
+    expect(page).to have_content 'Please describe what needs to be fixed'
     click_on t('back_link')
 
     expect(page).to have_content 'What is the problem?'
@@ -124,6 +125,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Problem description', with: 'Things are broken'
     click_continue
 
     # Address search:
@@ -137,7 +139,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Is there anything else we should know?'
+    expect(page).to have_content 'Please describe what needs to be fixed'
   end
 
   scenario 'when the contact details values were invalid' do
@@ -210,6 +212,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Problem description', with: 'Things are broken'
     click_continue
 
     # Address search:
@@ -267,6 +270,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Problem description', with: 'Things are broken'
     click_continue
 
     # Address search:
@@ -300,6 +304,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Problem description', with: 'Things are broken'
     click_continue
 
     # Address search:
@@ -312,7 +317,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     # Address search:
     click_on t('back_link')
 
-    expect(page).to have_content 'Is there anything else we should know?'
+    expect(page).to have_content 'Please describe what needs to be fixed'
   end
 
   private

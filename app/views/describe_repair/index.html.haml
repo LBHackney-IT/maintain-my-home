@@ -1,9 +1,9 @@
 = back_link
 
-= simple_form_for @form, as: :describe_repair_form, url: request.fullpath do |f|
+= simple_form_for @describe_repair.form, as: :describe_repair_form, url: request.fullpath do |f|
   %fieldset
     %legend.question
-      = render partial: @partial
+      = render partial: @describe_repair.partial
 
     .answers
       = f.input :description, as: :text
