@@ -5,10 +5,6 @@ class AddressSearch
     @form = AddressSearchForm.new(search_params)
   end
 
-  def back_link
-    Back.new(controller_name: 'describe_repair').link
-  end
-
   def results
     @results ||= AddressFinder.new.find(form)
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Resident can navigate back' do
+RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair was diagnosed' do
     property = {
       'property_reference' => 'abc123',
@@ -11,7 +11,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
+    stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
 
     visit '/'
     click_on 'Start'
@@ -37,10 +37,19 @@ RSpec.feature 'Resident can navigate back' do
 
     # Contact details
     click_on t('back_link')
+
+    # Address selection:
+    expect(page).to have_content 'What is your address?'
+    click_on t('back_link')
+
+    # Address search:
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
     expect(page).to have_content 'Is there anything else we should know?'
+    click_on t('back_link')
+
+    expect(page).to have_content 'What is the problem?'
     click_on t('back_link')
 
     expect(page).to have_content 'Do any of the following apply to you:'
@@ -56,7 +65,7 @@ RSpec.feature 'Resident can navigate back' do
     allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'skip' }])
 
     visit '/'
     click_on 'Start'
@@ -82,12 +91,21 @@ RSpec.feature 'Resident can navigate back' do
 
     # Contact details with callback - last page before confirmation:
     click_on t('back_link')
+
+    # Address selection:
     expect(page).to have_content 'What is your address?'
-
     click_on t('back_link')
+
+    # Address search:
+    expect(page).to have_content 'What is your address?'
+    click_on t('back_link')
+
     expect(page).to have_content 'Is there anything else we should know?'
-
     click_on t('back_link')
+
+    expect(page).to have_content 'What is the problem?'
+    click_on t('back_link')
+
     expect(page).to have_content 'Do any of the following apply to you:'
   end
 
@@ -112,7 +130,13 @@ RSpec.feature 'Resident can navigate back' do
     fill_in 'Postcode', with: ''
     click_on 'Find my address'
 
+    # Address search (validation error):
     click_on t('back_link')
+
+    # Address search (no validation error):
+    expect(page).to have_content 'What is your address?'
+    click_on t('back_link')
+
     expect(page).to have_content 'Is there anything else we should know?'
   end
 
@@ -153,6 +177,10 @@ RSpec.feature 'Resident can navigate back' do
     # Contact details - submit an empty form
     click_on 'Continue'
 
+    # Contact details with validation error:
+    click_on t('back_link')
+
+    # Contact details without validation error:
     click_on t('back_link')
 
     expect(page).to have_content 'What is your address?'
@@ -195,7 +223,12 @@ RSpec.feature 'Resident can navigate back' do
     # Contact details - submit an empty form
     click_on 'Continue'
 
+    # Contact details with validation error:
     click_on t('back_link')
+
+    # Contact details without validation error:
+    click_on t('back_link')
+
     expect(page).to have_content 'What is your address?'
   end
 
@@ -275,6 +308,10 @@ RSpec.feature 'Resident can navigate back' do
 
     # Address selection:
     click_on t('back_link')
+
+    # Address search:
+    click_on t('back_link')
+
     expect(page).to have_content 'Is there anything else we should know?'
   end
 

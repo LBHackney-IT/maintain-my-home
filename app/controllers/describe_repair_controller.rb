@@ -1,7 +1,6 @@
 class DescribeRepairController < ApplicationController
   def index
     @form = DescribeRepairForm.new
-    @back = Back.new(controller_name: 'questions/start')
   end
 
   def submit
