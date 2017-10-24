@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     question_saver =
       QuestionSaver.new(
         question: @question,
-        selected_answer_store: SelectedAnswerStore.new(session),
+        selected_answer_store: selected_answer_store,
       )
 
     return render :show unless question_saver.save(@form)

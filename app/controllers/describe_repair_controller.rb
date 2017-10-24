@@ -6,7 +6,7 @@ class DescribeRepairController < ApplicationController
   def submit
     @form = DescribeRepairForm.new(describe_repair_form_params)
 
-    SelectedAnswerStore.new(session).store_selected_answers(
+    selected_answer_store.store_selected_answers(
       :describe_repair,
       description: @form.description
     )
