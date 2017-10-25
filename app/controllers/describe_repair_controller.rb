@@ -13,12 +13,10 @@ class DescribeRepairController < ApplicationController
       answers: selected_answer_store.selected_answers
     )
 
-    if @describe_repair.form.valid?
-      selected_answer_store.store_selected_answers(
-        :describe_repair,
-        description: @describe_repair.form.description
-      )
+    saver =
+      DescribeRepairSaver.new(selected_answer_store: selected_answer_store)
 
+    if saver.save(@describe_repair.form)
       redirect_to address_search_path
     else
       render 'describe_repair/index'
