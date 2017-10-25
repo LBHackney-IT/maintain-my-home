@@ -1,12 +1,14 @@
 class QuestionsController < ApplicationController
   def show
     @form = QuestionForm.new
-    @question = QuestionSet.new.find(params[:id])
+    @question = QuestionSet.new(partial_checker: description_partial_checker)
+                           .find(params[:id])
   end
 
   def submit
     @form = QuestionForm.new(question_form_params)
-    @question = QuestionSet.new.find(params[:id])
+    @question = QuestionSet.new(partial_checker: description_partial_checker)
+                           .find(params[:id])
 
     question_saver =
       QuestionSaver.new(

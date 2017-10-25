@@ -1,9 +1,11 @@
 class QuestionSet
-  class UnknownQuestion < StandardError; end
-  class BadlyFormattedYaml < StandardError; end
-  class MissingQuestions < StandardError; end
+  class Error < StandardError; end
+  class UnknownQuestion < Error; end
+  class BadlyFormattedYaml < Error; end
+  class MissingQuestions < Error; end
+  class MissingPartials < Error; end
 
-  def initialize(filename = 'db/questions.yml')
+  def initialize(filename = 'db/questions.yml', partial_checker:)
     yaml_data = File.read(Rails.root.join(filename))
 
     begin
@@ -14,7 +16,7 @@ class QuestionSet
 
     @questions = parsed_yaml.to_ruby
 
-    QuestionValidator.new(@questions).validate!
+    QuestionValidator.new(@questions, partial_checker).validate!
   end
 
   def find(id)
@@ -26,12 +28,14 @@ class QuestionSet
   end
 
   class QuestionValidator
-    def initialize(questions)
+    def initialize(questions, partial_checker)
       @questions = questions
+      @partial_checker = partial_checker
     end
 
     def validate!
       validate_next
+      validate_desc
     end
 
     private
@@ -41,6 +45,14 @@ class QuestionSet
       missing_question_ids = answer_values_for('next') - question_ids
 
       raise MissingQuestions, missing_question_ids if missing_question_ids.any?
+    end
+
+    def validate_desc
+      missing_partials = answer_values_for('desc').reject do |partial_name|
+        @partial_checker.exists?(partial_name)
+      end
+
+      raise MissingPartials, missing_partials if missing_partials.any?
     end
 
     def answer_values_for(answer_type)

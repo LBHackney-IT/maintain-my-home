@@ -1,0 +1,7 @@
+---
+start:
+  question: Where is the problem located?
+  answers:
+    - text: Somewhere else
+      desc: some_other_place
+
