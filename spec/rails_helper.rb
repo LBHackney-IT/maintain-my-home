@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   add_group 'Queries', 'app/queries'
   add_group 'Validators', 'app/validators'
+  minimum_coverage 98
 end
 
 require 'spec_helper'
