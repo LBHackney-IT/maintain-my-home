@@ -1,17 +1,20 @@
 class DescribeRepair
   attr_reader :form
 
-  def initialize(form_params: {}, details:, answers:)
+  def initialize(form_params: {}, details:, answers:, partial_checker:)
     @form_params = form_params
     @answers = answers
     @details = details
+    @partial_checker = partial_checker
   end
 
   def partial
     if diagnosed?
       'anything_else'
+    elsif @partial_checker.exists?(@details)
+      @details
     else
-      @details || 'describe_problem'
+      'describe_problem'
     end
   end
 

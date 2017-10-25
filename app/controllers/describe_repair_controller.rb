@@ -2,7 +2,8 @@ class DescribeRepairController < ApplicationController
   def index
     @describe_repair = DescribeRepair.new(
       details: params[:details],
-      answers: selected_answer_store.selected_answers
+      answers: selected_answer_store.selected_answers,
+      partial_checker: description_partial_checker
     )
   end
 
@@ -10,7 +11,8 @@ class DescribeRepairController < ApplicationController
     @describe_repair = DescribeRepair.new(
       form_params: describe_repair_form_params,
       details: params[:details],
-      answers: selected_answer_store.selected_answers
+      answers: selected_answer_store.selected_answers,
+      partial_checker: description_partial_checker
     )
 
     saver =
