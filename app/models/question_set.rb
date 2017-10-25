@@ -14,7 +14,7 @@ class QuestionSet
 
     @questions = parsed_yaml.to_ruby
 
-    validate_questions
+    QuestionValidator.new(@questions).validate!
   end
 
   def find(id)
@@ -25,19 +25,29 @@ class QuestionSet
     Question.new(@questions.fetch(id))
   end
 
-  private
+  class QuestionValidator
+    def initialize(questions)
+      @questions = questions
+    end
 
-  def validate_questions
-    question_ids = @questions.map { |k, _v| k }.uniq
+    def validate!
+      validate_next
+    end
 
-    next_ids = @questions
-               .map { |_k, v| Array(v['answers']).map { |a| a['next'] } }
-               .flatten
-               .compact
+    private
 
-    missing_question_ids = next_ids - question_ids
+    def validate_next
+      question_ids = @questions.keys.uniq
+      missing_question_ids = answer_values_for('next') - question_ids
 
-    raise MissingQuestions, missing_question_ids if missing_question_ids.any?
+      raise MissingQuestions, missing_question_ids if missing_question_ids.any?
+    end
+
+    def answer_values_for(answer_type)
+      @questions.reduce([]) do |ids, (_k, v)|
+        answers = Array(v['answers'])
+        ids + answers.map { |a| a[answer_type] }.compact
+      end
+    end
   end
 end
-
