@@ -4,14 +4,11 @@ class ContactDetailsWithCallbackController < ApplicationController
     @selected_answers = selected_answer_store.selected_answers['address']
 
     @form = ContactDetailsWithCallbackForm.new
-    @back = Back.new(controller_name: 'address_searches')
   end
 
   def submit
     selected_answer_store = SelectedAnswerStore.new(session)
     @selected_answers = selected_answer_store.selected_answers['address']
-
-    @back = Back.new(controller_name: 'address_searches')
 
     @form = ContactDetailsWithCallbackForm.new(contact_details_form_params)
 

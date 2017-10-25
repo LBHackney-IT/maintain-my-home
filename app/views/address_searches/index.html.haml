@@ -1,3 +1,5 @@
+= back_link
+
 = simple_form_for @address_search.form, as: :address_search, url: address_search_path do |f|
   %fieldset
     %legend.question
@@ -7,5 +9,3 @@
     .answers
       = f.input :postcode
       = f.button :submit
-
-%p= @address_search.back_link

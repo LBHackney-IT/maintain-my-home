@@ -1,13 +1,11 @@
 class ContactDetailsController < ApplicationController
   def index
-    @back = Back.new(controller_name: 'address_searches')
     @form = ContactDetailsForm.new
   end
 
   def submit
     selected_answer_store = SelectedAnswerStore.new(session)
 
-    @back = Back.new(controller_name: 'address_searches')
     @form = ContactDetailsForm.new(contact_details_form_params)
 
     contact_details_saver =

@@ -21,12 +21,7 @@ en:
   addresses:
     errors:
       blank: Please choose your address to continue
-  back_links:
-    prefix: Back to %{page_description}
-    previous: previous page
-    questions/start: start
-    address_searches: find my address
-    describe_repair: problem description
+  back_link: Back
   confirmation:
     summary:
       description: 'Description: %{description}'
