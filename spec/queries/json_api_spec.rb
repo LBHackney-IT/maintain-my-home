@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'faraday_middleware'
 require 'app/queries/json_api'
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/slice'
+require 'spec/support/test_ssl'
 
 RSpec.describe JsonApi do
   describe 'construction' do
@@ -23,6 +25,38 @@ RSpec.describe JsonApi do
       it 'raises an exception' do
         expect { JsonApi.new(api_root: '  ') }
           .to raise_error(JsonApi::InvalidApiRootError)
+      end
+    end
+
+    context 'when a certificate is provided' do
+      it 'raises an error if the private key was missing' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: TestSsl.certificate,
+            api_key: nil,
+          )
+        end.to raise_error JsonApi::MissingPrivateKeyError
+      end
+
+      it 'raises an error if the private key was invalid' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: TestSsl.certificate,
+            api_key: 'Not a key'
+          )
+        end.to raise_error OpenSSL::PKey::RSAError
+      end
+
+      it 'raises an error if the cert was invalid' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: 'Not a cert',
+            api_key: TestSsl.key
+          )
+        end.to raise_error OpenSSL::X509::CertificateError
       end
     end
   end
@@ -71,6 +105,24 @@ RSpec.describe JsonApi do
       result = json_api.get('properties?postcode=A1 1AA')
 
       expect(result).to eq nil
+    end
+
+    context 'when a client certificate is specified' do
+      # TODO: work out how to test that the certificate and api_key actually get used
+
+      it 'makes a valid request' do
+        json_api = JsonApi.new(
+          api_root: 'http://hackney.api:8000',
+          api_cert: TestSsl.certificate,
+          api_key: TestSsl.key,
+        )
+        stub_request(:get, 'http://hackney.api:8000/repairs/00012345')
+
+        json_api.get('repairs/00012345')
+
+        expect(a_request(:get, 'http://hackney.api:8000/repairs/00012345'))
+          .to have_been_made.once
+      end
     end
   end
 

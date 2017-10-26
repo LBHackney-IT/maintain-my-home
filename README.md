@@ -31,8 +31,10 @@ The app should run successfully without these environment variables:
 
 #### Authentication
 
- - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
+- `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
    [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+- `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
+  private key - used if connecting to the Hackney API via a proxy server
 
 
 ## TODO:
