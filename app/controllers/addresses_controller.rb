@@ -13,7 +13,7 @@ class AddressesController < ApplicationController
       return render 'address_searches/create'
     end
 
-    if RepairParams.new(selected_answer_store.selected_answers).sor_code
+    if RepairParams.new(selected_answer_store.selected_answers).diagnosed?
       redirect_to contact_details_path
     else
       redirect_to contact_details_with_callback_path

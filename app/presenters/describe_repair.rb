@@ -25,7 +25,7 @@ class DescribeRepair
   private
 
   def diagnosed?
-    !RepairParams.new(@answers).sor_code.nil?
+    RepairParams.new(@answers).diagnosed?
   end
 
   def build_form(form_params)

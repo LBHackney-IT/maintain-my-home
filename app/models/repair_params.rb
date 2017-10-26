@@ -20,4 +20,8 @@ class RepairParams
   def sor_code
     @answers.fetch('diagnosis', {})['sor_code']
   end
+
+  def diagnosed?
+    sor_code.present?
+  end
 end
