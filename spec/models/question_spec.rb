@@ -63,65 +63,65 @@ RSpec.describe Question do
   end
 
   describe '#redirect_path_for_answer' do
-    it 'returns the path to the next question, if answer has "next" key' do
+    it 'is the path to the describe repair page by default' do
       question = Question.new(
         'question' => 'Where do you want to go?',
         'answers' => [
           {
             'text' => 'London',
-            'next' => 'next',
           },
         ],
       )
 
-      expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
+      expect(question.redirect_path_for_answer('London')).to eql '/describe-repair'
     end
 
-    it 'returns the path to a static page, if answer has "page" key' do
-      question = Question.new(
-        'question' => 'Where do you want to go?',
-        'answers' => [
-          {
-            'text' => 'London',
-            'page' => 'info',
-          },
-        ],
-      )
+    context 'if answer has "next" key' do
+      it 'returns the path to the next question' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'next' => 'next',
+            },
+          ],
+        )
 
-      expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
-    end
-  end
-
-  describe '#redirect_path' do
-    it 'returns the path to the next question, if question has "next" key' do
-      question = Question.new(
-        'question' => 'Please describe your problem',
-        'next' => 'another'
-      )
-
-      expect(question.redirect_path).to eql '/questions/another'
-    end
-  end
-
-  describe '#multiple_choice?' do
-    it 'is true when the question has possible answers' do
-      question = Question.new(
-        'question' => 'Cat or dog?',
-        'answers' => [
-          { 'text': 'Cat' },
-          { 'text': 'Dog' },
-        ],
-      )
-
-      expect(question.multiple_choice?).to be_truthy
+        expect(question.redirect_path_for_answer('London')).to eql '/questions/next'
+      end
     end
 
-    it 'is false when the question has no answers' do
-      question = Question.new(
-        'question' => 'Please describe your cat?'
-      )
+    context 'if answer has "page" key' do
+      it 'returns the path to a static page' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'page' => 'info',
+            },
+          ],
+        )
 
-      expect(question.multiple_choice?).to be_falsey
+        expect(question.redirect_path_for_answer('London')).to eql '/pages/info'
+      end
+    end
+
+    context 'if answer has "desc" key' do
+      it 'returns the path to a describe repair page' do
+        question = Question.new(
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'desc' => 'travel_details',
+            },
+          ],
+        )
+
+        expect(question.redirect_path_for_answer('London')).to eql '/describe-repair?details=travel_details'
+      end
     end
   end
 end

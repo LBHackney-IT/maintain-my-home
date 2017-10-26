@@ -1,9 +1,8 @@
 class ConfirmationsController < ApplicationController
   def show
-    answers = SelectedAnswerStore.new(session).selected_answers
     @confirmation = Confirmation.new(
       request_reference: params[:id],
-      answers: answers
+      answers: selected_answer_store.selected_answers
     )
   end
 end

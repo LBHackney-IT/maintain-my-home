@@ -73,4 +73,35 @@ RSpec.describe RepairParams do
       end
     end
   end
+
+  describe '#diagnosed?' do
+    context 'when an SOR code was selected' do
+      it 'is true' do
+        answers = {
+          'diagnosis' => {
+            'sor_code' => '002034',
+          },
+        }
+        expect(RepairParams.new(answers).diagnosed?).to eq true
+      end
+    end
+
+    context 'when no SOR code was selected' do
+      it 'is false' do
+        answers = {
+          'diagnosis' => {
+            'next' => 'next_question',
+          },
+        }
+        expect(RepairParams.new(answers).diagnosed?).to eq false
+      end
+    end
+
+    context 'when there is no diagnosis in the answers' do
+      it 'is false' do
+        answers = {}
+        expect(RepairParams.new(answers).diagnosed?).to eq false
+      end
+    end
+  end
 end

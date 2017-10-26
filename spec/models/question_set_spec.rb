@@ -4,20 +4,27 @@ RSpec.describe QuestionSet do
   describe '#initialize' do
     it 'throws an error if the YAML file is not in the correct format' do
       expect do
-        QuestionSet.new('spec/fixtures/broken.yml')
+        QuestionSet.new('spec/fixtures/broken.yml', partial_checker: double)
       end.to raise_error(QuestionSet::BadlyFormattedYaml)
     end
 
     it 'throws an error if the YAML file links to a missing question' do
       expect do
-        QuestionSet.new('spec/fixtures/missing_questions.yml')
+        QuestionSet.new('spec/fixtures/missing_questions.yml', partial_checker: double)
       end.to raise_error(QuestionSet::MissingQuestions)
+    end
+
+    it 'throws an error if the YAML file links to a missing description partial' do
+      partial_checker = instance_double('DescriptionPartialChecker', exists?: false)
+      expect do
+        QuestionSet.new('spec/fixtures/missing_partials.yml', partial_checker: partial_checker)
+      end.to raise_error(QuestionSet::MissingPartials)
     end
   end
 
   describe '#find' do
     it 'returns the requested question' do
-      store = QuestionSet.new('spec/fixtures/basic_question.yml')
+      store = QuestionSet.new('spec/fixtures/basic_question.yml', partial_checker: double)
       question = store.find('example')
 
       expect(question).to be_a(Question)
@@ -25,7 +32,7 @@ RSpec.describe QuestionSet do
     end
 
     it 'raises an error if the requested question was not found' do
-      store = QuestionSet.new('spec/fixtures/basic_question.yml')
+      store = QuestionSet.new('spec/fixtures/basic_question.yml', partial_checker: double)
 
       expect { store.find('wrong') }.to raise_error QuestionSet::UnknownQuestion
     end

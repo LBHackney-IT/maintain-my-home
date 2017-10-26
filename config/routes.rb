@@ -16,11 +16,6 @@ Rails.application.routes.draw do
   get '/describe-repair', to: 'describe_repair#index', as: 'describe_repair'
   post '/describe-repair', to: 'describe_repair#submit'
 
-  get '/describe-unknown-repair',
-      to: 'describe_unknown_repair#index',
-      as: 'describe_unknown_repair'
-  post '/describe-unknown-repair', to: 'describe_unknown_repair#submit'
-
   get '/contact-details', to: 'contact_details#index', as: 'contact_details'
   post '/contact-details', to: 'contact_details#submit'
 

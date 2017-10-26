@@ -4,8 +4,6 @@ class ContactDetailsController < ApplicationController
   end
 
   def submit
-    selected_answer_store = SelectedAnswerStore.new(session)
-
     @form = ContactDetailsForm.new(contact_details_form_params)
 
     contact_details_saver =

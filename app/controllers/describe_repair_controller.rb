@@ -1,17 +1,28 @@
 class DescribeRepairController < ApplicationController
   def index
-    @form = DescribeRepairForm.new
+    @describe_repair = DescribeRepair.new(
+      details: params[:details],
+      answers: selected_answer_store.selected_answers,
+      partial_checker: description_partial_checker
+    )
   end
 
   def submit
-    @form = DescribeRepairForm.new(describe_repair_form_params)
-
-    SelectedAnswerStore.new(session).store_selected_answers(
-      :describe_repair,
-      description: @form.description
+    @describe_repair = DescribeRepair.new(
+      form_params: describe_repair_form_params,
+      details: params[:details],
+      answers: selected_answer_store.selected_answers,
+      partial_checker: description_partial_checker
     )
 
-    redirect_to address_search_path
+    saver =
+      DescribeRepairSaver.new(selected_answer_store: selected_answer_store)
+
+    if saver.save(@describe_repair.form)
+      redirect_to address_search_path
+    else
+      render 'describe_repair/index'
+    end
   end
 
   private

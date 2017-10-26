@@ -1,26 +1,26 @@
 class QuestionsController < ApplicationController
   def show
     @form = QuestionForm.new
-    @question = QuestionSet.new.find(params[:id])
+    @question = QuestionSet.new(partial_checker: description_partial_checker)
+                           .find(params[:id])
   end
 
   def submit
     @form = QuestionForm.new(question_form_params)
-    @question = QuestionSet.new.find(params[:id])
+    @question = QuestionSet.new(partial_checker: description_partial_checker)
+                           .find(params[:id])
 
     question_saver =
       QuestionSaver.new(
         question: @question,
-        selected_answer_store: SelectedAnswerStore.new(session),
+        selected_answer_store: selected_answer_store,
       )
 
-    return render :show unless question_saver.save(@form)
-
-    if @question.multiple_choice?
-      return redirect_to @question.redirect_path_for_answer(@form.answer)
+    if question_saver.save(@form)
+      redirect_to @question.redirect_path_for_answer(@form.answer)
+    else
+      render :show
     end
-
-    redirect_to @question.redirect_path
   end
 
   private

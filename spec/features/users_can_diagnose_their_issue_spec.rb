@@ -19,24 +19,6 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_unchecked_field 'Nope'
   end
 
-  scenario 'viewing a question which requires text input' do
-    fake_question_set = instance_double(QuestionSet)
-    allow(fake_question_set)
-      .to receive(:find)
-      .with('first')
-      .and_return(
-        Question.new(
-          'question' => 'Please describe your first pet',
-        )
-      )
-    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
-
-    visit '/questions/first'
-
-    expect(page).to have_content 'Please describe your first pet'
-    expect(page).to have_field 'question_form_answer', type: 'textarea'
-  end
-
   scenario 'choosing an answer that moves on to another question' do
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
@@ -98,18 +80,59 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_content 'Please call our repair centre'
   end
 
-  scenario 'choosing an answer redirects to the describe repair page by default' do
+  scenario 'when the repair was diagnosed' do
     stub_diagnosis_question(
       question: 'Where does this question go?',
       id: 'where',
-      answers: [{ 'text' => 'Nowhere' }]
+      answers: [{ 'text' => 'To an optional describe form', 'sor_code' => '022456' }]
     )
 
     visit '/questions/where'
-    choose_radio_button 'Nowhere'
+    choose_radio_button 'To an optional describe form'
     click_on 'Continue'
 
     expect(page).to have_content 'Is there anything else we should know?'
+
+    click_on 'Continue'
+
+    expect(page).to have_content 'What is your address?'
+  end
+
+  scenario 'when the repair was not diagnosed' do
+    stub_diagnosis_question(
+      question: 'Where does this question go?',
+      id: 'where',
+      answers: [{ 'text' => 'To a required describe form' }]
+    )
+
+    visit '/questions/where'
+    choose_radio_button 'To a required describe form'
+    click_on 'Continue'
+
+    expect(page).to have_content 'Please describe what needs to be fixed'
+
+    click_on 'Continue'
+
+    expect(page).to have_content "can't be blank"
+  end
+
+  scenario 'choosing an answer with a special describe repair page' do
+    stub_diagnosis_question(
+      question: 'Where does this question go?',
+      id: 'where',
+      answers: [{ 'text' => 'Somewhere special', 'desc' => 'damp' }]
+    )
+
+    visit '/questions/where'
+    choose_radio_button 'Somewhere special'
+    click_on 'Continue'
+
+    expect(page).to have_content 'Please give details of the damp or mould'
+
+    # Submit invalid details - the same text should display
+    click_on 'Continue'
+
+    expect(page).to have_content 'Please give details of the damp or mould'
   end
 
   scenario 'not choosing an answer redisplays the form with an error' do
