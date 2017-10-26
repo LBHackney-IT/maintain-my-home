@@ -44,14 +44,27 @@ RSpec.describe DescribeRepair do
 
   describe '#partial' do
     context 'when the repair was diagnosed' do
-      it 'returns the name of a generic optional describe repair partial' do
-        describe_repair = DescribeRepair.new(details: nil, answers: diagnosed_answers, partial_checker: double)
+      it 'defaults to a generic optional describe repair partial' do
+        fake_partial_checker = double('DescriptionPartialChecker')
+        allow(fake_partial_checker).to receive(:exists?)
+          .with(nil)
+          .and_return(false)
+        describe_repair = DescribeRepair.new(details: nil, answers: diagnosed_answers, partial_checker: fake_partial_checker)
         expect(describe_repair.partial).to eq 'anything_else'
+      end
+
+      it 'returns the name of a specific describe repair partial if provided' do
+        fake_partial_checker = double('DescriptionPartialChecker')
+        allow(fake_partial_checker).to receive(:exists?)
+          .with('bathroom_problem')
+          .and_return(true)
+        describe_repair = DescribeRepair.new(details: 'bathroom_problem', answers: diagnosed_answers, partial_checker: fake_partial_checker)
+        expect(describe_repair.partial).to eq 'bathroom_problem'
       end
     end
 
     context 'when the repair was not diagnosed' do
-      it 'returns the name of a generic required describe repair partial' do
+      it 'defaults to a generic required describe repair partial' do
         fake_partial_checker = double('DescriptionPartialChecker')
         allow(fake_partial_checker).to receive(:exists?)
           .with(nil)
@@ -59,10 +72,8 @@ RSpec.describe DescribeRepair do
         describe_repair = DescribeRepair.new(details: nil, answers: undiagnosed_answers, partial_checker: fake_partial_checker)
         expect(describe_repair.partial).to eq 'describe_problem'
       end
-    end
 
-    context 'when the repair requires special details' do
-      it 'returns the name of a specific describe repair partial' do
+      it 'returns the name of a specific describe repair partial if provided' do
         fake_partial_checker = double('DescriptionPartialChecker')
         allow(fake_partial_checker).to receive(:exists?)
           .with('bathroom_problem')

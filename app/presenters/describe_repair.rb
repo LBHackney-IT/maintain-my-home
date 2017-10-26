@@ -9,12 +9,10 @@ class DescribeRepair
   end
 
   def partial
-    if diagnosed?
-      'anything_else'
-    elsif @partial_checker.exists?(@details)
+    if @partial_checker.exists?(@details)
       @details
     else
-      'describe_problem'
+      default_partial
     end
   end
 
@@ -33,6 +31,14 @@ class DescribeRepair
       DescribeRepairForm.new(form_params)
     else
       DescribeUnknownRepairForm.new(form_params)
+    end
+  end
+
+  def default_partial
+    if diagnosed?
+      'anything_else'
+    else
+      'describe_problem'
     end
   end
 end
