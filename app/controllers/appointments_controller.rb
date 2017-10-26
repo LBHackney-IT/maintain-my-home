@@ -12,7 +12,11 @@ class AppointmentsController < ApplicationController
       return render :show
     end
 
-    # TODO: Book appointment
+    HackneyApi.new.book_appointment(
+      work_order_reference: work_order_reference,
+      begin_date: @form.begin_date,
+      end_date: @form.end_date
+    )
 
     redirect_to confirmation_path(params[:repair_request_reference])
   end

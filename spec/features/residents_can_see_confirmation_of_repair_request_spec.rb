@@ -37,8 +37,16 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         ]
       )
     allow(fake_api).to receive(:post)
-      .with('work_orders/09124578/appointments', anything)
-      .and_return nil # TODO: return a realistic response
+      .with(
+        'work_orders/09124578/appointments',
+        beginDate: '2017-10-11T12:00:00Z',
+        endDate: '2017-10-11T17:00:00Z',
+      )
+      .and_return(
+        'beginDate' => '2017-10-11T12:00:00Z',
+        'endDate' => '2017-10-11T17:00:00Z',
+        'status' => 'booked',
+      )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)

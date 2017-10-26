@@ -5,5 +5,11 @@
         Please choose a date and time that suits you
 
     .answers
-      = f.input :appointment_id, collection: @appointments, label_method: :description, as: :radio_buttons, label: false
+      = f.input :appointment_id,
+        collection: @appointments,
+        value_method: :appointment_id,
+        label_method: :description,
+        as: :radio_buttons,
+        label: false
+
       = f.button :submit, class: 'button'

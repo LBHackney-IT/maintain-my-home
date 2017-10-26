@@ -8,4 +8,18 @@ class AppointmentForm
   def initialize(hash = {})
     @appointment_id = hash[:appointment_id]
   end
+
+  def begin_date
+    split_date.first
+  end
+
+  def end_date
+    split_date.last
+  end
+
+  private
+
+  def split_date
+    @split_date ||= @appointment_id.to_s.split('|')
+  end
 end

@@ -24,4 +24,12 @@ class HackneyApi
       'work_orders/' + work_order_reference + '/appointments'
     )
   end
+
+  def book_appointment(work_order_reference:, begin_date:, end_date:)
+    @json_api.post(
+      'work_orders/' + work_order_reference + '/appointments',
+      beginDate: begin_date,
+      endDate: end_date
+    )
+  end
 end
