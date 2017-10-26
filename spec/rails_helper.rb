@@ -1,6 +1,8 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_group 'Queries', 'app/queries'
+  add_group 'Services', 'app/services'
+  add_group 'Presenters', 'app/presenters'
   add_group 'Validators', 'app/validators'
   minimum_coverage 98
 end
