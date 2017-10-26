@@ -4,7 +4,7 @@ class JsonApi
   class InvalidResponseError < StandardError; end
 
   def initialize(api_root: ENV['HACKNEY_API_ROOT'])
-    raise InvalidApiRootError, 'api_root was nil or empty' if api_root.blank?
+    raise InvalidApiRootError, 'API root was nil or empty' if api_root.blank?
 
     @connection = Faraday.new api_root do |conn|
       conn.adapter Faraday.default_adapter
