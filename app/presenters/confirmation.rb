@@ -38,7 +38,8 @@ class Confirmation
       time_slot = callback.fetch('callback_time')
       Callback.new(time_slot: time_slot, request_reference: @request_reference)
     else
-      AppointmentPresenter.new
+      appointment = @answers.fetch('appointment')
+      AppointmentPresenter.new(appointment)
     end
   end
 

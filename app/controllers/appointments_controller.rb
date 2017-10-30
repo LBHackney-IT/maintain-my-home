@@ -12,11 +12,7 @@ class AppointmentsController < ApplicationController
       return render :show
     end
 
-    HackneyApi.new.book_appointment(
-      work_order_reference: work_order_reference,
-      begin_date: @form.begin_date,
-      end_date: @form.end_date
-    )
+    book_appointment_save_into_answer_store
 
     redirect_to confirmation_path(params[:repair_request_reference])
   end
@@ -41,5 +37,17 @@ class AppointmentsController < ApplicationController
     )
 
     appointments.map { |a| AppointmentPresenter.new(a) }
+  end
+
+  def book_appointment_save_into_answer_store
+    appointment = HackneyApi.new.book_appointment(
+      work_order_reference: work_order_reference,
+      begin_date: @form.begin_date,
+      end_date: @form.end_date
+    )
+
+    selected_answer_store.store_selected_answers(
+      'appointment', appointment
+    )
   end
 end

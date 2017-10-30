@@ -16,6 +16,14 @@ class AppointmentPresenter
     "#{day_of_week} #{begin_time}-#{end_time} (#{day} #{month})"
   end
 
+  def date
+    "#{day_of_week} #{day} #{month}"
+  end
+
+  def time
+    [begin_time, end_time].to_sentence
+  end
+
   def to_partial_path
     '/confirmations/appointment'
   end

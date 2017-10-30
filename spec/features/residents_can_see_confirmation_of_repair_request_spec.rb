@@ -133,7 +133,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 09124578'
         expect(page).to have_content 'Wednesday 11th October'
-        expect(page).to have_content 'between 12pm and 5pm'
+        expect(page).to have_content 'between 12:00pm and 5:00pm'
       end
 
       within '#summary' do
@@ -157,10 +157,9 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     )
 
     expect(fake_api).to have_received(:post).with(
-      'repair_appointments',
-      jobCode: '0078965',
-      startTime: '2017-10-11T12:00:00Z',
-      endTime: '2017-10-11T17:00:00Z',
+      'work_orders/09124578/appointments',
+      beginDate: '2017-10-11T12:00:00Z',
+      endDate: '2017-10-11T17:00:00Z',
     )
   end
 

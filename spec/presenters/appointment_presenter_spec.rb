@@ -28,4 +28,28 @@ RSpec.describe AppointmentPresenter do
       expect(presenter.description).to eql 'Monday 12:00pm-4:45pm (25th December)'
     end
   end
+
+  describe '#date' do
+    it 'returns the appointment date in a format suitable for the confirmation page' do
+      presenter = AppointmentPresenter.new(
+        'beginDate' => '2017-12-25T12:00:00Z',
+        'endDate' => '2017-12-25T16:45:00Z',
+        'bestSlot' => true
+      )
+
+      expect(presenter.date).to eql 'Monday 25th December'
+    end
+  end
+
+  describe '#time' do
+    it 'returns the appointment times in a format suitable for the confirmation page' do
+      presenter = AppointmentPresenter.new(
+        'beginDate' => '2017-12-25T12:00:00Z',
+        'endDate' => '2017-12-25T16:45:00Z',
+        'bestSlot' => true
+      )
+
+      expect(presenter.time).to eql '12:00pm and 4:45pm'
+    end
+  end
 end
