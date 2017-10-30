@@ -103,11 +103,9 @@ kitchen_electrical_problem:
 heating_problem:
   question: Is your problem one of these?
   answers:
-    - text: The boiler or pipes are making a loud noise
+    - text: I have no hot water - boiler in my home
 
-    - text: Electric heater is not working
-
-    - text: I have no hot water
+    - text: I have no hot water - communal boiler
 
     - text: Radiator is not working
 
@@ -226,16 +224,16 @@ other_problem:
    - text: Electrical
      next: other_electrical_problem
 
-   - text: External doors
+   - text: External door
      next: external_doors_problem
-
-   - text: Heating
-     next: heating_problem
-
-   - text: internal doors
 
    - text: Gas
      page: emergency_contact
+  
+   - text: Heating
+     next: heating_problem
+
+   - text: Internal door
 
    - text: Windows
      next: window_problem
@@ -271,22 +269,27 @@ other_electrical_problem:
 window_problem:
   question: Is your problem one of these?
   answers:
-    - text: Window is not shutting / locking (above ground floor)
+    - text: Window is not shutting / locking properly - uPVC
 
-    - text: Minor damage to glazing
+    - text: Window is not shutting / locking properly - Wood
+
+    - text: Damage to glazing
 
     - text: Something else
       desc: window_problem
 
 
 external_doors_problem:
-  question: Are you able to secure access to your property?
+  question: Is your problem one of these?
   answers:
-    - text: 'Yes'
-      desc: external_doors_problem
+    - text: Front or back door is stiff or loose - uPVC
 
-    - text: 'No'
-      page: emergency_contact
+    - text: Front or back door is stiff or loose - Wood
+
+    - text: Door lock
+      
+    - text: Something else
+      desc: external_doors_problem
 
 water_leaking_into_light:
   question: Is there water leaking into or from the light?
