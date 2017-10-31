@@ -5,7 +5,7 @@ RSpec.feature 'Users can answer repair questions' do
     visit '/questions/start/'
 
     within '.question' do
-      expect(page).to have_content 'Do any of the following apply to you:'
+      expect(page).to have_content 'Do any of the following apply'
     end
 
     within '.answers' do
@@ -31,7 +31,7 @@ RSpec.feature 'Users can answer repair questions' do
     choose_radio_button t('simple_form.options.start_form.answer.yes')
     click_continue
 
-    expect(page).to have_content 'Please call our repair centre'
+    expect(page).to have_content 'Emergency repairs'
   end
 
   scenario "Users can choose 'No' and is shown the next question" do

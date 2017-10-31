@@ -1,16 +1,17 @@
 = simple_form_for @form, url: request.fullpath do |f|
   %fieldset
     %legend.question
-      %h1 Before we start
+      %h1 Before you continue
 
       %p
         %strong
-          Do any of the following apply to you:
+          Do any of the following apply:
 
       %ul
-        %li I have no electricity
-        %li I have no water
+        %li I can smell gas
         %li I have no heating
+        %li I have no water
+        %li I have no power
         %li I have a water leak which I cannot contain
         %li I cannot access my property
 

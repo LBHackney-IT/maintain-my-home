@@ -77,7 +77,7 @@ RSpec.feature 'Users can diagnose their issue' do
     click_on 'Continue'
 
     expect(page.current_path).to eql '/pages/emergency_contact'
-    expect(page).to have_content 'Please call our repair centre'
+    expect(page).to have_content 'Emergency repairs'
   end
 
   scenario 'when the repair was diagnosed' do
