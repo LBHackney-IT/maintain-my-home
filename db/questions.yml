@@ -15,34 +15,52 @@ communal_problem:
   question: What is the problem in the communal grounds?
   answers:
     - text: A light is not working
-      next: faulty_lamp_post
+      desc: communal_faulty_lamp_post
 
     - text: The main entrance door is damaged or not closing
+      desc: communal_main_entrance_door
+
     - text: The intercom is not working for my property
+      desc: communal_intercom
+
     - text: The lift is faulty
+      desc: communal_lift
+
     - text: The rubbish chute is blocked or damaged
+      desc: communal_rubbish_chute
+
     - text: There is a blocked drain or gully
+      desc: communal_blocked_drain
+
     - text: There are pests or rodents
+      desc: communal_pests
+
     - text: Something else
-
-faulty_lamp_post:
-  question: Are you reporting a faulty lamp post?
-  answers:
-    - text: 'Yes'
-
-    - text: 'No'
-      page: cleaners_responsibility
+      desc: communal_describe_repair
 
 outside_problem:
   question: What is the problem outside your home?
   answers:
     - text: The guttering or downpipe is blocked or damaged
+      desc: outside_guttering
+
     - text: A drain is blocked
+      desc: outside_drain
+
     - text: Paving is broken or coming loose
+      desc: outside_paving
+
     - text: The roof is leaking
+      desc: outside_describe_repair
+
     - text: A light is not working
+      desc: outside_describe_repair
+
     - text: I have pests or rodents in or near my home
+      desc: communal_pests
+
     - text: Something else
+      desc: outside_describe_repair
 
 which_room:
   question: Which room?
@@ -60,9 +78,10 @@ kitchen_problem:
   question: What is the problem in your kitchen?
   answers:
     - text: Cupboards or Worktop
+      desc: inside_kitchen_cupboards
 
     - text: Damp or Mould
-      desc: damp
+      page: damp_and_mould
 
     - text: Electrical
       next: kitchen_electrical_problem
@@ -89,13 +108,13 @@ kitchen_electrical_problem:
       next: water_leaking_into_light
 
     - text: Light switch
-      page: electrical_hazard_warning
+      desc: inside_kitchen_light_switch
 
     - text: Smoke detector is beeping
-      page: emergency_contact
+      page: smoke_detector
 
     - text: Sockets
-      page: electrical_hazard_warning
+      desc: inside_sockets
 
     - text: Something else
       desc: kitchen_problem
@@ -104,8 +123,10 @@ heating_problem:
   question: Is your problem one of these?
   answers:
     - text: I have no hot water - boiler in my home
+      desc: inside_boiler
 
     - text: I have no hot water - communal boiler
+      desc: communal_boiler
 
     - text: Radiator is not working
 
@@ -122,6 +143,7 @@ sink_problem:
     - text: Sink is blocked
 
     - text: Sink is leaking - containable
+      desc: inside_kitchen_sink_leaking
 
     - text: Tap won't turn off - water running
       page: emergency_contact
@@ -129,6 +151,7 @@ sink_problem:
     - text: Tap is dripping
 
     - text: Tap is broken
+      desc: inside_kitchen_broken_tap
 
     - text: Something else
       desc: sink_problem
@@ -164,6 +187,7 @@ is_fan_leaking_water:
       page: emergency_contact
 
     - text: 'No'
+      desc: inside_kitchen_extractor_fan
 
 basin_problem:
   question: Is your problem one of these?
@@ -171,6 +195,7 @@ basin_problem:
     - text: Basin / Sink is blocked
 
     - text: Basin / Sink is leaking - containable
+      desc: inside_bathroom_basin_leaking
 
     - text: Tap won't turn off - water running
       page: emergency_contact
@@ -188,6 +213,7 @@ bath_problem:
     - text: Bath is blocked
 
     - text: Bath is leaking - containable
+      desc: inside_bathroom_bath_leaking
 
     - text: Tap won't turn off - water running
       page: emergency_contact
@@ -217,7 +243,6 @@ bathroom_electrical_problem:
 other_problem:
   question: What is the problem?
   answers:
-
    - text: Damp or mould
      desc: damp
 
@@ -229,11 +254,12 @@ other_problem:
 
    - text: Gas
      page: emergency_contact
-  
+
    - text: Heating
      next: heating_problem
 
    - text: Internal door
+     desc: other_internal_door
 
    - text: Windows
      next: window_problem
@@ -270,10 +296,13 @@ window_problem:
   question: Is your problem one of these?
   answers:
     - text: Window is not shutting / locking properly - uPVC
+      desc: inside_window_not_shutting
 
     - text: Window is not shutting / locking properly - Wood
+      desc: inside_window_not_shutting
 
     - text: Damage to glazing
+      desc: inside_window_damage
 
     - text: Something else
       desc: window_problem
@@ -283,11 +312,14 @@ external_doors_problem:
   question: Is your problem one of these?
   answers:
     - text: Front or back door is stiff or loose - uPVC
+      desc: other_external_door_stiff
 
     - text: Front or back door is stiff or loose - Wood
+      desc: other_external_door_stiff
 
     - text: Door lock
-      
+      desc: other_external_door_lock
+
     - text: Something else
       desc: external_doors_problem
 
@@ -319,9 +351,11 @@ toilet_problem:
     - text: Toilet is not flushing
       page: toilet_unblock_info
 
-    - text: Toilet is cracked
+    - text: Toilet is damaged
+      desc: inside_bathroom_toilet_damaged
 
     - text: Toilet is leaking - containable
+      desc: inside_bathroom_toilet_leaking
 
     - text: Something else
       desc: toilet_problem
