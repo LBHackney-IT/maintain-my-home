@@ -11,14 +11,14 @@ RSpec.describe QuestionSet do
     it 'throws an error if the YAML file links to a missing question' do
       expect do
         QuestionSet.new('spec/fixtures/missing_questions.yml', partial_checker: double)
-      end.to raise_error(QuestionSet::MissingQuestions)
+      end.to raise_error(QuestionsValidator::MissingQuestions)
     end
 
     it 'throws an error if the YAML file links to a missing description partial' do
       partial_checker = instance_double('DescriptionPartialChecker', exists?: false)
       expect do
         QuestionSet.new('spec/fixtures/missing_partials.yml', partial_checker: partial_checker)
-      end.to raise_error(QuestionSet::MissingPartials)
+      end.to raise_error(QuestionsValidator::MissingPartials)
     end
   end
 
