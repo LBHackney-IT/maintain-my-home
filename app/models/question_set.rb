@@ -4,19 +4,9 @@ class QuestionSet
   class BadlyFormattedYaml < Error; end
 
   def initialize(filename = 'db/questions.yml', partial_checker:)
-    yaml_data = File.read(Rails.root.join(filename))
-
-    begin
-      parsed_yaml = YAML.parse(yaml_data)
-    rescue => e
-      raise BadlyFormattedYaml, e.message
-    end
-
-    @questions = parsed_yaml.to_ruby
-
-    QuestionsValidator
-      .new(@questions, partial_checker: partial_checker)
-      .validate!
+    loader = QuestionSetLoader.new(partial_checker: partial_checker)
+    file_path = Rails.root.join(filename)
+    @questions = loader.load!(file_path)
   end
 
   def find(id)
@@ -25,5 +15,32 @@ class QuestionSet
     end
 
     Question.new(@questions.fetch(id))
+  end
+
+  class QuestionSetLoader
+    def initialize(partial_checker:)
+      @partial_checker = partial_checker
+    end
+
+    def load!(file_path)
+      yaml_data = File.read(file_path)
+      questions = parse_yaml(yaml_data).to_ruby
+
+      QuestionsValidator
+        .new(
+          questions,
+          partial_checker: @partial_checker,
+        ).validate!
+
+      questions
+    end
+
+    private
+
+    def parse_yaml(yaml_data)
+      YAML.parse(yaml_data)
+    rescue => e
+      raise BadlyFormattedYaml, e.message
+    end
   end
 end
