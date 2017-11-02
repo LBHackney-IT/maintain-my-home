@@ -7,20 +7,6 @@
         %strong
           Do any of the following apply:
 
-      %ul
-        %li I can smell gas
-        %li I have no heating
-        %li I have no water
-        %li I have no power
-        %li I have a water leak which I cannot contain
-        %li I cannot access my property
-
-      %p
-        or
-
-      %ul
-        %li my home has been adapted for my disability
-
     .answers
-      = f.input :answer, collection: [:yes, :no], as: :radio_buttons, label: false
+      = f.input :answer, collection: @form.choices, as: :radio_buttons, label: false
       = f.button :submit, class: 'button'

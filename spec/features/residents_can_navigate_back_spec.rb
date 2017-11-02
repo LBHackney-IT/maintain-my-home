@@ -240,7 +240,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
-    choose_radio_button 'Yes'
+    choose_radio_button 'I can smell gas'
     click_on 'Continue'
 
     click_on t('back_link')

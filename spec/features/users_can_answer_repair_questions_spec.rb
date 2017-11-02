@@ -9,8 +9,13 @@ RSpec.feature 'Users can answer repair questions' do
     end
 
     within '.answers' do
-      expect(page).to have_content 'Yes'
-      expect(page).to have_content 'No'
+      expect(page).to have_content t('simple_form.options.start_form.answer.smell_gas')
+      expect(page).to have_content t('simple_form.options.start_form.answer.no_heating')
+      expect(page).to have_content t('simple_form.options.start_form.answer.no_water')
+      expect(page).to have_content t('simple_form.options.start_form.answer.no_power')
+      expect(page).to have_content t('simple_form.options.start_form.answer.water_leak')
+      expect(page).to have_content t('simple_form.options.start_form.answer.home_adaptations')
+      expect(page).to have_content t('simple_form.options.start_form.answer.none_of_the_above')
     end
 
     expect(page).to have_button t('helpers.submit.create')
@@ -26,17 +31,17 @@ RSpec.feature 'Users can answer repair questions' do
     end
   end
 
-  scenario "Users can choose 'Yes' and get shown the emergency contact page" do
+  scenario "Users can choose 'I smell gas' and get shown the relevant content" do
     visit '/questions/start/'
-    choose_radio_button t('simple_form.options.start_form.answer.yes')
+    choose_radio_button t('simple_form.options.start_form.answer.smell_gas')
     click_continue
 
-    expect(page).to have_content 'Emergency repairs'
+    expect(page).to have_content 'What to do if you smell gas'
   end
 
-  scenario "Users can choose 'No' and is shown the next question" do
+  scenario "Users can choose 'No...' and is shown the next question" do
     visit '/questions/start/'
-    choose_radio_button t('simple_form.options.start_form.answer.no')
+    choose_radio_button t('simple_form.options.start_form.answer.none_of_the_above')
     click_continue
 
     within '.question' do

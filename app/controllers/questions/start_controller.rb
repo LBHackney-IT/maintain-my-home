@@ -7,19 +7,28 @@ module Questions
     def submit
       @form = StartForm.new(start_form_params)
 
-      return render :index unless @form.valid?
+      return render :index if @form.invalid?
 
-      if @form.priority_repair?
-        return redirect_to page_path('emergency_contact')
-      end
+      next_page = case @form.answer
+                  when 'smell_gas'
+                    page_path('gas')
+                  when 'no_heating'
+                    page_path('heating_repairs')
+                  when 'home_adaptations'
+                    page_path('home_adaptations')
+                  when 'none_of_the_above'
+                    questions_path('location')
+                  else
+                    page_path('emergency_contact')
+                  end
 
-      redirect_to questions_path('location')
+      redirect_to next_page
     end
 
     private
 
     def start_form_params
-      params.require(:start_form).permit!
+      params.require(:start_form).permit(:answer)
     end
   end
 end
