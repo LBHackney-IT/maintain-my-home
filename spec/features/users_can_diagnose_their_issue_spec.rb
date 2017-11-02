@@ -91,7 +91,7 @@ RSpec.feature 'Users can diagnose their issue' do
     choose_radio_button 'To an optional describe form'
     click_on 'Continue'
 
-    expect(page).to have_content 'Is there anything else we should know?'
+    expect(page).to have_content 'Please let us know any additional details'
 
     click_on 'Continue'
 
