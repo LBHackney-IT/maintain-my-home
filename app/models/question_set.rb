@@ -14,7 +14,7 @@ class QuestionSet
       raise UnknownQuestion, "Cannot find question with id '#{id}'"
     end
 
-    Question.new(@questions.fetch(id))
+    Question.new(id, @questions.fetch(id))
   end
 
   class QuestionSetLoader

@@ -26,6 +26,7 @@ RSpec.feature 'Users can diagnose their issue' do
       .with('first')
       .and_return(
         Question.new(
+          'fun',
           'question' => 'Are you having fun yet?',
           'answers' => [
             {
@@ -43,6 +44,7 @@ RSpec.feature 'Users can diagnose their issue' do
       .with('second')
       .and_return(
         Question.new(
+          'sure',
           'question' => 'Are you sure?',
           'answers' => [
             { 'text' => 'Absolutely!' },

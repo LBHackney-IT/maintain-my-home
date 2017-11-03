@@ -36,7 +36,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('location')
       .and_return(
         Question.new(
-          'question' => 'Where is the problem?',
+          'which_room',
+          'question' => 'Which room?',
           'answers' => [
             { 'text' => 'Kitchen', 'next' => 'kitchen' },
             { 'text' => 'Bathroom' },
@@ -49,6 +50,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('kitchen')
       .and_return(
         Question.new(
+          'kitchen',
           'question' => 'Is your tap broken?',
           'answers' => [
             { 'text' => 'Yes', 'sor_code' => '0078965' },
