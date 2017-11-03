@@ -23,6 +23,20 @@ RSpec.describe RepairParams do
         expect(RepairParams.new(answers).problem).to eq 'n/a'
       end
     end
+
+    context 'if a room was specified' do
+      it 'includes the room in the description' do
+        answers = {
+          'describe_repair' => {
+            'description' => 'My bath is broken',
+          },
+          'room' => {
+            'room' => 'Bathroom',
+          },
+        }
+        expect(RepairParams.new(answers).problem).to eq 'My bath is broken (Room: Bathroom)'
+      end
+    end
   end
 
   describe '#property_reference' do

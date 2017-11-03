@@ -124,7 +124,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: 'My sink is blocked',
+      problem: 'My sink is blocked (Room: Kitchen)',
       propertyRef: '00000503',
       repairOrders: [
         { jobCode: '0078965', propertyReference: '00000503' },
@@ -239,7 +239,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: 'My sink is blocked',
+      problem: 'My sink is blocked (Room: Other)',
       propertyRef: '00000503',
     )
   end

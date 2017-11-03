@@ -18,6 +18,9 @@ RSpec.describe CreateRepair do
         'describe_repair' => {
           'description' => 'My bath is broken',
         },
+        'room' => {
+          'room' => 'Bathroom',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -26,7 +29,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problem: 'My bath is broken',
+          problem: 'My bath is broken (Room: Bathroom)',
           propertyRef: '00034713',
         )
     end

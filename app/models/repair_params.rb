@@ -4,9 +4,9 @@ class RepairParams
   end
 
   def problem
-    @answers.fetch('describe_repair').fetch('description').tap do |problem|
-      return 'n/a' if problem.blank?
-    end
+    return 'n/a' if description.blank?
+    return "#{description} (Room: #{room})" if room
+    description
   end
 
   def property_reference
@@ -23,5 +23,15 @@ class RepairParams
 
   def diagnosed?
     sor_code.present?
+  end
+
+  private
+
+  def description
+    @answers.fetch('describe_repair').fetch('description')
+  end
+
+  def room
+    @answers.fetch('room', {})['room']
   end
 end
