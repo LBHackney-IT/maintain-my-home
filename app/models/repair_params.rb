@@ -18,7 +18,7 @@ class RepairParams
   end
 
   def sor_code
-    @answers.fetch('diagnosis', {})['sor_code']
+    @answers.dig('diagnosis', 'sor_code')
   end
 
   def diagnosed?
@@ -32,6 +32,6 @@ class RepairParams
   end
 
   def room
-    @answers.fetch('room', {})['room']
+    @answers.dig('room', 'room')
   end
 end
