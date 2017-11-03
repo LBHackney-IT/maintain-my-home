@@ -42,6 +42,10 @@ class Confirmation
     end
   end
 
+  def room
+    @answers.fetch('room').fetch('room')
+  end
+
   def description
     @answers.fetch('describe_repair').fetch('description')
   end

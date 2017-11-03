@@ -36,6 +36,19 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('location')
       .and_return(
         Question.new(
+          'location',
+          'question' => 'Where is the problem located?',
+          'answers' => [
+            { 'text' => 'Inside', 'next' => 'which_room' },
+            { 'text' => 'Outside' },
+          ],
+        )
+      )
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('which_room')
+      .and_return(
+        Question.new(
           'which_room',
           'question' => 'Which room?',
           'answers' => [
@@ -68,6 +81,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Fake decision tree
+    choose_radio_button 'Inside'
+    click_on 'Continue'
     choose_radio_button 'Kitchen'
     click_on 'Continue'
 
@@ -97,6 +112,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       end
 
       within '#summary' do
+        expect(page).to have_content t('confirmation.summary.room', room: 'Kitchen')
         expect(page).to have_content t('confirmation.summary.description', description: 'My sink is blocked')
 
         expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')
@@ -143,7 +159,35 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
-    stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('location')
+      .and_return(
+        Question.new(
+          'location',
+          'question' => 'Where is the problem located?',
+          'answers' => [
+            { 'text' => 'Inside', 'next' => 'which_room' },
+            { 'text' => 'Outside' },
+          ],
+        )
+      )
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('which_room')
+      .and_return(
+        Question.new(
+          'which_room',
+          'question' => 'Which room?',
+          'answers' => [
+            { 'text' => 'Kitchen', 'next' => 'kitchen' },
+            { 'text' => 'Bathroom' },
+            { 'text' => 'Other' },
+          ],
+        )
+      )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     visit '/'
     click_on 'Start'
@@ -153,7 +197,9 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Fake decision tree
-    choose_radio_button 'skip'
+    choose_radio_button 'Inside'
+    click_on 'Continue'
+    choose_radio_button 'Other'
     click_on 'Continue'
 
     # Describe problem:
@@ -181,6 +227,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       end
 
       within '#summary' do
+        expect(page).to have_content t('confirmation.summary.room', room: 'Other')
         expect(page).to have_content t('confirmation.summary.description', description: 'My sink is blocked')
 
         expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')

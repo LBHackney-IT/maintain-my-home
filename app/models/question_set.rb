@@ -30,7 +30,7 @@ class QuestionSet
         .new(
           questions,
           partial_checker: @partial_checker,
-          mandatory_questions: ['location']
+          mandatory_questions: %w[location which_room]
         ).validate!
 
       questions

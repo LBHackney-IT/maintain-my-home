@@ -24,6 +24,7 @@ en:
   back_link: Back
   confirmation:
     summary:
+      room: 'Room: %{room}'
       description: 'Description: %{description}'
       name: 'Name: %{name}'
       phone: 'Phone number: %{phone}'
