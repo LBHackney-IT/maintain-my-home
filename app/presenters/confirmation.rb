@@ -43,7 +43,7 @@ class Confirmation
   end
 
   def room
-    @answers.fetch('room').fetch('room')
+    @answers.dig('room', 'room')
   end
 
   def description

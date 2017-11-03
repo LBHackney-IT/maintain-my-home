@@ -19,7 +19,8 @@
     %h2 Summary
 
     %h3 Problem
-    %p= t('confirmation.summary.room', room: @confirmation.room)
+    - if @confirmation.room
+      %p= t('confirmation.summary.room', room: @confirmation.room)
     %p= t('confirmation.summary.description', description: @confirmation.description)
 
     %h3 Your details
