@@ -30,6 +30,7 @@ class QuestionSet
         .new(
           questions,
           partial_checker: @partial_checker,
+          mandatory_questions: ['location']
         ).validate!
 
       questions

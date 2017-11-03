@@ -1,4 +1,9 @@
 ---
+location:
+  question: Where is the problem located?
+  answers:
+    - text: Inside
+    - text: Outside
 example:
   question: Is this an example?
   answers:
