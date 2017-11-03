@@ -2,7 +2,6 @@ class Question
   class InvalidAnswerError < StandardError; end
 
   attr_reader :title
-  attr_reader :next_question
 
   def initialize(question_hash)
     @title = question_hash['question']
