@@ -10,19 +10,26 @@ class JsonApi
   end
 
   def get(path)
-    @connection.get(path).body
-  rescue Faraday::ParsingError => e
-    raise InvalidResponseError, e.message
-  rescue Faraday::ConnectionFailed => e
-    raise ConnectionError, e.message
+    response = call_and_raise do
+      @connection.get(path)
+    end
+    response.body
   end
 
   def post(path, params)
-    response = @connection.post(path) do |request|
-      request.body = params.to_json
-      request.headers['Content-Type'] = 'application/json'
+    response = call_and_raise do
+      @connection.post(path) do |request|
+        request.body = params.to_json
+        request.headers['Content-Type'] = 'application/json'
+      end
     end
     response.body
+  end
+
+  private
+
+  def call_and_raise
+    yield
   rescue Faraday::ParsingError => e
     raise InvalidResponseError, e.message
   rescue Faraday::ConnectionFailed => e
