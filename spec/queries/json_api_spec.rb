@@ -107,12 +107,66 @@ RSpec.describe JsonApi do
       expect(result).to eq nil
     end
 
-    it 'raises an error when the connection failed' do
-      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA').to_timeout
+    context 'when the connection failed' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA').to_timeout
 
-      expect { json_api.get('properties?postcode=A1 1AA') }
-        .to raise_error(JsonApi::ConnectionError)
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::ConnectionError)
+      end
+    end
+
+    context 'when the response is a 404 status' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .to_return(
+            status: 404,
+            body: nil.to_json
+          )
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::StatusNotFoundError)
+      end
+    end
+
+    context 'when the response is a 400 status' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .to_return(
+            status: 400,
+            body: { 'errors' => { 'userMessage' => 'That was invalid', 'developerMessage' => 'invalid request' } }.to_json
+          )
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::StatusBadRequestError, 'invalid request')
+      end
+    end
+
+    context 'when the response is a 500 status' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .to_return(
+            status: 500,
+            body: { 'errors' => { 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' } }.to_json
+          )
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::StatusServerError, 'server error')
+      end
+    end
+
+    context 'when the response is an unexpected status' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .to_return(
+            status: 503,
+            body: { 'errors' => { 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' } }.to_json
+          )
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::StatusUnexpectedError, 'server error')
+      end
     end
 
     context 'when a client certificate is specified' do

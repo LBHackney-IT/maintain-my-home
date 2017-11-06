@@ -4,6 +4,10 @@ class JsonApi
   class MissingPrivateKeyError < Error; end
   class InvalidResponseError < Error; end
   class ConnectionError < Error; end
+  class StatusBadRequestError < Error; end
+  class StatusNotFoundError < Error; end
+  class StatusServerError < Error; end
+  class StatusUnexpectedError < Error; end
 
   def initialize(api_config = {})
     @connection = ConnectionBuilder.new.build(api_config)
@@ -29,11 +33,33 @@ class JsonApi
   private
 
   def call_and_raise
-    yield
+    yield.tap { |response| raise_for_http_status(response) }
   rescue Faraday::ParsingError => e
     raise InvalidResponseError, e.message
   rescue Faraday::ConnectionFailed => e
     raise ConnectionError, e.message
+  end
+
+  def raise_for_http_status(response)
+    return unless error_klass(response.status)
+    raise error_klass(response.status), error_message(response)
+  end
+
+  def error_klass(status)
+    case status
+    when 404
+      StatusNotFoundError
+    when 400, 422
+      StatusBadRequestError
+    when 500
+      StatusServerError
+    else
+      StatusUnexpectedError unless status == 200
+    end
+  end
+
+  def error_message(response)
+    response.body&.dig('errors', 'developerMessage')
   end
 
   class ConnectionBuilder
