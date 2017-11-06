@@ -4,9 +4,15 @@ class RepairParams
   end
 
   def problem
-    return 'n/a' if description.blank?
-    return "#{description} (Room: #{room})" if room
-    description
+    if description.present? && room.present?
+      "#{description} (Room: #{room})"
+    elsif description.present?
+      description
+    elsif room.present?
+      "Room: #{room}"
+    else
+      'n/a'
+    end
   end
 
   def property_reference
