@@ -3,6 +3,7 @@ class JsonApi
   class InvalidApiRootError < Error; end
   class MissingPrivateKeyError < Error; end
   class InvalidResponseError < Error; end
+  class ConnectionError < Error; end
 
   def initialize(api_config = {})
     @connection = ConnectionBuilder.new.build(api_config)
@@ -12,6 +13,8 @@ class JsonApi
     @connection.get(path).body
   rescue Faraday::ParsingError => e
     raise InvalidResponseError, e.message
+  rescue Faraday::ConnectionFailed => e
+    raise ConnectionError, e.message
   end
 
   def post(path, params)
@@ -22,6 +25,8 @@ class JsonApi
     response.body
   rescue Faraday::ParsingError => e
     raise InvalidResponseError, e.message
+  rescue Faraday::ConnectionFailed => e
+    raise ConnectionError, e.message
   end
 
   class ConnectionBuilder

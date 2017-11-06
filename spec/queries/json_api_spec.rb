@@ -107,6 +107,14 @@ RSpec.describe JsonApi do
       expect(result).to eq nil
     end
 
+    it 'raises an error when the connection failed' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA').to_timeout
+
+      expect { json_api.get('properties?postcode=A1 1AA') }
+        .to raise_error(JsonApi::ConnectionError)
+    end
+
     context 'when a client certificate is specified' do
       # TODO: work out how to test that the certificate and api_key actually get used
 
@@ -162,6 +170,14 @@ RSpec.describe JsonApi do
         expect { json_api.post('/v1/repairs', {}) }
           .to raise_error(JsonApi::InvalidResponseError, "765: unexpected token at 'not found'")
       end
+    end
+
+    it 'raises an error when the connection failed' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:post, 'http://hackney.api:8000/repairs').to_timeout
+
+      expect { json_api.post('/repairs', {}) }
+        .to raise_error(JsonApi::ConnectionError)
     end
   end
 end
