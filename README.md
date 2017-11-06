@@ -7,13 +7,17 @@ should be set directly on the server. In development these can be managed by
 [dotenv](https://github.com/bkeepers/dotenv): create a `.env.local` file in the
 root of the application containing environment variable assignments.
 
+### Required config
+
 The following environment variables are required to run the site:
 
-- `API_ROOT` - the root of the Hackney API which is used by the site
+- `HACKNEY_API_ROOT` - the root of the Hackney API which is used by the site
 
-The following environment variables are optional:
+### Optional config
 
-### Analytics
+The app should run successfully without these environment variables:
+
+#### Analytics
 
 - `GOOGLE_ANALYTICS_ID` - The
   [tracking code](https://support.google.com/analytics/answer/1008080#trackingID)
@@ -25,10 +29,12 @@ The following environment variables are optional:
   [Hotjar Snippet Version](https://docs.hotjar.com/v1.0/docs/understanding-the-tracking-code)
   i.e. the version of the Hotjar tracking code being used
 
-### Authentication
+#### Authentication
 
- - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
+- `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
    [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+- `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
+  private key - used if connecting to the Hackney API via a proxy server
 
 
 ## TODO:

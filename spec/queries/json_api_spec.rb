@@ -2,71 +2,11 @@ require 'spec_helper'
 require 'faraday_middleware'
 require 'app/queries/json_api'
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/slice'
+require 'spec/support/test_ssl'
 
 RSpec.describe JsonApi do
-  describe '#get' do
-    context 'with a path matching properties?postcode=' do
-      it 'parses a JSON response' do
-        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
-          .to_return(
-            body: [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }].to_json,
-            headers: { content_type: 'application/json' }
-          )
-
-        result = json_api.get('properties?postcode=A1 1AA')
-
-        expect(result).to eq [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }]
-      end
-
-      it 'parses a JSON response with an unspecified content_type' do
-        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
-          .to_return(
-            body: [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }].to_json
-          )
-
-        result = json_api.get('properties?postcode=A1 1AA')
-
-        expect(result).to eq [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }]
-      end
-
-      it 'raises an exception for an invalid json response' do
-        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
-          .to_return(
-            body: '<html><body>An error occurred</body></html>'
-          )
-
-        expect { json_api.get('properties?postcode=A1 1AA') }
-          .to raise_error(JsonApi::InvalidResponseError, "765: unexpected token at '<html><body>An error occurred</body></html>'")
-      end
-
-      it 'handles an empty response body' do
-        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
-
-        result = json_api.get('properties?postcode=A1 1AA')
-
-        expect(result).to eq nil
-      end
-    end
-
-    context 'with a path matching properties/:property_reference' do
-      it 'parses a JSON response' do
-        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:get, 'http://hackney.api:8000/properties/zxc098')
-          .to_return(
-            body: { 'uprn' => 'xyz987', 'property_reference' => 'abc123', 'short_address' => '1 some road' }.to_json,
-            headers: { content_type: 'application/json' }
-          )
-
-        result = json_api.get('properties/zxc098')
-
-        expect(result).to eq('uprn' => 'xyz987', 'property_reference' => 'abc123', 'short_address' => '1 some road')
-      end
-    end
-
+  describe 'construction' do
     context 'when the api root is missing' do
       it 'raises an exception' do
         expect { JsonApi.new(api_root: nil) }
@@ -85,6 +25,103 @@ RSpec.describe JsonApi do
       it 'raises an exception' do
         expect { JsonApi.new(api_root: '  ') }
           .to raise_error(JsonApi::InvalidApiRootError)
+      end
+    end
+
+    context 'when a certificate is provided' do
+      it 'raises an error if the private key was missing' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: TestSsl.certificate,
+            api_key: nil,
+          )
+        end.to raise_error JsonApi::MissingPrivateKeyError
+      end
+
+      it 'raises an error if the private key was invalid' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: TestSsl.certificate,
+            api_key: 'Not a key'
+          )
+        end.to raise_error OpenSSL::PKey::RSAError
+      end
+
+      it 'raises an error if the cert was invalid' do
+        expect do
+          JsonApi.new(
+            api_root: 'http://hackney.api:8000',
+            api_cert: 'Not a cert',
+            api_key: TestSsl.key
+          )
+        end.to raise_error OpenSSL::X509::CertificateError
+      end
+    end
+  end
+
+  describe '#get' do
+    it 'parses a JSON response' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+        .to_return(
+          body: [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }].to_json,
+          headers: { content_type: 'application/json' }
+        )
+
+      result = json_api.get('properties?postcode=A1 1AA')
+
+      expect(result).to eq [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }]
+    end
+
+    it 'parses a JSON response with an unspecified content_type' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+        .to_return(
+          body: [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }].to_json
+        )
+
+      result = json_api.get('properties?postcode=A1 1AA')
+
+      expect(result).to eq [{ 'property_reference' => 'abc123', 'short_address' => '1 some road' }]
+    end
+
+    it 'raises an exception for an invalid json response' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+        .to_return(
+          body: '<html><body>An error occurred</body></html>'
+        )
+
+      expect { json_api.get('properties?postcode=A1 1AA') }
+        .to raise_error(JsonApi::InvalidResponseError, "765: unexpected token at '<html><body>An error occurred</body></html>'")
+    end
+
+    it 'handles an empty response body' do
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+
+      result = json_api.get('properties?postcode=A1 1AA')
+
+      expect(result).to eq nil
+    end
+
+    context 'when a client certificate is specified' do
+      # TODO: work out how to test that the certificate and api_key actually get used
+
+      it 'makes a valid request' do
+        json_api = JsonApi.new(
+          api_root: 'http://hackney.api:8000',
+          api_cert: TestSsl.certificate,
+          api_key: TestSsl.key,
+        )
+        stub_request(:get, 'http://hackney.api:8000/repairs/00012345')
+
+        json_api.get('repairs/00012345')
+
+        expect(a_request(:get, 'http://hackney.api:8000/repairs/00012345'))
+          .to have_been_made.once
       end
     end
   end
