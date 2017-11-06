@@ -18,14 +18,24 @@ RSpec.describe AppointmentPresenter do
   end
 
   describe '#description' do
-    it 'returns the appointment slot in a human-readable format' do
+    it 'returns the appointment in a human-readable format' do
       presenter = AppointmentPresenter.new(
-        'beginDate' => '2017-12-25T12:00:00Z',
+        'beginDate' => '2017-12-25T12:15:00Z',
         'endDate' => '2017-12-25T16:45:00Z',
         'bestSlot' => true
       )
 
-      expect(presenter.description).to eql 'Monday 12:00pm-4:45pm (25th December)'
+      expect(presenter.description).to eql 'Monday 12:15pm-4:45pm (25th December)'
+    end
+
+    it 'returns times on the hour without :00' do
+      presenter = AppointmentPresenter.new(
+        'beginDate' => '2017-12-25T13:00:00Z',
+        'endDate' => '2017-12-25T16:00:00Z',
+        'bestSlot' => true
+      )
+
+      expect(presenter.description).to eql 'Monday 1pm-4pm (25th December)'
     end
   end
 
@@ -49,7 +59,7 @@ RSpec.describe AppointmentPresenter do
         'bestSlot' => true
       )
 
-      expect(presenter.time).to eql '12:00pm and 4:45pm'
+      expect(presenter.time).to eql '12pm and 4:45pm'
     end
   end
 end

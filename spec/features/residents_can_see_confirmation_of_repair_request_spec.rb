@@ -126,14 +126,14 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Appointments:
-    choose_radio_button 'Wednesday 12:00pm-5:00pm (11th October)'
+    choose_radio_button 'Wednesday 12pm-5pm (11th October)'
     click_on 'Continue'
 
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 09124578'
         expect(page).to have_content 'Wednesday 11th October'
-        expect(page).to have_content 'between 12:00pm and 5:00pm'
+        expect(page).to have_content 'between 12pm and 5pm'
       end
 
       within '#summary' do

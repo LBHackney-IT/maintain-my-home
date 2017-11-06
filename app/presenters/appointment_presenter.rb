@@ -51,10 +51,20 @@ class AppointmentPresenter
   end
 
   def begin_time
-    I18n.l(begin_date, format: '%l:%M%P').strip
+    friendly_time(begin_date)
   end
 
   def end_time
-    I18n.l(end_date, format: '%l:%M%P').strip
+    friendly_time(end_date)
+  end
+
+  def friendly_time(time)
+    format = if time.strftime('%M').to_i.zero?
+               '%l%P'
+             else
+               '%l:%M%P'
+             end
+
+    I18n.l(time, format: format).strip
   end
 end
