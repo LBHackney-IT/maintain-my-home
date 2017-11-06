@@ -8,7 +8,7 @@ module CapybaraHelpers
     allow(fake_question_set)
       .to receive(:find)
       .with(id)
-      .and_return(Question.new(id, 'question' => question, 'answers' => answers))
+      .and_return(Question.new('id' => id, 'question' => question, 'answers' => answers))
     allow(QuestionSet).to receive(:new).and_return(fake_question_set)
   end
 end

@@ -36,7 +36,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('location')
       .and_return(
         Question.new(
-          'location',
+          'id' => 'location',
           'question' => 'Where is the problem located?',
           'answers' => [
             { 'text' => 'Inside', 'next' => 'which_room' },
@@ -49,7 +49,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('which_room')
       .and_return(
         Question.new(
-          'which_room',
+          'id' => 'which_room',
           'question' => 'Which room?',
           'answers' => [
             { 'text' => 'Kitchen', 'next' => 'kitchen' },
@@ -63,7 +63,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('kitchen')
       .and_return(
         Question.new(
-          'kitchen',
+          'id' => 'kitchen',
           'question' => 'Is your tap broken?',
           'answers' => [
             { 'text' => 'Yes', 'sor_code' => '0078965' },
@@ -165,7 +165,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('location')
       .and_return(
         Question.new(
-          'location',
+          'id' => 'location',
           'question' => 'Where is the problem located?',
           'answers' => [
             { 'text' => 'Inside', 'next' => 'which_room' },
@@ -178,7 +178,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('which_room')
       .and_return(
         Question.new(
-          'which_room',
+          'id' => 'which_room',
           'question' => 'Which room?',
           'answers' => [
             { 'text' => 'Kitchen', 'next' => 'kitchen' },
@@ -277,7 +277,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('location')
       .and_return(
         Question.new(
-          'location',
+          'id' => 'location',
           'question' => 'Where is the problem located?',
           'answers' => [
             { 'text' => 'Inside', 'next' => 'which_room' },
