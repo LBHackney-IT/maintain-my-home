@@ -29,7 +29,7 @@ communal_problem:
     - text: The rubbish chute is blocked or damaged
       desc: communal_rubbish_chute
 
-    - text: There is a blocked drain or gully
+    - text: There is a blocked or overflowing drain
       desc: communal_blocked_drain
 
     - text: There are pests or rodents
@@ -41,10 +41,10 @@ communal_problem:
 outside_problem:
   question: What is the problem outside your home?
   answers:
-    - text: The guttering or downpipe is blocked or damaged
+    - text: The guttering or downpipe is overflowing or damaged
       desc: outside_guttering
 
-    - text: A drain is blocked
+    - text: A drain is blocked or overflowing
       desc: outside_drain
 
     - text: Paving is broken or coming loose
