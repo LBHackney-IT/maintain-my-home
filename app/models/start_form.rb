@@ -2,6 +2,7 @@ class StartForm
   include ActiveModel::Model
 
   attr_reader :answer
+  attr_reader :choices
 
   validates :answer, presence: true
 
@@ -9,7 +10,16 @@ class StartForm
     @answer = hash[:answer]
   end
 
-  def priority_repair?
-    answer == 'yes'
+  def choices
+    %i[
+      smell_gas
+      no_heating
+      no_water
+      no_power
+      water_leak
+      not_secure_access
+      home_adaptations
+      none_of_the_above
+    ]
   end
 end

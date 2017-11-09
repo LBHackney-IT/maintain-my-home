@@ -1,25 +1,12 @@
 = simple_form_for @form, url: request.fullpath do |f|
   %fieldset
     %legend.question
-      %h1 Before we start
+      %h1 Before you continue
 
       %p
         %strong
-          Do any of the following apply to you:
-
-      %ul
-        %li I have no electricity
-        %li I have no water
-        %li I have no heating
-        %li I have a water leak which I cannot contain
-        %li I cannot access my property
-
-      %p
-        or
-
-      %ul
-        %li my home has been adapted for my disability
+          Do any of the following apply:
 
     .answers
-      = f.input :answer, collection: [:yes, :no], as: :radio_buttons, label: false
+      = f.input :answer, collection: @form.choices, as: :radio_buttons, label: false
       = f.button :submit, class: 'button'
