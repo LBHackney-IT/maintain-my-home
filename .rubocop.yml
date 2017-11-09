@@ -6,6 +6,7 @@ AllCops:
       - 'db/migrate/**/*'
       - 'db/schema.rb'
       - 'bin/**/*'
+      - 'config/routes.rb'
 
 Rails:
     Enabled: true
