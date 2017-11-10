@@ -30,4 +30,14 @@ Rails.application.routes.draw do
       as: 'appointments'
   post '/appointments/:repair_request_reference',
        to: 'appointments#submit'
+
+  # Feature flags
+  flipper_app = Flipper::UI.app(App.flipper) do |builder|
+    builder.use Rack::Auth::Basic do |username, password|
+      username == ENV['FLIPPER_AUTH_USER'] &&
+        password == ENV['FLIPPER_AUTH_PASSWORD']
+    end
+  end
+
+  mount flipper_app, at: '/feature_flags'
 end
