@@ -1,6 +1,8 @@
 module Questions
   class StartController < ApplicationController
     def index
+      reset_session
+
       @form = StartForm.new
     end
 
