@@ -16,13 +16,6 @@
 
 .grid-row
   %section#summary.column-two-thirds
-    %h2 Summary
-
-    %h3 Problem
-    - if @confirmation.room
-      %p= t('confirmation.summary.room', room: @confirmation.room)
-    %p= t('confirmation.summary.description', description: @confirmation.description)
-
     %h3 Your details
     %p= t('confirmation.summary.name', name: @confirmation.full_name)
     %p= t('confirmation.summary.phone', phone: @confirmation.telephone_number)
