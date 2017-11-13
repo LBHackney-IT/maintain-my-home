@@ -1,10 +1,11 @@
 class Question
   class InvalidAnswerError < StandardError; end
 
+  attr_reader :id
   attr_reader :title
-  attr_reader :next_question
 
   def initialize(question_hash)
+    @id = question_hash['id']
     @title = question_hash['question']
     @answers = question_hash['answers'] || []
     @route_helpers = Rails.application.routes.url_helpers

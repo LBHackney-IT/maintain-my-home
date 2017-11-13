@@ -1,4 +1,15 @@
 ---
+location:
+  question: Where is the problem located?
+  answers:
+    - text: Inside
+    - text: Outside
+which_room:
+  question: Which room?
+  answers:
+    - text: Kitchen
+    - text: Bathroom
+    - text: Other
 example:
   question: Is this an example?
   answers:

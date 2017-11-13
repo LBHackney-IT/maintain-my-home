@@ -4,8 +4,14 @@ class RepairParams
   end
 
   def problem
-    @answers.fetch('describe_repair').fetch('description').tap do |problem|
-      return 'n/a' if problem.blank?
+    if description.present? && room.present?
+      "#{description} (Room: #{room})"
+    elsif description.present?
+      description
+    elsif room.present?
+      "Room: #{room}"
+    else
+      'n/a'
     end
   end
 
@@ -18,10 +24,20 @@ class RepairParams
   end
 
   def sor_code
-    @answers.fetch('diagnosis', {})['sor_code']
+    @answers.dig('diagnosis', 'sor_code')
   end
 
   def diagnosed?
     sor_code.present?
+  end
+
+  private
+
+  def description
+    @answers.fetch('describe_repair').fetch('description')
+  end
+
+  def room
+    @answers.dig('room', 'room')
   end
 end
