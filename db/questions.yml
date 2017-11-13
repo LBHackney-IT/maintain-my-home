@@ -16,6 +16,7 @@ communal_problem:
   answers:
     - text: A light is not working
       desc: communal_faulty_lamp_post
+      sor_code: 20110220
 
     - text: The main entrance door is damaged or not closing
       desc: communal_main_entrance_door
@@ -28,9 +29,11 @@ communal_problem:
 
     - text: The rubbish chute is blocked or damaged
       desc: communal_rubbish_chute
+      sor_code: 34D60301
 
     - text: There is a blocked or overflowing drain
       desc: communal_blocked_drain
+      sor_code: 34D60301
 
     - text: There are pests or rodents
       desc: communal_pests
@@ -43,15 +46,18 @@ outside_problem:
   answers:
     - text: The guttering or downpipe is overflowing or damaged
       desc: outside_guttering
+      sor_code: 20060010
 
     - text: A drain is blocked or overflowing
       desc: outside_drain
+      sor_code: 34D60301
 
     - text: Paving is broken or coming loose
       desc: outside_paving
 
     - text: The roof is leaking
       desc: outside_describe_repair
+      sor_code: 20030010
 
     - text: A light is not working
       desc: outside_describe_repair
@@ -79,6 +85,7 @@ kitchen_problem:
   answers:
     - text: Cupboards or Worktop
       desc: inside_kitchen_cupboards
+      sor_code: 20040060
 
     - text: Damp or Mould
       page: damp_and_mould
@@ -115,24 +122,31 @@ kitchen_electrical_problem:
 
     - text: Sockets
       desc: inside_sockets
+      sor_code: 20110010
 
     - text: Something else
       desc: kitchen_problem
+      sor_code: 20110010
 
 heating_problem:
   question: Is your problem one of these?
   answers:
     - text: I have no hot water - boiler in my home
       desc: inside_boiler
+      sor_code: 489680KH
 
     - text: I have no hot water - communal boiler
       desc: communal_boiler
+      sor_code: 48000000
 
     - text: Radiator is not working
+      sor_code: 489681H
 
     - text: Radiator is coming loose
+      sor_code: 489681H
 
     - text: Radiator is leaking - containable
+      sor_code: 489681H
 
     - text: Something else
       desc: heating_problem
@@ -141,20 +155,25 @@ sink_problem:
   question: Is your problem one of these?
   answers:
     - text: Sink is blocked
+      sor_code: 20060030
 
     - text: Sink is leaking - containable
       desc: inside_kitchen_sink_leaking
+      sor_code: 20060030
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
+      sor_code: 20060030
 
     - text: Tap is broken
       desc: inside_kitchen_broken_tap
+      sor_code: 20060030
 
     - text: Something else
       desc: sink_problem
+      sor_code: 20060030
 
 bathroom_problem:
   question: What is the problem in your bathroom?
@@ -188,42 +207,53 @@ is_fan_leaking_water:
 
     - text: 'No'
       desc: inside_kitchen_extractor_fan
+      sor_code: 20110010
 
 basin_problem:
   question: Is your problem one of these?
   answers:
     - text: Basin / Sink is blocked
+      sor_code: 20060020
 
     - text: Basin / Sink is leaking - containable
       desc: inside_bathroom_basin_leaking
+      sor_code: 20060020
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
+      sor_code: 20060020
 
     - text: Tap is broken
+      sor_code: 20060020
 
     - text: Something else
       desc: sink_problem
+      sor_code: 20060020
 
 bath_problem:
   question: Is your problem one of these?
   answers:
     - text: Bath is blocked
+      sor_code: 20060020
 
     - text: Bath is leaking - containable
       desc: inside_bathroom_bath_leaking
+      sor_code: 20060020
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
+      sor_code: 20060020
 
     - text: Tap is broken
+      sor_code: 20060020
 
     - text: Something else
       desc: bath_problem
+      sor_code: 20060020
 
 bathroom_electrical_problem:
   question: Is your problem one of these?
@@ -233,12 +263,15 @@ bathroom_electrical_problem:
 
     - text: Light fitting
       next: water_leaking_into_light
+      sor_code: 20110010
 
     - text: Light switch
       page: electrical_hazard_warning
+      sor_code: 20110010
 
     - text: Something else
       desc: bathroom_problem
+      sor_code: 20110010
 
 other_problem:
   question: What is the problem?
@@ -260,6 +293,7 @@ other_problem:
 
    - text: Internal door
      desc: other_internal_door
+     sor_code: 20040020
 
    - text: Windows
      next: window_problem
@@ -291,21 +325,25 @@ other_electrical_problem:
 
     - text: Something else
       desc: electrical_problem
+      sor_code: 20110010
 
 window_problem:
   question: Is your problem one of these?
   answers:
     - text: Window is not shutting / locking properly - uPVC
       desc: inside_window_not_shutting
+      sor_code: 20040310
 
     - text: Window is not shutting / locking properly - Wood
       desc: inside_window_not_shutting
+      sor_code: 20040010
 
     - text: Damage to glazing
       desc: inside_window_damage
 
     - text: Something else
       desc: window_problem
+      sor_code: 20040010
 
 
 external_doors_problem:
@@ -313,9 +351,11 @@ external_doors_problem:
   answers:
     - text: Front or back door is stiff or loose - uPVC
       desc: other_external_door_stiff
+      sor_code: 20040310
 
     - text: Front or back door is stiff or loose - Wood
       desc: other_external_door_stiff
+      sor_code: 20040020
 
     - text: Door lock
       desc: other_external_door_lock
@@ -332,7 +372,6 @@ water_leaking_into_light:
     - text: 'No'
       next: light_check_trip_switches
 
-
 light_check_trip_switches:
   question: Have you checked the trip switches in the fuse box?
   answers:
@@ -347,15 +386,20 @@ toilet_problem:
   answers:
     - text: Toilet is blocked
       page: blocked_only_toilet
+      sor_code: 20060020
 
     - text: Toilet is not flushing
       page: toilet_unblock_info
+      sor_code: 20060020
 
     - text: Toilet is damaged
       desc: inside_bathroom_toilet_damaged
+      sor_code: 20060020
 
     - text: Toilet is leaking - containable
       desc: inside_bathroom_toilet_leaking
+      sor_code: 20060020
 
     - text: Something else
       desc: toilet_problem
+      sor_code: 20060020
