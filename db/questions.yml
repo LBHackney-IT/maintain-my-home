@@ -93,7 +93,7 @@ kitchen_problem:
     - text: Electrical
       next: kitchen_electrical_problem
 
-    - text: Heating
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Sink
@@ -190,7 +190,7 @@ bathroom_problem:
     - text: Electrical
       next: bathroom_electrical_problem
 
-    - text: Heating
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Toilet
@@ -288,7 +288,7 @@ other_problem:
    - text: Gas
      page: emergency_contact
 
-   - text: Heating
+   - text: Heating or Hot water
      next: heating_problem
 
    - text: Internal door
@@ -376,10 +376,20 @@ light_check_trip_switches:
   question: Have you checked the trip switches in the fuse box?
   answers:
     - text: 'Yes'
-      page: replace_lightbulb
+      next: light_check_light_bulb
 
     - text: 'No'
       page: check_fusebox
+
+light_check_light_bulb:
+  question: Have you replaced the light bulb?
+  answers:
+    - text: 'Yes'
+      desc: lightfitting_problem
+      sor_code: 20110010
+
+    - text: 'No'
+      page: replace_lightbulb
 
 toilet_problem:
   question: Is your problem one of these?
