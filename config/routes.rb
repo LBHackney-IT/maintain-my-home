@@ -24,4 +24,10 @@ Rails.application.routes.draw do
       as: 'contact_details_with_callback'
   post '/contact-details-with-callback',
        to: 'contact_details_with_callback#submit'
+
+  get '/appointments/:repair_request_reference',
+      to: 'appointments#show',
+      as: 'appointments'
+  post '/appointments/:repair_request_reference',
+       to: 'appointments#submit'
 end

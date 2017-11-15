@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'app/models/repair'
 require 'app/presenters/callback'
-require 'app/presenters/appointment'
+require 'app/presenters/appointment_presenter'
 require 'app/presenters/confirmation'
 
 RSpec.describe Confirmation do

@@ -1,0 +1,8 @@
+%p
+  Your appointment has been booked for
+  %strong
+    = appointment.date
+  between
+  %strong
+    = succeed '.' do
+      = appointment.time

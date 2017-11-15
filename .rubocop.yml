@@ -40,3 +40,4 @@ Metrics/LineLength:
 Metrics/BlockLength:
     Exclude:
       - 'spec/**/*'
+      - 'config/routes.rb'

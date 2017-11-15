@@ -28,6 +28,25 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'problem' => 'My sink is blocked',
         'propertyRef' => '00000503',
       )
+    allow(fake_api).to receive(:get)
+      .with('work_orders/09124578/appointments')
+      .and_return(
+        [
+          { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false },
+          { 'beginDate' => '2017-10-11T12:00:00Z', 'endDate' => '2017-10-11T17:00:00Z', 'bestSlot' => false },
+        ]
+      )
+    allow(fake_api).to receive(:post)
+      .with(
+        'work_orders/09124578/appointments',
+        beginDate: '2017-10-11T12:00:00Z',
+        endDate: '2017-10-11T17:00:00Z',
+      )
+      .and_return(
+        'beginDate' => '2017-10-11T12:00:00Z',
+        'endDate' => '2017-10-11T17:00:00Z',
+        'status' => 'booked',
+      )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)
@@ -101,14 +120,20 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     choose_radio_button 'Ross Court 23'
     click_on 'Continue'
 
-    # Contact details - last page before confirmation:
+    # Contact details:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
+    click_on 'Continue'
+
+    # Appointments:
+    choose_radio_button 'Wednesday 12pm-5pm (11th October)'
     click_on 'Continue'
 
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 09124578'
+        expect(page).to have_content 'Wednesday 11th October'
+        expect(page).to have_content 'between 12pm and 5pm'
       end
 
       within '#summary' do
@@ -129,6 +154,12 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       repairOrders: [
         { jobCode: '0078965', propertyReference: '00000503' },
       ]
+    )
+
+    expect(fake_api).to have_received(:post).with(
+      'work_orders/09124578/appointments',
+      beginDate: '2017-10-11T12:00:00Z',
+      endDate: '2017-10-11T17:00:00Z',
     )
   end
 
