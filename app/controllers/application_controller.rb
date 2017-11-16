@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::Base
+  class ServiceDisabled < StandardError; end
+
+  before_action :check_service_status
+
   protect_from_forgery with: :exception
+
+  rescue_from ServiceDisabled do
+    render 'errors/service_disabled'
+  end
 
   include Authentication
 
@@ -9,5 +17,9 @@ class ApplicationController < ActionController::Base
 
   def description_partial_checker
     DescriptionPartialChecker.new(lookup_context: lookup_context)
+  end
+
+  def check_service_status
+    raise ServiceDisabled if App.flipper.enabled?(:service_disabled)
   end
 end

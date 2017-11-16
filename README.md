@@ -33,9 +33,18 @@ The app should run successfully without these environment variables:
 
 - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
    [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+- `FLIPPER_AUTH_USER` / `FLIPPER_AUTH_PASSWORD` - As above, but for feature flag UI
 - `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
   private key - used if connecting to the Hackney API via a proxy server
 
+#### Feature flagging
+
+The following feature flags can be used. The first time these are used, they
+should be created via the Flipper UI:
+
+- `service_disabled` - Enabling this flag disables the service completely. All
+  pages will return a message prompting users to call the repairs contact
+  centre. This is to be used when Hackney backend systems are unavailable.
 
 ## TODO:
 
