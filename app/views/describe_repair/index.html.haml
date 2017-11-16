@@ -6,5 +6,5 @@
       = render partial: @describe_repair.partial
 
     .answers
-      = f.input :description, as: :text
+      = f.input :description, as: :text, input_html: { maxlength: 500 }
       = f.button :submit, class: 'button'
