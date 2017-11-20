@@ -4,11 +4,11 @@ class HackneyApi
   end
 
   def list_properties(postcode:)
-    @json_api.get('properties?postcode=' + postcode)
+    @json_api.get('v1/properties?postcode=' + postcode)
   end
 
   def get_property(property_reference:)
-    @json_api.get('properties/' + property_reference)
+    @json_api.get('v1/properties/' + property_reference)
   end
 
   def create_repair(repair_params)

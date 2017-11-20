@@ -8,8 +8,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -63,8 +63,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'skip' }])
@@ -151,8 +151,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -198,8 +198,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -258,7 +258,7 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -292,7 +292,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'going back from the address selection page' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return([])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])

@@ -22,7 +22,7 @@ describe HackneyApi do
         'postcode' => 'N1 1AA',
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('properties/cre045').and_return(results)
+      allow(json_api).to receive(:get).with('v1/properties/cre045').and_return(results)
       api = HackneyApi.new(json_api)
 
       expect(api.get_property(property_reference: 'cre045')).to eql results
