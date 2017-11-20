@@ -9,7 +9,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return([matching_property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
     allow(fake_api).to receive(:get).with('v1/properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
@@ -67,7 +67,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return([matching_property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
     allow(fake_api).to receive(:get).with('v1/properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 

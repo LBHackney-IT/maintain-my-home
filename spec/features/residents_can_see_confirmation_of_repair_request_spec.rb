@@ -8,7 +8,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
     allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
@@ -170,7 +170,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
     allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
@@ -282,7 +282,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
     allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)

@@ -4,7 +4,8 @@ class HackneyApi
   end
 
   def list_properties(postcode:)
-    @json_api.get('v1/properties?postcode=' + postcode)
+    response = @json_api.get('v1/properties?postcode=' + postcode)
+    response.fetch('results')
   end
 
   def get_property(property_reference:)

@@ -7,10 +7,21 @@ describe HackneyApi do
       results = [
         { 'propertyReference' => 'def567', 'address' => 'Flat 8, 1 Aardvark Road', 'postcode' => 'A1 1AA' },
       ]
-      json_api = double(get: results)
+      json_api = double(get: { 'results' => results })
       api = HackneyApi.new(json_api)
 
       expect(api.list_properties(postcode: 'A1 1AA')).to eql results
+    end
+
+    it 'raises MissingResults if the "results" key is missing from the response' do
+      response = {
+        'no_result_key_here' => 'epic_fail',
+      }
+
+      json_api = double(get: response)
+      api = HackneyApi.new(json_api)
+
+      expect { api.list_properties(postcode: 'A1 1AA') }.to raise_error(KeyError)
     end
   end
 
