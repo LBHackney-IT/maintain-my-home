@@ -56,7 +56,7 @@ RSpec.describe RepairParams do
       answers = {
         'address' => {
           'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
       }

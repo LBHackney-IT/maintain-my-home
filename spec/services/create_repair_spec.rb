@@ -12,7 +12,7 @@ RSpec.describe CreateRepair do
       fake_answers = {
         'address' => {
           'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -47,7 +47,7 @@ RSpec.describe CreateRepair do
       fake_answers = {
         'address' => {
           'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -73,7 +73,7 @@ RSpec.describe CreateRepair do
     fake_answers = {
       'address' => {
         'property_reference' => '00034713',
-        'short_address' => 'Ross Court 25',
+        'address' => 'Ross Court 25',
         'postcode' => 'E5 8TE',
       },
       'describe_repair' => {
@@ -92,7 +92,7 @@ RSpec.describe CreateRepair do
       fake_answers = {
         'address' => {
           'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -130,7 +130,7 @@ RSpec.describe CreateRepair do
       fake_answers = {
         'address' => {
           'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {

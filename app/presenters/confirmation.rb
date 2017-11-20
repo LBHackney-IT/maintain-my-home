@@ -18,7 +18,7 @@ class Confirmation
   def address
     address_answer = @answers.fetch('address')
     [
-      address_answer.fetch('short_address'),
+      address_answer.fetch('address'),
       address_answer.fetch('postcode'),
     ].join(', ')
   end

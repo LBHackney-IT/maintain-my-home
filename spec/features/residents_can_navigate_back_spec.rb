@@ -4,7 +4,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair was diagnosed' do
     property = {
       'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -58,7 +58,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair could not be diagnosed' do
     property = {
       'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -145,7 +145,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the contact details values were invalid' do
     property = {
       'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -191,7 +191,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the contact details with callback values were invalid' do
     property = {
       'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -250,7 +250,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'going back from the My address is not here exit page' do
     property = {
       'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])

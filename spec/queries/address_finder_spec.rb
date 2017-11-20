@@ -16,7 +16,7 @@ RSpec.describe AddressFinder do
       api_result = [
         {
           'property_reference' => 'P01234',
-          'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+          'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
         },
       ]
       api = double(list_properties: api_result)
@@ -25,7 +25,7 @@ RSpec.describe AddressFinder do
       result = AddressFinder.new(api).find(form)
 
       expect(result.first.property_reference).to eq 'P01234'
-      expect(result.first.short_address).to eq 'Flat 1, 8 Hoxton Square, N1 6NU'
+      expect(result.first.address).to eq 'Flat 1, 8 Hoxton Square, N1 6NU'
     end
   end
 end

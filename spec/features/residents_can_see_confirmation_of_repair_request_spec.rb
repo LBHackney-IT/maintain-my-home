@@ -4,7 +4,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
   scenario 'when the issue was diagnosed and an appointment was booked' do
     property = {
       'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
@@ -166,7 +166,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
   scenario 'when the issue could not be completely diagnosed (and a callback is required)' do
     property = {
       'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
@@ -278,7 +278,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
   scenario 'when the issue was in a communal area' do
     property = {
       'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)

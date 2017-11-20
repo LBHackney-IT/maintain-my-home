@@ -45,7 +45,7 @@ RSpec.describe Confirmation do
       fake_answers = {
         'address' => {
           'property_reference' => '01234567',
-          'short_address' => 'Ross Court 25',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
       }
