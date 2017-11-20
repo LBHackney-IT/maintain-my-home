@@ -66,25 +66,25 @@ RSpec.describe JsonApi do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
         .to_return(
-          body: [{ 'property_reference' => 'abc123', 'address' => '1 some road' }].to_json,
+          body: [{ 'property_reference' => 'abc123', 'address' => '1 some road', 'postcode' => 'A1 1AA' }].to_json,
           headers: { content_type: 'application/json' }
         )
 
       result = json_api.get('properties?postcode=A1 1AA')
 
-      expect(result).to eq [{ 'property_reference' => 'abc123', 'address' => '1 some road' }]
+      expect(result).to eq [{ 'property_reference' => 'abc123', 'address' => '1 some road', 'postcode' => 'A1 1AA' }]
     end
 
     it 'parses a JSON response with an unspecified content_type' do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
         .to_return(
-          body: [{ 'property_reference' => 'abc123', 'address' => '1 some road' }].to_json
+          body: [{ 'property_reference' => 'abc123', 'address' => '1 some road', 'postcode' => 'A1 1AA' }].to_json
         )
 
       result = json_api.get('properties?postcode=A1 1AA')
 
-      expect(result).to eq [{ 'property_reference' => 'abc123', 'address' => '1 some road' }]
+      expect(result).to eq [{ 'property_reference' => 'abc123', 'address' => '1 some road', 'postcode' => 'A1 1AA' }]
     end
 
     it 'raises an exception for an invalid json response' do

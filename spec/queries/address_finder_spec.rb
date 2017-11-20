@@ -17,6 +17,7 @@ RSpec.describe AddressFinder do
         {
           'property_reference' => 'P01234',
           'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+          'postcode' => 'N1 6NU',
         },
       ]
       api = double(list_properties: api_result)

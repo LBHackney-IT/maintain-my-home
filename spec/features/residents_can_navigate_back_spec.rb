@@ -5,6 +5,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -59,6 +60,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -146,6 +148,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -192,6 +195,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
@@ -251,6 +255,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])

@@ -8,10 +8,11 @@ class AddressFinder
     properties.map do |property|
       Property.new(
         property['property_reference'],
-        property['address']
+        property['address'],
+        property['postcode'],
       )
     end
   end
 
-  Property = Struct.new(:property_reference, :address)
+  Property = Struct.new(:property_reference, :address, :postcode)
 end

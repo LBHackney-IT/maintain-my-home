@@ -11,10 +11,12 @@ RSpec.feature 'Resident can locate a problem' do
     tenant_property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
     other_property = {
       'property_reference' => 'def456',
       'address' => 'Flat 7, 12 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
 
     matching_properties = [other_property, tenant_property]
@@ -104,6 +106,7 @@ RSpec.feature 'Resident can locate a problem' do
     matching_property = {
       'property_reference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'postcode' => 'N1 6NU',
     }
 
     fake_api = instance_double(JsonApi)
@@ -125,6 +128,7 @@ RSpec.feature 'Resident can locate a problem' do
     other_property = {
       'property_reference' => 'abc123',
       'address' => '99 Abersham Road',
+      'postcode' => 'N1 6NU',
     }
 
     fake_api = instance_double(JsonApi)
