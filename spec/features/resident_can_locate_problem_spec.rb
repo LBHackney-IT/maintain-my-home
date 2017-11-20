@@ -10,12 +10,12 @@ RSpec.feature 'Resident can locate a problem' do
   scenario 'when they are a Hackney Council Tenant' do
     tenant_property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     other_property = {
       'property_reference' => 'def456',
-      'address' => 'Flat 7, 12 Hoxton Square, N1 6NU',
+      'address' => 'Flat 7, 12 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
 
@@ -32,7 +32,7 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
 
     within '#address-search-results' do
-      choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+      choose_radio_button 'Flat 1, 8 Hoxton Square'
     end
 
     click_button t('helpers.submit.create')
@@ -40,7 +40,7 @@ RSpec.feature 'Resident can locate a problem' do
     expect(page).to have_content t('contact-details.title')
 
     within '#progress' do
-      expect(page).to have_content 'Flat 1, 8 Hoxton Square, N1 6NU'
+      expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     end
   end
 
@@ -105,7 +105,7 @@ RSpec.feature 'Resident can locate a problem' do
   scenario 'performing a search and not selecting an address' do
     matching_property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
 

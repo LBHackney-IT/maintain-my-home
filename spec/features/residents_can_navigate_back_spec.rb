@@ -4,7 +4,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair was diagnosed' do
     property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
@@ -33,7 +33,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details
@@ -59,7 +59,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair could not be diagnosed' do
     property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
@@ -89,7 +89,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details with callback - last page before confirmation:
@@ -147,7 +147,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the contact details values were invalid' do
     property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
@@ -176,7 +176,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details - submit an empty form
@@ -194,7 +194,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the contact details with callback values were invalid' do
     property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
@@ -224,7 +224,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details - submit an empty form
@@ -254,7 +254,7 @@ RSpec.feature 'Resident can navigate back', js: true do
   scenario 'going back from the My address is not here exit page' do
     property = {
       'property_reference' => 'abc123',
-      'address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)

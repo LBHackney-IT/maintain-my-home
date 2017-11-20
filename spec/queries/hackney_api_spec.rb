@@ -5,7 +5,7 @@ describe HackneyApi do
   describe '#list_properties' do
     it 'returns a list of properties' do
       results = [
-        { 'property_reference' => 'def567', 'address' => 'Flat 8, 1 Aardvark Road, A1 1AA', 'postcode' => 'A1 1AA' },
+        { 'property_reference' => 'def567', 'address' => 'Flat 8, 1 Aardvark Road', 'postcode' => 'A1 1AA' },
       ]
       json_api = double(get: results)
       api = HackneyApi.new(json_api)
@@ -18,7 +18,7 @@ describe HackneyApi do
     it 'returns an individual property' do
       results = {
         'property_reference' => 'cre045',
-        'address' => 'Flat 45, Cheddar Row Estate, Hackney, N1 1AA',
+        'address' => 'Flat 45, Cheddar Row Estate',
         'postcode' => 'N1 1AA',
       }
       json_api = instance_double('JsonApi')
