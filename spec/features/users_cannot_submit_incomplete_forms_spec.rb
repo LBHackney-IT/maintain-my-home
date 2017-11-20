@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Users cannot submit incomplete forms' do
   scenario 'when the repair could not be diagnosed' do
     matching_property = {
-      'property_reference' => 'zzz',
+      'propertyReference' => 'zzz',
       'address' => '8A Abersham Road',
       'postcode' => 'E5 8TE',
     }
@@ -61,7 +61,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
 
   scenario 'when the repair was diagnosed' do
     matching_property = {
-      'property_reference' => 'zzz',
+      'propertyReference' => 'zzz',
       'address' => '8A Abersham Road',
       'postcode' => 'E5 8TE',
     }

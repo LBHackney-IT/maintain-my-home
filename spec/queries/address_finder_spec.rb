@@ -15,7 +15,7 @@ RSpec.describe AddressFinder do
     it 'wraps the result of the api call in an object' do
       api_result = [
         {
-          'property_reference' => 'P01234',
+          'propertyReference' => 'P01234',
           'address' => 'Flat 1, 8 Hoxton Square',
           'postcode' => 'N1 6NU',
         },

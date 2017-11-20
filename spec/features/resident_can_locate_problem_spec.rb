@@ -9,12 +9,12 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'when they are a Hackney Council Tenant' do
     tenant_property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
     other_property = {
-      'property_reference' => 'def456',
+      'propertyReference' => 'def456',
       'address' => 'Flat 7, 12 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -104,7 +104,7 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'performing a search and not selecting an address' do
     matching_property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -126,7 +126,7 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario "user's address isn't listed" do
     other_property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => '99 Abersham Road',
       'postcode' => 'N1 6NU',
     }

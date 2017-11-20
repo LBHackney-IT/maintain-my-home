@@ -15,7 +15,7 @@ class CreateRepair
     {
       priority: params.priority,
       problem: params.problem,
-      propertyRef: params.property_reference,
+      propertyReference: params.property_reference,
     }.tap do |hash|
       hash[:repairOrders] = create_work_order_params(params) if params.sor_code
     end
@@ -25,7 +25,6 @@ class CreateRepair
     [
       {
         jobCode: params.sor_code,
-        propertyReference: params.property_reference,
       },
     ]
   end

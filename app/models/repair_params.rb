@@ -16,7 +16,7 @@ class RepairParams
   end
 
   def property_reference
-    @answers.fetch('address').fetch('property_reference')
+    @answers.fetch('address').fetch('propertyReference')
   end
 
   def priority

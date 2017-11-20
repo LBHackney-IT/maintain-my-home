@@ -9,7 +9,7 @@ RSpec.describe Repair do
         'orderReference' => '00412371',
         'problem' => 'My bath is broken',
         'priority' => 'N',
-        'propertyRef' => '00034713',
+        'propertyReference' => '00034713',
       }
       expect(Repair.new(repair_data).work_order_reference).to eq '00412371'
     end
@@ -20,7 +20,7 @@ RSpec.describe Repair do
           'requestReference' => '00004578',
           'problem' => 'My bath is broken',
           'priority' => 'N',
-          'propertyRef' => '00034713',
+          'propertyReference' => '00034713',
         }
         expect(Repair.new(repair_data).work_order_reference).to be_nil
       end
@@ -33,7 +33,7 @@ RSpec.describe Repair do
         'requestReference' => '00004578',
         'problem' => 'My bath is broken',
         'priority' => 'N',
-        'propertyRef' => '00034713',
+        'propertyReference' => '00034713',
       }
       expect(Repair.new(repair_data).request_reference).to eq '00004578'
     end
@@ -45,7 +45,7 @@ RSpec.describe Repair do
         'repairRequestReference' => '00004578',
         'problem' => 'My bath is broken',
         'priority' => 'N',
-        'propertyRef' => '00034713',
+        'propertyReference' => '00034713',
       }
       expect(Repair.new(repair_data).request_reference).to eq '00004578'
     end
@@ -56,7 +56,7 @@ RSpec.describe Repair do
       repair_data = {
         'problem' => 'My bath is broken',
         'priority' => 'N',
-        'propertyRef' => '00034713',
+        'propertyReference' => '00034713',
       }
       expect { Repair.new(repair_data).request_reference }.to raise_error(KeyError)
     end

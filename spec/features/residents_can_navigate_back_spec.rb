@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair was diagnosed' do
     property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -58,7 +58,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the repair could not be diagnosed' do
     property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -146,7 +146,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the contact details values were invalid' do
     property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -193,7 +193,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the contact details with callback values were invalid' do
     property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
@@ -253,7 +253,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'going back from the My address is not here exit page' do
     property = {
-      'property_reference' => 'abc123',
+      'propertyReference' => 'abc123',
       'address' => 'Flat 1, 8 Hoxton Square',
       'postcode' => 'N1 6NU',
     }
