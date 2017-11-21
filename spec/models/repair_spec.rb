@@ -5,7 +5,7 @@ RSpec.describe Repair do
   describe '#work_order_reference' do
     it 'returns the first work order reference from the repair' do
       repair_data = {
-        'requestReference' => '00004578',
+        'repairRequestReference' => '00004578',
         'orderReference' => '00412371',
         'problem' => 'My bath is broken',
         'priority' => 'N',
@@ -17,7 +17,7 @@ RSpec.describe Repair do
     context 'when there are no work orders' do
       it 'is nil' do
         repair_data = {
-          'requestReference' => '00004578',
+          'repairRequestReference' => '00004578',
           'problem' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
@@ -28,18 +28,6 @@ RSpec.describe Repair do
   end
 
   describe '#request_reference' do
-    it 'returns the request reference from the repair' do
-      repair_data = {
-        'requestReference' => '00004578',
-        'problem' => 'My bath is broken',
-        'priority' => 'N',
-        'propertyReference' => '00034713',
-      }
-      expect(Repair.new(repair_data).request_reference).to eq '00004578'
-    end
-  end
-
-  context 'when there is a reference with an outdated key' do
     it 'returns the request reference from the repair' do
       repair_data = {
         'repairRequestReference' => '00004578',

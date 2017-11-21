@@ -77,7 +77,7 @@ describe HackneyApi do
   describe '#get_repair' do
     it 'returns an individual repair' do
       result = {
-        'requestReference' => '00045678',
+        'repairRequestReference' => '00045678',
         'orderReference' => '00412371',
         'problem' => 'My bath is broken',
         'priority' => 'N',

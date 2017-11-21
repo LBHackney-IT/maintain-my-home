@@ -12,7 +12,7 @@ RSpec.describe Confirmation do
         allow(fake_api).to receive(:get_repair)
           .with(repair_request_reference: '00004578')
           .and_return(
-            'requestReference' => '00004578',
+            'repairRequestReference' => '00004578',
             'orderReference' => '00412371',
             'problem' => 'My bath is broken',
             'priority' => 'N',
@@ -29,7 +29,7 @@ RSpec.describe Confirmation do
         allow(fake_api).to receive(:get_repair)
           .with(repair_request_reference: '00004578')
           .and_return(
-            'requestReference' => '00004578',
+            'repairRequestReference' => '00004578',
             'problem' => 'My bath is broken',
             'priority' => 'N',
             'propertyReference' => '00034713',

@@ -34,11 +34,11 @@ RSpec.describe CreateRepair do
         )
     end
 
-    it 'returns a result containing the request reference' do
+    it 'returns a result containing the repair request reference' do
       fake_api = instance_double('HackneyApi')
       allow(fake_api).to receive(:create_repair)
         .and_return(
-          'requestReference' => '03153917',
+          'repairRequestReference' => '03153917',
           'problem' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
@@ -117,11 +117,11 @@ RSpec.describe CreateRepair do
         )
     end
 
-    it 'returns a result which exposes the request reference' do
+    it 'returns a result which exposes the repair request reference' do
       fake_api = instance_double('HackneyApi')
       allow(fake_api).to receive(:create_repair)
         .and_return(
-          'requestReference' => '03153917',
+          'repairRequestReference' => '03153917',
           'orderReference' => '09876543',
           'problem' => 'My bath is broken',
           'priority' => 'N',

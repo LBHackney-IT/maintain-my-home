@@ -13,7 +13,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Kitchen",
@@ -22,7 +22,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Kitchen",
@@ -175,7 +175,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Other",
         'propertyReference' => '00000503',
@@ -183,7 +183,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Other",
         'propertyReference' => '00000503',
@@ -288,7 +288,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'priority' => 'N',
         'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
         'propertyReference' => '00000503',
@@ -296,7 +296,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
       .and_return(
-        'requestReference' => '00367923',
+        'repairRequestReference' => '00367923',
         'priority' => 'N',
         'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
         'propertyReference' => '00000503',
