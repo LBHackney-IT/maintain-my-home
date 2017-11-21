@@ -3,7 +3,7 @@ class RepairParams
     @answers = answers
   end
 
-  def problem
+  def problem_description
     lines = [description]
     lines << "Room: #{room}" if room.present?
     lines << "Callback requested: between #{callback_time}" if callback_time

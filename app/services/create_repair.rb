@@ -14,7 +14,7 @@ class CreateRepair
   def create_repair_params(params)
     {
       priority: params.priority,
-      problem: params.problem,
+      problemDescription: params.problem_description,
       propertyReference: params.property_reference,
     }.tap do |hash|
       hash[:repairOrders] = create_work_order_params(params) if params.sor_code

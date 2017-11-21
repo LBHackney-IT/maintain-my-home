@@ -48,7 +48,7 @@ describe HackneyApi do
       api = HackneyApi.new(json_api)
       repair_params = {
         priority: 'U',
-        problem: 'It is broken',
+        problemDescription: 'It is broken',
         propertyReference: '01234567',
       }
       api.create_repair(repair_params)
@@ -57,7 +57,7 @@ describe HackneyApi do
         .with(
           'repairs',
           priority: 'U',
-          problem: 'It is broken',
+          problemDescription: 'It is broken',
           propertyReference: '01234567',
         )
     end
@@ -79,7 +79,7 @@ describe HackneyApi do
       result = {
         'repairRequestReference' => '00045678',
         'orderReference' => '00412371',
-        'problem' => 'My bath is broken',
+        'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
       }

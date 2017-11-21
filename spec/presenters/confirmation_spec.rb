@@ -14,7 +14,7 @@ RSpec.describe Confirmation do
           .and_return(
             'repairRequestReference' => '00004578',
             'orderReference' => '00412371',
-            'problem' => 'My bath is broken',
+            'problemDescription' => 'My bath is broken',
             'priority' => 'N',
             'propertyReference' => '00034713',
           )
@@ -30,7 +30,7 @@ RSpec.describe Confirmation do
           .with(repair_request_reference: '00004578')
           .and_return(
             'repairRequestReference' => '00004578',
-            'problem' => 'My bath is broken',
+            'problemDescription' => 'My bath is broken',
             'priority' => 'N',
             'propertyReference' => '00034713',
           )

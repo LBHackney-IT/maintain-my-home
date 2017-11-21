@@ -129,7 +129,7 @@ RSpec.describe JsonApi do
   describe '#post' do
     it 'sends a JSON payload' do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-      request_params = { priority: 'N', problem: 'It is broken', propertyReference: '00001234' }
+      request_params = { priority: 'N', problemDescription: 'It is broken', propertyReference: '00001234' }
       request_json = request_params.to_json
       stub_request(:post, 'http://hackney.api:8000/repairs')
         .with(body: request_json)

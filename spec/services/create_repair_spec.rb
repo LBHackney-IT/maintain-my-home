@@ -29,7 +29,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problem: "My bath is broken\n\nRoom: Bathroom",
+          problemDescription: "My bath is broken\n\nRoom: Bathroom",
           propertyReference: '00034713',
         )
     end
@@ -39,7 +39,7 @@ RSpec.describe CreateRepair do
       allow(fake_api).to receive(:create_repair)
         .and_return(
           'repairRequestReference' => '03153917',
-          'problem' => 'My bath is broken',
+          'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
         )
@@ -66,7 +66,7 @@ RSpec.describe CreateRepair do
     expect(fake_api).to receive(:create_repair)
       .with(
         priority: 'N',
-        problem: 'No description given',
+        problemDescription: 'No description given',
         propertyReference: '00034713'
       )
 
@@ -109,7 +109,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problem: 'My bath is broken',
+          problemDescription: 'My bath is broken',
           propertyReference: '00034713',
           repairOrders: [
             { jobCode: '002034' },
@@ -123,7 +123,7 @@ RSpec.describe CreateRepair do
         .and_return(
           'repairRequestReference' => '03153917',
           'orderReference' => '09876543',
-          'problem' => 'My bath is broken',
+          'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
         )

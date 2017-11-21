@@ -7,7 +7,7 @@ RSpec.describe Repair do
       repair_data = {
         'repairRequestReference' => '00004578',
         'orderReference' => '00412371',
-        'problem' => 'My bath is broken',
+        'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
       }
@@ -18,7 +18,7 @@ RSpec.describe Repair do
       it 'is nil' do
         repair_data = {
           'repairRequestReference' => '00004578',
-          'problem' => 'My bath is broken',
+          'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
         }
@@ -31,7 +31,7 @@ RSpec.describe Repair do
     it 'returns the request reference from the repair' do
       repair_data = {
         'repairRequestReference' => '00004578',
-        'problem' => 'My bath is broken',
+        'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
       }
@@ -42,7 +42,7 @@ RSpec.describe Repair do
   context 'when there is no reference in the data' do
     it 'raises an error' do
       repair_data = {
-        'problem' => 'My bath is broken',
+        'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
       }
