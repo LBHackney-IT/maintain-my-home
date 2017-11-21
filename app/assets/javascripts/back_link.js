@@ -1,6 +1,6 @@
 $(document).ready(function(){
   function backLink(text) {
-    var backLink = $("<a class='link-back' href='#'></a>");
+    var backLink = $("<a class='link-back' href='#' rel='nofollow'></a>");
     backLink.text(text);
     backLink.click(function(){
       parent.history.back();
