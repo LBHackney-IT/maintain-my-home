@@ -111,8 +111,8 @@ RSpec.describe CreateRepair do
           priority: 'N',
           problemDescription: 'My bath is broken',
           propertyReference: '00034713',
-          repairOrders: [
-            { jobCode: '002034' },
+          workOrders: [
+            { sorCode: '002034' },
           ],
         )
     end

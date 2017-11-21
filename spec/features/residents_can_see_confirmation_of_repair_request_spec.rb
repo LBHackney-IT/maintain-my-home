@@ -151,8 +151,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       priority: 'N',
       problemDescription: "My sink is blocked\n\nRoom: Kitchen",
       propertyReference: '00000503',
-      repairOrders: [
-        { jobCode: '0078965' },
+      workOrders: [
+        { sorCode: '0078965' },
       ]
     )
 

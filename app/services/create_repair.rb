@@ -17,14 +17,14 @@ class CreateRepair
       problemDescription: params.problem_description,
       propertyReference: params.property_reference,
     }.tap do |hash|
-      hash[:repairOrders] = create_work_order_params(params) if params.sor_code
+      hash[:workOrders] = create_work_order_params(params) if params.sor_code
     end
   end
 
   def create_work_order_params(params)
     [
       {
-        jobCode: params.sor_code,
+        sorCode: params.sor_code,
       },
     ]
   end
