@@ -7,11 +7,12 @@ class AddressFinder
     properties = @api.list_properties(postcode: form.data[:postcode])
     properties.map do |property|
       Property.new(
-        property['property_reference'],
-        property['short_address']
+        property['propertyReference'],
+        property['address'],
+        property['postcode'],
       )
     end
   end
 
-  Property = Struct.new(:property_reference, :short_address)
+  Property = Struct.new(:property_reference, :address, :postcode)
 end

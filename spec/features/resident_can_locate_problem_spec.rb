@@ -9,19 +9,21 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'when they are a Hackney Council Tenant' do
     tenant_property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     other_property = {
-      'property_reference' => 'def456',
-      'short_address' => 'Flat 7, 12 Hoxton Square, N1 6NU',
+      'propertyReference' => 'def456',
+      'address' => 'Flat 7, 12 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
 
     matching_properties = [other_property, tenant_property]
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return(matching_properties)
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(tenant_property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => matching_properties)
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(tenant_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -30,7 +32,7 @@ RSpec.feature 'Resident can locate a problem' do
     click_button t('helpers.submit.address_search.create')
 
     within '#address-search-results' do
-      choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+      choose_radio_button 'Flat 1, 8 Hoxton Square'
     end
 
     click_button t('helpers.submit.create')
@@ -38,13 +40,13 @@ RSpec.feature 'Resident can locate a problem' do
     expect(page).to have_content t('contact-details.title')
 
     within '#progress' do
-      expect(page).to have_content 'Flat 1, 8 Hoxton Square, N1 6NU'
+      expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     end
   end
 
   scenario 'when the address search returned no results' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -81,8 +83,8 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'changing the postcode after searching' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6AA').and_return([])
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6AA').and_return('results' => [])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -102,12 +104,13 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'performing a search and not selecting an address' do
     matching_property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([matching_property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [matching_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -123,12 +126,13 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario "user's address isn't listed" do
     other_property = {
-      'property_reference' => 'abc123',
-      'short_address' => '99 Abersham Road',
+      'propertyReference' => 'abc123',
+      'address' => '99 Abersham Road',
+      'postcode' => 'N1 6NU',
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=N1 6NU').and_return([other_property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [other_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'

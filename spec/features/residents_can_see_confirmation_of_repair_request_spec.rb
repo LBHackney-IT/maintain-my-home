@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.feature 'Resident can see a confirmation of their repair request' do
   scenario 'when the issue was diagnosed and an appointment was booked' do
     property = {
-      'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'propertyReference' => '00000503',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E5 8TE').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
@@ -17,7 +17,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => 'My sink is blocked',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
@@ -26,7 +26,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => 'My sink is blocked',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
       .with('work_orders/09124578/appointments')
@@ -150,9 +150,9 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'repairs',
       priority: 'N',
       problem: 'My sink is blocked (Room: Kitchen)',
-      propertyRef: '00000503',
+      propertyReference: '00000503',
       repairOrders: [
-        { jobCode: '0078965', propertyReference: '00000503' },
+        { jobCode: '0078965' },
       ]
     )
 
@@ -165,20 +165,20 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
 
   scenario 'when the issue could not be completely diagnosed (and a callback is required)' do
     property = {
-      'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'propertyReference' => '00000503',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E5 8TE').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
         'problem' => 'My sink is blocked',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
@@ -186,7 +186,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'requestReference' => '00367923',
         'priority' => 'N',
         'problem' => 'My sink is blocked',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
@@ -271,26 +271,26 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'repairs',
       priority: 'N',
       problem: 'My sink is blocked (Room: Other)',
-      propertyRef: '00000503',
+      propertyReference: '00000503',
     )
   end
 
   scenario 'when the issue was in a communal area' do
     property = {
-      'property_reference' => '00000503',
-      'short_address' => 'Ross Court 23',
+      'propertyReference' => '00000503',
+      'address' => 'Ross Court 23',
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E5 8TE').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
       .with('repairs', anything)
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
         'problem' => 'The streetlamp is broken',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
@@ -298,7 +298,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'requestReference' => '00367923',
         'priority' => 'N',
         'problem' => 'The streetlamp is broken',
-        'propertyRef' => '00000503',
+        'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
@@ -367,7 +367,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'repairs',
       priority: 'N',
       problem: 'The streetlamp is broken',
-      propertyRef: '00000503',
+      propertyReference: '00000503',
     )
   end
 end

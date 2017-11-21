@@ -5,23 +5,35 @@ describe HackneyApi do
   describe '#list_properties' do
     it 'returns a list of properties' do
       results = [
-        { 'property_reference' => 'def567', 'short_address' => 'Flat 8, 1 Aardvark Road, A1 1AA' },
+        { 'propertyReference' => 'def567', 'address' => 'Flat 8, 1 Aardvark Road', 'postcode' => 'A1 1AA' },
       ]
-      json_api = double(get: results)
+      json_api = double(get: { 'results' => results })
       api = HackneyApi.new(json_api)
 
       expect(api.list_properties(postcode: 'A1 1AA')).to eql results
+    end
+
+    it 'raises MissingResults if the "results" key is missing from the response' do
+      response = {
+        'no_result_key_here' => 'epic_fail',
+      }
+
+      json_api = double(get: response)
+      api = HackneyApi.new(json_api)
+
+      expect { api.list_properties(postcode: 'A1 1AA') }.to raise_error(KeyError)
     end
   end
 
   describe '#get_property' do
     it 'returns an individual property' do
       results = {
-        'property_reference' => 'cre045',
-        'short_address' => 'Flat 45, Cheddar Row Estate, Hackney, N1 1AA',
+        'propertyReference' => 'cre045',
+        'address' => 'Flat 45, Cheddar Row Estate',
+        'postcode' => 'N1 1AA',
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('properties/cre045').and_return(results)
+      allow(json_api).to receive(:get).with('v1/properties/cre045').and_return(results)
       api = HackneyApi.new(json_api)
 
       expect(api.get_property(property_reference: 'cre045')).to eql results
@@ -37,7 +49,7 @@ describe HackneyApi do
       repair_params = {
         priority: 'U',
         problem: 'It is broken',
-        property_reference: '01234567',
+        propertyReference: '01234567',
       }
       api.create_repair(repair_params)
 
@@ -46,7 +58,7 @@ describe HackneyApi do
           'repairs',
           priority: 'U',
           problem: 'It is broken',
-          property_reference: '01234567',
+          propertyReference: '01234567',
         )
     end
 
@@ -69,7 +81,7 @@ describe HackneyApi do
         'orderReference' => '00412371',
         'problem' => 'My bath is broken',
         'priority' => 'N',
-        'propertyRef' => '00034713',
+        'propertyReference' => '00034713',
       }
       json_api = instance_double('JsonApi')
       allow(json_api).to receive(:get).with('repairs/00045678').and_return(result)

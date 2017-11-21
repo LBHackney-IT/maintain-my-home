@@ -55,8 +55,8 @@ RSpec.describe RepairParams do
     it 'fetches the property reference from answers' do
       answers = {
         'address' => {
-          'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '00034713',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
       }

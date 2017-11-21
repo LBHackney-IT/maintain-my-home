@@ -3,12 +3,13 @@ require 'rails_helper'
 RSpec.feature 'Resident can navigate back', js: true do
   scenario 'when the repair was diagnosed' do
     property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -32,7 +33,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details
@@ -57,12 +58,13 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the repair could not be diagnosed' do
     property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'skip' }])
@@ -87,7 +89,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details with callback - last page before confirmation:
@@ -144,12 +146,13 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the contact details values were invalid' do
     property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -173,7 +176,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details - submit an empty form
@@ -190,12 +193,13 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'when the contact details with callback values were invalid' do
     property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
-    allow(fake_api).to receive(:get).with('properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -220,7 +224,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Find my address'
 
     # Address selection:
-    choose_radio_button 'Flat 1, 8 Hoxton Square, N1 6NU'
+    choose_radio_button 'Flat 1, 8 Hoxton Square'
     click_on 'Continue'
 
     # Contact details - submit an empty form
@@ -249,11 +253,12 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'going back from the My address is not here exit page' do
     property = {
-      'property_reference' => 'abc123',
-      'short_address' => 'Flat 1, 8 Hoxton Square, N1 6NU',
+      'propertyReference' => 'abc123',
+      'address' => 'Flat 1, 8 Hoxton Square',
+      'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([property])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -287,7 +292,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'going back from the address selection page' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('properties?postcode=E8 5TQ').and_return([])
+    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])

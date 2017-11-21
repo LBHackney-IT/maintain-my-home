@@ -16,7 +16,7 @@ RSpec.describe Confirmation do
             'orderReference' => '00412371',
             'problem' => 'My bath is broken',
             'priority' => 'N',
-            'propertyRef' => '00034713',
+            'propertyReference' => '00034713',
           )
         expect(Confirmation.new(request_reference: '00004578', answers: {}, api: fake_api).request_reference)
           .to eq '00412371'
@@ -32,7 +32,7 @@ RSpec.describe Confirmation do
             'requestReference' => '00004578',
             'problem' => 'My bath is broken',
             'priority' => 'N',
-            'propertyRef' => '00034713',
+            'propertyReference' => '00034713',
           )
         expect(Confirmation.new(request_reference: '00004578', answers: {}, api: fake_api).request_reference)
           .to eq '00004578'
@@ -44,8 +44,8 @@ RSpec.describe Confirmation do
     it 'builds an address from the selected answers' do
       fake_answers = {
         'address' => {
-          'property_reference' => '01234567',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '01234567',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
       }

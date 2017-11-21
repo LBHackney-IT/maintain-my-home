@@ -11,8 +11,8 @@ RSpec.describe CreateRepair do
       allow(fake_api).to receive(:create_repair)
       fake_answers = {
         'address' => {
-          'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '00034713',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -30,7 +30,7 @@ RSpec.describe CreateRepair do
         .with(
           priority: 'N',
           problem: 'My bath is broken (Room: Bathroom)',
-          propertyRef: '00034713',
+          propertyReference: '00034713',
         )
     end
 
@@ -41,13 +41,13 @@ RSpec.describe CreateRepair do
           'requestReference' => '03153917',
           'problem' => 'My bath is broken',
           'priority' => 'N',
-          'propertyRef' => '00034713',
+          'propertyReference' => '00034713',
         )
 
       fake_answers = {
         'address' => {
-          'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '00034713',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -67,13 +67,13 @@ RSpec.describe CreateRepair do
       .with(
         priority: 'N',
         problem: 'n/a',
-        propertyRef: '00034713'
+        propertyReference: '00034713'
       )
 
     fake_answers = {
       'address' => {
-        'property_reference' => '00034713',
-        'short_address' => 'Ross Court 25',
+        'propertyReference' => '00034713',
+        'address' => 'Ross Court 25',
         'postcode' => 'E5 8TE',
       },
       'describe_repair' => {
@@ -91,8 +91,8 @@ RSpec.describe CreateRepair do
       allow(fake_api).to receive(:create_repair)
       fake_answers = {
         'address' => {
-          'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '00034713',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {
@@ -110,9 +110,9 @@ RSpec.describe CreateRepair do
         .with(
           priority: 'N',
           problem: 'My bath is broken',
-          propertyRef: '00034713',
+          propertyReference: '00034713',
           repairOrders: [
-            { jobCode: '002034', propertyReference: '00034713' },
+            { jobCode: '002034' },
           ],
         )
     end
@@ -125,12 +125,12 @@ RSpec.describe CreateRepair do
           'orderReference' => '09876543',
           'problem' => 'My bath is broken',
           'priority' => 'N',
-          'propertyRef' => '00034713',
+          'propertyReference' => '00034713',
         )
       fake_answers = {
         'address' => {
-          'property_reference' => '00034713',
-          'short_address' => 'Ross Court 25',
+          'propertyReference' => '00034713',
+          'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
         'describe_repair' => {

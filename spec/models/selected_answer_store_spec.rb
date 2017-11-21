@@ -19,7 +19,7 @@ RSpec.describe SelectedAnswerStore do
     session = {}
     old_answers = {
       'property_ref' => 'adh389',
-      'address' => 'Flat 1, 35 Church Walk, N16 8QR',
+      'address' => 'Flat 1, 35 Church Walk',
     }
     new_answers = {
       'property_ref' => 'bsg108',
