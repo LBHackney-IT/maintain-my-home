@@ -16,6 +16,7 @@ class CreateRepair
       priority: params.priority,
       problemDescription: params.problem_description,
       propertyReference: params.property_reference,
+      contact: create_contact_params(params),
     }.tap do |hash|
       hash[:workOrders] = create_work_order_params(params) if params.sor_code
     end
@@ -27,5 +28,12 @@ class CreateRepair
         sorCode: params.sor_code,
       },
     ]
+  end
+
+  def create_contact_params(params)
+    {
+      name: params.contact_full_name,
+      telephoneNumber: params.contact_telephone_number,
+    }
   end
 end

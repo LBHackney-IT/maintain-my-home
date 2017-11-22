@@ -15,6 +15,10 @@ RSpec.describe CreateRepair do
           'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
+        'contact_details' => {
+          'full_name' => 'Jo Bloggs',
+          'telephone_number' => '07900 123456',
+        },
         'describe_repair' => {
           'description' => 'My bath is broken',
         },
@@ -31,6 +35,10 @@ RSpec.describe CreateRepair do
           priority: 'N',
           problemDescription: "My bath is broken\n\nRoom: Bathroom",
           propertyReference: '00034713',
+          contact: {
+            name: 'Jo Bloggs',
+            telephoneNumber: '07900 123456',
+          }
         )
     end
 
@@ -42,6 +50,10 @@ RSpec.describe CreateRepair do
           'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
+          'contact' => {
+            'name' => 'Jo Apple',
+            'telephoneNumber' => '07900 880110',
+          },
         )
 
       fake_answers = {
@@ -49,6 +61,10 @@ RSpec.describe CreateRepair do
           'propertyReference' => '00034713',
           'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
+        },
+        'contact_details' => {
+          'full_name' => 'Jo Apple',
+          'telephone_number' => '07900 880110',
         },
         'describe_repair' => {
           'description' => 'My bath is broken',
@@ -67,7 +83,11 @@ RSpec.describe CreateRepair do
       .with(
         priority: 'N',
         problemDescription: 'No description given',
-        propertyReference: '00034713'
+        propertyReference: '00034713',
+        contact: {
+          name: 'Jo Bloggs',
+          telephoneNumber: '07900 123456',
+        }
       )
 
     fake_answers = {
@@ -75,6 +95,10 @@ RSpec.describe CreateRepair do
         'propertyReference' => '00034713',
         'address' => 'Ross Court 25',
         'postcode' => 'E5 8TE',
+      },
+      'contact_details' => {
+        'full_name' => 'Jo Bloggs',
+        'telephone_number' => '07900 123456',
       },
       'describe_repair' => {
         'description' => '',
@@ -95,6 +119,10 @@ RSpec.describe CreateRepair do
           'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
         },
+        'contact_details' => {
+          'full_name' => 'Alex Doe',
+          'telephone_number' => '020 8534 1234',
+        },
         'describe_repair' => {
           'description' => 'My bath is broken',
         },
@@ -111,6 +139,10 @@ RSpec.describe CreateRepair do
           priority: 'N',
           problemDescription: 'My bath is broken',
           propertyReference: '00034713',
+          contact: {
+            name: 'Alex Doe',
+            telephoneNumber: '020 8534 1234',
+          },
           workOrders: [
             { sorCode: '002034' },
           ],
@@ -126,12 +158,20 @@ RSpec.describe CreateRepair do
           'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
+          'contact' => {
+            'name' => 'Jo Apple',
+            'telephoneNumber' => '07900 880110',
+          },
         )
       fake_answers = {
         'address' => {
           'propertyReference' => '00034713',
           'address' => 'Ross Court 25',
           'postcode' => 'E5 8TE',
+        },
+        'contact_details' => {
+          'full_name' => 'Jo Apple',
+          'telephone_number' => '07900 880110',
         },
         'describe_repair' => {
           'description' => 'My bath is broken',

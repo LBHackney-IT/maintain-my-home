@@ -151,6 +151,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       priority: 'N',
       problemDescription: "My sink is blocked\n\nRoom: Kitchen",
       propertyReference: '00000503',
+      contact: {
+        name: 'John Evans',
+        telephoneNumber: '078 98765 432',
+      },
       workOrders: [
         { sorCode: '0078965' },
       ]
@@ -273,6 +277,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       priority: 'N',
       problemDescription: "My sink is blocked\n\nRoom: Other\n\nCallback requested: between 8am and 5pm",
       propertyReference: '00000503',
+      contact: {
+        name: 'John Evans',
+        telephoneNumber: '078 98765 432',
+      },
     )
   end
 
@@ -369,6 +377,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       priority: 'N',
       problemDescription: "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
       propertyReference: '00000503',
+      contact: {
+        name: 'John Evans',
+        telephoneNumber: '078 98765 432',
+      },
     )
   end
 end

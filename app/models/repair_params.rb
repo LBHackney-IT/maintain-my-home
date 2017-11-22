@@ -26,6 +26,14 @@ class RepairParams
     sor_code.present?
   end
 
+  def contact_full_name
+    @answers.fetch('contact_details').fetch('full_name')
+  end
+
+  def contact_telephone_number
+    @answers.fetch('contact_details').fetch('telephone_number')
+  end
+
   private
 
   def description
