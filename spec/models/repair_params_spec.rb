@@ -20,7 +20,7 @@ RSpec.describe RepairParams do
             'description' => '',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq 'n/a'
+        expect(RepairParams.new(answers).problem).to eq 'No description given'
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe RepairParams do
             'room' => 'Bathroom',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq 'Room: Bathroom'
+        expect(RepairParams.new(answers).problem).to eq "No description given\n\nRoom: Bathroom"
       end
     end
   end

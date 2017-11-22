@@ -66,7 +66,7 @@ RSpec.describe CreateRepair do
     expect(fake_api).to receive(:create_repair)
       .with(
         priority: 'N',
-        problem: 'n/a',
+        problem: 'No description given',
         propertyReference: '00034713'
       )
 

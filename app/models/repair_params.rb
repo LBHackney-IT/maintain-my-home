@@ -4,12 +4,9 @@ class RepairParams
   end
 
   def problem
-    lines = []
-    lines << description if description.present?
+    lines = [description]
     lines << "Room: #{room}" if room.present?
-    lines.compact.join("\n\n").tap do |output|
-      return 'n/a' if output.empty?
-    end
+    lines.compact.join("\n\n")
   end
 
   def property_reference
@@ -31,7 +28,9 @@ class RepairParams
   private
 
   def description
-    @answers.fetch('describe_repair').fetch('description')
+    @answers.fetch('describe_repair').fetch('description').tap do |desc|
+      return 'No description given' if desc.blank?
+    end
   end
 
   def room
