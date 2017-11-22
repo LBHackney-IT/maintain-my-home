@@ -16,7 +16,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'requestReference' => '00367923',
         'orderReference' => '09124578',
         'priority' => 'N',
-        'problem' => 'My sink is blocked',
+        'problem' => "My sink is blocked\n\nRoom: Kitchen",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -25,7 +25,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'requestReference' => '00367923',
         'orderReference' => '09124578',
         'priority' => 'N',
-        'problem' => 'My sink is blocked',
+        'problem' => "My sink is blocked\n\nRoom: Kitchen",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -149,7 +149,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: 'My sink is blocked (Room: Kitchen)',
+      problem: "My sink is blocked\n\nRoom: Kitchen",
       propertyReference: '00000503',
       repairOrders: [
         { jobCode: '0078965' },
@@ -177,7 +177,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
-        'problem' => 'My sink is blocked',
+        'problem' => "My sink is blocked\n\nRoom: Other",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -185,7 +185,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
-        'problem' => 'My sink is blocked',
+        'problem' => "My sink is blocked\n\nRoom: Other",
         'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
@@ -270,7 +270,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: 'My sink is blocked (Room: Other)',
+      problem: "My sink is blocked\n\nRoom: Other",
       propertyReference: '00000503',
     )
   end

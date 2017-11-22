@@ -4,14 +4,11 @@ class RepairParams
   end
 
   def problem
-    if description.present? && room.present?
-      "#{description} (Room: #{room})"
-    elsif description.present?
-      description
-    elsif room.present?
-      "Room: #{room}"
-    else
-      'n/a'
+    lines = []
+    lines << description if description.present?
+    lines << "Room: #{room}" if room.present?
+    lines.compact.join("\n\n").tap do |output|
+      return 'n/a' if output.empty?
     end
   end
 

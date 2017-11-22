@@ -34,7 +34,7 @@ RSpec.describe RepairParams do
             'room' => 'Bathroom',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq 'My bath is broken (Room: Bathroom)'
+        expect(RepairParams.new(answers).problem).to eq "My bath is broken\n\nRoom: Bathroom"
       end
 
       it 'describes the room if there was no description' do
