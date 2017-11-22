@@ -6,6 +6,7 @@ class RepairParams
   def problem
     lines = [description]
     lines << "Room: #{room}" if room.present?
+    lines << "Callback requested: between #{callback_time}" if callback_time
     lines.compact.join("\n\n")
   end
 
@@ -35,5 +36,12 @@ class RepairParams
 
   def room
     @answers.dig('room', 'room')
+  end
+
+  def callback_time
+    time = @answers.dig('callback_time', 'callback_time')
+    return if time.blank?
+
+    Callback::TimeSlot.new(time)
   end
 end

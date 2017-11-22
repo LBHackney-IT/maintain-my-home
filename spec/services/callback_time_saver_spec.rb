@@ -10,7 +10,7 @@ RSpec.describe CallbackTimeSaver do
                                   valid?: true,
                                   full_name: 'Alan Stubbs',
                                   telephone_number: '0456765432',
-                                  callback_time: ['morning'])
+                                  'callback_time' => ['morning'])
 
       saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
       saver.save(fake_form)
@@ -18,8 +18,8 @@ RSpec.describe CallbackTimeSaver do
       expect(fake_answer_store)
         .to have_received(:store_selected_answers)
         .with(
-          :callback_time,
-          callback_time: ['morning'],
+          'callback_time',
+          'callback_time' => ['morning'],
         )
     end
 
@@ -30,7 +30,7 @@ RSpec.describe CallbackTimeSaver do
                                   valid?: true,
                                   full_name: 'Alan Stubbs',
                                   telephone_number: '0456765432',
-                                  callback_time: ['morning'])
+                                  'callback_time' => ['morning'])
 
       saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
       expect(saver.save(fake_form)).to eq true
@@ -44,7 +44,7 @@ RSpec.describe CallbackTimeSaver do
                                     valid?: false,
                                     full_name: '',
                                     telephone_number: '',
-                                    callback_time: [])
+                                    'callback_time' => [])
 
         saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
         saver.save(fake_form)
@@ -59,7 +59,7 @@ RSpec.describe CallbackTimeSaver do
                                     valid?: false,
                                     full_name: '',
                                     telephone_number: '',
-                                    callback_time: [])
+                                    'callback_time' => [])
 
         saver = CallbackTimeSaver.new(selected_answer_store: fake_answer_store)
         expect(saver.save(fake_form)).to eq false

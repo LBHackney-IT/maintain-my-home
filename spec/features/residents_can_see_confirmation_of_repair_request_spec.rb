@@ -249,12 +249,13 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
     check 'morning (8am - 12pm)'
+    check 'afternoon (12pm - 5pm)'
     click_on 'Continue'
 
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 00367923'
-        expect(page).to have_content 'between 8am and 12pm'
+        expect(page).to have_content 'between 8am and 5pm'
       end
 
       within '#summary' do
@@ -270,7 +271,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: "My sink is blocked\n\nRoom: Other",
+      problem: "My sink is blocked\n\nRoom: Other\n\nCallback requested: between 8am and 5pm",
       propertyReference: '00000503',
     )
   end
@@ -289,7 +290,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
-        'problem' => 'The streetlamp is broken',
+        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -297,7 +298,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'requestReference' => '00367923',
         'priority' => 'N',
-        'problem' => 'The streetlamp is broken',
+        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
         'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
@@ -366,7 +367,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'repairs',
       priority: 'N',
-      problem: 'The streetlamp is broken',
+      problem: "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
       propertyReference: '00000503',
     )
   end

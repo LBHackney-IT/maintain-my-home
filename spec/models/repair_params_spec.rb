@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'active_support/core_ext/object/blank'
+require 'app/presenters/callback'
 require 'app/models/repair_params'
 
 RSpec.describe RepairParams do
@@ -47,6 +48,32 @@ RSpec.describe RepairParams do
           },
         }
         expect(RepairParams.new(answers).problem).to eq "No description given\n\nRoom: Bathroom"
+      end
+    end
+
+    context 'if a callback was requested' do
+      it 'includes the callback info in the description' do
+        answers = {
+          'describe_repair' => {
+            'description' => 'My bath is broken',
+          },
+          'callback_time' => {
+            'callback_time' => ['morning'],
+          },
+        }
+        expect(RepairParams.new(answers).problem).to eq "My bath is broken\n\nCallback requested: between 8am and 12pm"
+      end
+
+      it 'includes the callback info if there was no description' do
+        answers = {
+          'describe_repair' => {
+            'description' => '',
+          },
+          'callback_time' => {
+            'callback_time' => ['morning'],
+          },
+        }
+        expect(RepairParams.new(answers).problem).to eq "No description given\n\nCallback requested: between 8am and 12pm"
       end
     end
   end
