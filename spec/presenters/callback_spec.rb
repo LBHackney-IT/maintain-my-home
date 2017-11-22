@@ -31,14 +31,14 @@ RSpec.describe Callback do
     context 'when the stored callback time was a string (not an array)' do
       it 'raises an exception' do
         expect { Callback.new(time_slot: 'morning', request_reference: '00000000').time }
-          .to raise_error(Callback::InvalidCallbackTimeError)
+          .to raise_error(Callback::TimeSlot::InvalidCallbackTimeError)
       end
     end
 
     context 'when the stored callback time was not recognised' do
       it 'raises an exception' do
         expect { Callback.new(time_slot: ['teatime'], request_reference: '00000000').time }
-          .to raise_error(Callback::InvalidCallbackTimeError)
+          .to raise_error(Callback::TimeSlot::InvalidCallbackTimeError)
       end
     end
   end
