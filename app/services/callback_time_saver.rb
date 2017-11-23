@@ -16,8 +16,8 @@ class CallbackTimeSaver
 
   def persist_answers(form)
     @selected_answer_store.store_selected_answers(
-      :callback_time,
-      callback_time: form.callback_time,
+      'callback_time',
+      'callback_time' => form.callback_time,
     )
   end
 end

@@ -4,15 +4,10 @@ class RepairParams
   end
 
   def problem
-    if description.present? && room.present?
-      "#{description} (Room: #{room})"
-    elsif description.present?
-      description
-    elsif room.present?
-      "Room: #{room}"
-    else
-      'n/a'
-    end
+    lines = [description]
+    lines << "Room: #{room}" if room.present?
+    lines << "Callback requested: between #{callback_time}" if callback_time
+    lines.compact.join("\n\n")
   end
 
   def property_reference
@@ -34,10 +29,19 @@ class RepairParams
   private
 
   def description
-    @answers.fetch('describe_repair').fetch('description')
+    @answers.fetch('describe_repair').fetch('description').tap do |desc|
+      return 'No description given' if desc.blank?
+    end
   end
 
   def room
     @answers.dig('room', 'room')
+  end
+
+  def callback_time
+    time = @answers.dig('callback_time', 'callback_time')
+    return if time.blank?
+
+    Callback::TimeSlot.new(time)
   end
 end
