@@ -53,8 +53,8 @@ en:
           address_isnt_here: "My address isn't here"
       contact_details_form:
         callback_time:
-          morning: "morning (8am - midday)"
-          afternoon: "afternoon (midday - 5pm)"
+          morning: "morning (8am to midday)"
+          afternoon: "afternoon (midday to 5pm)"
       start_form:
         answer:
           smell_gas: I can smell gas

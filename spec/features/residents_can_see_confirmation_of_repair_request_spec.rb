@@ -136,7 +136,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Appointments:
-    choose_radio_button 'Wednesday midday-5pm (11th October)'
+    choose_radio_button 'Wednesday midday to 5pm (11th October)'
     click_on 'Continue'
 
     aggregate_failures do
@@ -262,8 +262,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     # Contact details - last page before confirmation:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
-    check 'morning (8am - midday)'
-    check 'afternoon (midday - 5pm)'
+    check 'morning (8am to midday)'
+    check 'afternoon (midday to 5pm)'
     click_on 'Continue'
 
     aggregate_failures do
@@ -363,7 +363,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     # Contact details - last page before confirmation:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
-    check 'morning (8am - midday)'
+    check 'morning (8am to midday)'
     click_on 'Continue'
 
     aggregate_failures do
