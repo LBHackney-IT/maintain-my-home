@@ -59,6 +59,7 @@ class AppointmentPresenter
   end
 
   def friendly_time(time)
+    return 'midday' if time == time.midday
     format = if time.strftime('%M').to_i.zero?
                '%l%P'
              else

@@ -59,7 +59,7 @@ RSpec.describe AppointmentPresenter do
         'bestSlot' => true
       )
 
-      expect(presenter.time).to eql '12pm and 4:45pm'
+      expect(presenter.time).to eql 'midday and 4:45pm'
     end
   end
 end
