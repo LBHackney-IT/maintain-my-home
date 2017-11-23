@@ -43,7 +43,7 @@ describe HackneyApi do
   describe '#create_repair' do
     it 'sends repair creation parameters' do
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:post).with('repairs', anything)
+      allow(json_api).to receive(:post).with('v1/repairs', anything)
 
       api = HackneyApi.new(json_api)
       repair_params = {
@@ -55,7 +55,7 @@ describe HackneyApi do
 
       expect(json_api).to have_received(:post)
         .with(
-          'repairs',
+          'v1/repairs',
           priority: 'U',
           problemDescription: 'It is broken',
           propertyReference: '01234567',
@@ -66,7 +66,7 @@ describe HackneyApi do
       json_api = instance_double('JsonApi')
       result = double('api result')
       allow(json_api).to receive(:post)
-        .with('repairs', anything)
+        .with('v1/repairs', anything)
         .and_return result
 
       api = HackneyApi.new(json_api)
@@ -89,7 +89,7 @@ describe HackneyApi do
         ],
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('repairs/00045678').and_return(result)
+      allow(json_api).to receive(:get).with('v1/repairs/00045678').and_return(result)
       api = HackneyApi.new(json_api)
 
       expect(api.get_repair(repair_request_reference: '00045678')).to eql result
