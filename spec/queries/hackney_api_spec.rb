@@ -78,10 +78,15 @@ describe HackneyApi do
     it 'returns an individual repair' do
       result = {
         'repairRequestReference' => '00045678',
-        'orderReference' => '00412371',
         'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
+        'workOrders' => [
+          {
+            'sorCode' => '20164242',
+            'workOrderReference' => '00412371',
+          },
+        ],
       }
       json_api = instance_double('JsonApi')
       allow(json_api).to receive(:get).with('repairs/00045678').and_return(result)

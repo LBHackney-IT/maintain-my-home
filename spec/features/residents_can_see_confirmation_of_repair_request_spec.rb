@@ -14,19 +14,29 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .with('repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
-        'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Kitchen",
         'propertyReference' => '00000503',
+        'workOrders' => [
+          {
+            'sorCode' => '0078965',
+            'workOrderReference' => '09124578',
+          },
+        ]
       )
     allow(fake_api).to receive(:get)
       .with('repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
-        'orderReference' => '09124578',
         'priority' => 'N',
         'problem' => "My sink is blocked\n\nRoom: Kitchen",
         'propertyReference' => '00000503',
+        'workOrders' => [
+          {
+            'sorCode' => '0078965',
+            'workOrderReference' => '09124578',
+          },
+        ]
       )
     allow(fake_api).to receive(:get)
       .with('work_orders/09124578/appointments')

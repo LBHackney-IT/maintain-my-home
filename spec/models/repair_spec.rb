@@ -6,10 +6,17 @@ RSpec.describe Repair do
     it 'returns the first work order reference from the repair' do
       repair_data = {
         'repairRequestReference' => '00004578',
-        'orderReference' => '00412371',
         'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
+        'workOrders' => [
+          {
+            'workOrderReference' => '00412371',
+          },
+          {
+            'workOrderReference' => '88888888',
+          },
+        ],
       }
       expect(Repair.new(repair_data).work_order_reference).to eq '00412371'
     end
@@ -22,6 +29,20 @@ RSpec.describe Repair do
           'priority' => 'N',
           'propertyReference' => '00034713',
         }
+        expect(Repair.new(repair_data).work_order_reference).to be_nil
+      end
+    end
+
+    context 'when workOrders is returned, but is empty' do
+      it 'is nil' do
+        repair_data = {
+          'repairRequestReference' => '00004578',
+          'problemDescription' => 'My bath is broken',
+          'priority' => 'N',
+          'propertyReference' => '00034713',
+          'workOrders' => [],
+        }
+
         expect(Repair.new(repair_data).work_order_reference).to be_nil
       end
     end

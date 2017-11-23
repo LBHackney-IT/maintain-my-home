@@ -154,7 +154,6 @@ RSpec.describe CreateRepair do
       allow(fake_api).to receive(:create_repair)
         .and_return(
           'repairRequestReference' => '03153917',
-          'orderReference' => '09876543',
           'problemDescription' => 'My bath is broken',
           'priority' => 'N',
           'propertyReference' => '00034713',
@@ -162,6 +161,12 @@ RSpec.describe CreateRepair do
             'name' => 'Jo Apple',
             'telephoneNumber' => '07900 880110',
           },
+          'workOrders' => [
+            {
+              'sorCode' => '20012345',
+              'workOrderReference' => '09876543',
+            },
+          ],
         )
       fake_answers = {
         'address' => {
