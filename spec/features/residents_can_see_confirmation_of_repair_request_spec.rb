@@ -39,7 +39,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('work_orders/09124578/appointments')
+      .with('work_orders/09124578/available_appointments')
       .and_return(
         [
           { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false },

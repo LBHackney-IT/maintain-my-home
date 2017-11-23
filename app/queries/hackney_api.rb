@@ -22,7 +22,7 @@ class HackneyApi
 
   def list_available_appointments(work_order_reference:)
     @json_api.get(
-      'work_orders/' + work_order_reference + '/appointments'
+      'work_orders/' + work_order_reference + '/available_appointments'
     )
   end
 
