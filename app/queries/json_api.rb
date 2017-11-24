@@ -1,13 +1,16 @@
 class JsonApi
   class Error < StandardError; end
+
   class InvalidApiRootError < Error; end
   class MissingPrivateKeyError < Error; end
-  class InvalidResponseError < Error; end
-  class ConnectionError < Error; end
-  class StatusBadRequestError < Error; end
-  class StatusNotFoundError < Error; end
-  class StatusServerError < Error; end
-  class StatusUnexpectedError < Error; end
+
+  class ApiError < Error; end
+  class InvalidResponseError < ApiError; end
+  class ConnectionError < ApiError; end
+  class StatusBadRequestError < ApiError; end
+  class StatusNotFoundError < ApiError; end
+  class StatusServerError < ApiError; end
+  class StatusUnexpectedError < ApiError; end
 
   def initialize(api_config = {})
     @connection = ConnectionBuilder.new.build(api_config)

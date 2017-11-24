@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
   def check_service_status
     raise ServiceDisabled if App.flipper.enabled?(:service_disabled)
   end
+
+  rescue_from JsonApi::ApiError do
+    render 'errors/api_error'
+  end
 end
