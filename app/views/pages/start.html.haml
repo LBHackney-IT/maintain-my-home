@@ -25,9 +25,7 @@
   %strong
     If you can smell gas, please call National Gas Emergency on:
     %br/
-    %span{ itemprop: 'telephone' }
-      %a{ href: 'tel:0800111999' }
-        0800 111 999
+    = gas_emergency_telephone_number
 
 %p
   %a.button.button-start{ href: '/questions/start/' } Start
@@ -38,9 +36,8 @@
 %p
   If your repair is an emergency, please call the
   Repairs Contact Centre on
-  %span{ itemprop: 'telephone' }
-    = succeed '.' do
-      %a{ href: 'tel:02083563691' } 020 8356 3691
+  = succeed '.' do
+    = repairs_contact_centre_telephone_number
 
 %p
   They are open

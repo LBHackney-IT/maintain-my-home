@@ -5,16 +5,14 @@
   %strong
     Please phone our repairs contact centre on
     = succeed '.' do
-      %span{ itemprop: 'telephone' }
-        %a{ href: 'tel:02083563691' } 020 8356 3691
+      = repairs_contact_centre_telephone_number
     We’re open Monday to Friday from 8am to midnight and on Saturday
     from 9am to 1pm.
 
 %p
   If you have an emergency repair outside of these hours, you should phone us on
   = succeed '.' do
-    %span{ itemprop: 'telephone' }
-      %a{ href: 'tel:02083563691' } 020 8356 3691
+    = repairs_emergency_telephone_number
 
 %p
   Emergency repairs include:
@@ -37,14 +35,11 @@
 
 %p
   Electricity:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:08000280247' } 0800 028 0247
+  = electricity_emergency_telephone_number
   %br/
   Gas:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:0800111999' } 0800 111 999
+  = gas_emergency_telephone_number
   %br/
   Water:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:0800714614' } 0800 714 614
+  = water_emergency_telephone_number
   %br/
