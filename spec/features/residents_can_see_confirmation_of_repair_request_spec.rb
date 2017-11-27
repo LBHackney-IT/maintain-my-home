@@ -136,14 +136,14 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Continue'
 
     # Appointments:
-    choose_radio_button 'Wednesday 12pm-5pm (11th October)'
+    choose_radio_button 'Wednesday midday to 5pm (11th October)'
     click_on 'Continue'
 
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 09124578'
         expect(page).to have_content 'Wednesday 11th October'
-        expect(page).to have_content 'between 12pm and 5pm'
+        expect(page).to have_content 'between midday and 5pm'
       end
 
       within '#summary' do
@@ -262,8 +262,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     # Contact details - last page before confirmation:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
-    check 'morning (8am - 12pm)'
-    check 'afternoon (12pm - 5pm)'
+    check 'morning (8am to midday)'
+    check 'afternoon (midday to 5pm)'
     click_on 'Continue'
 
     aggregate_failures do
@@ -308,7 +308,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
-        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
+        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and midday",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -316,7 +316,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
-        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
+        'problem' => "The streetlamp is broken\n\nCallback requested: between 8am and midday",
         'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
@@ -363,13 +363,13 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     # Contact details - last page before confirmation:
     fill_in 'Full name', with: 'John Evans'
     fill_in 'Telephone number', with: '078 98765 432'
-    check 'morning (8am - 12pm)'
+    check 'morning (8am to midday)'
     click_on 'Continue'
 
     aggregate_failures do
       within '#confirmation' do
         expect(page).to have_content 'Your reference number is 00367923'
-        expect(page).to have_content 'between 8am and 12pm'
+        expect(page).to have_content 'between 8am and midday'
       end
 
       within '#summary' do
@@ -385,7 +385,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'v1/repairs',
       priority: 'N',
-      problemDescription: "The streetlamp is broken\n\nCallback requested: between 8am and 12pm",
+      problemDescription: "The streetlamp is broken\n\nCallback requested: between 8am and midday",
       propertyReference: '00000503',
       contact: {
         name: 'John Evans',

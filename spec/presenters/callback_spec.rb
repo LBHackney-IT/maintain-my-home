@@ -10,14 +10,14 @@ RSpec.describe Callback do
     context 'when the stored callback time was morning' do
       it 'returns a user-readable string based on the stored callback time' do
         expect(Callback.new(time_slot: ['morning'], request_reference: '00000000').time)
-          .to eq '8am and 12pm'
+          .to eq '8am and midday'
       end
     end
 
     context 'when the stored callback time was afternoon' do
       it 'returns a user-readable string based on the stored callback time' do
         expect(Callback.new(time_slot: ['afternoon'], request_reference: '00000000').time)
-          .to eq '12pm and 5pm'
+          .to eq 'midday and 5pm'
       end
     end
 

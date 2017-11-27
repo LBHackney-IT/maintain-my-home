@@ -13,7 +13,7 @@ class AppointmentPresenter
   end
 
   def description
-    "#{day_of_week} #{begin_time}-#{end_time} (#{day} #{month})"
+    "#{day_of_week} #{begin_time} to #{end_time} (#{day} #{month})"
   end
 
   def date
@@ -59,6 +59,7 @@ class AppointmentPresenter
   end
 
   def friendly_time(time)
+    return 'midday' if time == time.midday
     format = if time.strftime('%M').to_i.zero?
                '%l%P'
              else

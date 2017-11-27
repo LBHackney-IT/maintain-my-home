@@ -24,9 +24,9 @@ class Callback
     def to_s
       case @time_slot
       when ['morning']
-        '8am and 12pm'
+        '8am and midday'
       when ['afternoon']
-        '12pm and 5pm'
+        'midday and 5pm'
       when %w[morning afternoon]
         '8am and 5pm'
       else

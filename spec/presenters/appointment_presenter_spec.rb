@@ -25,7 +25,7 @@ RSpec.describe AppointmentPresenter do
         'bestSlot' => true
       )
 
-      expect(presenter.description).to eql 'Monday 12:15pm-4:45pm (25th December)'
+      expect(presenter.description).to eql 'Monday 12:15pm to 4:45pm (25th December)'
     end
 
     it 'returns times on the hour without :00' do
@@ -35,7 +35,7 @@ RSpec.describe AppointmentPresenter do
         'bestSlot' => true
       )
 
-      expect(presenter.description).to eql 'Monday 1pm-4pm (25th December)'
+      expect(presenter.description).to eql 'Monday 1pm to 4pm (25th December)'
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe AppointmentPresenter do
         'bestSlot' => true
       )
 
-      expect(presenter.time).to eql '12pm and 4:45pm'
+      expect(presenter.time).to eql 'midday and 4:45pm'
     end
   end
 end
