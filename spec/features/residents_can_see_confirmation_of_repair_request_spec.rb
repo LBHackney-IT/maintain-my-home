@@ -39,7 +39,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('work_orders/09124578/available_appointments')
+      .with('v1/work_orders/09124578/available_appointments')
       .and_return(
         'results' => [
           { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false },
@@ -48,7 +48,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       )
     allow(fake_api).to receive(:post)
       .with(
-        'work_orders/09124578/appointments',
+        'v1/work_orders/09124578/appointments',
         beginDate: '2017-10-11T12:00:00Z',
         endDate: '2017-10-11T17:00:00Z',
       )
@@ -171,7 +171,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     )
 
     expect(fake_api).to have_received(:post).with(
-      'work_orders/09124578/appointments',
+      'v1/work_orders/09124578/appointments',
       beginDate: '2017-10-11T12:00:00Z',
       endDate: '2017-10-11T17:00:00Z',
     )

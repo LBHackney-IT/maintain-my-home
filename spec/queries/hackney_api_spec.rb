@@ -113,7 +113,7 @@ describe HackneyApi do
 
       json_api = instance_double('JsonApi')
       result = { 'results' => appointments }
-      allow(json_api).to receive(:get).with('work_orders/00412371/available_appointments').and_return(result)
+      allow(json_api).to receive(:get).with('v1/work_orders/00412371/available_appointments').and_return(result)
       api = HackneyApi.new(json_api)
 
       expect(api.list_available_appointments(work_order_reference: '00412371')).to eql appointments
@@ -132,7 +132,7 @@ describe HackneyApi do
       allow(json_api)
         .to receive(:post)
         .with(
-          'work_orders/00412371/appointments',
+          'v1/work_orders/00412371/appointments',
           beginDate: '2017-11-01T14:00:00Z',
           endDate: '2017-11-01T16:30:00Z'
         )
