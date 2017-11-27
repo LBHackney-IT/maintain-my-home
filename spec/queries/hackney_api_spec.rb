@@ -98,7 +98,7 @@ describe HackneyApi do
 
   describe '#list_available_appointments' do
     it 'returns a list of available appointments for a work order' do
-      result = [
+      appointments = [
         {
           'beginDate' => '2017-11-01T08:00:00Z',
           'endDate' => '2017-11-01T12:00:00Z',
@@ -112,10 +112,11 @@ describe HackneyApi do
       ]
 
       json_api = instance_double('JsonApi')
+      result = { 'results' => appointments }
       allow(json_api).to receive(:get).with('work_orders/00412371/available_appointments').and_return(result)
       api = HackneyApi.new(json_api)
 
-      expect(api.list_available_appointments(work_order_reference: '00412371')).to eql result
+      expect(api.list_available_appointments(work_order_reference: '00412371')).to eql appointments
     end
   end
 

@@ -21,9 +21,10 @@ class HackneyApi
   end
 
   def list_available_appointments(work_order_reference:)
-    @json_api.get(
+    response = @json_api.get(
       'work_orders/' + work_order_reference + '/available_appointments'
     )
+    response.fetch('results')
   end
 
   def book_appointment(work_order_reference:, begin_date:, end_date:)
