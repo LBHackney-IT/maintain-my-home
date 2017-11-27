@@ -43,21 +43,21 @@ describe HackneyApi do
   describe '#create_repair' do
     it 'sends repair creation parameters' do
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:post).with('repairs', anything)
+      allow(json_api).to receive(:post).with('v1/repairs', anything)
 
       api = HackneyApi.new(json_api)
       repair_params = {
         priority: 'U',
-        problem: 'It is broken',
+        problemDescription: 'It is broken',
         propertyReference: '01234567',
       }
       api.create_repair(repair_params)
 
       expect(json_api).to have_received(:post)
         .with(
-          'repairs',
+          'v1/repairs',
           priority: 'U',
-          problem: 'It is broken',
+          problemDescription: 'It is broken',
           propertyReference: '01234567',
         )
     end
@@ -66,7 +66,7 @@ describe HackneyApi do
       json_api = instance_double('JsonApi')
       result = double('api result')
       allow(json_api).to receive(:post)
-        .with('repairs', anything)
+        .with('v1/repairs', anything)
         .and_return result
 
       api = HackneyApi.new(json_api)
@@ -77,14 +77,19 @@ describe HackneyApi do
   describe '#get_repair' do
     it 'returns an individual repair' do
       result = {
-        'requestReference' => '00045678',
-        'orderReference' => '00412371',
-        'problem' => 'My bath is broken',
+        'repairRequestReference' => '00045678',
+        'problemDescription' => 'My bath is broken',
         'priority' => 'N',
         'propertyReference' => '00034713',
+        'workOrders' => [
+          {
+            'sorCode' => '20164242',
+            'workOrderReference' => '00412371',
+          },
+        ],
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('repairs/00045678').and_return(result)
+      allow(json_api).to receive(:get).with('v1/repairs/00045678').and_return(result)
       api = HackneyApi.new(json_api)
 
       expect(api.get_repair(repair_request_reference: '00045678')).to eql result

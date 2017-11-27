@@ -13,11 +13,11 @@ class HackneyApi
   end
 
   def create_repair(repair_params)
-    @json_api.post('repairs', repair_params)
+    @json_api.post('v1/repairs', repair_params)
   end
 
   def get_repair(repair_request_reference:)
-    @json_api.get('repairs/' + repair_request_reference)
+    @json_api.get('v1/repairs/' + repair_request_reference)
   end
 
   def list_available_appointments(work_order_reference:)

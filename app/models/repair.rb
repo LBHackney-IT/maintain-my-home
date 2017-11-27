@@ -4,12 +4,12 @@ class Repair
   end
 
   def request_reference
-    @repair_data.fetch('requestReference') do |_key|
-      @repair_data.fetch('repairRequestReference')
-    end
+    @repair_data.fetch('repairRequestReference')
   end
 
   def work_order_reference
-    @repair_data['orderReference']
+    return nil unless @repair_data.key?('workOrders')
+
+    @repair_data.fetch('workOrders')&.first&.fetch('workOrderReference')
   end
 end

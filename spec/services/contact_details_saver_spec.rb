@@ -18,9 +18,9 @@ RSpec.describe ContactDetailsSaver do
       expect(fake_answer_store)
         .to have_received(:store_selected_answers)
         .with(
-          :contact_details,
-          full_name: 'Alan Stubbs',
-          telephone_number: '0456765432',
+          'contact_details',
+          'full_name' => 'Alan Stubbs',
+          'telephone_number' => '0456765432',
         )
     end
 

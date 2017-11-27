@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'active_support/inflector'
 require 'app/models/repair'
 require 'app/presenters/callback'
 require 'app/presenters/appointment_presenter'
@@ -12,11 +13,16 @@ RSpec.describe Confirmation do
         allow(fake_api).to receive(:get_repair)
           .with(repair_request_reference: '00004578')
           .and_return(
-            'requestReference' => '00004578',
-            'orderReference' => '00412371',
-            'problem' => 'My bath is broken',
+            'repairRequestReference' => '00004578',
+            'problemDescription' => 'My bath is broken',
             'priority' => 'N',
             'propertyReference' => '00034713',
+            'workOrders' => [
+              {
+                'sorCode' => '20110010',
+                'workOrderReference' => '00412371',
+              },
+            ]
           )
         expect(Confirmation.new(request_reference: '00004578', answers: {}, api: fake_api).request_reference)
           .to eq '00412371'
@@ -29,8 +35,8 @@ RSpec.describe Confirmation do
         allow(fake_api).to receive(:get_repair)
           .with(repair_request_reference: '00004578')
           .and_return(
-            'requestReference' => '00004578',
-            'problem' => 'My bath is broken',
+            'repairRequestReference' => '00004578',
+            'problemDescription' => 'My bath is broken',
             'priority' => 'N',
             'propertyReference' => '00034713',
           )

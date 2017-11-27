@@ -16,9 +16,9 @@ class ContactDetailsSaver
 
   def persist_answers(form)
     @selected_answer_store.store_selected_answers(
-      :contact_details,
-      full_name: form.full_name,
-      telephone_number: form.telephone_number,
+      'contact_details',
+      'full_name' => form.full_name,
+      'telephone_number' => form.telephone_number
     )
   end
 end

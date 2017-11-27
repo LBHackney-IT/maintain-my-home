@@ -4,14 +4,14 @@ require 'app/presenters/callback'
 require 'app/models/repair_params'
 
 RSpec.describe RepairParams do
-  describe '#problem' do
+  describe '#problem_description' do
     it 'fetches the description from answers' do
       answers = {
         'describe_repair' => {
           'description' => 'My bath is broken',
         },
       }
-      expect(RepairParams.new(answers).problem).to eq 'My bath is broken'
+      expect(RepairParams.new(answers).problem_description).to eq 'My bath is broken'
     end
 
     context 'if no description was provided' do
@@ -21,7 +21,7 @@ RSpec.describe RepairParams do
             'description' => '',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq 'No description given'
+        expect(RepairParams.new(answers).problem_description).to eq 'No description given'
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe RepairParams do
             'room' => 'Bathroom',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq "My bath is broken\n\nRoom: Bathroom"
+        expect(RepairParams.new(answers).problem_description).to eq "My bath is broken\n\nRoom: Bathroom"
       end
 
       it 'describes the room if there was no description' do
@@ -47,7 +47,7 @@ RSpec.describe RepairParams do
             'room' => 'Bathroom',
           },
         }
-        expect(RepairParams.new(answers).problem).to eq "No description given\n\nRoom: Bathroom"
+        expect(RepairParams.new(answers).problem_description).to eq "No description given\n\nRoom: Bathroom"
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe RepairParams do
             'callback_time' => ['morning'],
           },
         }
-        expect(RepairParams.new(answers).problem).to eq "My bath is broken\n\nCallback requested: between 8am and 12pm"
+        expect(RepairParams.new(answers).problem_description).to eq "My bath is broken\n\nCallback requested: between 8am and 12pm"
       end
 
       it 'includes the callback info if there was no description' do
@@ -73,7 +73,7 @@ RSpec.describe RepairParams do
             'callback_time' => ['morning'],
           },
         }
-        expect(RepairParams.new(answers).problem).to eq "No description given\n\nCallback requested: between 8am and 12pm"
+        expect(RepairParams.new(answers).problem_description).to eq "No description given\n\nCallback requested: between 8am and 12pm"
       end
     end
   end
