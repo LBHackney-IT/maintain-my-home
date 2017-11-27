@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def telephone_number(number)
     tag.span itemprop: 'telephone' do
-      link_to number, "tel:#{number.gsub!(/\s+/, '')}"
+      link_to number, "tel:#{number.gsub(/\s+/, '')}"
     end
   end
 
