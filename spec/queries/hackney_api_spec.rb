@@ -125,7 +125,6 @@ describe HackneyApi do
       result = {
         'beginDate' => '2017-11-01T14:00:00Z',
         'endDate' => '2017-11-01T16:30:00Z',
-        'status' => 'booked',
       }
 
       json_api = instance_double('JsonApi')
