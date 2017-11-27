@@ -5,7 +5,7 @@ RSpec.feature 'Error pages' do
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get)
       .with('v1/properties?postcode=E5 8TE')
-      .and_raise JsonApi::ConnectionError
+      .and_raise JsonApi::ConnectionError, 'Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)'
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)
@@ -23,6 +23,8 @@ RSpec.feature 'Error pages' do
         )
       )
     allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+
+    allow(Rails.logger).to receive(:error)
 
     visit '/'
     click_on 'Start'
@@ -44,6 +46,8 @@ RSpec.feature 'Error pages' do
     click_on 'Find my address'
 
     expect(page).to have_content "We're really sorry"
+    expect(Rails.logger).to have_received(:error)
+      .with('[Handled] JsonApi::ConnectionError: Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)')
   end
 end
 
