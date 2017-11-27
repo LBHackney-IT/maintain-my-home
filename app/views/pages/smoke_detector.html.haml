@@ -9,38 +9,4 @@
   as a priority and schedule a suitable appointment to help
   resolve the issue quickly.
 
-%p
-  %strong
-    Call us on:
-    = succeed ',' do
-      %span{ itemprop: 'telephone' }
-        %a{ href: 'tel:02083562300' } 020 8356 2300
-    Monday to Friday, 8am to 7pm and Saturday, 9am to 1pm
-
-%p
-  Outside of these hours, we provide a
-  %em
-    make safe
-  service, to ensure that there is no danger to your household or significant
-  damage to your property, please call:
-  %strong
-    %span{ itemprop: 'telephone' }
-      %a{ href: 'tel:02083562300' } 020 8356 2300
-
-%p
-  %strong
-    For electricity:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:08000280247' } 020 8356 2300
-
-%p
-  %strong
-    For water:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:0800714614' } 0800 714 614
-
-%p
-  %strong
-    For gas, call National Grid:
-  %span{ itemprop: 'telephone' }
-    %a{ href: 'tel:0800111999' } 0800 111 999
+= render partial: 'emergency_telephone_numbers'
