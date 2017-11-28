@@ -62,7 +62,14 @@ class JsonApi
   end
 
   def error_message(response)
-    response.body&.dig('errors', 'developerMessage')
+    case response.body
+    when Array
+      response.body
+              .map { |error| error.fetch('developerMessage', '') }
+              .join(', ')
+    when Hash
+      response.body.dig('errors', 'developerMessage')
+    end
   end
 
   class ConnectionBuilder

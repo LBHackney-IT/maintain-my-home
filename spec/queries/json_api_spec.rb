@@ -169,6 +169,63 @@ RSpec.describe JsonApi do
       end
     end
 
+    context 'when the response error json is in the wrong format' do
+      context 'when the response is a 400 status' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+            .to_return(
+              status: 400,
+              body: [{ 'userMessage' => 'That was invalid', 'developerMessage' => 'invalid request' }].to_json
+            )
+          expect { json_api.get('properties?postcode=A1 1AA') }
+            .to raise_error(JsonApi::StatusBadRequestError, 'invalid request')
+        end
+      end
+
+      context 'when the response is a 400 status with multiple validation errors' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:post, 'http://hackney.api:8000/repairs')
+            .to_return(
+              status: 400,
+              body: [
+                { 'userMessage' => 'Phone number is missing', 'developerMessage' => 'Phone number cannot be blank' },
+                { 'userMessage' => 'Description is missing', 'developerMessage' => 'Description cannot be blank' },
+              ].to_json
+            )
+          expect { json_api.post('repairs', {}) }
+            .to raise_error(JsonApi::StatusBadRequestError, 'Phone number cannot be blank, Description cannot be blank')
+        end
+      end
+
+      context 'when the response is a 500 status' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+            .to_return(
+              status: 500,
+              body: [{ 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' }].to_json
+            )
+          expect { json_api.get('properties?postcode=A1 1AA') }
+            .to raise_error(JsonApi::StatusServerError, 'server error')
+        end
+      end
+
+      context 'when the response is an unexpected status' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+            .to_return(
+              status: 503,
+              body: [{ 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' }].to_json
+            )
+          expect { json_api.get('properties?postcode=A1 1AA') }
+            .to raise_error(JsonApi::StatusUnexpectedError, 'server error')
+        end
+      end
+    end
+
     context 'when a client certificate is specified' do
       # TODO: work out how to test that the certificate and api_key actually get used
 
