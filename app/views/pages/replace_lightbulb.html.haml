@@ -4,18 +4,12 @@
   Common fixes - replacing a lightbulb
 
 %p
-  Watch this brief video that provides guidance on how to replace a light bulb or a lamp in your home.
-
-%p
-  The guidance in this video is also applicable for replacing light bulbs in other areas of your home.
+  Watch this short video for advice on how to replace a light bulb or a lamp in your home.
 
 %iframe{ width: '560', height: '315', src: 'https://www.youtube.com/embed/NZN2AZAMPHY?rel=0&amp;showinfo=0', frameborder: '0', allowfullscreen: true }
 
-%h2
-  My light is still not working
+%p
+  If you've replaced the bulb and the light still isn't working, please select continue to book an appointment.
 
 %p
-  Please click continue to schedule an engineer
-
-%p
-  = link_to 'Continue', describe_repair_path, class: 'button'
+  = link_to 'Continue', describe_repair_path(details: 'inside_light_fitting'), class: 'button'
