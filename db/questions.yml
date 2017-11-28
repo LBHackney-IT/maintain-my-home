@@ -96,6 +96,9 @@ kitchen_problem:
     - text: Heating
       next: heating_problem
 
+    - text: Hot water
+      next: heating_problem
+
     - text: Sink
       next: sink_problem
 
@@ -191,6 +194,9 @@ bathroom_problem:
       next: bathroom_electrical_problem
 
     - text: Heating
+      next: heating_problem
+
+    - text: Hot water
       next: heating_problem
 
     - text: Toilet
@@ -289,6 +295,9 @@ other_problem:
      page: emergency_contact
 
    - text: Heating
+     next: heating_problem
+
+   - text: Hot water
      next: heating_problem
 
    - text: Internal door
