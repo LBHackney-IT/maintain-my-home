@@ -6,14 +6,26 @@ RSpec.describe AppointmentPresenter do
   end
 
   describe '#appointment_id' do
-    it 'returns the begin and end dates concatenated together' do
-      presenter = AppointmentPresenter.new(
-        'beginDate' => '2017-12-25T12:00:00Z',
-        'endDate' => '2017-12-25T16:45:00Z',
-        'bestSlot' => true
-      )
+    it 'returns the appointment in tamperproof format' do
+      ClimateControl.modify(ENCRYPTION_SECRET: 'test') do
+        appointment = {
+          'beginDate' => '2017-12-25T12:00:00Z',
+          'endDate' => '2017-12-25T16:45:00Z',
+          'bestSlot' => true,
+        }
 
-      expect(presenter.appointment_id).to eql '2017-12-25T12:00:00Z|2017-12-25T16:45:00Z'
+        fake_message_verifier_instance = instance_double('ActiveSupport::MessageVerifier')
+        expect(fake_message_verifier_instance).to receive(:generate)
+          .and_return('encrypted_appointment')
+
+        fake_message_verifier = class_double('ActiveSupport::MessageVerifier')
+        expect(fake_message_verifier).to receive(:new)
+          .and_return(fake_message_verifier_instance)
+
+        presenter = AppointmentPresenter.new(appointment, verifier: fake_message_verifier)
+
+        expect(presenter.appointment_id).to eql 'encrypted_appointment'
+      end
     end
   end
 

@@ -1,15 +1,15 @@
 class AppointmentPresenter
   include ActiveSupport::Inflector
 
-  def initialize(appointment = {})
+  def initialize(appointment = {}, verifier: ActiveSupport::MessageVerifier)
     @appointment = appointment
+    @verifier = verifier
   end
 
   def appointment_id
-    [
-      @appointment.fetch('beginDate'),
-      @appointment.fetch('endDate'),
-    ].join('|')
+    @verifier
+      .new(encryption_secret)
+      .generate(@appointment)
   end
 
   def description
@@ -67,5 +67,9 @@ class AppointmentPresenter
              end
 
     I18n.l(time, format: format).strip
+  end
+
+  def encryption_secret
+    ENV.fetch('ENCRYPTION_SECRET')
   end
 end
