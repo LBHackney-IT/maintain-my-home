@@ -113,30 +113,4 @@ RSpec.describe Confirmation do
       end
     end
   end
-
-  describe 'room' do
-    it 'Returns the stored room' do
-      fake_answers = {
-        'room' => {
-          'room' => 'Kitchen',
-        },
-      }
-
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).room)
-        .to eq 'Kitchen'
-    end
-  end
-
-  describe 'description' do
-    it 'Returns the stored description' do
-      fake_answers = {
-        'describe_repair' => {
-          'description' => 'My bath is broken',
-        },
-      }
-
-      expect(Confirmation.new(request_reference: '00000000', answers: fake_answers, api: double).description)
-        .to eq 'My bath is broken'
-    end
-  end
 end
