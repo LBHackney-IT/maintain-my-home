@@ -90,6 +90,22 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
       )
     allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
+    # FIRST VISIT ========================
+    visit '/'
+    click_on 'Start'
+
+    # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Fake decision tree
+    choose_radio_button 'Kitchen'
+    click_on 'Continue'
+
+    choose_radio_button 'Yes' # Gets a SOR code
+    click_on 'Continue'
+
+    # SECOND VISIT ========================
     visit '/'
     click_on 'Start'
 
@@ -116,51 +132,12 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     choose_radio_button 'Ross Court 42'
     click_on 'Continue'
 
-    # Contact details - last page before confirmation:
+    # Contact details
     fill_in 'Full name', with: 'Jane Evans'
     fill_in 'Telephone number', with: '07900 424242'
-    check 'morning (8am to midday)'
+    choose_radio_button 'morning (8am to midday)'
     click_on 'Continue'
 
-    # Confirmation page
-    expect(page).to have_content('We will call you within one working day, between 8am and midday')
-
-    visit '/'
-    click_on 'Start'
-
-    # Emergency page:
-    choose_radio_button 'No'
-    click_on 'Continue'
-
-    # Fake decision tree
-    choose_radio_button 'Kitchen'
-    click_on 'Continue'
-
-    choose_radio_button 'Yes' # Gets a SOR code
-    click_on 'Continue'
-
-    # Describe problem:
-    fill_in 'describe_repair_form_description', with: 'My sink is blocked'
-    click_on 'Continue'
-
-    # Address search:
-    fill_in 'Postcode', with: 'E5 8TE'
-    click_on 'Find my address'
-
-    # Address selection:
-    choose_radio_button 'Ross Court 42'
-    click_on 'Continue'
-
-    # Contact details - last page before confirmation:
-    fill_in 'Full name', with: 'Jane Evans'
-    fill_in 'Telephone number', with: '07900 424242'
-    click_on 'Continue'
-
-    # Book appointment
-    choose_radio_button 'Monday 10am to midday (27th November)'
-    click_on 'Continue'
-
-    # Confirmation page
-    expect(page).to have_content('Your appointment has been booked for Monday 27th November between 10am and midday.')
+    expect(page).to have_content 'We will call you within one working day, between 8am and midday'
   end
 end
