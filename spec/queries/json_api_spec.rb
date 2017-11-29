@@ -169,7 +169,7 @@ RSpec.describe JsonApi do
       end
     end
 
-    context 'when the response error json is in the wrong format' do
+    context 'when the response error json is in the wrong format (array)' do
       context 'when the response is a 400 status' do
         it 'raises an error' do
           json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
@@ -219,6 +219,34 @@ RSpec.describe JsonApi do
             .to_return(
               status: 503,
               body: [{ 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' }].to_json
+            )
+          expect { json_api.get('properties?postcode=A1 1AA') }
+            .to raise_error(JsonApi::StatusUnexpectedError, 'server error')
+        end
+      end
+    end
+
+    context 'when the response error json is in the wrong format (no key)' do
+      context 'when the response is a 500 status' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+            .to_return(
+              status: 500,
+              body: { 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' }.to_json
+            )
+          expect { json_api.get('properties?postcode=A1 1AA') }
+            .to raise_error(JsonApi::StatusServerError, 'server error')
+        end
+      end
+
+      context 'when the response is an unexpected status' do
+        it 'raises an error' do
+          json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+          stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+            .to_return(
+              status: 503,
+              body: { 'userMessage' => 'Something is wrong', 'developerMessage' => 'server error' }.to_json
             )
           expect { json_api.get('properties?postcode=A1 1AA') }
             .to raise_error(JsonApi::StatusUnexpectedError, 'server error')
