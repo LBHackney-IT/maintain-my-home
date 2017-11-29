@@ -68,7 +68,7 @@ class JsonApi
               .map { |error| error.fetch('developerMessage', '') }
               .join(', ')
     when Hash
-      response.body.dig('errors', 'developerMessage')
+      response.body.fetch('errors', response.body)['developerMessage']
     end
   end
 
