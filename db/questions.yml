@@ -188,7 +188,7 @@ bathroom_problem:
       next: bath_problem
 
     - text: Damp or mould
-      desc: damp
+      page: damp_and_mould
 
     - text: Electrical
       next: bathroom_electrical_problem
@@ -283,7 +283,7 @@ other_problem:
   question: What is the problem?
   answers:
    - text: Damp or mould
-     desc: damp
+     page: damp_and_mould
 
    - text: Electrical
      next: other_electrical_problem
@@ -421,3 +421,16 @@ toilet_problem:
     - text: Something else
       desc: toilet_problem
       sor_code: 20060020
+
+damp_or_mould_problem:
+  question: Is your problem with damp or mould?
+  answers:
+    - text: Damp
+      desc: damp
+      sor_code: PRE00001
+
+    - text: Mould
+      desc: mould
+      sor_code: 08500820
+
+    - text: I'm not sure
