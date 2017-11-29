@@ -1,22 +1,23 @@
 = back_link
 
-%h1 Electrical safety
+%h1
+  Electrical safety
 
 %p
   %strong
-    Please exercise extreme caution with any faulty or exposed electrics
-    in your home and make sure that the area is restricted for any
-    household members.
+    You should always be extremely careful with any faulty
+    or exposed electrics in your home and make sure no one
+    else in the house is in danger from them.
 
 %p
-  If you are uncertain or have any immediate concerns about an electrical
-  repair issue in your home, please call our repairs contact centre for
-  guidance on
-  = succeed '.'
-    = electricity_emergency_telephone_number
+  If you're uncertain or have any immediate concerns about
+  an electrical repair issue in your home, please call our
+  repairs contact centre for guidance on
+  = succeed '.' do
+    = repairs_contact_centre_telephone_number
 
 %p
-  If you would like to book an appointment for your electrical repair,
-  please select continue.
+  If you'd like to book an appointment for your electrical
+  repair, please select continue.
 
 %p= link_to 'Continue', describe_repair_path, class: 'button'

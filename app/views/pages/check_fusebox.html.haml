@@ -4,26 +4,45 @@
   Checking the fuse box
 
 %p
-  If your light is not working, it may be that the corresponding trip switch
-  in your fuse box is not in the correct position. Please check your fuse
-  box and ensure that the switch is in the 'ON' position.
+  If your light isn't working and you've already tried changing the
+  light bulb, it may be that the lighting trip switch in your fuse
+  box has activated and is in the ‘OFF’ position.
+  Please check your fuse box and make sure the lighting trip
+  switch is in the 'ON' position.
 
 %p
-  The fuse box is typically located in the hallway cupboard. If you would
-  like help locating the fuse box in your home, please call the repairs
-  contact centre on
+  If it doesn't reset, select continue to book an appointment.
+
+%p
+  If the trip switch does reset, check the light by pressing
+  the light switch again. If the light is still not working,
+  select continue to book an appointment.
+
+%p
+  The fuse box is usually near your electric meter or in
+  the hallway. If you need help finding your fuse box,
+  please call the repairs contact centre on
   = succeed '.' do
-    = electricity_emergency_telephone_number
+    = repairs_contact_centre_telephone_number
+
+%h2
+  Electrical safety
 
 %p
   %strong
-    Warning:
-  If you are replacing any light bulbs in your home, please ensure you have
-  flicked the relevant trip switch to the 'OFF' position.
-  If you have any doubts, please contact us for guidance.
+    You should always be extremely careful with any faulty or
+    exposed electrics in your home and make sure no one else
+    in the house is in danger from them.
 
 %p
-  If you have checked the fusebox and the light is still not working, please
-  select continue.
+  If you are uncertain or have any immediate concerns about
+  an electrical repair issue in your home, please call our
+  repairs contact centre for guidance on
+  = succeed '.' do
+    = repairs_contact_centre_telephone_number
+
+%p
+  If you would like to book an appointment for your
+  electrical repair, please select continue.
 
 %p= link_to 'Continue', questions_path('light_check_bulb'), class: 'button'

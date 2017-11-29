@@ -61,8 +61,8 @@ en:
           no_heating: I have no heating
           no_water: I have no water
           no_power: I have no power
-          water_leak: I have a water leak which I cannot contain
-          not_secure_access: I cannot secure access to my property
+          water_leak: I have a water leak which I can't contain
+          not_secure_access: I can't secure my property
           home_adaptations: My home has been adapted for my disability
           none_of_the_above: No, my problem is not one of the above
   title: Report a repair

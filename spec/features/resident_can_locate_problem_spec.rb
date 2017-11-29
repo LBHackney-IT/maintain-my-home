@@ -60,7 +60,7 @@ RSpec.feature 'Resident can locate a problem' do
 
     click_button t('helpers.submit.create')
 
-    expect(page).to have_content 'We cannot find your address'
+    expect(page).to have_content "We can't find your address"
   end
 
   scenario 'when an invalid postcode is entered' do
@@ -146,6 +146,6 @@ RSpec.feature 'Resident can locate a problem' do
 
     click_button t('helpers.submit.create')
 
-    expect(page).to have_content 'We cannot find your address'
+    expect(page).to have_content "We can't find your address"
   end
 end

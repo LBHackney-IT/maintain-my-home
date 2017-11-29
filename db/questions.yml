@@ -70,7 +70,7 @@ outside_problem:
       sor_code: 20030010
 
     - text: A light is not working
-      desc: outside_describe_repair
+      desc: communal_faulty_light
 
     - text: I have pests or rodents in or near my home
       desc: communal_pests
