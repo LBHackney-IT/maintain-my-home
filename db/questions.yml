@@ -28,7 +28,7 @@ communal_problem:
 
     - text: The rubbish chute is blocked or damaged
       desc: communal_rubbish_chute
-      sor_code: 34D60301
+      sor_code: 2500990
 
     - text: There is a blocked or overflowing drain
       desc: communal_blocked_drain
