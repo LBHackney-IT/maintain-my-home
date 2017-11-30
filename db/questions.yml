@@ -413,11 +413,10 @@ toilet_problem:
   question: Is your problem one of these?
   answers:
     - text: Toilet is blocked
-      page: blocked_only_toilet
-      sor_code: 20060020
+      page: toilet_unblock_info
 
     - text: Toilet is not flushing
-      page: toilet_unblock_info
+      desc: toilet_problem
       sor_code: 20060020
 
     - text: Toilet is damaged
@@ -429,6 +428,16 @@ toilet_problem:
       sor_code: 20060020
 
     - text: Something else
+      desc: toilet_problem
+      sor_code: 20060020
+
+blocked_only_toilet:
+  question: Is this your only toilet?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
       desc: toilet_problem
       sor_code: 20060020
 
