@@ -3,9 +3,13 @@ class QuestionsValidator
   class MissingQuestions < Error; end
   class MissingMandatoryQuestions < Error; end
   class MissingPartials < Error; end
+  class MissingPages < Error; end
 
-  def initialize(partial_checker:, mandatory_questions: [])
+  def initialize(partial_checker:,
+                 page_checker:,
+                 mandatory_questions: [])
     @partial_checker = partial_checker
+    @page_checker = page_checker
     @mandatory_questions = mandatory_questions
   end
 
@@ -14,6 +18,7 @@ class QuestionsValidator
     validate_next!(questions)
     validate_desc!(questions)
     validate_mandatory!(questions)
+    validate_page!(questions)
   end
 
   private
@@ -37,6 +42,14 @@ class QuestionsValidator
 
     return if missing_question_ids.empty?
     raise MissingMandatoryQuestions, missing_question_ids
+  end
+
+  def validate_page!(questions)
+    missing_pages = questions.answer_values_for('page').reject do |page_name|
+      @page_checker.exists?(page_name)
+    end
+
+    raise MissingPages, missing_pages if missing_pages.any?
   end
 
   class Questions

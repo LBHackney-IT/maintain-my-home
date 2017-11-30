@@ -3,9 +3,10 @@ class QuestionSet
   class UnknownQuestion < Error; end
   class BadlyFormattedYaml < Error; end
 
-  def initialize(filename = 'db/questions.yml', partial_checker:)
+  def initialize(filename = 'db/questions.yml', partial_checker:, page_checker:)
     validator = QuestionsValidator.new(
       partial_checker: partial_checker,
+      page_checker: page_checker,
       mandatory_questions: %w[location which_room]
     )
     loader = QuestionSetLoader.new(validator: validator)
