@@ -6,3 +6,13 @@
   %strong
     = succeed '.' do
       = appointment.time
+
+%p
+  If you need to change your appointment or have any questions,
+  please call us on
+  = repairs_contact_centre_telephone_number
+  and quote your reference no
+  = succeed '.' do
+    = @confirmation.request_reference
+  We're open Monday to Friday, 8am to midnight
+  and Saturday, 9am to 1pm.
