@@ -40,6 +40,7 @@ en:
         create: Find my address
       create: Continue
       submit: Continue
+  rcc_opening_hours: Monday to Friday, 8am to midnight and Saturday, 9am to 1pm
   simple_form:
     labels:
       address:

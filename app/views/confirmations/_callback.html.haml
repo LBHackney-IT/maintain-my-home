@@ -10,5 +10,6 @@
   and quote your reference number
   = succeed "." do
     %strong= callback.request_reference
-  We are open Monday to Friday 8am to midnight
-  and Saturday, 9am to 1pm.
+  We're open
+  = succeed '.' do
+    = t('rcc_opening_hours')
