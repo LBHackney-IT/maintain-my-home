@@ -54,11 +54,11 @@ communal_light_problem:
 outside_problem:
   question: What is the problem outside your home?
   answers:
-    - text: The guttering or downpipe is overflowing or damaged
+    - text: The guttering or downpipe is blocked or damaged
       desc: outside_guttering
       sor_code: 20060010
 
-    - text: A drain is blocked or overflowing
+    - text: A drain is blocked
       desc: outside_drain
       sor_code: 34D60301
 
