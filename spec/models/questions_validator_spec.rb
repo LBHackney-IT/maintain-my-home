@@ -16,7 +16,7 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingQuestions)
     end
 
@@ -33,7 +33,7 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: false)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingPartials)
     end
 
@@ -50,7 +50,7 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker).validate!(questions) }
         .to_not raise_error
     end
   end
@@ -68,14 +68,14 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker, mandatory_questions: ['location']).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker, mandatory_questions: ['location']).validate!(questions) }
         .to_not raise_error
     end
 
     it 'throws an error if these questions are not included' do
       questions = {}
       partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker, mandatory_questions: ['which_room']).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker, mandatory_questions: ['which_room']).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingMandatoryQuestions)
     end
   end
