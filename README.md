@@ -43,8 +43,8 @@ The following feature flags can be used. The first time these are used, they
 should be created via the Flipper UI:
 
 - `service_disabled` - Enabling this flag disables the service completely. All
-  pages will return a message prompting users to call the repairs contact
-  centre. This is to be used when Hackney backend systems are unavailable.
+  pages will return a message prompting users to call the Repairs Contact
+  Centre. This is to be used when Hackney back-end systems are unavailable.
 
 ## TODO:
 
