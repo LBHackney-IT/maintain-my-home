@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Resident can see a confirmation of their repair request' do
+  around(:each) do |example|
+    travel_to Time.zone.local(2017, 10, 1) do
+      example.run
+    end
+  end
+
   scenario 'when the issue was diagnosed and an appointment was booked' do
     ClimateControl.modify(ENCRYPTION_SECRET: 'test') do
       property = {
