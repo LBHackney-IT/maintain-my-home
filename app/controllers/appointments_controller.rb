@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   def show
     @form = AppointmentForm.new
     @appointments = available_appointments
+    @work_order_reference = work_order_reference
   end
 
   def submit
@@ -9,6 +10,7 @@ class AppointmentsController < ApplicationController
 
     if @form.invalid?
       @appointments = available_appointments
+      @work_order_reference = work_order_reference
       return render :show
     end
 
