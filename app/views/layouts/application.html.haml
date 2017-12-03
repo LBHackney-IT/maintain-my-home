@@ -11,11 +11,22 @@
 
     = csrf_meta_tags
     %link{ href: 'https://fonts.googleapis.com/css?family=Droid+Sans:400,700', rel: 'stylesheet' }/
-    = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
 
     = render partial: 'analytics/google'
     = render partial: 'analytics/hotjar'
+
+    /[if lt IE 9]
+      = javascript_include_tag 'html5shiv'
+      = stylesheet_link_tag 'application-ie8', media: 'all'
+    /[if gt IE 8]
+      = stylesheet_link_tag 'application', media: 'all'
+
+    :plain
+      <!--[if !IE]><!-->
+    = stylesheet_link_tag 'application', media: 'all'
+    :plain
+      <!-- <![endif]-->
 
   %body
     %header
