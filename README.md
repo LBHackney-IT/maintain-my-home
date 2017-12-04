@@ -12,6 +12,7 @@ root of the application containing environment variable assignments.
 The following environment variables are required to run the site:
 
 - `HACKNEY_API_ROOT` - the root of the Hackney API which is used by the site
+- `ENCRYPTION_SECRET` - secret used to prevent parameter tampering
 
 ### Optional config
 
