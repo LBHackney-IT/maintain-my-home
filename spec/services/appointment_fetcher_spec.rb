@@ -10,7 +10,10 @@ RSpec.describe AppointmentFetcher do
     stub_appointments(available_appointments)
 
     travel_to Time.zone.local(2017, 10, 1) do
-      appointments = AppointmentFetcher.new.call(work_order_reference: '04819510')
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '04819510',
+        limit: 15
+      )
 
       expect(appointments).to eql available_appointments
     end
@@ -24,7 +27,10 @@ RSpec.describe AppointmentFetcher do
     stub_appointments([past_appointment, today_appointment, tomorrow_appointment])
 
     travel_to Time.zone.local(2017, 10, 11) do
-      appointments = AppointmentFetcher.new.call(work_order_reference: '1234')
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '1234',
+        limit: 15
+      )
 
       expect(appointments).to include tomorrow_appointment
       expect(appointments).not_to include past_appointment
@@ -39,7 +45,10 @@ RSpec.describe AppointmentFetcher do
     stub_appointments([regular_appointment, long_appointment])
 
     travel_to Time.zone.local(2017, 10, 1) do
-      appointments = AppointmentFetcher.new.call(work_order_reference: '1234')
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '1234',
+        limit: 15
+      )
 
       expect(appointments).to include regular_appointment
       expect(appointments).not_to include long_appointment
@@ -53,10 +62,32 @@ RSpec.describe AppointmentFetcher do
     stub_appointments([best_slot, non_best_slot])
 
     travel_to Time.zone.local(2017, 10, 1) do
-      appointments = AppointmentFetcher.new.call(work_order_reference: '1234')
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '1234',
+        limit: 15
+      )
 
       expect(appointments).to include best_slot
       expect(appointments).not_to include non_best_slot
+    end
+  end
+
+  it 'returns a limited number of results' do
+    first_slot = { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true }
+    second_slot = { 'beginDate' => '2017-10-11T12:00:00Z', 'endDate' => '2017-10-11T14:00:00Z', 'bestSlot' => true }
+    third_slot = { 'beginDate' => '2017-10-11T14:00:00Z', 'endDate' => '2017-10-11T16:00:00Z', 'bestSlot' => true }
+
+    stub_appointments([first_slot, second_slot, third_slot])
+
+    travel_to Time.zone.local(2017, 10, 1) do
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '1234',
+        limit: 2
+      )
+
+      expect(appointments).to include first_slot
+      expect(appointments).to include second_slot
+      expect(appointments).not_to include third_slot
     end
   end
 

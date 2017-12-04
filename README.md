@@ -52,6 +52,8 @@ The app should run successfully without these environment variables:
   `Rack::Timeout` times-out an HTTP request. This is used to ensure that the
   app times out before Heroku automatically kills the connection and displays
   its own, less friendly, error message.
+- `APPOINTMENT_LIMIT` - Set this to override the maximum number of appointments
+  returned from the `AppointmentFetcher` service. Defaults to 15.
 
 #### Feature flagging
 

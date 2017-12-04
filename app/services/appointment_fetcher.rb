@@ -1,10 +1,11 @@
 class AppointmentFetcher
-  def call(work_order_reference:)
+  def call(work_order_reference:, limit:)
     @work_order_reference = work_order_reference
 
     appointments = filter_before_tomorrow(available_appointments)
     appointments = keep_best_slots_only(appointments)
-    filter_long_slots(appointments)
+    appointments = filter_long_slots(appointments)
+    appointments.take(limit)
   end
 
   private

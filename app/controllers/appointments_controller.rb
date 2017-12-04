@@ -36,7 +36,10 @@ class AppointmentsController < ApplicationController
   def available_appointments
     AppointmentFetcher
       .new
-      .call(work_order_reference: work_order_reference)
+      .call(
+        work_order_reference: work_order_reference,
+        limit: ENV.fetch('APPOINTMENT_LIMIT', 15).to_i
+      )
       .map { |appointment| AppointmentPresenter.new(appointment) }
   end
 
