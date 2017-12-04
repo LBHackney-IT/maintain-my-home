@@ -168,6 +168,7 @@ sink_problem:
   question: Is your problem one of these?
   answers:
     - text: Sink is blocked
+      page: unblock_sink
       sor_code: 20060030
 
     - text: Sink is leaking - containable
@@ -229,6 +230,7 @@ basin_problem:
   question: Is your problem one of these?
   answers:
     - text: Basin / Sink is blocked
+      page: unblock_sink
       sor_code: 20060020
 
     - text: Basin / Sink is leaking - containable
