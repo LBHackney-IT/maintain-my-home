@@ -12,4 +12,12 @@
         as: :radio_buttons,
         label: false
 
+      %p
+        If you can't make any of these appointments, please call
+        the Repairs Contact Centre on
+        = repairs_contact_centre_telephone_number
+        and quote reference number
+        = succeed '.' do
+          = @work_order_reference
+
       = f.button :submit, class: 'button'
