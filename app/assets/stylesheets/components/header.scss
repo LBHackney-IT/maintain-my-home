@@ -12,6 +12,7 @@ header {
   h1 {
     background: asset-url('logo.png') 0 0 no-repeat;
     background-size: contain;
+    -ms-behavior: url(/backgroundsize.htc);
     display: inline-block;
     height: 62px;
     overflow: hidden;
