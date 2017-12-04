@@ -37,6 +37,7 @@ Metrics/LineLength:
     Exclude:
       - 'spec/**/*'
       - 'config/initializers/simple_form.rb'
+      - 'config/initializers/rollbar.rb'
 
 Metrics/BlockLength:
     Exclude:
