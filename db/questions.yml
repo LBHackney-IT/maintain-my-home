@@ -144,6 +144,9 @@ kitchen_electrical_problem:
 heating_problem:
   question: Is your problem one of these?
   answers:
+    - text: I have no heating
+      page: heating_repairs
+
     - text: I have no hot water - boiler in my home
       desc: inside_boiler
       sor_code: 489680KH
@@ -192,7 +195,7 @@ sink_problem:
 bathroom_problem:
   question: What is the problem in your bathroom?
   answers:
-    - text: Basin
+    - text: Basin / Sink
       next: basin_problem
 
     - text: Bath

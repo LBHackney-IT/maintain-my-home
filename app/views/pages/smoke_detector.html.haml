@@ -9,4 +9,10 @@
   the problem as a priority and schedule a suitable
   appointment to help resolve the issue quickly.
 
-= render partial: 'pages/emergency_telephone_numbers'
+%p
+  %strong
+    Call us on:
+    = succeed ',' do
+      = repairs_contact_centre_telephone_number
+    = succeed '.' do
+      = t('rcc_opening_hours')
