@@ -30,6 +30,14 @@ The app should run successfully without these environment variables:
   [Hotjar Snippet Version](https://docs.hotjar.com/v1.0/docs/understanding-the-tracking-code)
   i.e. the version of the Hotjar tracking code being used
 
+#### Monitoring
+
+- `ROLLBAR_ACCESS_TOKEN` - The access token for the
+  [rollbar](https://rollbar.com) account used to monitor system errors
+- `ROLLBAR_ENV` - Defines which environment rollbar errors are logged to. By
+  default this is `Rails.env` and doesn't need to be set in development but on
+  the staging server this should be set to 'staging'.
+
 #### Authentication
 
 - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
