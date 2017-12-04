@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from JsonApi::ApiError do |e|
     logger.error "[Handled] #{e.class}: #{e.message}"
+    Rollbar.error(e)
     render 'errors/api_error'
   end
 

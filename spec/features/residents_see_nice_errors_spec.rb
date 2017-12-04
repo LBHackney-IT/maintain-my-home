@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.feature 'Error pages' do
   scenario 'when UH is not available' do
     fake_api = instance_double(JsonApi)
+    connection_error = JsonApi::ConnectionError.new('Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)')
     allow(fake_api).to receive(:get)
       .with('v1/properties?postcode=E5 8TE')
-      .and_raise JsonApi::ConnectionError, 'Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)'
+      .and_raise connection_error
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     fake_question_set = instance_double(QuestionSet)
@@ -25,6 +26,7 @@ RSpec.feature 'Error pages' do
     allow(QuestionSet).to receive(:new).and_return(fake_question_set)
 
     allow(Rails.logger).to receive(:error)
+    allow(Rollbar).to receive(:error)
 
     visit '/'
     click_on 'Start'
@@ -48,6 +50,8 @@ RSpec.feature 'Error pages' do
     expect(page).to have_content "We're really sorry"
     expect(Rails.logger).to have_received(:error)
       .with('[Handled] JsonApi::ConnectionError: Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)')
+    expect(Rollbar).to have_received(:error)
+      .with(connection_error)
   end
 end
 
