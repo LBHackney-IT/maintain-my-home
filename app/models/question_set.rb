@@ -3,8 +3,13 @@ class QuestionSet
   class UnknownQuestion < Error; end
   class BadlyFormattedYaml < Error; end
 
-  def initialize(filename = 'db/questions.yml', partial_checker:)
-    loader = QuestionSetLoader.new(partial_checker: partial_checker)
+  def initialize(filename = 'db/questions.yml', partial_checker:, page_checker:)
+    validator = QuestionsValidator.new(
+      partial_checker: partial_checker,
+      page_checker: page_checker,
+      mandatory_questions: %w[location which_room]
+    )
+    loader = QuestionSetLoader.new(validator: validator)
     file_path = Rails.root.join(filename)
     @questions = loader.load!(file_path)
   end
@@ -19,22 +24,15 @@ class QuestionSet
   end
 
   class QuestionSetLoader
-    def initialize(partial_checker:)
-      @partial_checker = partial_checker
+    def initialize(validator:)
+      @validator = validator
     end
 
     def load!(file_path)
       yaml_data = File.read(file_path)
-      questions = parse_yaml(yaml_data).to_ruby
-
-      QuestionsValidator
-        .new(
-          questions,
-          partial_checker: @partial_checker,
-          mandatory_questions: %w[location which_room]
-        ).validate!
-
-      questions
+      parse_yaml(yaml_data).to_ruby.tap do |questions|
+        @validator.validate!(questions)
+      end
     end
 
     private

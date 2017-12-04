@@ -15,8 +15,7 @@ RSpec.describe QuestionsValidator do
           ],
         },
       }
-      partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: double, page_checker: double).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingQuestions)
     end
 
@@ -33,7 +32,7 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: false)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker, page_checker: double).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingPartials)
     end
 
@@ -50,7 +49,41 @@ RSpec.describe QuestionsValidator do
         },
       }
       partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker).validate! }
+      expect { QuestionsValidator.new(partial_checker: partial_checker, page_checker: double).validate!(questions) }
+        .to_not raise_error
+    end
+
+    it 'throws an error if there is a link to a page which does not exist' do
+      questions = {
+        'location' => {
+          'question' => 'What is the problem?',
+          'answers' => [
+            {
+              'text' => 'Something which requires a page',
+              'page' => 'a_page_which_does_not_exist',
+            },
+          ],
+        },
+      }
+      page_checker = instance_double('PageChecker', exists?: false)
+      expect { QuestionsValidator.new(partial_checker: double, page_checker: page_checker).validate!(questions) }
+        .to raise_error(QuestionsValidator::MissingPages)
+    end
+
+    it 'passes if there is a link to a page which exists' do
+      questions = {
+        'location' => {
+          'question' => 'What is the problem?',
+          'answers' => [
+            {
+              'text' => 'Something which requires a page',
+              'page' => 'a_page_which_exists',
+            },
+          ],
+        },
+      }
+      page_checker = instance_double('PageChecker', exists?: true)
+      expect { QuestionsValidator.new(partial_checker: double, page_checker: page_checker).validate!(questions) }
         .to_not raise_error
     end
   end
@@ -67,15 +100,13 @@ RSpec.describe QuestionsValidator do
           ],
         },
       }
-      partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker, mandatory_questions: ['location']).validate! }
+      expect { QuestionsValidator.new(partial_checker: double, page_checker: double, mandatory_questions: ['location']).validate!(questions) }
         .to_not raise_error
     end
 
     it 'throws an error if these questions are not included' do
       questions = {}
-      partial_checker = instance_double('DescriptionPartialChecker', exists?: true)
-      expect { QuestionsValidator.new(questions, partial_checker: partial_checker, mandatory_questions: ['which_room']).validate! }
+      expect { QuestionsValidator.new(partial_checker: double, page_checker: double, mandatory_questions: ['which_room']).validate!(questions) }
         .to raise_error(QuestionsValidator::MissingMandatoryQuestions)
     end
   end
