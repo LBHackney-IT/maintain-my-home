@@ -12,7 +12,7 @@ location:
       next: communal_problem
 
 communal_problem:
-  question: What is the problem in the communal grounds?
+  question: What is the problem in the communal area?
   answers:
     - text: A light is not working
       next: communal_light_problem
