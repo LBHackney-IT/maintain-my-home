@@ -10,12 +10,12 @@
 
 %ul
   %li
-    report non-emergency repairs to your home
+    report non-emergency repairs for your home
   %li
     choose a date and time for us to carry out the repair
 
 %p
-  Reporting a repair should take around 5 minutes.
+  Reporting a repair should take less than 5 minutes.
 
 %p.notice
   %i.icon.icon-important
@@ -40,23 +40,21 @@
     = repairs_contact_centre_telephone_number
 
 %p
-  They are open
-  %strong
-    Monday to Friday 8am to 7pm
-  and
-  %strong
-    Saturday 9am to 1pm
+  We're open
+  = succeed '.' do
+    = t('rcc_opening_hours')
 
 %h2
   Home improvements
 
 %p
-  Please note, you are responsible for any home improvements you carry
-  out yourself.
+  Please note that you're responsible for repairs to
+  any home improvements you've carried out yourself.
 
 %h2
   Tenant Management Organisation (TMO)
 
 %p
-  If your home is managed by a TMO, please contact them first for
+  If your home is managed by a Tenant Management
+  Organisation, please contact them first for
   help with repairs.

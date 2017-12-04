@@ -93,7 +93,7 @@ RSpec.feature 'Users can diagnose their issue' do
     choose_radio_button 'To an optional describe form'
     click_on 'Continue'
 
-    expect(page).to have_content 'Please let us know any additional details'
+    expect(page).to have_content 'Let us know any additional details'
 
     click_on 'Continue'
 
@@ -111,7 +111,7 @@ RSpec.feature 'Users can diagnose their issue' do
     choose_radio_button 'To a required describe form'
     click_on 'Continue'
 
-    expect(page).to have_content 'Please describe what needs to be fixed'
+    expect(page).to have_content 'Let us know any additional details you think might help us'
 
     click_on 'Continue'
 
@@ -129,12 +129,12 @@ RSpec.feature 'Users can diagnose their issue' do
     choose_radio_button 'Somewhere special'
     click_on 'Continue'
 
-    expect(page).to have_content 'Please give details of the damp or mould'
+    expect(page).to have_content 'The exact location of the damp'
 
     # Submit invalid details - the same text should display
     click_on 'Continue'
 
-    expect(page).to have_content 'Please give details of the damp or mould'
+    expect(page).to have_content 'The exact location of the damp'
   end
 
   scenario 'not choosing an answer redisplays the form with an error' do

@@ -12,11 +12,10 @@ location:
       next: communal_problem
 
 communal_problem:
-  question: What is the problem in the communal grounds?
+  question: What is the problem in the communal area?
   answers:
     - text: A light is not working
-      desc: communal_faulty_lamp_post
-      sor_code: 20110220
+      next: communal_light_problem
 
     - text: The main entrance door is damaged or not closing
       desc: communal_main_entrance_door
@@ -24,12 +23,12 @@ communal_problem:
     - text: The intercom is not working for my property
       desc: communal_intercom
 
-    - text: The lift is faulty
+    - text: The lift is faulty or damaged
       desc: communal_lift
 
     - text: The rubbish chute is blocked or damaged
       desc: communal_rubbish_chute
-      sor_code: 34D60301
+      sor_code: 2500990
 
     - text: There is a blocked or overflowing drain
       desc: communal_blocked_drain
@@ -41,10 +40,21 @@ communal_problem:
     - text: Something else
       desc: communal_describe_repair
 
+communal_light_problem:
+  question: Where is the faulty light located?
+  answers:
+    - text: On a lamp post
+      desc: communal_faulty_street_light
+      sor_code: 405E1022
+
+    - text: Somewhere else
+      desc: communal_faulty_light
+      sor_code: 405E1017
+
 outside_problem:
   question: What is the problem outside your home?
   answers:
-    - text: The guttering or downpipe is overflowing or damaged
+    - text: The guttering or downpipe is blocked or damaged
       desc: outside_guttering
       sor_code: 20060010
 
@@ -60,7 +70,7 @@ outside_problem:
       sor_code: 20030010
 
     - text: A light is not working
-      desc: outside_describe_repair
+      desc: communal_faulty_light
 
     - text: I have pests or rodents in or near my home
       desc: communal_pests
@@ -94,6 +104,9 @@ kitchen_problem:
       next: kitchen_electrical_problem
 
     - text: Heating
+      next: heating_problem
+
+    - text: Hot water
       next: heating_problem
 
     - text: Sink
@@ -131,6 +144,9 @@ kitchen_electrical_problem:
 heating_problem:
   question: Is your problem one of these?
   answers:
+    - text: I have no heating
+      page: heating_repairs
+
     - text: I have no hot water - boiler in my home
       desc: inside_boiler
       sor_code: 489680KH
@@ -155,6 +171,7 @@ sink_problem:
   question: Is your problem one of these?
   answers:
     - text: Sink is blocked
+      page: unblock_sink
       sor_code: 20060030
 
     - text: Sink is leaking - containable
@@ -178,19 +195,22 @@ sink_problem:
 bathroom_problem:
   question: What is the problem in your bathroom?
   answers:
-    - text: Basin
+    - text: Basin / Sink
       next: basin_problem
 
     - text: Bath
       next: bath_problem
 
     - text: Damp or mould
-      desc: damp
+      page: damp_and_mould
 
     - text: Electrical
       next: bathroom_electrical_problem
 
     - text: Heating
+      next: heating_problem
+
+    - text: Hot water
       next: heating_problem
 
     - text: Toilet
@@ -213,6 +233,7 @@ basin_problem:
   question: Is your problem one of these?
   answers:
     - text: Basin / Sink is blocked
+      page: unblock_sink
       sor_code: 20060020
 
     - text: Basin / Sink is leaking - containable
@@ -277,7 +298,7 @@ other_problem:
   question: What is the problem?
   answers:
    - text: Damp or mould
-     desc: damp
+     page: damp_and_mould
 
    - text: Electrical
      next: other_electrical_problem
@@ -289,6 +310,9 @@ other_problem:
      page: emergency_contact
 
    - text: Heating
+     next: heating_problem
+
+   - text: Hot water
      next: heating_problem
 
    - text: Internal door
@@ -376,20 +400,28 @@ light_check_trip_switches:
   question: Have you checked the trip switches in the fuse box?
   answers:
     - text: 'Yes'
-      page: replace_lightbulb
+      next: light_check_bulb
 
     - text: 'No'
       page: check_fusebox
+
+light_check_bulb:
+  question: Have you replaced the light bulb?
+  answers:
+    - text: 'Yes'
+      desc: inside_light_fitting
+
+    - text: 'No'
+      page: replace_lightbulb
 
 toilet_problem:
   question: Is your problem one of these?
   answers:
     - text: Toilet is blocked
-      page: blocked_only_toilet
-      sor_code: 20060020
+      page: toilet_unblock_info
 
     - text: Toilet is not flushing
-      page: toilet_unblock_info
+      desc: toilet_problem
       sor_code: 20060020
 
     - text: Toilet is damaged
@@ -403,3 +435,26 @@ toilet_problem:
     - text: Something else
       desc: toilet_problem
       sor_code: 20060020
+
+blocked_only_toilet:
+  question: Is this your only toilet?
+  answers:
+    - text: 'Yes'
+      page: emergency_contact
+
+    - text: 'No'
+      desc: toilet_problem
+      sor_code: 20060020
+
+damp_or_mould_problem:
+  question: Is your problem with damp or mould?
+  answers:
+    - text: Damp
+      desc: damp
+      sor_code: PRE00001
+
+    - text: Mould
+      desc: mould
+      sor_code: 08500820
+
+    - text: I'm not sure

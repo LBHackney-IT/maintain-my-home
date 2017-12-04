@@ -47,7 +47,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Please let us know any additional details'
+    expect(page).to have_content 'Let us know any additional details'
     click_on t('back_link')
 
     expect(page).to have_content 'What is the problem?'
@@ -103,7 +103,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Please describe what needs to be fixed'
+    expect(page).to have_content 'Let us know any additional details you think might help us'
     click_on t('back_link')
 
     expect(page).to have_content 'What is the problem?'
@@ -141,7 +141,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Please describe what needs to be fixed'
+    expect(page).to have_content 'Let us know any additional details you think might help us'
   end
 
   scenario 'when the contact details values were invalid' do
@@ -322,7 +322,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     # Address search:
     click_on t('back_link')
 
-    expect(page).to have_content 'Please describe what needs to be fixed'
+    expect(page).to have_content 'Let us know any additional details you think might help us'
   end
 
   private

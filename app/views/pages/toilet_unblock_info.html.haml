@@ -1,20 +1,16 @@
 = back_link
 
 %h1
-  Common repairs - unblock toilet
+  Common fixes - unblocking a toilet
 
-%h2
-  Watch this brief video to find out how to unblock your toilet
+%p
+  Watch this short video for advice on how to unblock a toilet in your home.
 
 %iframe{ width: '560', height: '315', src: 'https://www.youtube.com/embed/_zzMhYpaD-o?rel=0&amp;showinfo=0', frameborder: '0', allowfullscreen: true }
 
 %p
-  If your toilet is still blocked, please call our repairs contact
-  centre so that we can help resolve this and schedule a
-  suitable appointment.
+  If your toilet is still blocked, please
+  select continue to book an appointment.
 
 %p
-  Please call the repairs contact centre on
-  %strong= repairs_contact_centre_telephone_number
-  Monday to Friday 8am to 7pm and
-  Saturday 9am to 1pm.
+  = link_to 'Continue', questions_path('blocked_only_toilet'), class: 'button'
