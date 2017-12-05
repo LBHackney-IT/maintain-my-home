@@ -95,6 +95,7 @@ class JsonApi
       Faraday.new root, ssl: ssl do |conn|
         conn.adapter Faraday.default_adapter
         conn.response :json
+        conn.response :logger, Rails.logger, headers: true, bodies: true
       end
     end
 
