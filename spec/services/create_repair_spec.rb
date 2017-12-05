@@ -25,6 +25,10 @@ RSpec.describe CreateRepair do
         'room' => {
           'room' => 'Bathroom',
         },
+        'last_question' => {
+          'question' => 'Is it?',
+          'answer' => 'No',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -33,7 +37,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: "My bath is broken\n\nRoom: Bathroom",
+          problemDescription: "My bath is broken\n\nRoom: Bathroom\n\nLast question: \"Is it?\" -> No",
           propertyReference: '00034713',
           contact: {
             name: 'Jo Bloggs',
@@ -69,6 +73,10 @@ RSpec.describe CreateRepair do
         'describe_repair' => {
           'description' => 'My bath is broken',
         },
+        'last_question' => {
+          'question' => 'Is it?',
+          'answer' => 'No',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -79,17 +87,7 @@ RSpec.describe CreateRepair do
 
   it 'posts a default description, if none was provided' do
     fake_api = instance_double('HackneyApi')
-    expect(fake_api).to receive(:create_repair)
-      .with(
-        priority: 'N',
-        problemDescription: 'No description given',
-        propertyReference: '00034713',
-        contact: {
-          name: 'Jo Bloggs',
-          telephoneNumber: '07900 123456',
-        }
-      )
-
+    allow(fake_api).to receive(:create_repair)
     fake_answers = {
       'address' => {
         'propertyReference' => '00034713',
@@ -103,10 +101,25 @@ RSpec.describe CreateRepair do
       'describe_repair' => {
         'description' => '',
       },
+      'last_question' => {
+        'question' => 'Is it?',
+        'answer' => 'No',
+      },
     }
 
     service = CreateRepair.new(api: fake_api)
     service.call(answers: fake_answers)
+
+    expect(fake_api).to have_received(:create_repair)
+      .with(
+        priority: 'N',
+        problemDescription: "No description given\n\nLast question: \"Is it?\" -> No",
+        propertyReference: '00034713',
+        contact: {
+          name: 'Jo Bloggs',
+          telephoneNumber: '07900 123456',
+        }
+      )
   end
 
   context 'when an SOR code was identified' do
@@ -129,6 +142,10 @@ RSpec.describe CreateRepair do
         'diagnosis' => {
           'sor_code' => '002034',
         },
+        'last_question' => {
+          'question' => 'Is it?',
+          'answer' => 'No',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -137,7 +154,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: 'My bath is broken',
+          problemDescription: "My bath is broken\n\nLast question: \"Is it?\" -> No",
           propertyReference: '00034713',
           contact: {
             name: 'Alex Doe',
@@ -183,6 +200,10 @@ RSpec.describe CreateRepair do
         },
         'diagnosis' => {
           'sor_code' => '002034',
+        },
+        'last_question' => {
+          'question' => 'Is it?',
+          'answer' => 'No',
         },
       }
 

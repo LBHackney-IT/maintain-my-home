@@ -18,6 +18,7 @@ class QuestionSaver
   def persist_answers(form)
     persist_room(form)
     persist_sor_code(form)
+    persist_last_question(form)
   end
 
   def persist_room(form)
@@ -35,5 +36,23 @@ class QuestionSaver
       :diagnosis,
       sor_code: sor_code
     )
+  end
+
+  def persist_last_question(form)
+    answer = @question.answer_data(form.answer)
+    return unless last_question?(answer)
+    @selected_answer_store.store_selected_answers(
+      :last_question,
+      question: @question.title,
+      answer: answer['text']
+    )
+  end
+
+  def last_question?(answer)
+    answer['desc'] || !explicit_redirect?(answer)
+  end
+
+  def explicit_redirect?(answer)
+    %w[desc next page].any? { |key| answer.key?(key) }
   end
 end

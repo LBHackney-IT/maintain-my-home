@@ -22,7 +22,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
-          'problem' => "My sink is blocked\n\nRoom: Kitchen",
+          'problem' => "My sink is blocked\n\nRoom: Kitchen\n\nLast question: \"Is your tap broken?\" -> Yes",
           'propertyReference' => '00000503',
           'workOrders' => [
             {
@@ -36,7 +36,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
-          'problem' => "My sink is blocked\n\nRoom: Kitchen",
+          'problem' => "My sink is blocked\n\nRoom: Kitchen\n\nLast question: \"Is your tap broken?\" -> Yes",
           'propertyReference' => '00000503',
           'workOrders' => [
             {
@@ -89,7 +89,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
             'id' => 'kitchen',
             'question' => 'Is your tap broken?',
             'answers' => [
-              { 'text' => 'Yes', 'sor_code' => '0078965' },
+              { 'text' => 'Yes', 'sor_code' => '0078965', 'desc' => 'kitchen_problem' },
               { 'text' => 'No' },
             ],
           )
@@ -148,7 +148,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       expect(fake_api).to have_received(:post).with(
         'v1/repairs',
         priority: 'N',
-        problemDescription: "My sink is blocked\n\nRoom: Kitchen",
+        problemDescription: "My sink is blocked\n\nRoom: Kitchen\n\nLast question: \"Is your tap broken?\" -> Yes",
         propertyReference: '00000503',
         contact: {
           name: 'John Evans',
@@ -181,7 +181,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
-        'problem' => "My sink is blocked\n\nRoom: Other",
+        'problem' => "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other",
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
@@ -189,7 +189,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
-        'problem' => "My sink is blocked\n\nRoom: Other",
+        'problem' => "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other",
         'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
@@ -205,7 +205,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           'answers' => [
             { 'text' => 'Kitchen', 'next' => 'kitchen' },
             { 'text' => 'Bathroom' },
-            { 'text' => 'Other' },
+            { 'text' => 'Other', 'desc' => 'describe_problem' },
           ],
         )
       )
@@ -257,7 +257,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'v1/repairs',
       priority: 'N',
-      problemDescription: "My sink is blocked\n\nRoom: Other\n\nCallback requested: between 8am and 5pm",
+      problemDescription: "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other\n\nCallback requested: between 8am and 5pm",
       propertyReference: '00000503',
       contact: {
         name: 'John Evans',
