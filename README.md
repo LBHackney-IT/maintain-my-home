@@ -46,6 +46,13 @@ The app should run successfully without these environment variables:
 - `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
   private key - used if connecting to the Hackney API via a proxy server
 
+#### Miscellaneous
+
+- `RACK_SERVICE_TIMEOUT` - Set this to control the point at which
+  `Rack::Timeout` times-out an HTTP request. This is used to ensure that the
+  app times out before Heroku automatically kills the connection and displays
+  its own, less friendly, error message.
+
 #### Feature flagging
 
 The following feature flags can be used. The first time these are used, they
