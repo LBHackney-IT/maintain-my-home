@@ -34,11 +34,13 @@ class AppointmentsController < ApplicationController
   end
 
   def available_appointments
-    appointments = HackneyApi.new.list_available_appointments(
-      work_order_reference: work_order_reference
-    )
-
-    appointments.map { |a| AppointmentPresenter.new(a) }
+    AppointmentFetcher
+      .new
+      .call(
+        work_order_reference: work_order_reference,
+        limit: ENV.fetch('APPOINTMENT_LIMIT', 15).to_i
+      )
+      .map { |appointment| AppointmentPresenter.new(appointment) }
   end
 
   def book_appointment_save_into_answer_store

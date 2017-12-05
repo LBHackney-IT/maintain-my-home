@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Resident can see a confirmation of their repair request' do
+  around(:each) do |example|
+    travel_to Time.zone.local(2017, 10, 1) do
+      example.run
+    end
+  end
+
   scenario 'when the issue was diagnosed and an appointment was booked' do
     ClimateControl.modify(ENCRYPTION_SECRET: 'test') do
       property = {
@@ -43,8 +49,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         .with('v1/work_orders/09124578/available_appointments')
         .and_return(
           'results' => [
-            { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false },
-            { 'beginDate' => '2017-10-11T12:00:00Z', 'endDate' => '2017-10-11T17:00:00Z', 'bestSlot' => false },
+            { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true },
+            { 'beginDate' => '2017-10-11T12:00:00Z', 'endDate' => '2017-10-11T17:00:00Z', 'bestSlot' => true },
           ]
         )
       allow(fake_api).to receive(:post)
