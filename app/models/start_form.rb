@@ -2,7 +2,6 @@ class StartForm
   include ActiveModel::Model
 
   attr_reader :answer
-  attr_reader :choices
 
   validates :answer, presence: true
 

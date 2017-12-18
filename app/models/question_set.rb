@@ -39,7 +39,7 @@ class QuestionSet
 
     def parse_yaml(yaml_data)
       YAML.parse(yaml_data)
-    rescue => e
+    rescue StandardError => e
       raise BadlyFormattedYaml, e.message
     end
   end

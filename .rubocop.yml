@@ -32,6 +32,9 @@ Style/TrailingCommaInArguments:
 Style/Documentation:
     Enabled: false
 
+Style/FormatStringToken:
+    Enabled: false
+
 Metrics/LineLength:
     Max: 80
     Exclude:

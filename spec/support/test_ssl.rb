@@ -16,7 +16,7 @@ module TestSsl
   #   openssl x509 -req -sha256 -days 3650 -in test.csr -signkey test.key -out test.crt
 
   def self.key
-    <<~EOF
+    <<~KEY
       -----BEGIN RSA PRIVATE KEY-----
       MIIJKgIBAAKCAgEAzTxqml+dWPWsS0bvT6wYp5/TJIsDMYjBi9iUcYuLXWtRx0Po
       qWXeTDvgIcv7Lj7QMNQguhK+0cCGJPXOztxqbn85mw94vUw0TVSO6ZkAEb9sOpdr
@@ -68,11 +68,11 @@ module TestSsl
       PsVcQIHuKMWQlxoeWaYhmD2U64lzUXUPxLwkl7lbaWGbAszvFC7UqMn3BCVPCnOI
       LsNdmUgH5J6+ZRlGkDjvsmeOXuRQznssp/M3WiKhA1V+rZUhiEpF2IzIR4+wzw==
       -----END RSA PRIVATE KEY-----
-    EOF
+    KEY
   end
 
   def self.certificate
-    <<~EOF
+    <<~CERT
       -----BEGIN CERTIFICATE-----
         MIIFBjCCAu4CCQDmS4ztMeTTYDANBgkqhkiG9w0BAQsFADBFMQswCQYDVQQGEwJB
       VTETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0
@@ -102,6 +102,6 @@ module TestSsl
       7cfFIudj1pWYqYGGrdYi02em0mAWGfNWQNx8wrkpuFuKiABUDXOdAK9ju9FQmThx
       1P8u65W3kAsHeVmtdQJNO11smWuhDEKRR/+eY1/8RfXBIdfTHDhPC1LO
       -----END CERTIFICATE-----
-    EOF
+    CERT
   end
 end

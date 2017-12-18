@@ -31,7 +31,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop', '~> 0.49.1' # Locked because minor versions might change cops
+  gem 'rubocop', '~> 0.52.0' # Locked because minor versions might change cops
 end
 
 group :development do

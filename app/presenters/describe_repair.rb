@@ -1,6 +1,4 @@
 class DescribeRepair
-  attr_reader :form
-
   def initialize(form_params: {}, details:, answers:, partial_checker:)
     @form_params = form_params
     @answers = answers
