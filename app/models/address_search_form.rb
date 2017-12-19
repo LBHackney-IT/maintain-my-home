@@ -15,4 +15,3 @@ class AddressSearchForm
     postcode.strip.gsub(/\s+/, '').insert(-4, ' ').upcase
   end
 end
-

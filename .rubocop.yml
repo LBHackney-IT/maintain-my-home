@@ -20,9 +20,6 @@ Style/FrozenStringLiteralComment:
 Style/NumericLiterals:
     Enabled: false
 
-Layout/TrailingBlankLines:
-    Enabled: false
-
 Style/TrailingCommaInLiteral:
     EnforcedStyleForMultiline: comma
 

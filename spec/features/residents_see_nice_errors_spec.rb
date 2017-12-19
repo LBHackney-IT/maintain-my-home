@@ -87,4 +87,3 @@ RSpec.feature 'Error pages' do
       .with(connection_error)
   end
 end
-
