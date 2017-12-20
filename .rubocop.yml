@@ -6,7 +6,6 @@ AllCops:
       - 'db/migrate/**/*'
       - 'db/schema.rb'
       - 'bin/**/*'
-      - 'config/routes.rb'
 
 Rails:
     Enabled: true
@@ -33,7 +32,6 @@ Style/FormatStringToken:
     Enabled: false
 
 Metrics/LineLength:
-    Max: 80
     Exclude:
       - 'spec/**/*'
       - 'config/initializers/simple_form.rb'
