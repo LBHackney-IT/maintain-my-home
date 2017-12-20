@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
 
     saver = AddressSaver.new(selected_answer_store: selected_answer_store)
 
-    unless saver.save(@form)
+    if saver.save(@form) == :invalid
       @address_search = AddressSearch.new(postcode: @form.postcode)
       return render 'address_searches/create'
     end
