@@ -5,7 +5,9 @@ class AddressSaver
   end
 
   def save(form)
-    if form.valid?
+    if form.address_isnt_here?
+      :not_found
+    elsif form.valid?
       persist_answers(form)
       :success
     else
