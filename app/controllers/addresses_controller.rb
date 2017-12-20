@@ -12,6 +12,8 @@ class AddressesController < ApplicationController
     when :invalid
       @address_search = AddressSearch.new(postcode: @form.postcode)
       render 'address_searches/create'
+    when :not_maintainable
+      redirect_to page_path('cannot_report_repair')
     end
   end
 

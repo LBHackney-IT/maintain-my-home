@@ -97,5 +97,35 @@ RSpec.describe AddressSaver do
         expect(saver.save(fake_form)).to eq :not_found
       end
     end
+
+    context 'when the address is not maintainable' do
+      it 'does not persist the form data' do
+        fake_answer_store = instance_double('SelectedAnswerStore')
+        allow(fake_answer_store).to receive(:store_selected_answers)
+        fake_form = instance_double('AddressForm',
+                                    valid?: true,
+                                    address_isnt_here?: false,
+                                    property_reference: '01234567')
+        fake_api = instance_double('HackneyApi', get_property: { 'maintainable' => false })
+
+        saver = AddressSaver.new(api: fake_api, selected_answer_store: fake_answer_store)
+        saver.save(fake_form)
+
+        expect(fake_answer_store).to_not have_received(:store_selected_answers)
+      end
+
+      it 'returns :not_maintainable' do
+        fake_answer_store = instance_double('SelectedAnswerStore')
+        allow(fake_answer_store).to receive(:store_selected_answers)
+        fake_form = instance_double('AddressForm',
+                                    valid?: true,
+                                    address_isnt_here?: false,
+                                    property_reference: '01234567')
+        fake_api = instance_double('HackneyApi', get_property: { 'maintainable' => false })
+
+        saver = AddressSaver.new(api: fake_api, selected_answer_store: fake_answer_store)
+        expect(saver.save(fake_form)).to eq :not_maintainable
+      end
+    end
   end
 end
