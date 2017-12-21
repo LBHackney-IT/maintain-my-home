@@ -1,6 +1,39 @@
 require 'rails_helper'
 
 RSpec.feature 'Error pages' do
+  scenario 'when an application error occurs' do
+    runtime_error = RuntimeError.new("They're coming outta the walls! They're coming outta the goddamn walls!")
+    allow(StartForm).to receive(:new)
+      .and_raise runtime_error
+
+    allow(Rails.logger).to receive(:error)
+    allow(Rollbar).to receive(:error)
+
+    visit '/'
+    expect { click_on 'Start' }.to raise_error runtime_error # ...and rely on rails default routing to render the error
+  end
+
+  scenario 'when the user was redirected to an internal server error page' do
+    visit '/500'
+    expect(page).to have_content "We're really sorry"
+    click_on 'contact us'
+    expect(page).to have_content 'Please phone our repairs contact centre'
+  end
+
+  scenario 'when a page was not found' do
+    visit '/404'
+    expect(page).to have_content "Sorry - the page you were looking for doesn't seem to exist!"
+    click_on 'contact us'
+    expect(page).to have_content 'Please phone our repairs contact centre'
+  end
+
+  scenario 'when a page was not found' do
+    visit '/422'
+    expect(page).to have_content 'Something seems to have gone wrong while reporting your repair'
+    click_on 'contact us'
+    expect(page).to have_content 'Please phone our repairs contact centre'
+  end
+
   scenario 'when UH is not available' do
     fake_api = instance_double(JsonApi)
     connection_error = JsonApi::ConnectionError.new('Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)')
