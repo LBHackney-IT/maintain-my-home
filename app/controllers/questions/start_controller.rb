@@ -19,7 +19,7 @@ module Questions
                   when 'home_adaptations'
                     page_path('home_adaptations')
                   when 'none_of_the_above'
-                    questions_path('location')
+                    questions_path('which_room')
                   else
                     page_path('emergency_contact')
                   end

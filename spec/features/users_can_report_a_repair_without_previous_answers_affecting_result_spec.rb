@@ -65,7 +65,7 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
       .to receive(:find)
-      .with('location')
+      .with('which_room')
       .and_return(
         Question.new(
           'question' => 'Where is the problem?',
