@@ -12,7 +12,8 @@ root of the application containing environment variable assignments.
 The following environment variables are required to run the site:
 
 - `HACKNEY_API_ROOT` - the root of the Hackney API which is used by the site
-- `ENCRYPTION_SECRET` - secret used to prevent parameter tampering
+- `ENCRYPTION_SECRET` - secret used to prevent parameter tampering. Generate
+  one with e.g. `rake secret`
 
 ### Optional config
 
@@ -51,7 +52,7 @@ The app should run successfully without these environment variables:
 - `RACK_SERVICE_TIMEOUT` - Set this to control the point at which
   `Rack::Timeout` times-out an HTTP request. This is used to ensure that the
   app times out before Heroku automatically kills the connection and displays
-  its own, less friendly, error message.
+  its own, less friendly, error message. Defaults to 15 seconds.
 - `APPOINTMENT_LIMIT` - Set this to override the maximum number of appointments
   returned from the `AppointmentFetcher` service. Defaults to 15.
 
