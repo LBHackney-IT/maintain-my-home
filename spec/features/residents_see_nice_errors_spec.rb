@@ -29,7 +29,7 @@ RSpec.feature 'Error pages' do
 
   scenario 'when a page was not found' do
     visit '/422'
-    expect(page).to have_content "We're sorry, but the change you wanted was rejected"
+    expect(page).to have_content 'Something seems to have gone wrong while reporting your repair'
     click_on 'contact us'
     expect(page).to have_content 'Please phone our repairs contact centre'
   end
