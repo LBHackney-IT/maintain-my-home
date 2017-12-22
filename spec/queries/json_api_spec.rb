@@ -3,9 +3,17 @@ require 'faraday_middleware'
 require 'app/queries/json_api'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/hash/slice'
+require 'rack-timeout'
+require 'logger'
 require 'spec/support/test_ssl'
 
 RSpec.describe JsonApi do
+  before do
+    dev_null = File.new('/dev/null', 'w')
+    null_logger = Logger.new(dev_null)
+    stub_const('Rails', double(logger: null_logger))
+  end
+
   describe 'construction' do
     context 'when the api root is missing' do
       it 'raises an exception' do
@@ -114,6 +122,17 @@ RSpec.describe JsonApi do
 
         expect { json_api.get('properties?postcode=A1 1AA') }
           .to raise_error(JsonApi::ConnectionError)
+      end
+    end
+
+    context 'when the request took too long' do
+      it 'raises an error' do
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .to_raise(Rack::Timeout::RequestTimeoutException)
+
+        expect { json_api.get('properties?postcode=A1 1AA') }
+          .to raise_error(JsonApi::TimeoutError)
       end
     end
 
