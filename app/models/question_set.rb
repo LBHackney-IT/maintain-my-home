@@ -7,7 +7,7 @@ class QuestionSet
     validator = QuestionsValidator.new(
       partial_checker: partial_checker,
       page_checker: page_checker,
-      mandatory_questions: %w[location which_room]
+      mandatory_questions: %w[which_room]
     )
     loader = QuestionSetLoader.new(validator: validator)
     file_path = Rails.root.join(filename)
