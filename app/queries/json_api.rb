@@ -7,6 +7,7 @@ class JsonApi
   class ApiError < Error; end
   class InvalidResponseError < ApiError; end
   class ConnectionError < ApiError; end
+  class TimeoutError < ApiError; end
   class StatusBadRequestError < ApiError; end
   class StatusNotFoundError < ApiError; end
   class StatusServerError < ApiError; end
@@ -41,6 +42,8 @@ class JsonApi
     raise InvalidResponseError, e.message
   rescue Faraday::ConnectionFailed => e
     raise ConnectionError, e.message
+  rescue Rack::Timeout::RequestTimeoutException => e
+    raise TimeoutError, e.message
   end
 
   def raise_for_http_status(response)
