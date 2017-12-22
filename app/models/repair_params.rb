@@ -6,6 +6,7 @@ class RepairParams
   def problem_description
     lines = [description]
     lines << "Room: #{room}" if room.present?
+    lines << "Last question: #{last_question}"
     lines << "Callback requested: between #{callback_time}" if callback_time
     lines.compact.join("\n\n")
   end
@@ -44,6 +45,11 @@ class RepairParams
 
   def room
     @answers.dig('room', 'room')
+  end
+
+  def last_question
+    question = @answers.fetch('last_question')
+    %("#{question.fetch('question')}" -> #{question.fetch('answer')})
   end
 
   def callback_time
