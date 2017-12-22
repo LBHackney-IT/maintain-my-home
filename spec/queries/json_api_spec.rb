@@ -3,9 +3,16 @@ require 'faraday_middleware'
 require 'app/queries/json_api'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/hash/slice'
+require 'logger'
 require 'spec/support/test_ssl'
 
 RSpec.describe JsonApi do
+  before do
+    dev_null = File.new('/dev/null', 'w')
+    null_logger = Logger.new(dev_null)
+    stub_const('Rails', double(logger: null_logger))
+  end
+
   describe 'construction' do
     context 'when the api root is missing' do
       it 'raises an exception' do

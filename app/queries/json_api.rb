@@ -12,8 +12,8 @@ class JsonApi
   class StatusServerError < ApiError; end
   class StatusUnexpectedError < ApiError; end
 
-  def initialize(api_config = {})
-    @connection = ConnectionBuilder.new.build(api_config)
+  def initialize(api_config = {}, logger = Rails.logger)
+    @connection = ConnectionBuilder.new.build(logger, api_config)
   end
 
   def get(path)
@@ -74,6 +74,7 @@ class JsonApi
 
   class ConnectionBuilder
     def build(
+      logger,
       api_root: ENV['HACKNEY_API_ROOT'],
       api_cert: ENV['PROXY_API_CERT'],
       api_key: ENV['PROXY_API_KEY']
@@ -85,17 +86,18 @@ class JsonApi
         ssl: ssl_options(
           cert: api_cert,
           key: api_key,
-        )
+        ),
+        logger: logger,
       )
     end
 
     private
 
-    def build_connection(root:, ssl:)
+    def build_connection(root:, ssl:, logger:)
       Faraday.new root, ssl: ssl do |conn|
         conn.adapter Faraday.default_adapter
         conn.response :json
-        conn.response :logger, Rails.logger, headers: true, bodies: true
+        conn.response :logger, logger, headers: true, bodies: true
       end
     end
 
