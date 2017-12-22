@@ -9,5 +9,4 @@
 # Offense count: 4
 Metrics/AbcSize:
   Exclude:
-    - app/controllers/addresses_controller.rb
     - app/controllers/contact_details_with_callback_controller.rb
