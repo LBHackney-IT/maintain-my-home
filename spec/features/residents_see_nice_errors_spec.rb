@@ -17,21 +17,21 @@ RSpec.feature 'Error pages' do
     visit '/500'
     expect(page).to have_content "We're really sorry"
     click_on 'contact us'
-    expect(page).to have_content 'Please phone our repairs contact centre'
+    expect(page).to have_content 'Please phone us'
   end
 
   scenario 'when a page was not found' do
     visit '/404'
     expect(page).to have_content "Sorry - the page you were looking for doesn't seem to exist!"
     click_on 'contact us'
-    expect(page).to have_content 'Please phone our repairs contact centre'
+    expect(page).to have_content 'Please phone us'
   end
 
   scenario 'when a page was not found' do
     visit '/422'
     expect(page).to have_content 'Something seems to have gone wrong while reporting your repair'
     click_on 'contact us'
-    expect(page).to have_content 'Please phone our repairs contact centre'
+    expect(page).to have_content 'Please phone us'
   end
 
   scenario 'when UH is not available' do
