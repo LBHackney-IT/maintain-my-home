@@ -1,14 +1,14 @@
 header {
   background-color: $hackney-dark-grey;
-  border-bottom: 4px solid $hackney-border-green;
+  border-bottom: 4px solid $hackney-mid-green;
   color: $white;
   padding: $gutter 0 ($gutter + 5px);
   position: relative;
 
   &:before {
-    content: "";
-    background: $hackney-border-green;
+    background: $hackney-mid-green;
     bottom: 5px;
+    content: "";
     display: block;
     height: 5px;
     left: 0;
@@ -17,9 +17,9 @@ header {
   }
 
   &:after {
-    content: "";
-    background: #9bcf80;
+    background: #9bcf7f;
     bottom: -11px;
+    content: '';
     display: block;
     height: 3px;
     left: 0;
