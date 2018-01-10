@@ -1,12 +1,41 @@
 header {
   background-color: $hackney-dark-grey;
-  border-bottom: 8px solid $hackney-green;
+  border-bottom: 4px solid $hackney-border-green;
   color: $white;
-  padding: $gutter-half 0;
+  padding: $gutter 0 ($gutter + 5px);
+  position: relative;
+
+  &:before {
+    content: "";
+    background: $hackney-border-green;
+    bottom: 5px;
+    display: block;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  &:after {
+    content: "";
+    background: #9bcf80;
+    bottom: -11px;
+    display: block;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
 
   @include media(mobile) {
-    border-bottom-width: 0;
-    padding: ($gutter-half / 2) 0;
+    padding: $gutter-half 0;
+
+    &:before { display: none }
+    &:after { display: none }
+
+    a {
+      h2 { padding-bottom: 1px; }
+    }
   }
 
   h1 {
@@ -37,6 +66,6 @@ header {
     @include heading-24;
     display: inline-block;
     margin-left: $gutter-half;
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 }
