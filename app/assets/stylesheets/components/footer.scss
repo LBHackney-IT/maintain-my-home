@@ -55,4 +55,32 @@ footer {
   li {
     line-height: 1.5em;
   }
+
+  .social {
+    li {
+      display: inline-block;
+      text-indent: -9999px;
+
+      a {
+        background-color: #333;
+        border-radius: 5px;
+        display: block;
+        height: 40px;
+        width: 40px;
+        margin-right: $gutter-half;
+        float: left;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+
+        &:hover, &:focus {
+          background-color: $hackney-grey;
+        }
+      }
+    }
+  }
+
+  .social-twitter { background-image: asset-url('twitter.png') }
+  .social-facebook { background-image: asset-url('facebook.png') }
+  .social-youtube { background-image: asset-url('youtube.png') }
+  .social-instagram { background-image: asset-url('instagram.png') }
 }
