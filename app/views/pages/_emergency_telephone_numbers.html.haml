@@ -3,34 +3,17 @@
     Call us on:
     = succeed ',' do
       = repairs_contact_centre_telephone_number
-    = succeed '.' do
-      = t('rcc_opening_hours')
-
 %p
-  Outside these hours, we provide a
-  %em
-    make safe
-  service, to ensure there's no danger to your
-  household or significant damage to your property.
-  Please call
-  %strong
-    = repairs_emergency_telephone_number
-
-%p
-  If your emergency relates to gas, electricity or water
+  However, if your emergency relates to gas, electricity or water
   supply, you should phone:
 
-%p
-  %strong
-    For electricity:
-  = electricity_emergency_telephone_number
-
-%p
-  %strong
-    For water:
-  = water_emergency_telephone_number
-
-%p
-  %strong
-    For gas:
-  = gas_emergency_telephone_number
+%ul
+  %li
+    National Grid (Gas):
+    = gas_emergency_telephone_number
+  %li
+    UK Power Networks:
+    = electricity_emergency_telephone_number
+  %li
+    Thames Water:
+    = water_emergency_telephone_number

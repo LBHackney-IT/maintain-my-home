@@ -1,15 +1,11 @@
 %p
   %strong
-    Please phone our repairs contact centre on
+    Please phone us on
     = succeed '.' do
       = repairs_contact_centre_telephone_number
     We’re open Monday to Friday from 8am to midnight and on Saturday
     from 9am to 1pm.
-
-%p
-  If you have an emergency repair outside of these hours, you should phone us on
-  = succeed '.' do
-    = repairs_emergency_telephone_number
+    You can phone us outside these hours if you need an emergency repair.
 
 %p
   Emergency repairs include:
@@ -24,19 +20,19 @@
     major plumbing and electrical faults resulting in large scale water loss
     or power loss
   %li
-    blocked toilet where it’s your only toilet
+    blocked toilet - where it’s your only toilet
 
 %p
-  If your emergency relates to gas, electricity or water supply emergencies,
-  you should phone:
+  If your emergency relates to gas, electricity or water
+  supply, you should phone:
 
-%p
-  Electricity:
-  = electricity_emergency_telephone_number
-  %br/
-  Gas:
-  = gas_emergency_telephone_number
-  %br/
-  Water:
-  = water_emergency_telephone_number
-  %br/
+%ul
+  %li
+    National Grid (Gas):
+    = gas_emergency_telephone_number
+  %li
+    UK Power Networks:
+    = electricity_emergency_telephone_number
+  %li
+    Thames Water:
+    = water_emergency_telephone_number

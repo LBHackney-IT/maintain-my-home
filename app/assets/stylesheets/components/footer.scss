@@ -1,13 +1,13 @@
 footer {
   background-color: $hackney-dark-grey;
-  border-top: 5px solid $hackney-green;
+  border-top: 5px solid $hackney-light-green;
   color: $white;
   font-size: 14px;
   padding: 2em;
   position: relative;
 
-  &::before, &::after {
-    background-color: $hackney-light-green;
+  &::before {
+    background-color: #9bcf7f;
     content: '';
     display: block;
     height: 3px;
@@ -15,6 +15,17 @@ footer {
     position: absolute;
     right: 0;
     top: 5px;
+  }
+
+  &::after {
+    background-color: $hackney-mid-green;
+    content: '';
+    height: 6px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: -16px;
+    z-index: 999;
   }
 
   a {
@@ -44,4 +55,32 @@ footer {
   li {
     line-height: 1.5em;
   }
+
+  .social {
+    li {
+      display: inline-block;
+      text-indent: -9999px;
+
+      a {
+        background-color: #333;
+        border-radius: 5px;
+        display: block;
+        height: 40px;
+        width: 40px;
+        margin-right: $gutter-half;
+        float: left;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+
+        &:hover, &:focus {
+          background-color: $hackney-grey;
+        }
+      }
+    }
+  }
+
+  .social-twitter { background-image: asset-url('twitter.png') }
+  .social-facebook { background-image: asset-url('facebook.png') }
+  .social-youtube { background-image: asset-url('youtube.png') }
+  .social-instagram { background-image: asset-url('instagram.png') }
 }
