@@ -55,6 +55,9 @@ The app should run successfully without these environment variables:
   its own, less friendly, error message. Defaults to 15 seconds.
 - `APPOINTMENT_LIMIT` - Set this to override the maximum number of appointments
   returned from the `AppointmentFetcher` service. Defaults to 15.
+- `ONE_ACCOUNT_URL` - Set this to override the URL that redirects users to One
+  Account in the event that Report a Repair is disabled (see feature flagging
+  below).
 
 #### Feature flagging
 
