@@ -59,6 +59,12 @@ main {
     padding-bottom: 2em;
   }
 
+  object, embed {
+    height: 315px;
+    max-width: 95%;
+    width: 560px;
+  }
+
   abbr[title] {
     cursor: help;
     text-decoration: underline dotted;
