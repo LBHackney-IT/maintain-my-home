@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/landing', to: 'landing_page#index'
+
   get '/address-search', to: 'address_searches#index', as: 'address_search'
   post '/address-search', to: 'address_searches#create'
 
