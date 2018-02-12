@@ -70,20 +70,20 @@ heating_problem:
 
     - text: I have no hot water - boiler in my home
       desc: inside_boiler
-      sor_code: 489680KH
+      sor_code: 4896801H
 
     - text: I have no hot water - communal boiler
       desc: communal_boiler
       sor_code: 48000000
 
     - text: Radiator is not working
-      sor_code: 489681H
+      sor_code: 4896816H
 
     - text: Radiator is coming loose
-      sor_code: 489681H
+      sor_code: 4896816H
 
     - text: Radiator is leaking - containable
-      sor_code: 489681H
+      sor_code: 4896816H
 
     - text: Something else
       desc: heating_problem
@@ -258,6 +258,7 @@ other_electrical_problem:
 
     - text: Light switch
       page: electrical_hazard_warning
+      sor_code: 20110010
 
     - text: Smoke detector is beeping
       page: emergency_contact
@@ -267,6 +268,7 @@ other_electrical_problem:
 
     - text: Sockets
       page: electrical_hazard_warning
+      sor_code: 20110010
 
     - text: Something else
       desc: electrical_problem
