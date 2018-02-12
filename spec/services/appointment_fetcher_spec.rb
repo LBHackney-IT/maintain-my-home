@@ -91,6 +91,21 @@ RSpec.describe AppointmentFetcher do
     end
   end
 
+  it 'returns non-best slots if there are no best slots' do
+    non_best_slot = { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => false }
+
+    stub_appointments([non_best_slot])
+
+    travel_to Time.zone.local(2017, 10, 1) do
+      appointments = AppointmentFetcher.new.call(
+        work_order_reference: '1234',
+        limit: 2
+      )
+
+      expect(appointments).to include non_best_slot
+    end
+  end
+
   private
 
   def stub_appointments(appointments)
