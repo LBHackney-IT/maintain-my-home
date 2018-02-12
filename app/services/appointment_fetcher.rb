@@ -3,8 +3,12 @@ class AppointmentFetcher
     @work_order_reference = work_order_reference
 
     appointments = filter_before_tomorrow(available_appointments)
-    appointments = keep_best_slots_only(appointments)
     appointments = filter_long_slots(appointments)
+
+    if best_slots?(appointments)
+      appointments = keep_best_slots_only(appointments)
+    end
+
     appointments.take(limit)
   end
 
@@ -38,5 +42,9 @@ class AppointmentFetcher
     appointments.select do |appointment|
       appointment.fetch('bestSlot') == true
     end
+  end
+
+  def best_slots?(appointments)
+    appointments.any? { |appointment| appointment.fetch('bestSlot') == true }
   end
 end
