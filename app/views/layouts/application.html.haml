@@ -41,6 +41,14 @@
       #content{ role: 'main' }
         - flash.each do |key, value|
           = content_tag :div, value, class: "flash flash-#{key}"
+
+        .beta-banner
+          %p
+            %small Beta
+            This is a new service -
+            %a{ href: '/pages/beta' }
+              find out what this means
+
         = yield
 
     %footer
