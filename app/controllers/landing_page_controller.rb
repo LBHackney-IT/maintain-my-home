@@ -2,7 +2,7 @@ class LandingPageController < ApplicationController
   skip_before_action :check_service_status
 
   def index
-    if service_disabled?
+    if bouncing?
       redirect_to one_account
     else
       redirect_to '/'
@@ -11,8 +11,8 @@ class LandingPageController < ApplicationController
 
   private
 
-  def service_disabled?
-    App.flipper.enabled?(:service_disabled)
+  def bouncing?
+    App.flipper.enabled?(:bounce_to_one_account)
   end
 
   def one_account
