@@ -24,10 +24,7 @@ kitchen_problem:
     - text: Electrical
       next: kitchen_electrical_problem
 
-    - text: Heating
-      next: heating_problem
-
-    - text: Hot water
+    - text: Heating / Hot water
       next: heating_problem
 
     - text: Sink
@@ -68,13 +65,8 @@ heating_problem:
     - text: I have no heating
       page: heating_repairs
 
-    - text: I have no hot water - boiler in my home
-      desc: inside_boiler
-      sor_code: 4896801H
-
-    - text: I have no hot water - communal boiler
-      desc: communal_boiler
-      sor_code: 48000000
+    - text: I have no hot water
+      page: emergency_contact
 
     - text: Radiator is not working
       sor_code: 4896816H
@@ -128,10 +120,7 @@ bathroom_problem:
     - text: Electrical
       next: bathroom_electrical_problem
 
-    - text: Heating
-      next: heating_problem
-
-    - text: Hot water
+    - text: Heating / Hot water
       next: heating_problem
 
     - text: Toilet
@@ -230,10 +219,7 @@ other_problem:
    - text: Gas
      page: emergency_contact
 
-   - text: Heating
-     next: heating_problem
-
-   - text: Hot water
+   - text: Heating / Hot water
      next: heating_problem
 
    - text: Internal door
