@@ -8,10 +8,6 @@ class Confirmation
   end
 
   def request_reference
-    repair = Repair.new(
-      @api.get_repair(repair_request_reference: @request_reference)
-    )
-
     repair.work_order_reference || repair.request_reference
   end
 
@@ -51,5 +47,11 @@ class Confirmation
 
   def format_telephone_number(number)
     number.delete("\s")
+  end
+
+  def repair
+    @repair ||= Repair.new(
+      @api.get_repair(repair_request_reference: @request_reference)
+    )
   end
 end

@@ -26,11 +26,7 @@ class AppointmentsController < ApplicationController
   end
 
   def work_order_reference
-    Repair.new(
-      HackneyApi.new.get_repair(
-        repair_request_reference: params[:repair_request_reference]
-      )
-    ).work_order_reference
+    repair.work_order_reference
   end
 
   def available_appointments
@@ -52,6 +48,14 @@ class AppointmentsController < ApplicationController
 
     selected_answer_store.store_selected_answers(
       'appointment', appointment
+    )
+  end
+
+  def repair
+    @repair ||= Repair.new(
+      HackneyApi.new.get_repair(
+        repair_request_reference: params[:repair_request_reference]
+      )
     )
   end
 end
