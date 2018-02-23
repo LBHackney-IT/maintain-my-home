@@ -4,9 +4,12 @@ require 'app/models/describe_repair_form'
 
 RSpec.describe DescribeRepairForm do
   describe 'validations' do
-    it 'is valid without a description' do
+    it 'is invalid without a description' do
       form = DescribeRepairForm.new
-      expect(form).to be_valid
+      form.valid?
+
+      expect(form.errors.details[:description])
+        .to include(error: :blank)
     end
 
     it 'is valid with a description' do

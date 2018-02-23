@@ -3,5 +3,5 @@ class DescribeRepairForm
 
   attr_accessor :description
 
-  validates :description, length: { maximum: 500 }
+  validates :description, presence: true, length: { maximum: 500 }
 end

@@ -4,7 +4,7 @@ SimpleCov.start 'rails' do
   add_group 'Services', 'app/services'
   add_group 'Presenters', 'app/presenters'
   add_group 'Validators', 'app/validators'
-  minimum_coverage 98
+  minimum_coverage 95
 end
 
 require 'spec_helper'

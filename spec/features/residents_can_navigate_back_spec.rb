@@ -26,6 +26,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Description', with: 'My bathroom widget is broken'
     click_continue
 
     # Address search:
@@ -169,6 +170,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_continue
 
     # Describe repair
+    fill_in 'Description', with: 'My bathroom widget is broken'
     click_continue
 
     # Address search:
