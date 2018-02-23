@@ -29,6 +29,9 @@ RSpec.describe CreateRepair do
           'question' => 'Is it?',
           'answer' => 'No',
         },
+        'problem' => {
+          'problem' => 'Bath',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -37,7 +40,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: "My bath is broken\n\nRoom: Bathroom\n\nLast question: \"Is it?\" -> No",
+          problemDescription: "Room: Bathroom\nProblem with: Bath\n\nMy bath is broken",
           propertyReference: '00034713',
           contact: {
             name: 'Jo Bloggs',
@@ -85,43 +88,6 @@ RSpec.describe CreateRepair do
     end
   end
 
-  it 'posts a default description, if none was provided' do
-    fake_api = instance_double('HackneyApi')
-    allow(fake_api).to receive(:create_repair)
-    fake_answers = {
-      'address' => {
-        'propertyReference' => '00034713',
-        'address' => 'Ross Court 25',
-        'postcode' => 'E5 8TE',
-      },
-      'contact_details' => {
-        'full_name' => 'Jo Bloggs',
-        'telephone_number' => '07900 123456',
-      },
-      'describe_repair' => {
-        'description' => '',
-      },
-      'last_question' => {
-        'question' => 'Is it?',
-        'answer' => 'No',
-      },
-    }
-
-    service = CreateRepair.new(api: fake_api)
-    service.call(answers: fake_answers)
-
-    expect(fake_api).to have_received(:create_repair)
-      .with(
-        priority: 'N',
-        problemDescription: "No description given\n\nLast question: \"Is it?\" -> No",
-        propertyReference: '00034713',
-        contact: {
-          name: 'Jo Bloggs',
-          telephoneNumber: '07900 123456',
-        }
-      )
-  end
-
   context 'when an SOR code was identified' do
     it 'posts to the Hackney API with repair creation params including work orders' do
       fake_api = instance_double('HackneyApi')
@@ -154,7 +120,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: "My bath is broken\n\nLast question: \"Is it?\" -> No",
+          problemDescription: 'My bath is broken',
           propertyReference: '00034713',
           contact: {
             name: 'Alex Doe',

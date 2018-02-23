@@ -19,6 +19,7 @@ class QuestionSaver
     persist_room(form)
     persist_sor_code(form)
     persist_last_question(form)
+    persist_problem(form)
   end
 
   def persist_room(form)
@@ -45,6 +46,15 @@ class QuestionSaver
       :last_question,
       question: @question.title,
       answer: answer['text']
+    )
+  end
+
+  def persist_problem(form)
+    problem = @question.answer_data(form.answer)['problem']
+    return unless problem
+    @selected_answer_store.store_selected_answers(
+      :problem,
+      problem: problem
     )
   end
 end
