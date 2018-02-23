@@ -3,6 +3,12 @@ class AppointmentsController < ApplicationController
     @form = AppointmentForm.new
     @appointments = available_appointments
     @work_order_reference = work_order_reference
+
+    if @appointments.any?
+      render :show
+    else
+      render :none_available
+    end
   end
 
   def submit

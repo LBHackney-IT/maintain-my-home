@@ -1,0 +1,24 @@
+.grid-row
+  %section#confirmation.column-two-thirds
+    %h1
+      Booking your appointment
+
+    %p
+      Sorry, we can't book an appointment for you online right now.
+
+    .box-highlight.lede
+      Your reference number is
+      = succeed "." do
+        %strong= @work_order_reference
+
+    %p
+      %strong
+        Please call us on
+        = repairs_contact_centre_telephone_number
+        to arrange an appointment
+      and quote your reference number
+      = succeed "." do
+        %strong= @work_order_reference
+      We’re open
+      = succeed '.' do
+        = t('rcc_opening_hours')
