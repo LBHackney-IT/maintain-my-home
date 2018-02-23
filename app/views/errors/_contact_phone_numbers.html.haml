@@ -3,8 +3,9 @@
     Please phone us on
     = succeed '.' do
       = repairs_contact_centre_telephone_number
-    We’re open Monday to Friday from 8am to midnight and on Saturday
-    from 9am to 1pm.
+    We’re open
+    = succeed '.' do
+      = t('rcc_opening_hours')
     You can phone us outside these hours if you need an emergency repair.
 
 %p
