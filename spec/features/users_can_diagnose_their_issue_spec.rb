@@ -86,18 +86,18 @@ RSpec.feature 'Users can diagnose their issue' do
     stub_diagnosis_question(
       question: 'Where does this question go?',
       id: 'where',
-      answers: [{ 'text' => 'To an optional describe form', 'sor_code' => '022456' }]
+      answers: [{ 'text' => 'To a required describe form', 'sor_code' => '022456' }]
     )
 
     visit '/questions/where'
-    choose_radio_button 'To an optional describe form'
+    choose_radio_button 'To a required describe form'
     click_on 'Continue'
 
     expect(page).to have_content 'Let us know any further details'
 
     click_on 'Continue'
 
-    expect(page).to have_content 'What is your address?'
+    expect(page).to have_content "can't be blank"
   end
 
   scenario 'when the repair was not diagnosed' do

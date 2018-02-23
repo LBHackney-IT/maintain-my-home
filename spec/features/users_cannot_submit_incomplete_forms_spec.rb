@@ -87,6 +87,7 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     click_continue
 
     # Describe repair
+    fill_in 'Description', with: 'Things are broken'
     click_continue
 
     # Choose address

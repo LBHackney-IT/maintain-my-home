@@ -8,10 +8,10 @@ require 'app/presenters/describe_repair'
 RSpec.describe DescribeRepair do
   describe '#form' do
     context 'when the repair was diagnosed' do
-      it 'returns an empty, optional describe repair form' do
+      it 'returns an empty, required describe repair form' do
         describe_repair = DescribeRepair.new(details: nil, answers: diagnosed_answers, partial_checker: double)
         expect(describe_repair.form.description).to eq nil
-        expect(describe_repair.form.valid?).to eq true
+        expect(describe_repair.form.valid?).to eq false
       end
 
       it 'returns a form with params if provided' do
