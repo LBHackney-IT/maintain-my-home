@@ -17,6 +17,7 @@ kitchen_problem:
     - text: Cupboards or Worktop
       desc: inside_kitchen_cupboards
       sor_code: 20040060
+      problem: Cupboards or Worktop
 
     - text: Damp or Mould
       page: damp_and_mould
@@ -47,6 +48,7 @@ kitchen_electrical_problem:
 
     - text: Light switch
       desc: inside_kitchen_light_switch
+      problem: Light switch
 
     - text: Smoke detector is beeping
       page: smoke_detector
@@ -54,10 +56,12 @@ kitchen_electrical_problem:
     - text: Sockets
       desc: inside_sockets
       sor_code: 20110010
+      problem: Sockets
 
     - text: Something else
       desc: kitchen_problem
       sor_code: 20110010
+      problem: Electrical
 
 heating_problem:
   question: Is your problem one of these?
@@ -70,15 +74,19 @@ heating_problem:
 
     - text: Radiator is not working
       sor_code: 4896816H
+      problem: Radiator is not working
 
     - text: Radiator is coming loose
       sor_code: 4896816H
+      problem: Radiator is coming loose
 
     - text: Radiator is leaking - containable
       sor_code: 4896816H
+      problem: Radiator is leaking - containable
 
     - text: Something else
       desc: heating_problem
+      problem: Heating / Hot water
 
 sink_problem:
   question: Is your problem one of these?
@@ -86,24 +94,29 @@ sink_problem:
     - text: Sink is blocked
       page: unblock_sink
       sor_code: 20060030
+      problem: Sink is blocked
 
     - text: Sink is leaking - containable
       desc: inside_kitchen_sink_leaking
       sor_code: 20060030
+      problem: Sink is leaking - containable
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
       sor_code: 20060030
+      problem: Tap is dripping
 
     - text: Tap is broken
       desc: inside_kitchen_broken_tap
       sor_code: 20060030
+      problem: Tap is broken
 
     - text: Something else
       desc: sink_problem
       sor_code: 20060030
+      problem: Sink
 
 bathroom_problem:
   question: What is the problem in your bathroom?
@@ -138,6 +151,7 @@ is_fan_leaking_water:
     - text: 'No'
       desc: inside_kitchen_extractor_fan
       sor_code: 20110010
+      problem: Extractor fan
 
 basin_problem:
   question: Is your problem one of these?
@@ -145,46 +159,56 @@ basin_problem:
     - text: Basin / Sink is blocked
       page: unblock_sink
       sor_code: 20060020
+      problem: Basin / Sink is blocked
 
     - text: Basin / Sink is leaking - containable
       desc: inside_bathroom_basin_leaking
       sor_code: 20060020
+      problem: Basin / Sink is leaking - containable
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
       sor_code: 20060020
+      problem: Tap is dripping
 
     - text: Tap is broken
       sor_code: 20060020
+      problem: Tap is broken
 
     - text: Something else
       desc: sink_problem
       sor_code: 20060020
+      problem: Basin / Sink
 
 bath_problem:
   question: Is your problem one of these?
   answers:
     - text: Bath is blocked
       sor_code: 20060020
+      problem: Bath is blocked
 
     - text: Bath is leaking - containable
       desc: inside_bathroom_bath_leaking
       sor_code: 20060020
+      problem: Bath is leaking - containable
 
     - text: Tap won't turn off - water running
       page: emergency_contact
 
     - text: Tap is dripping
       sor_code: 20060020
+      problem: Tap is dripping
 
     - text: Tap is broken
       sor_code: 20060020
+      problem: Tap is broken
 
     - text: Something else
       desc: bath_problem
       sor_code: 20060020
+      problem: Bath
 
 bathroom_electrical_problem:
   question: Is your problem one of these?
@@ -203,6 +227,7 @@ bathroom_electrical_problem:
     - text: Something else
       desc: bathroom_problem
       sor_code: 20110010
+      problem: Electrical
 
 other_problem:
   question: What is the problem?
@@ -225,6 +250,7 @@ other_problem:
    - text: Internal door
      desc: other_internal_door
      sor_code: 20040020
+     problem: Internal door
 
    - text: Windows
      next: window_problem
@@ -245,6 +271,7 @@ other_electrical_problem:
     - text: Light switch
       page: electrical_hazard_warning
       sor_code: 20110010
+      problem: Light switch
 
     - text: Smoke detector is beeping
       page: emergency_contact
@@ -255,10 +282,12 @@ other_electrical_problem:
     - text: Sockets
       page: electrical_hazard_warning
       sor_code: 20110010
+      problem: Sockets
 
     - text: Something else
       desc: electrical_problem
       sor_code: 20110010
+      problem: Electrical
 
 window_problem:
   question: Is your problem one of these?
@@ -266,17 +295,21 @@ window_problem:
     - text: Window is not shutting / locking properly - uPVC
       desc: inside_window_not_shutting
       sor_code: 20040310
+      problem: Window is not shutting / locking properly - uPVC
 
     - text: Window is not shutting / locking properly - Wood
       desc: inside_window_not_shutting
       sor_code: 20040010
+      problem: Window is not shutting / locking properly - Wood
 
     - text: Damage to glazing
       desc: inside_window_damage
+      problem: Damage to glazing
 
     - text: Something else
       desc: window_problem
       sor_code: 20040010
+      problem: Window
 
 
 external_doors_problem:
@@ -285,16 +318,20 @@ external_doors_problem:
     - text: Front or back door is stiff or loose - uPVC
       desc: other_external_door_stiff
       sor_code: 20040310
+      problem: Front or back door is stiff or loose - uPVC
 
     - text: Front or back door is stiff or loose - Wood
       desc: other_external_door_stiff
       sor_code: 20040020
+      problem: Front or back door is stiff or loose - Wood
 
     - text: Door lock
       desc: other_external_door_lock
+      problem: Door lock
 
     - text: Something else
       desc: external_doors_problem
+      problem: External door
 
 water_leaking_into_light:
   question: Is there water leaking into or from the light?
@@ -319,6 +356,7 @@ light_check_bulb:
   answers:
     - text: 'Yes'
       desc: inside_light_fitting
+      problem: Light fitting
 
     - text: 'No'
       page: replace_lightbulb
@@ -332,18 +370,22 @@ toilet_problem:
     - text: Toilet is not flushing
       desc: toilet_problem
       sor_code: 20060020
+      problem: Toilet is not flushing
 
     - text: Toilet is damaged
       desc: inside_bathroom_toilet_damaged
       sor_code: 20060020
+      problem: Toilet is damaged
 
     - text: Toilet is leaking - containable
       desc: inside_bathroom_toilet_leaking
       sor_code: 20060020
+      problem: Toilet is leaking - containable
 
     - text: Something else
       desc: toilet_problem
       sor_code: 20060020
+      problem: Toilet
 
 blocked_only_toilet:
   question: Is this your only toilet?
@@ -354,6 +396,7 @@ blocked_only_toilet:
     - text: 'No'
       desc: toilet_problem
       sor_code: 20060020
+      problem: Toilet is blocked
 
 damp_or_mould_problem:
   question: Is your problem with damp or mould?
@@ -361,9 +404,12 @@ damp_or_mould_problem:
     - text: Damp
       desc: damp
       sor_code: PRE00001
+      problem: Damp
 
     - text: Mould
       desc: mould
       sor_code: 08500820
+      problem: Mould
 
     - text: I'm not sure
+      problem: Damp or mould
