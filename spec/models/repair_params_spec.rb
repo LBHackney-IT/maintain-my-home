@@ -50,21 +50,6 @@ RSpec.describe RepairParams do
         expect(RepairParams.new(answers).problem_description).to eq "My bath is broken\n\nRoom: Bathroom\n\nLast question: \"Is it?\" -> No"
       end
 
-      it 'describes the room if there was no description' do
-        answers = {
-          'describe_repair' => {
-            'description' => '',
-          },
-          'room' => {
-            'room' => 'Bathroom',
-          },
-          'last_question' => {
-            'question' => 'Is it?',
-            'answer' => 'No',
-          },
-        }
-        expect(RepairParams.new(answers).problem_description).to eq "No description given\n\nRoom: Bathroom\n\nLast question: \"Is it?\" -> No"
-      end
     end
 
     context 'if a callback was requested' do
@@ -84,24 +69,6 @@ RSpec.describe RepairParams do
 
         expect(RepairParams.new(answers).problem_description)
           .to eq "My bath is broken\n\nLast question: \"Is it?\" -> No\n\nCallback requested: between 8am and midday"
-      end
-
-      it 'includes the callback info if there was no description' do
-        answers = {
-          'describe_repair' => {
-            'description' => '',
-          },
-          'callback_time' => {
-            'callback_time' => ['morning'],
-          },
-          'last_question' => {
-            'question' => 'Is it?',
-            'answer' => 'No',
-          },
-        }
-
-        expect(RepairParams.new(answers).problem_description)
-          .to eq "No description given\n\nLast question: \"Is it?\" -> No\n\nCallback requested: between 8am and midday"
       end
     end
   end
