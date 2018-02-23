@@ -29,6 +29,9 @@ RSpec.describe CreateRepair do
           'question' => 'Is it?',
           'answer' => 'No',
         },
+        'problem' => {
+          'problem' => 'Bath',
+        },
       }
 
       service = CreateRepair.new(api: fake_api)
@@ -37,7 +40,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: "My bath is broken\n\nRoom: Bathroom\n\nLast question: \"Is it?\" -> No",
+          problemDescription: "Room: Bathroom\nProblem with: Bath\n\nMy bath is broken",
           propertyReference: '00034713',
           contact: {
             name: 'Jo Bloggs',
@@ -117,7 +120,7 @@ RSpec.describe CreateRepair do
       expect(fake_api).to have_received(:create_repair)
         .with(
           priority: 'N',
-          problemDescription: "My bath is broken\n\nLast question: \"Is it?\" -> No",
+          problemDescription: 'My bath is broken',
           propertyReference: '00034713',
           contact: {
             name: 'Alex Doe',

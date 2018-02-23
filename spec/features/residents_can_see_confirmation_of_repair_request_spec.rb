@@ -148,7 +148,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       expect(fake_api).to have_received(:post).with(
         'v1/repairs',
         priority: 'N',
-        problemDescription: "My sink is blocked\n\nRoom: Kitchen\n\nLast question: \"Is your tap broken?\" -> Yes",
+        problemDescription: "Room: Kitchen\n\nMy sink is blocked",
         propertyReference: '00000503',
         contact: {
           name: 'John Evans',
@@ -257,7 +257,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     expect(fake_api).to have_received(:post).with(
       'v1/repairs',
       priority: 'N',
-      problemDescription: "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other\n\nCallback requested: between 8am and 5pm",
+      problemDescription: "Callback requested: between 8am and 5pm\n\nMy sink is blocked",
       propertyReference: '00000503',
       contact: {
         name: 'John Evans',
