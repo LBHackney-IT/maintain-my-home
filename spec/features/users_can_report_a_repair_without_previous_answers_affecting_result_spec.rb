@@ -138,6 +138,6 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     choose_radio_button 'morning (8am to midday)'
     click_on 'Continue'
 
-    expect(page).to have_content 'We will call you within one working day, between 8am and midday'
+    expect(page).to have_content 'We will call you between 8am and midday'
   end
 end
