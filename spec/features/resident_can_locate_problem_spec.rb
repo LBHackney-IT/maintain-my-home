@@ -22,8 +22,8 @@ RSpec.feature 'Resident can locate a problem' do
     matching_properties = [other_property, tenant_property]
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => matching_properties)
-    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(tenant_property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6NU').and_return('results' => matching_properties)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties/abc123').and_return(tenant_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -46,7 +46,7 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'when the address search returned no results' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6NU').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -83,8 +83,8 @@ RSpec.feature 'Resident can locate a problem' do
 
   scenario 'changing the postcode after searching' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6AA').and_return('results' => [])
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6AA').and_return('results' => [])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6NU').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -110,7 +110,7 @@ RSpec.feature 'Resident can locate a problem' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [matching_property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6NU').and_return('results' => [matching_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'
@@ -132,7 +132,7 @@ RSpec.feature 'Resident can locate a problem' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=N1 6NU').and_return('results' => [other_property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=N1 6NU').and_return('results' => [other_property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     visit '/address-search'

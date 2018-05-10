@@ -8,10 +8,10 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
-      .with('v1/repairs', anything)
+      .with('hackneyrepairs/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -25,7 +25,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('v1/repairs/00367923')
+      .with('hackneyrepairs/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -39,7 +39,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('v1/work_orders/09124578/available_appointments')
+      .with('hackneyrepairs/work_orders/09124578/available_appointments')
       .and_return(
         'results' => []
       )
@@ -112,7 +112,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
     end
 
     expect(fake_api).to have_received(:post).with(
-      'v1/repairs',
+      'hackneyrepairs/repairs',
       priority: 'N',
       problemDescription: "Room: Kitchen\n\nMy sink is blocked",
       propertyReference: '00000503',
