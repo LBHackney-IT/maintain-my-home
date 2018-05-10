@@ -11,10 +11,10 @@ RSpec.feature 'Leaseholders cannot report in-dwelling repairs' do
 
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get)
-      .with('v1/properties?postcode=N1 6NN')
+      .with('hackneyrepairs/v1/properties?postcode=N1 6NN')
       .and_return('results' => [property])
     allow(fake_api).to receive(:get)
-      .with('v1/properties/00001234')
+      .with('hackneyrepairs/v1/properties/00001234')
       .and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 

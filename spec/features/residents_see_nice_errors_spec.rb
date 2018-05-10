@@ -38,7 +38,7 @@ RSpec.feature 'Error pages' do
     fake_api = instance_double(JsonApi)
     connection_error = JsonApi::ConnectionError.new('Failed to open TCP connection to api_server:8000 (getaddrinfo: nodename nor servname provided, or not known)')
     allow(fake_api).to receive(:get)
-      .with('v1/properties?postcode=E5 8TE')
+      .with('hackneyrepairs/v1/properties?postcode=E5 8TE')
       .and_raise connection_error
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
