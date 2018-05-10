@@ -78,7 +78,7 @@ class JsonApi
   class ConnectionBuilder
     def build(
       logger,
-      api_root: ENV['HACKNEY_API_ROOT'] + 'hackneyrepairs/',
+      api_root: ENV['HACKNEY_API_ROOT'],
       api_cert: ENV['PROXY_API_CERT'],
       api_key: ENV['PROXY_API_KEY']
     )
