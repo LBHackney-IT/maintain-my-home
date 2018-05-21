@@ -44,8 +44,9 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    # Address search:
-    expect(page).to have_content 'What is your address?'
+    # Address confirmation:
+    expect(page).to have_content 'Confirm address'
+    expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     click_on t('back_link')
 
     expect(page).to have_content 'Let us know any further details'
@@ -100,8 +101,9 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    # Address search:
-    expect(page).to have_content 'What is your address?'
+    # Address confirmation:
+    expect(page).to have_content 'Confirm address'
+    expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     click_on t('back_link')
 
     expect(page).to have_content 'Let us know any further details you think might help us'

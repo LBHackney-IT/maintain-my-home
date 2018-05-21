@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/address-search', to: 'address_searches#index', as: 'address_search'
   post '/address-search', to: 'address_searches#create'
+  delete '/address-search', to: 'address_searches#destroy', as: 'destroy_address_search'
 
   resource :address, only: [:create]
   resources :confirmations, only: [:show]

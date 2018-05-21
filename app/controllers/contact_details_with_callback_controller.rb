@@ -1,8 +1,16 @@
 class ContactDetailsWithCallbackController < ApplicationController
   def index
     @selected_answers = selected_answer_store.selected_answers['address']
-
-    @form = ContactDetailsWithCallbackForm.new
+    contact_details = selected_answer_store.selected_answers['contact_details']
+    if contact_details
+      default_values = {
+        full_name: contact_details['full_name'],
+        telephone_number: contact_details['telephone_number'],
+      }
+    else
+      default_values = {}
+    end
+    @form = ContactDetailsWithCallbackForm.new(default_values)
   end
 
   def submit
