@@ -1,7 +1,11 @@
 module Questions
   class StartController < ApplicationController
     def index
-      reset_session
+      if params[:keep_address]
+        selected_answer_store.reset_repair_questions!
+      else
+        reset_session
+      end
 
       @form = StartForm.new
     end

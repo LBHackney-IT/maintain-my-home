@@ -4,7 +4,9 @@ class HackneyApi
   end
 
   def list_properties(postcode:)
-    response = @json_api.get('hackneyrepairs/v1/properties?postcode=' + postcode)
+    response = @json_api.get(
+      'hackneyrepairs/v1/properties?postcode=' + postcode
+    )
     response.fetch('results')
   end
 
@@ -22,7 +24,9 @@ class HackneyApi
 
   def list_available_appointments(work_order_reference:)
     response = @json_api.get(
-      'hackneyrepairs/v1/work_orders/' + work_order_reference + '/available_appointments'
+      'hackneyrepairs/v1/work_orders/' +
+      work_order_reference +
+      '/available_appointments'
     )
     response.fetch('results')
   end
