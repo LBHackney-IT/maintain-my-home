@@ -20,6 +20,8 @@ module Questions
                     page_path('gas')
                   when 'no_heating'
                     page_path('heating_repairs')
+                  when 'no_water'
+                    page_path('no_water')
                   when 'home_adaptations'
                     page_path('home_adaptations')
                   when 'none_of_the_above'

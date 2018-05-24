@@ -1,0 +1,26 @@
+= back_link
+
+%h1
+  What to do if you have no water
+
+%br/
+
+%h2
+  If you don't have drinking water in the kitchen
+
+%p
+  Please call Thames Water on
+  %strong
+    = succeed '.' do
+      = water_emergency_telephone_number
+
+%h2
+  If you don't have water in the bathroom or toilet
+
+%p
+  Please call our Repairs Contact Centre on
+  %strong
+    = succeed ',' do
+      = repairs_contact_centre_telephone_number
+  this will allow us to review your repair straight away
+  and schedule an appointment.
