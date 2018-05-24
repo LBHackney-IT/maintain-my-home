@@ -1,22 +1,25 @@
 = back_link
 
 %h1
-  Heating repairs
+  What to do if you have no heating
+
+%br/
 
 %h2
-  Watch this short video to find out how to fix common heating problems.
-
-%object
-  %param{ name: 'movie', value: 'https://www.youtube.com/v/ktklk7d0ibY?version=3&hl=en_US' }/
-  %param{ name: 'allowFullScreen', value: 'true' }/
-  %param{ name: 'allowscriptaccess', value: 'always' }/
-  %embed{ allowfullscreen: 'true', allowscriptaccess: 'always', src: 'https://www.youtube.com/v/ktklk7d0ibY?version=3&hl=en_US', type: 'application/x-shockwave-flash' }
+  The problem you're having might need immediate attention
 
 %p
-  If your heating still isn't working, call us to schedule an appointment.
+  Please report emergency or urgent repair problems
+  through our Repairs Contact Centre - this will allow us to
+  review your repair straight away and schedule
+  an appointment.
 
 %p
   Repairs Contact Centre:
   %strong= repairs_contact_centre_telephone_number
   = succeed '.' do
     = t('rcc_opening_hours')
+
+%p
+  You can also watch this short video to find out
+  %a{ href: 'https://www.youtube.com/v/ktklk7d0ibY?version=3&hl=en_US' } how to fix common heating problems.
