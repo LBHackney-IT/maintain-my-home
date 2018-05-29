@@ -15,19 +15,7 @@ module Questions
 
       return render :index if @form.invalid?
 
-      next_page = case @form.answer
-                  when 'smell_gas'
-                    page_path('gas')
-                  when 'no_heating'
-                    page_path('heating_repairs')
-                  when 'home_adaptations'
-                    page_path('home_adaptations')
-                  when 'none_of_the_above'
-                    questions_path('which_room')
-                  else
-                    page_path('emergency_contact')
-                  end
-
+      next_page = page_mapping[@form.answer] || page_path('emergency_contact')
       redirect_to next_page
     end
 
@@ -35,6 +23,16 @@ module Questions
 
     def start_form_params
       params.require(:start_form).permit(:answer)
+    end
+
+    def page_mapping
+      {
+        'smell_gas' => page_path('gas'),
+        'no_heating' => page_path('heating_repairs'),
+        'no_water' => page_path('no_water'),
+        'home_adaptations' => page_path('home_adaptations'),
+        'none_of_the_above' => questions_path('which_room'),
+      }
     end
   end
 end
