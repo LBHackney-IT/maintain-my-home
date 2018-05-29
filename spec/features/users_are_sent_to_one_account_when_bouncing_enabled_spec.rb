@@ -5,7 +5,7 @@ RSpec.feature 'Users visiting our landing page from hackney.gov.uk' do
     visit '/landing'
 
     expect(page.current_path).to eql '/'
-    expect(page).to have_content 'We provide housing and communal area repairs for council tenants'
+    expect(page).to have_content 'We provide housing repairs for council tenants through this online service'
   end
 
   scenario 'redirected to One Account, when bouncing is enabled' do
