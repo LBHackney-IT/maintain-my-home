@@ -24,6 +24,10 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     choose_radio_button 'No'
     click_continue
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'skip'
     click_continue
@@ -81,6 +85,10 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     # Emergency repairs
     choose_radio_button 'No'
     click_continue
+
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
 
     # Fake decision tree
     choose_radio_button 'diagnose'

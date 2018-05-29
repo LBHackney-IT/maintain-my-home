@@ -98,6 +98,10 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'Kitchen'
     click_on 'Continue'
@@ -110,6 +114,10 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 

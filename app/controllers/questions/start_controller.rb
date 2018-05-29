@@ -30,8 +30,7 @@ module Questions
         'smell_gas' => page_path('gas'),
         'no_heating' => page_path('heating_repairs'),
         'no_water' => page_path('no_water'),
-        'home_adaptations' => page_path('home_adaptations'),
-        'none_of_the_above' => questions_path('which_room'),
+        'none_of_the_above' => questions_path('screening_filter'),
       }
     end
   end

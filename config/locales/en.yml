@@ -64,6 +64,12 @@ en:
           no_power: I have no power
           water_leak: I have a water leak which I can't contain
           not_secure_access: I can't secure my property
+          none_of_the_above: No, my problem is not one of the above
+      screening_filter_form:
+        answer:
+          communal: Repair is in the communal area
           home_adaptations: My home has been adapted for my disability
+          multiple_properties: Repair problem affects multiple properties
+          recent_repair: Repair was made within the last month
           none_of_the_above: No, my problem is not one of the above
   title: Report a repair

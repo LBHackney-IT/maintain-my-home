@@ -103,6 +103,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       choose_radio_button 'No'
       click_on 'Continue'
 
+      # Filter page:
+      choose_radio_button 'No'
+      click_on 'Continue'
+
       # Fake decision tree
       choose_radio_button 'Kitchen'
       click_on 'Continue'
@@ -215,6 +219,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
