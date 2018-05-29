@@ -68,6 +68,10 @@ RSpec.feature 'Error pages' do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'Kitchen'
     click_on 'Continue'
@@ -87,4 +91,3 @@ RSpec.feature 'Error pages' do
       .with(connection_error)
   end
 end
-

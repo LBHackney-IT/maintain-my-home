@@ -14,7 +14,6 @@ RSpec.feature 'Users can answer repair questions' do
       expect(page).to have_content t('simple_form.options.start_form.answer.no_water')
       expect(page).to have_content t('simple_form.options.start_form.answer.no_power')
       expect(page).to have_content t('simple_form.options.start_form.answer.water_leak')
-      expect(page).to have_content t('simple_form.options.start_form.answer.home_adaptations')
       expect(page).to have_content t('simple_form.options.start_form.answer.none_of_the_above')
     end
 
@@ -45,7 +44,7 @@ RSpec.feature 'Users can answer repair questions' do
     click_continue
 
     within '.question' do
-      expect(page).to have_content 'Where is the problem located?'
+      expect(page).to have_content 'Do any of the following apply?'
     end
   end
 

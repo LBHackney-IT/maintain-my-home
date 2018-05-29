@@ -21,16 +21,10 @@ RSpec.describe Questions::StartController do
         expect(response).to redirect_to '/pages/no_water'
       end
 
-      it 'shows the home adaptations page' do
-        post :submit, params: { start_form: { answer: 'home_adaptations' } }
-
-        expect(response).to redirect_to '/pages/home_adaptations'
-      end
-
-      it 'shows the which_room question' do
+      it 'shows the screening filter question' do
         post :submit, params: { start_form: { answer: 'none_of_the_above' } }
 
-        expect(response).to redirect_to '/questions/which_room'
+        expect(response).to redirect_to '/questions/screening_filter'
       end
 
       it 'shows the standard emergency contact page for other values' do

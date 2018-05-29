@@ -82,6 +82,10 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'Kitchen'
     click_on 'Continue'

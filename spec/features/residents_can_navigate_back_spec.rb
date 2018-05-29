@@ -21,6 +21,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'diagnose'
     click_continue
@@ -78,6 +82,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'skip'
     click_continue
@@ -125,6 +133,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'skip'
     click_continue
@@ -164,6 +176,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -212,6 +228,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -274,6 +294,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     choose_radio_button 'No'
     click_on 'Continue'
 
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
     # Fake decision tree
     choose_radio_button 'skip'
     click_continue
@@ -305,6 +329,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
