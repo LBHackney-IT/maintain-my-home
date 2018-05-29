@@ -60,7 +60,6 @@ kitchen_electrical_problem:
 
     - text: Something else
       desc: kitchen_problem
-      sor_code: 20110010
       problem: Electrical
 
 heating_problem:
@@ -115,7 +114,6 @@ sink_problem:
 
     - text: Something else
       desc: sink_problem
-      sor_code: 20060030
       problem: Sink
 
 bathroom_problem:
@@ -179,7 +177,6 @@ basin_problem:
 
     - text: Something else
       desc: sink_problem
-      sor_code: 20060020
       problem: Basin / Sink
 
 bath_problem:
@@ -207,7 +204,6 @@ bath_problem:
 
     - text: Something else
       desc: bath_problem
-      sor_code: 20060020
       problem: Bath
 
 bathroom_electrical_problem:
@@ -226,7 +222,6 @@ bathroom_electrical_problem:
 
     - text: Something else
       desc: bathroom_problem
-      sor_code: 20110010
       problem: Electrical
 
 other_problem:
@@ -286,7 +281,6 @@ other_electrical_problem:
 
     - text: Something else
       desc: electrical_problem
-      sor_code: 20110010
       problem: Electrical
 
 window_problem:
@@ -308,7 +302,6 @@ window_problem:
 
     - text: Something else
       desc: window_problem
-      sor_code: 20040010
       problem: Window
 
 
@@ -384,7 +377,6 @@ toilet_problem:
 
     - text: Something else
       desc: toilet_problem
-      sor_code: 20060020
       problem: Toilet
 
 blocked_only_toilet:
