@@ -1,6 +1,6 @@
 ---
 which_room:
-  question: In which room is the problem located?
+  question: Where is the problem located?
   answers:
     - text: Kitchen
       next: kitchen_problem
@@ -8,7 +8,7 @@ which_room:
     - text: Bathroom
       next: bathroom_problem
 
-    - text: Other
+    - text: Elsewhere in my property
       next: other_problem
 
 kitchen_problem:
