@@ -61,7 +61,7 @@ en:
           smell_gas: I can smell gas
           no_heating: I have no heating
           no_water: I have no water
-          no_power: I have no power
+          no_power: I have no electricity
           water_leak: I have a major leak or an upsurge of water
           water_leak_electrics: I have water leaking onto electrics
           not_secure_access: I can't secure my property

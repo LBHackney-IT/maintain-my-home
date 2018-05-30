@@ -21,6 +21,12 @@ RSpec.describe Questions::StartController do
         expect(response).to redirect_to '/pages/no_water'
       end
 
+      it 'shows the no power repairs page' do
+        post :submit, params: { start_form: { answer: 'no_power' } }
+
+        expect(response).to redirect_to '/pages/no_power'
+      end
+
       it 'shows the exposed wiring page' do
         post :submit, params: { start_form: { answer: 'exposed_wiring' } }
 
