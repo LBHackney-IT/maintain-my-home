@@ -62,8 +62,11 @@ en:
           no_heating: I have no heating
           no_water: I have no water
           no_power: I have no power
-          water_leak: I have a water leak which I can't contain
+          water_leak: I have a major leak or an upsurge of water
+          water_leak_electrics: I have water leaking onto electrics
           not_secure_access: I can't secure my property
+          exposed_wiring: I have exposed wiring or sparking sockets
+          alarm_beeping: My carbon monoxide or smoke alarm is beeping
           none_of_the_above: No, my problem is not one of the above
       screening_filter_form:
         answer:

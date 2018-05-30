@@ -59,7 +59,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is the problem?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these?'
+    click_on t('back_link')
+
+    expect(page).to have_content 'Is your repair one of these emergencies'
   end
 
   scenario 'when the repair could not be diagnosed' do
@@ -120,7 +123,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is the problem?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these?'
+    click_on t('back_link')
+
+    expect(page).to have_content 'Is your repair one of these emergencies?'
   end
 
   scenario 'when the address search was invalid' do
@@ -272,7 +278,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Continue'
 
     click_on t('back_link')
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these emergencies'
   end
 
   scenario 'going back from the My address is not here exit page' do
