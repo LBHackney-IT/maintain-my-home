@@ -21,6 +21,24 @@ RSpec.describe Questions::StartController do
         expect(response).to redirect_to '/pages/no_water'
       end
 
+      it 'shows the exposed wiring page' do
+        post :submit, params: { start_form: { answer: 'exposed_wiring' } }
+
+        expect(response).to redirect_to '/pages/electrical_hazard_emergency'
+      end
+
+      it 'shows the water leak electrics page' do
+        post :submit, params: { start_form: { answer: 'water_leak_electrics' } }
+
+        expect(response).to redirect_to '/pages/electrical_hazard_emergency'
+      end
+
+      it 'shows the alarm beeping page' do
+        post :submit, params: { start_form: { answer: 'alarm_beeping' } }
+
+        expect(response).to redirect_to '/pages/alarm_beeping_emergency'
+      end
+
       it 'shows the screening filter question' do
         post :submit, params: { start_form: { answer: 'none_of_the_above' } }
 

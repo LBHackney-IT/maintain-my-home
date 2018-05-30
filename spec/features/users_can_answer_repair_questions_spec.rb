@@ -5,7 +5,7 @@ RSpec.feature 'Users can answer repair questions' do
     visit '/questions/start/'
 
     within '.question' do
-      expect(page).to have_content 'Do any of the following apply'
+      expect(page).to have_content 'Is your repair one of these emergencies'
     end
 
     within '.answers' do
@@ -44,7 +44,7 @@ RSpec.feature 'Users can answer repair questions' do
     click_continue
 
     within '.question' do
-      expect(page).to have_content 'Do any of the following apply?'
+      expect(page).to have_content 'Is your repair one of these?'
     end
   end
 

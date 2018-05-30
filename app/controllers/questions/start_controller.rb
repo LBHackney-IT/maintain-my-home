@@ -30,6 +30,9 @@ module Questions
         'smell_gas' => page_path('gas'),
         'no_heating' => page_path('heating_repairs'),
         'no_water' => page_path('no_water'),
+        'exposed_wiring' => page_path('electrical_hazard_emergency'),
+        'water_leak_electrics' => page_path('electrical_hazard_emergency'),
+        'alarm_beeping' => page_path('alarm_beeping_emergency'),
         'none_of_the_above' => questions_path('screening_filter'),
       }
     end

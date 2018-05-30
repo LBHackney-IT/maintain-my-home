@@ -13,6 +13,6 @@ RSpec.feature 'Users understand the purpose of the service' do
 
     click_on 'Start'
 
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these emergencies?'
   end
 end

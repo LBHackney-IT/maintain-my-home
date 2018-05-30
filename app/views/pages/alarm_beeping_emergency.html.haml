@@ -1,0 +1,42 @@
+= back_link
+
+%h1
+  Carbon Monoxide Alarm
+
+%h2
+  What to do if your carbon monoxide (CO) alarm has triggered
+
+%ol
+  %li
+    Turn off the gas supply at the gas meter
+  %li
+    Extinguish all sources of ignition
+  %li
+    Do not smoke
+  %li
+    Do not operate electrical light switches and power sockets
+  %li
+    Do not use the door entry system - if you need to let someone in, go down to the entrance door to open it
+  %li
+    Open doors and windows to ventilate the area
+  %li
+    Contact National Grid on
+    %strong= gas_emergency_telephone_number
+    from outside the property
+
+%h1
+  Smoke detector beeping
+
+%p
+  If your smoke detector or fire alarm is beeping please call
+  us. This will allow us to review
+  the problem as a priority and schedule a suitable
+  appointment to help resolve the issue quickly.
+
+%p
+  %strong
+    Call us on:
+    = succeed ',' do
+      = repairs_contact_centre_telephone_number
+    = succeed '.' do
+      = t('rcc_opening_hours')
