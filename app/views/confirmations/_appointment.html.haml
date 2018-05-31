@@ -7,6 +7,8 @@
     = succeed '.' do
       = appointment.time
 
+= link_to "Report another repair", questions_start_path(keep_address: true), class: 'button'
+
 %p
   If you need to change your appointment or have any questions,
   please call us on

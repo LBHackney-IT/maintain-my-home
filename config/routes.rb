@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/address-search', to: 'address_searches#index', as: 'address_search'
   post '/address-search', to: 'address_searches#create'
+  delete '/address-search', to: 'address_searches#destroy', as: 'destroy_address_search'
 
   resource :address, only: [:create]
   resources :confirmations, only: [:show]
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   namespace :questions do
     get '/start', to: 'start#index', as: 'start'
     post '/start', to: 'start#submit'
+    get '/screening_filter', to: 'screening_filter#index', as: 'screening_filter'
+    post '/screening_filter', to: 'screening_filter#submit'
   end
 
   get '/questions/:id', to: 'questions#show', as: 'questions'

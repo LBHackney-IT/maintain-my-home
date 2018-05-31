@@ -1,4 +1,4 @@
-class StartForm
+class ScreeningFilterForm
   include ActiveModel::Model
 
   attr_reader :answer
@@ -12,8 +12,11 @@ class StartForm
 
   def choices
     %i[
-      smell_gas no_heating no_water no_power water_leak water_leak_electrics
-      not_secure_access exposed_wiring alarm_beeping none_of_the_above
+      communal
+      home_adaptations
+      multiple_properties
+      recent_repair
+      none_of_the_above
     ]
   end
 end

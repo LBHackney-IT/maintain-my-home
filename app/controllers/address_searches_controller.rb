@@ -1,6 +1,13 @@
 class AddressSearchesController < ApplicationController
   def index
-    @address_search = AddressSearch.new
+    if selected_answer_store.address?
+      @address = selected_answer_store.selected_answers['address']
+      repair_params = RepairParams.new(selected_answer_store.selected_answers)
+      @diagnosed = repair_params.diagnosed?
+      render template: 'address_searches/confirm_address'
+    else
+      @address_search = AddressSearch.new
+    end
   end
 
   def create
@@ -11,6 +18,11 @@ class AddressSearchesController < ApplicationController
     else
       render :index
     end
+  end
+
+  def destroy
+    selected_answer_store.clear_address!
+    redirect_to action: :index
   end
 
   private

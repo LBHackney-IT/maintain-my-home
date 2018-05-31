@@ -1,0 +1,18 @@
+= back_link
+%h1
+  Confirm address
+
+%p
+  Is this the address for repair?
+
+%p
+  %aside#progress
+    = @address['address']
+    = @address['postcode']
+    = button_to "Change", destroy_address_search_path, method: :delete, class: 'link'
+
+%p
+  - if @diagnosed
+    = link_to "Confirm", contact_details_path, class: 'button'
+  - else
+    = link_to "Confirm", contact_details_with_callback_path, class: 'button'

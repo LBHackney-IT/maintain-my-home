@@ -8,8 +8,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -18,6 +18,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -44,8 +48,9 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    # Address search:
-    expect(page).to have_content 'What is your address?'
+    # Address confirmation:
+    expect(page).to have_content 'Confirm address'
+    expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     click_on t('back_link')
 
     expect(page).to have_content 'Let us know any further details'
@@ -54,7 +59,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is the problem?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these?'
+    click_on t('back_link')
+
+    expect(page).to have_content 'Is your repair one of these emergencies'
   end
 
   scenario 'when the repair could not be diagnosed' do
@@ -64,8 +72,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(question: 'What is the problem?', answers: [{ 'text' => 'skip' }])
@@ -74,6 +82,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -100,8 +112,9 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is your address?'
     click_on t('back_link')
 
-    # Address search:
-    expect(page).to have_content 'What is your address?'
+    # Address confirmation:
+    expect(page).to have_content 'Confirm address'
+    expect(page).to have_content 'Flat 1, 8 Hoxton Square'
     click_on t('back_link')
 
     expect(page).to have_content 'Let us know any further details you think might help us'
@@ -110,7 +123,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     expect(page).to have_content 'What is the problem?'
     click_on t('back_link')
 
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these?'
+    click_on t('back_link')
+
+    expect(page).to have_content 'Is your repair one of these emergencies?'
   end
 
   scenario 'when the address search was invalid' do
@@ -120,6 +136,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -152,8 +172,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => '12345678' }])
@@ -162,6 +182,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -200,8 +224,8 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('v1/properties/abc123').and_return(property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/abc123').and_return(property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -210,6 +234,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -250,7 +278,7 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Continue'
 
     click_on t('back_link')
-    expect(page).to have_content 'Do any of the following apply'
+    expect(page).to have_content 'Is your repair one of these emergencies'
   end
 
   scenario 'going back from the My address is not here exit page' do
@@ -260,7 +288,7 @@ RSpec.feature 'Resident can navigate back', js: true do
       'postcode' => 'N1 6NU',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [property])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -269,6 +297,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 
@@ -294,7 +326,7 @@ RSpec.feature 'Resident can navigate back', js: true do
 
   scenario 'going back from the address selection page' do
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E8 5TQ').and_return('results' => [])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E8 5TQ').and_return('results' => [])
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -303,6 +335,10 @@ RSpec.feature 'Resident can navigate back', js: true do
     click_on 'Start'
 
     # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
     choose_radio_button 'No'
     click_on 'Continue'
 

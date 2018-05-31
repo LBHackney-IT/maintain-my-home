@@ -33,7 +33,7 @@ describe HackneyApi do
         'postcode' => 'N1 1AA',
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('v1/properties/cre045').and_return(results)
+      allow(json_api).to receive(:get).with('hackneyrepairs/v1/properties/cre045').and_return(results)
       api = HackneyApi.new(json_api)
 
       expect(api.get_property(property_reference: 'cre045')).to eql results
@@ -43,7 +43,7 @@ describe HackneyApi do
   describe '#create_repair' do
     it 'sends repair creation parameters' do
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:post).with('v1/repairs', anything)
+      allow(json_api).to receive(:post).with('hackneyrepairs/v1/repairs', anything)
 
       api = HackneyApi.new(json_api)
       repair_params = {
@@ -55,7 +55,7 @@ describe HackneyApi do
 
       expect(json_api).to have_received(:post)
         .with(
-          'v1/repairs',
+          'hackneyrepairs/v1/repairs',
           priority: 'U',
           problemDescription: 'It is broken',
           propertyReference: '01234567',
@@ -66,7 +66,7 @@ describe HackneyApi do
       json_api = instance_double('JsonApi')
       result = double('api result')
       allow(json_api).to receive(:post)
-        .with('v1/repairs', anything)
+        .with('hackneyrepairs/v1/repairs', anything)
         .and_return result
 
       api = HackneyApi.new(json_api)
@@ -89,7 +89,7 @@ describe HackneyApi do
         ],
       }
       json_api = instance_double('JsonApi')
-      allow(json_api).to receive(:get).with('v1/repairs/00045678').and_return(result)
+      allow(json_api).to receive(:get).with('hackneyrepairs/v1/repairs/00045678').and_return(result)
       api = HackneyApi.new(json_api)
 
       expect(api.get_repair(repair_request_reference: '00045678')).to eql result
@@ -113,7 +113,7 @@ describe HackneyApi do
 
       json_api = instance_double('JsonApi')
       result = { 'results' => appointments }
-      allow(json_api).to receive(:get).with('v1/work_orders/00412371/available_appointments').and_return(result)
+      allow(json_api).to receive(:get).with('hackneyrepairs/v1/work_orders/00412371/available_appointments').and_return(result)
       api = HackneyApi.new(json_api)
 
       expect(api.list_available_appointments(work_order_reference: '00412371')).to eql appointments
@@ -131,7 +131,7 @@ describe HackneyApi do
       allow(json_api)
         .to receive(:post)
         .with(
-          'v1/work_orders/00412371/appointments',
+          'hackneyrepairs/v1/work_orders/00412371/appointments',
           beginDate: '2017-11-01T14:00:00Z',
           endDate: '2017-11-01T16:30:00Z'
         )

@@ -2,8 +2,7 @@
   Report a repair
 
 %p.lede
-  We provide housing and communal area repairs for council tenants,
-  and communal repairs for leaseholders.
+  We provide housing repairs for council tenants through this online service.
 
 %p
   You can use this service to:
@@ -15,7 +14,7 @@
     choose a date and time for us to carry out the repair
 
 %p
-  Reporting a repair should take less than 5 minutes.
+  Reporting a single repair should take less than 5 minutes.
 
 %p.notice
   %i.icon.icon-important
@@ -42,6 +41,17 @@
   We're open
   = succeed '.' do
     = t('rcc_opening_hours')
+
+%h2
+  Communal repairs
+
+%p
+  If you need to report a repair within a communal area
+  such as lift, entry doors and lighting,
+  %br/
+  please call us on
+  = succeed '.' do
+    = repairs_contact_centre_telephone_number
 
 %h2
   Home improvements

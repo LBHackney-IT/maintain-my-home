@@ -1,0 +1,29 @@
+= back_link
+
+%h1
+  Emergency repairs
+
+%h2
+  The problem you're having might need immediate attention
+
+%p
+  %strong
+    Call us on:
+    = succeed ',' do
+      = repairs_contact_centre_telephone_number
+    = succeed '.' do
+      = t('rcc_opening_hours')
+
+%h2
+  Electrical safety
+
+%p
+  %strong
+    You should always be extremely careful with any faulty
+    or exposed electrics in your home and make sure no one
+    else in the house is in danger from them.
+
+%p
+  If you're uncertain or have any immediate concerns about
+  an electrical repair issue in your home, please call us
+  for guidance

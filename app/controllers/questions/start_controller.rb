@@ -1,7 +1,11 @@
 module Questions
   class StartController < ApplicationController
     def index
-      reset_session
+      if params[:keep_address]
+        selected_answer_store.reset_repair_questions!
+      else
+        reset_session
+      end
 
       @form = StartForm.new
     end
@@ -11,19 +15,7 @@ module Questions
 
       return render :index if @form.invalid?
 
-      next_page = case @form.answer
-                  when 'smell_gas'
-                    page_path('gas')
-                  when 'no_heating'
-                    page_path('heating_repairs')
-                  when 'home_adaptations'
-                    page_path('home_adaptations')
-                  when 'none_of_the_above'
-                    questions_path('which_room')
-                  else
-                    page_path('emergency_contact')
-                  end
-
+      next_page = page_mapping[@form.answer] || page_path('emergency_contact')
       redirect_to next_page
     end
 
@@ -31,6 +23,19 @@ module Questions
 
     def start_form_params
       params.require(:start_form).permit(:answer)
+    end
+
+    def page_mapping
+      {
+        'smell_gas' => page_path('gas'),
+        'no_heating' => page_path('heating_repairs'),
+        'no_water' => page_path('no_water'),
+        'no_power' => page_path('no_power'),
+        'exposed_wiring' => page_path('electrical_hazard_emergency'),
+        'water_leak_electrics' => page_path('electrical_hazard_emergency'),
+        'alarm_beeping' => page_path('alarm_beeping_emergency'),
+        'none_of_the_above' => questions_path('screening_filter'),
+      }
     end
   end
 end

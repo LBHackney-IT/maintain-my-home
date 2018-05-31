@@ -5,6 +5,10 @@
     %legend.question
       = render partial: @describe_repair.partial
 
+    .info-notice.column-two-thirds
+      %p
+        Please only report one repair at a time. You will have a chance to report another repair after this one.
+
     .answers
       = f.input :description, as: :text, input_html: { maxlength: 500 }
       = f.button :submit, class: 'button'

@@ -15,16 +15,40 @@ RSpec.describe Questions::StartController do
         expect(response).to redirect_to '/pages/heating_repairs'
       end
 
-      it 'shows the home adaptations page' do
-        post :submit, params: { start_form: { answer: 'home_adaptations' } }
+      it 'shows the no water repairs page' do
+        post :submit, params: { start_form: { answer: 'no_water' } }
 
-        expect(response).to redirect_to '/pages/home_adaptations'
+        expect(response).to redirect_to '/pages/no_water'
       end
 
-      it 'shows the which_room question' do
+      it 'shows the no power repairs page' do
+        post :submit, params: { start_form: { answer: 'no_power' } }
+
+        expect(response).to redirect_to '/pages/no_power'
+      end
+
+      it 'shows the exposed wiring page' do
+        post :submit, params: { start_form: { answer: 'exposed_wiring' } }
+
+        expect(response).to redirect_to '/pages/electrical_hazard_emergency'
+      end
+
+      it 'shows the water leak electrics page' do
+        post :submit, params: { start_form: { answer: 'water_leak_electrics' } }
+
+        expect(response).to redirect_to '/pages/electrical_hazard_emergency'
+      end
+
+      it 'shows the alarm beeping page' do
+        post :submit, params: { start_form: { answer: 'alarm_beeping' } }
+
+        expect(response).to redirect_to '/pages/alarm_beeping_emergency'
+      end
+
+      it 'shows the screening filter question' do
         post :submit, params: { start_form: { answer: 'none_of_the_above' } }
 
-        expect(response).to redirect_to '/questions/which_room'
+        expect(response).to redirect_to '/questions/screening_filter'
       end
 
       it 'shows the standard emergency contact page for other values' do

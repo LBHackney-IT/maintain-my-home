@@ -9,8 +9,8 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
-    allow(fake_api).to receive(:get).with('v1/properties/zzz').and_return(matching_property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'skip' }])
@@ -23,6 +23,10 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     # Emergency repairs
     choose_radio_button 'No'
     click_continue
+
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
 
     # Fake decision tree
     choose_radio_button 'skip'
@@ -67,8 +71,8 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     }
 
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
-    allow(fake_api).to receive(:get).with('v1/properties/zzz').and_return(matching_property)
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [matching_property])
+    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/zzz').and_return(matching_property)
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_diagnosis_question(answers: [{ 'text' => 'diagnose', 'sor_code' => 'fake_code' }])
@@ -81,6 +85,10 @@ RSpec.feature 'Users cannot submit incomplete forms' do
     # Emergency repairs
     choose_radio_button 'No'
     click_continue
+
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
 
     # Fake decision tree
     choose_radio_button 'diagnose'
