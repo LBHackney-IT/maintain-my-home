@@ -32,6 +32,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_google_sheets_logger
+
     fake_question_set = stub_diagnosis_question(question: 'Which room?', answers: [
                                                   { 'text' => 'Kitchen', 'next' => 'kitchen' },
                                                   { 'text' => 'Bathroom', 'desc' => 'describe_problem' },

@@ -62,6 +62,8 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_google_sheets_logger
+
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
       .to receive(:find)
