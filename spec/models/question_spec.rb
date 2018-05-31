@@ -130,6 +130,24 @@ RSpec.describe Question do
       end
     end
 
+    context 'if answer has "page" key and a "desc" key' do
+      it 'returns the path to a static page' do
+        question = Question.new(
+          'id' => 'where',
+          'question' => 'Where do you want to go?',
+          'answers' => [
+            {
+              'text' => 'London',
+              'page' => 'info',
+              'desc' => 'travel_details',
+            },
+          ],
+        )
+
+        expect(question.redirect_path_for_answer('London')).to eql '/pages/info?details=travel_details'
+      end
+    end
+
     context 'if answer has "desc" key' do
       it 'returns the path to a describe repair page' do
         question = Question.new(
