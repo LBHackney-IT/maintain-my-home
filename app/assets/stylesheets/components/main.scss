@@ -95,4 +95,14 @@ main {
       font-weight: bold;
     }
   }
+
+  .info-notice {
+    border-left: 1em solid #dee0e2;
+    padding: 1em 0 1em 1em;
+    margin: 0 0 2em 0;
+
+    p:last-child, ul:last-child, ol:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
