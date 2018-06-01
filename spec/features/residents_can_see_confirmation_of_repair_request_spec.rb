@@ -66,6 +66,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         )
       allow(JsonApi).to receive(:new).and_return(fake_api)
 
+      stub_google_sheets_logger
+
       fake_question_set = instance_double(QuestionSet)
       allow(fake_question_set)
         .to receive(:find)
@@ -197,6 +199,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'propertyReference' => '00000503',
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    stub_google_sheets_logger
 
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
