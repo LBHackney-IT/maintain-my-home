@@ -18,3 +18,4 @@
 /yarn-error.log
 /spec/failures.txt
 .env
+config/google_cred.json

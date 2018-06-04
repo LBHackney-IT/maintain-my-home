@@ -12,4 +12,11 @@ module CapybaraHelpers
     allow(QuestionSet).to receive(:new).and_return(fake_question_set)
     fake_question_set
   end
+
+  def stub_google_sheets_logger
+    fake_sheets_api = instance_double(GoogleSheetLogger)
+    allow(fake_sheets_api).to receive(:call)
+    allow(GoogleSheetLogger).to receive(:new).and_return(fake_sheets_api)
+    fake_sheets_api
+  end
 end

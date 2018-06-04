@@ -137,6 +137,25 @@ RSpec.feature 'Users can diagnose their issue' do
     expect(page).to have_content 'The exact location of the damp'
   end
 
+  scenario 'choosing an answer with a special describe repair page and electrical hazard warning' do
+    stub_diagnosis_question(
+      question: 'Where does this question go?',
+      id: 'where',
+      answers: [{ 'text' => 'Somewhere special', 'desc' => 'inside_sockets', 'page' => 'electrical_hazard_warning' }]
+    )
+
+    visit '/questions/where'
+    choose_radio_button 'Somewhere special'
+    click_on 'Continue'
+
+    expect(page).to have_content 'Electrical safety'
+
+    # Submit invalid details - the same text should display
+    click_on 'Continue'
+
+    expect(page).to have_content 'the problem with the socket'
+  end
+
   scenario 'not choosing an answer redisplays the form with an error' do
     stub_diagnosis_question(
       question: 'Do you like errors?',

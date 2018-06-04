@@ -27,7 +27,7 @@ class Question
     if answer_hash.key?('next')
       @route_helpers.questions_path(answer_hash['next'])
     elsif answer_hash.key?('page')
-      @route_helpers.page_path(answer_hash['page'])
+      @route_helpers.page_path answer_hash['page'], details: answer_hash['desc']
     elsif answer_hash.key?('desc')
       @route_helpers.describe_repair_path(details: answer_hash['desc'])
     else

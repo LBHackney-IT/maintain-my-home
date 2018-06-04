@@ -25,6 +25,7 @@ class ContactDetailsWithCallbackController < ApplicationController
     if contact_details_saver.save(@form) && callback_time_saver.save(@form)
       result =
         CreateRepair.new.call(answers: selected_answer_store.selected_answers)
+      GoogleSheetLogger.new.call(result, 'callback')
 
       redirect_to confirmation_path(result.request_reference)
     else

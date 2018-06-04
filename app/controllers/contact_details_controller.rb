@@ -19,9 +19,7 @@ class ContactDetailsController < ApplicationController
       ContactDetailsSaver.new(selected_answer_store: selected_answer_store)
 
     if contact_details_saver.save(@form)
-      result =
-        CreateRepair.new.call(answers: selected_answer_store.selected_answers)
-
+      result = save_and_log_repair
       redirect_to appointments_path(result.request_reference)
     else
       render :index
@@ -32,5 +30,12 @@ class ContactDetailsController < ApplicationController
 
   def contact_details_form_params
     params.require(:contact_details_form).permit!
+  end
+
+  def save_and_log_repair
+    result =
+      CreateRepair.new.call(answers: selected_answer_store.selected_answers)
+    GoogleSheetLogger.new.call(result, 'booking')
+    result
   end
 end

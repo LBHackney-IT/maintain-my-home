@@ -45,6 +45,8 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
       )
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
+    stub_google_sheets_logger
+
     fake_question_set = instance_double(QuestionSet)
     allow(fake_question_set)
       .to receive(:find)

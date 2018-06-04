@@ -47,13 +47,16 @@ kitchen_electrical_problem:
       next: water_leaking_into_light
 
     - text: Light switch
-      desc: inside_kitchen_light_switch
+      page: electrical_hazard_warning
+      desc: light_switch
       problem: Light switch
+      sor_code: 20110010
 
     - text: Smoke detector is beeping
       page: smoke_detector
 
     - text: Sockets
+      page: electrical_hazard_warning
       desc: inside_sockets
       sor_code: 20110010
       problem: Sockets
@@ -217,6 +220,7 @@ bathroom_electrical_problem:
       sor_code: 20110010
 
     - text: Light switch
+      desc: light_switch
       page: electrical_hazard_warning
       sor_code: 20110010
 
@@ -265,6 +269,7 @@ other_electrical_problem:
 
     - text: Light switch
       page: electrical_hazard_warning
+      desc: light_switch
       sor_code: 20110010
       problem: Light switch
 
@@ -275,6 +280,7 @@ other_electrical_problem:
       page: emergency_contact
 
     - text: Sockets
+      desc: inside_sockets
       page: electrical_hazard_warning
       sor_code: 20110010
       problem: Sockets
