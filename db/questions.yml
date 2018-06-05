@@ -496,6 +496,7 @@ water_source:
 
     - text: No, it’s coming from outside of my property
       problem: Leak from outside property
+      desc: source_size_location_leak
 
     - text: I'm not sure
       problem: Leak from unknown source
@@ -506,13 +507,16 @@ drip_source:
     - text: A pipe
       sor_code: TODO - Plumber
       problem: Water leaking from a pipe
+      desc: source_size_location_leak
 
     - text: Condensation
       sor_code: PRE00001
       problem: Damp caused by condensation
+      desc: size_location_condensation
 
     - text: I'm not sure
       problem: Leak inside the property unknown source
+      desc: size_location_leak
 
 damp_or_mould:
   question: Is your problem with damp or mould?
@@ -526,9 +530,11 @@ damp_or_mould:
     - text: Both
       sor_code: PRE00001
       problem: Damp and mould problem
+      desc: damp_or_mould
 
     - text: I'm not sure
       problem: Not sure if damp or mould
+      desc: damp_or_mould
 
 external_pipes:
   question: Are there any external pipes behind the wall?
@@ -536,23 +542,28 @@ external_pipes:
     - text: 'Yes'
       sor_code: 20060030
       problem: Damp where external pipes exist
+      desc: source_size_location_damp
 
     - text: 'No'
       problem: Damp where no external pipes
+      desc: source_size_location_damp
 
     - text: I'm not sure
       problem: Damp, no information about external pipes
+      desc: source_size_location_damp
 
 wet_wall:
   question: Is the area around the mould wet?
   answers:
     - text: 'Yes'
       problem: Wet mould
+      desc: mould
 
     - text: 'No'
       sor_code: 08500820
       problem: Dry mould
-
+      desc: mould
 
     - text: I'm not sure
       problem: Mould, not sure if wet or dry
+      desc: mould
