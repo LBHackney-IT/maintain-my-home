@@ -20,16 +20,6 @@ RSpec.feature 'Users can answer repair questions' do
     expect(page).to have_button t('helpers.submit.create')
   end
 
-  scenario 'Users cannot submit the form without answering the question' do
-    visit '/questions/start/'
-    click_continue
-
-    within '.start_form_answer' do
-      expect(page).to have_css '.error-message'
-      expect(page).to have_content t('errors.messages.blank')
-    end
-  end
-
   scenario "Users can choose 'I smell gas' and get shown the relevant content" do
     visit '/questions/start/'
     choose_radio_button t('simple_form.options.start_form.answer.smell_gas')

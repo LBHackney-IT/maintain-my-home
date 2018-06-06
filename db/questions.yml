@@ -14,19 +14,22 @@ which_room:
 kitchen_problem:
   question: What is the problem in your kitchen?
   answers:
-    - text: Cupboards or Worktop
-      desc: inside_kitchen_cupboards
-      sor_code: 20040060
-      problem: Cupboards or Worktop
-
-    - text: Damp or Mould
+    - text: Damp or mould
       next: damp_or_mould
+
+    - text: Drip or leak
+      next: kitchen_drip_or_leak
+
+    - text: Heating or hot water
+      next: heating_problem
 
     - text: Electrical
       next: kitchen_electrical_problem
 
-    - text: Heating / Hot water
-      next: heating_problem
+    - text: Cupboards or worktop
+      desc: inside_kitchen_cupboards
+      sor_code: 20040060
+      problem: Cupboards or Worktop
 
     - text: Sink
       next: sink_problem
@@ -36,9 +39,6 @@ kitchen_problem:
 
     - text: Something else
       desc: kitchen_problem
-
-    - text: Drip or leak
-      next: kitchen_drip_or_leak
 
 kitchen_electrical_problem:
   question: Is your problem one of these?
@@ -147,26 +147,29 @@ sink_problem:
 bathroom_problem:
   question: What is the problem in your bathroom?
   answers:
-    - text: Basin / Sink
+    - text: Damp or mould
+      next: damp_or_mould
+
+    - text: Drip or leak
+      next: bathroom_drip_or_leak
+
+    - text: Heating or hot water
+      next: heating_problem
+
+    - text: Electrical
+      next: bathroom_electrical_problem
+
+    - text: Basin or sink
       next: basin_problem
 
     - text: Bath
       next: bath_problem
 
-    - text: Damp or mould
-      next: damp_or_mould
-
-    - text: Electrical
-      next: bathroom_electrical_problem
-
-    - text: Heating / Hot water
-      next: heating_problem
-
     - text: Toilet
       next: toilet_problem
 
-    - text: Drip or leak
-      next: bathroom_drip_or_leak
+    - text: Windows
+      next: window_problem
 
     - text: Something else
       desc: bathroom_problem
@@ -294,17 +297,17 @@ other_problem:
    - text: Damp or mould
      next: damp_or_mould
 
+   - text: Drip or leak
+     next: other_drip_or_leak
+
+   - text: Heating or hot water
+     next: heating_problem
+
    - text: Electrical
      next: other_electrical_problem
 
    - text: External door
      next: external_doors_problem
-
-   - text: Gas
-     page: emergency_contact
-
-   - text: Heating / Hot water
-     next: heating_problem
 
    - text: Internal door
      desc: other_internal_door
@@ -313,9 +316,6 @@ other_problem:
 
    - text: Windows
      next: window_problem
-
-   - text: Drip or leak
-     next: other_drip_or_leak
 
    - text: Something else
      desc: describe_problem

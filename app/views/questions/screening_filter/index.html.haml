@@ -6,5 +6,5 @@
       %h1 Is your repair one of these?
 
     .answers
-      = f.input :answer, collection: @form.choices, as: :radio_buttons, label: false
+      = f.input :answer, collection: @form.choices, checked: :none_of_the_above, as: :radio_buttons, label: false
       = f.button :submit, class: 'button'
