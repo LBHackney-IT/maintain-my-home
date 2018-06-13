@@ -25,7 +25,7 @@ kitchen_problem:
     - text: Electrical
       next: kitchen_electrical_problem
 
-    - text: Heating / Hot water
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Sink
@@ -63,6 +63,9 @@ kitchen_electrical_problem:
       desc: inside_sockets
       sor_code: 20110010
       problem: Sockets
+
+    - text: Carbon Monoxide detector is beeping
+      page: carbon_monoxide_alarm
 
     - text: Something else
       desc: kitchen_problem
@@ -113,7 +116,7 @@ heating_problem:
 
     - text: Something else
       desc: heating_problem
-      problem: Heating / Hot water
+      problem: Heating or Hot water
 
 sink_problem:
   question: Is your problem one of these?
@@ -159,7 +162,7 @@ bathroom_problem:
     - text: Electrical
       next: bathroom_electrical_problem
 
-    - text: Heating / Hot water
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Toilet
@@ -167,6 +170,9 @@ bathroom_problem:
 
     - text: Drip or leak
       next: bathroom_drip_or_leak
+
+    - text: Windows
+      next: window_problem
 
     - text: Something else
       desc: bathroom_problem
@@ -303,7 +309,7 @@ other_problem:
    - text: Gas
      page: emergency_contact
 
-   - text: Heating / Hot water
+   - text: Heating or Hot water
      next: heating_problem
 
    - text: Internal door
@@ -336,10 +342,10 @@ other_electrical_problem:
       problem: Light switch
 
     - text: Smoke detector is beeping
-      page: emergency_contact
+      page: smoke_detector
 
     - text: Carbon Monoxide detector is beeping
-      page: emergency_contact
+      page: carbon_monoxide_alarm
 
     - text: Sockets
       desc: inside_sockets
