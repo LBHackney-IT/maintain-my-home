@@ -511,14 +511,12 @@ drip_source:
   question: Is the source of the drip
   answers:
     - text: A pipe
-      sor_code: TODO - Plumber
+      sor_code: 20060060
       problem: Water leaking from a pipe
       desc: source_size_location_leak
 
     - text: Condensation
-      sor_code: PRE00001
-      problem: Damp caused by condensation
-      desc: size_location_condensation
+      page: condensation_problem
 
     - text: I'm not sure
       problem: Leak inside the property unknown source
