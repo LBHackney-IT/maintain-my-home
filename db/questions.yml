@@ -20,12 +20,12 @@ kitchen_problem:
       problem: Cupboards or Worktop
 
     - text: Damp or Mould
-      page: damp_and_mould
+      next: damp_or_mould
 
     - text: Electrical
       next: kitchen_electrical_problem
 
-    - text: Heating / Hot water
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Sink
@@ -36,6 +36,9 @@ kitchen_problem:
 
     - text: Something else
       desc: kitchen_problem
+
+    - text: Drip or leak
+      next: kitchen_drip_or_leak
 
 kitchen_electrical_problem:
   question: Is your problem one of these?
@@ -61,9 +64,34 @@ kitchen_electrical_problem:
       sor_code: 20110010
       problem: Sockets
 
+    - text: Carbon Monoxide detector is beeping
+      page: carbon_monoxide_alarm
+
     - text: Something else
       desc: kitchen_problem
       problem: Electrical
+
+kitchen_drip_or_leak:
+  question: Is your problem one of these?
+  answers:
+    - text: Water dripping from a wall or ceilling
+      next: is_the_water
+
+    - text: Sink is leaking - containable
+      desc: inside_kitchen_sink_leaking
+      sor_code: 20060030
+      problem: Sink is leaking - containable
+
+    - text: Tap won't turn off - water running
+      page: emergency_contact
+
+    - text: Tap is dripping
+      sor_code: 20060030
+      problem: Tap is dripping
+
+    - text: Radiator is leaking - containable
+      sor_code: 4896816H
+      problem: Radiator is leaking - containable
 
 heating_problem:
   question: Is your problem one of these?
@@ -88,7 +116,7 @@ heating_problem:
 
     - text: Something else
       desc: heating_problem
-      problem: Heating / Hot water
+      problem: Heating or Hot water
 
 sink_problem:
   question: Is your problem one of these?
@@ -129,19 +157,57 @@ bathroom_problem:
       next: bath_problem
 
     - text: Damp or mould
-      page: damp_and_mould
+      next: damp_or_mould
 
     - text: Electrical
       next: bathroom_electrical_problem
 
-    - text: Heating / Hot water
+    - text: Heating or Hot water
       next: heating_problem
 
     - text: Toilet
       next: toilet_problem
 
+    - text: Drip or leak
+      next: bathroom_drip_or_leak
+
+    - text: Windows
+      next: window_problem
+
     - text: Something else
       desc: bathroom_problem
+
+bathroom_drip_or_leak:
+  question: Is your problem one of these?
+  answers:
+    - text: Water dripping from a wall or ceilling
+      next: is_the_water
+
+    - text: Basin / Sink is leaking - containable
+      desc: inside_bathroom_basin_leaking
+      sor_code: 20060020
+      problem: Basin / Sink is leaking - containable
+
+    - text: Tap won't turn off - water running
+      page: emergency_contact
+
+    - text: Tap is dripping
+      sor_code: 20060020
+      problem: Tap is dripping
+
+    - text: Bath is leaking - containable
+      desc: inside_bathroom_bath_leaking
+      sor_code: 20060020
+      problem: Bath is leaking - containable
+
+    - text: Toilet is leaking - containable
+      desc: inside_bathroom_toilet_leaking
+      sor_code: 20060020
+      problem: Toilet is leaking - containable
+
+    - text: Radiator is leaking - containable
+      sor_code: 4896816H
+      problem: Radiator is leaking - containable
 
 is_fan_leaking_water:
   question: Is there water leaking into or from the fan?
@@ -232,7 +298,7 @@ other_problem:
   question: What is the problem?
   answers:
    - text: Damp or mould
-     page: damp_and_mould
+     next: damp_or_mould
 
    - text: Electrical
      next: other_electrical_problem
@@ -243,7 +309,7 @@ other_problem:
    - text: Gas
      page: emergency_contact
 
-   - text: Heating / Hot water
+   - text: Heating or Hot water
      next: heating_problem
 
    - text: Internal door
@@ -254,9 +320,11 @@ other_problem:
    - text: Windows
      next: window_problem
 
+   - text: Drip or leak
+     next: other_drip_or_leak
+
    - text: Something else
      desc: describe_problem
-
 
 other_electrical_problem:
   question: Is your problem one of these?
@@ -274,10 +342,10 @@ other_electrical_problem:
       problem: Light switch
 
     - text: Smoke detector is beeping
-      page: emergency_contact
+      page: smoke_detector
 
     - text: Carbon Monoxide detector is beeping
-      page: emergency_contact
+      page: carbon_monoxide_alarm
 
     - text: Sockets
       desc: inside_sockets
@@ -288,6 +356,16 @@ other_electrical_problem:
     - text: Something else
       desc: electrical_problem
       problem: Electrical
+
+other_drip_or_leak:
+  question: Is your problem one of these?
+  answers:
+    - text: Water dripping from a wall or ceilling
+      next: is_the_water
+
+    - text: Radiator is leaking - containable
+      sor_code: 4896816H
+      problem: Radiator is leaking - containable
 
 window_problem:
   question: Is your problem one of these?
@@ -309,7 +387,6 @@ window_problem:
     - text: Something else
       desc: window_problem
       problem: Window
-
 
 external_doors_problem:
   question: Is your problem one of these?
@@ -396,18 +473,101 @@ blocked_only_toilet:
       sor_code: 20060020
       problem: Toilet is blocked
 
-damp_or_mould_problem:
+is_ceilling_wall_dripping:
+  question: Is your ceiling or wall dripping?
+  answers:
+   - text: 'Yes'
+     next: is_the_water
+
+   - text: 'No'
+     next: damp_or_mould
+
+is_the_water:
+  question: Is the water
+  answers:
+   - text: Dripping onto electrics
+     page: emergency_contact
+
+   - text: Containable with a bucket, bowl or towel
+     next: water_source
+
+   - text: Not containable
+     page: emergency_contact
+
+water_source:
+  question: Is the water coming from within your property?
+  answers:
+    - text: 'Yes'
+      next: drip_source
+
+    - text: No, it’s coming from outside of my property
+      problem: Leak from outside property
+      desc: source_size_location_leak
+
+    - text: I'm not sure
+      problem: Leak from unknown source
+
+drip_source:
+  question: Is the source of the drip
+  answers:
+    - text: A pipe
+      sor_code: 20060060
+      problem: Water leaking from a pipe
+      desc: source_size_location_leak
+
+    - text: Condensation
+      page: condensation_problem
+
+    - text: I'm not sure
+      problem: Leak inside the property unknown source
+      desc: size_location_leak
+
+damp_or_mould:
   question: Is your problem with damp or mould?
   answers:
     - text: Damp
-      desc: damp
-      sor_code: PRE00001
-      problem: Damp
+      next: external_pipes
 
     - text: Mould
-      desc: mould
-      sor_code: 08500820
-      problem: Mould
+      next: wet_wall
+
+    - text: Both
+      sor_code: PRE00001
+      problem: Damp and mould problem
+      desc: damp_or_mould
 
     - text: I'm not sure
-      problem: Damp or mould
+      problem: Not sure if damp or mould
+      desc: damp_or_mould
+
+external_pipes:
+  question: Are there any external pipes behind the wall?
+  answers:
+    - text: 'Yes'
+      sor_code: 20060030
+      problem: Damp where external pipes exist
+      desc: source_size_location_damp
+
+    - text: 'No'
+      problem: Damp where no external pipes
+      desc: source_size_location_damp
+
+    - text: I'm not sure
+      problem: Damp, no information about external pipes
+      desc: source_size_location_damp
+
+wet_wall:
+  question: Is the area around the mould wet?
+  answers:
+    - text: 'Yes'
+      problem: Wet mould
+      desc: mould
+
+    - text: 'No'
+      sor_code: 08500820
+      problem: Dry mould
+      desc: mould
+
+    - text: I'm not sure
+      problem: Mould, not sure if wet or dry
+      desc: mould
