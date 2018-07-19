@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'business_time'
 gem 'faker' # Use in all environments until we have a real API
 gem 'faraday'
 gem 'faraday_middleware'

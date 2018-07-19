@@ -21,20 +21,25 @@ RSpec.describe AppointmentFetcher do
 
   it 'excludes appointment slots before tomorrow' do
     past_appointment = { 'beginDate' => '2017-10-09T16:00:00Z', 'endDate' => '2017-10-09T18:00:00Z', 'bestSlot' => true }
-    today_appointment = { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true }
-    tomorrow_appointment = { 'beginDate' => '2017-10-12T12:00:00Z', 'endDate' => '2017-10-12T17:00:00Z', 'bestSlot' => true }
+    today_appointment = { 'beginDate' => '2017-10-13T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true }
+    tomorrow_appointment = { 'beginDate' => '2017-10-14T12:00:00Z', 'endDate' => '2017-10-12T17:00:00Z', 'bestSlot' => true }
+    weekend_appointment = { 'beginDate' => '2017-10-15T12:00:00Z', 'endDate' => '2017-10-12T17:00:00Z', 'bestSlot' => true }
+    monday_appointment = { 'beginDate' => '2017-10-17T12:00:00Z', 'endDate' => '2017-10-12T17:00:00Z', 'bestSlot' => true }
 
-    stub_appointments([past_appointment, today_appointment, tomorrow_appointment])
+    stub_appointments([past_appointment, today_appointment, tomorrow_appointment, weekend_appointment, monday_appointment])
 
-    travel_to Time.zone.local(2017, 10, 11) do
+    # Today is Thursday
+    travel_to Time.zone.local(2017, 10, 13) do
       appointments = AppointmentFetcher.new.call(
         work_order_reference: '1234',
         limit: 15
       )
 
-      expect(appointments).to include tomorrow_appointment
+      expect(appointments).to include monday_appointment
+      expect(appointments).not_to include tomorrow_appointment
       expect(appointments).not_to include past_appointment
       expect(appointments).not_to include today_appointment
+      expect(appointments).not_to include weekend_appointment
     end
   end
 

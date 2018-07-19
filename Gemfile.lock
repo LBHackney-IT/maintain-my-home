@@ -44,6 +44,9 @@ GEM
     ast (2.3.0)
     bindex (0.5.0)
     builder (3.2.3)
+    business_time (0.9.3)
+      activesupport (>= 3.2.0)
+      tzinfo
     capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
@@ -332,6 +335,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  business_time
   capybara
   climate_control
   dotenv-rails

@@ -2,7 +2,7 @@ class AppointmentFetcher
   def call(work_order_reference:, limit:)
     @work_order_reference = work_order_reference
 
-    appointments = filter_before_tomorrow(available_appointments)
+    appointments = filter_to_soon(available_appointments)
     appointments = filter_long_slots(appointments)
 
     if best_slots?(appointments)
@@ -20,11 +20,11 @@ class AppointmentFetcher
     )
   end
 
-  def filter_before_tomorrow(appointments)
-    tomorrow = 1.day.from_now.at_beginning_of_day
+  def filter_to_soon(appointments)
+    earliest = 2.business_days.from_now
 
     appointments.select do |appointment|
-      Time.zone.parse(appointment.fetch('beginDate')) >= tomorrow
+      Time.zone.parse(appointment.fetch('beginDate')) >= earliest
     end
   end
 
