@@ -58,8 +58,9 @@ footer {
 
   .social {
     li {
-      display: inline-block;
       text-indent: -9999px;
+      display: flex;
+      justify-content: center;
 
       a {
         background-color: #333;
