@@ -1,5 +1,13 @@
 # Hackney - Report a Repair
 
+## System dependencies
+
+PhantomJS is required on the host machine when running the test suite:
+
+```bash
+$ brew cask install phantomjs
+```
+
 ## Configuration
 
 The application is configured using environment variables. On production these
@@ -68,17 +76,16 @@ should be created via the Flipper UI:
   pages will return a message prompting users to call the Repairs Contact
   Centre. This is to be used when Hackney back-end systems are unavailable.
 
+
 ## TODO:
-
+* How to run the test suite
 * Ruby version
-
-* System dependencies
 
 * Database creation
 
 * Database initialization
 
-* How to run the test suite
+
 
 * Services (job queues, cache servers, search engines, etc.)
 
