@@ -1,5 +1,17 @@
 # Hackney - Report a Repair
 
+## How to start the application
+
+```bash
+$ rails server
+```
+
+## How to run the test suite
+
+```bash
+$ rspec spec
+```
+
 ## System dependencies
 
 PhantomJS is required on the host machine when running the test suite:
@@ -78,14 +90,12 @@ should be created via the Flipper UI:
 
 
 ## TODO:
-* How to run the test suite
+
 * Ruby version
 
 * Database creation
 
 * Database initialization
-
-
 
 * Services (job queues, cache servers, search engines, etc.)
 
