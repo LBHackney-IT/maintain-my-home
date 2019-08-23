@@ -35,41 +35,29 @@ RSpec.describe JsonApi do
           .to raise_error(JsonApi::InvalidApiRootError)
       end
     end
-
-    context 'when a certificate is provided' do
-      it 'raises an error if the private key was missing' do
-        expect do
-          JsonApi.new(
-            api_root: 'http://hackney.api:8000',
-            api_cert: TestSsl.certificate,
-            api_key: nil,
-          )
-        end.to raise_error JsonApi::MissingPrivateKeyError
-      end
-
-      it 'raises an error if the private key was invalid' do
-        expect do
-          JsonApi.new(
-            api_root: 'http://hackney.api:8000',
-            api_cert: TestSsl.certificate,
-            api_key: 'Not a key'
-          )
-        end.to raise_error OpenSSL::PKey::RSAError
-      end
-
-      it 'raises an error if the cert was invalid' do
-        expect do
-          JsonApi.new(
-            api_root: 'http://hackney.api:8000',
-            api_cert: 'Not a cert',
-            api_key: TestSsl.key
-          )
-        end.to raise_error OpenSSL::X509::CertificateError
-      end
-    end
   end
 
   describe '#get' do
+    it 'adds the API token to the header of the request' do
+      cached_api_token = ENV['HACKNEY_API_TOKEN']
+      ENV['HACKNEY_API_TOKEN'] = 'foobar'
+
+      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+
+      json_api.get('properties?postcode=A1 1AA')
+
+      expect(a_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+        .with(
+          headers: {
+            'X-Api-Key' => 'foobar',
+          }
+        )).to have_been_made.once
+
+      ENV['HACKNEY_API_TOKEN'] = cached_api_token
+    end
+
     it 'parses a JSON response' do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
@@ -279,8 +267,6 @@ RSpec.describe JsonApi do
       it 'makes a valid request' do
         json_api = JsonApi.new(
           api_root: 'http://hackney.api:8000',
-          api_cert: TestSsl.certificate,
-          api_key: TestSsl.key,
         )
         stub_request(:get, 'http://hackney.api:8000/hackneyrepairs/v1/repairs/00012345')
 
@@ -293,6 +279,27 @@ RSpec.describe JsonApi do
   end
 
   describe '#post' do
+    it 'adds the API token to the header of the request' do
+      cached_api_token = ENV['HACKNEY_API_TOKEN']
+      ENV['HACKNEY_API_TOKEN'] = 'foobar'
+
+      stub_request(:post, "http://hackney.api:8000/hackneyrepairs/v1/repairs")
+
+      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+
+      json_api.post('hackneyrepairs/v1/repairs', {})
+
+      expect(a_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
+        .with(
+          headers: {
+            content_type: 'application/json',
+            'X-Api-Key' => 'foobar',
+          }
+        )).to have_been_made.once
+
+      ENV['HACKNEY_API_TOKEN'] = cached_api_token
+    end
+
     it 'sends a JSON payload' do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       request_params = { priority: 'N', problemDescription: 'It is broken', propertyReference: '00001234' }

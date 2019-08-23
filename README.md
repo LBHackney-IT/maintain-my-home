@@ -11,7 +11,7 @@ root of the application containing environment variable assignments.
 
 The following environment variables are required to run the site:
 
-- `HACKNEY_API_ROOT` - the root of the Hackney API which is used by the site
+- `HACKNEY_API_URL` - the root of the Hackney API which is used by the site
 - `ENCRYPTION_SECRET` - secret used to prevent parameter tampering. Generate
   one with e.g. `rake secret`
 
@@ -44,8 +44,6 @@ The app should run successfully without these environment variables:
 - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
    [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 - `FLIPPER_AUTH_USER` / `FLIPPER_AUTH_PASSWORD` - As above, but for feature flag UI
-- `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
-  private key - used if connecting to the Hackney API via a proxy server
 
 #### Miscellaneous
 
