@@ -161,7 +161,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           telephoneNumber: '078 98765 432',
         },
         workOrders: [
-          { sorCode: '0078965' },
+          {
+            sorCode: '0078965',
+            estimatedunits: '1'
+          },
         ]
       )
 
