@@ -1,5 +1,25 @@
 # Hackney - Report a Repair
 
+## How to start the application
+
+```bash
+$ rails server
+```
+
+## How to run the test suite
+
+```bash
+$ rspec spec
+```
+
+## System dependencies
+
+PhantomJS is required on the host machine when running the test suite:
+
+```bash
+$ brew cask install phantomjs
+```
+
 ## Configuration
 
 The application is configured using environment variables. On production these
@@ -66,18 +86,16 @@ should be created via the Flipper UI:
   pages will return a message prompting users to call the Repairs Contact
   Centre. This is to be used when Hackney back-end systems are unavailable.
 
+## Deployment instructions
+
+This application is hosted on Heroku and configured with webhooks so that when GitHub receives a push to *origin/develop* it will automatically attempt a staging deployment, and when it receives a push to *origin/master* it will automatically attempt a production deployment.
+
 ## TODO:
 
 * Ruby version
-
-* System dependencies
 
 * Database creation
 
 * Database initialization
 
-* How to run the test suite
-
 * Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
