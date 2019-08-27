@@ -38,4 +38,8 @@ class HackneyApi
       endDate: end_date
     )
   end
+
+  def get_cautionary_contacts(property_reference:)
+    @json_api.get("repairs/v1/cautionary_contact/?reference=#{property_reference}")
+  end
 end

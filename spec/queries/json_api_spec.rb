@@ -280,7 +280,6 @@ RSpec.describe JsonApi do
       ClimateControl.modify(HACKNEY_API_TOKEN: 'foobar') do
         stub_request(:post, "http://hackney.api:8000/repairs/v1/repairs")
 
-
         json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
 
         json_api.post('repairs/v1/repairs', {})

@@ -14,6 +14,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
     allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000503')
+      .and_return({'results'=>{'alertCodes'=>[nil], 'callerNotes'=>[nil]}})
     allow(fake_api).to receive(:post)
       .with('repairs/v1/repairs', anything)
       .and_return(
@@ -30,6 +32,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'problem' => "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other",
         'propertyReference' => '00000503',
       )
+
     allow(JsonApi).to receive(:new).and_return(fake_api)
 
     stub_google_sheets_logger
@@ -167,6 +170,8 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       }
       allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
       allow(fake_api).to receive(:get).with('repairs/v1/properties/00000504').and_return(property)
+      allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000504')
+        .and_return({'results'=>{'alertCodes'=>[nil], 'callerNotes'=>[nil]}})
       allow(fake_api).to receive(:post)
         .with('repairs/v1/repairs', anything)
         .and_return(
