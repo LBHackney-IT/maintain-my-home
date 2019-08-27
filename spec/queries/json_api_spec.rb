@@ -39,23 +39,20 @@ RSpec.describe JsonApi do
 
   describe '#get' do
     it 'adds the API token to the header of the request' do
-      cached_api_token = ENV['HACKNEY_API_TOKEN']
-      ENV['HACKNEY_API_TOKEN'] = 'foobar'
+      ClimateControl.modify(HACKNEY_API_TOKEN: 'foobar') do
+        stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
 
-      stub_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
 
-      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        json_api.get('properties?postcode=A1 1AA')
 
-      json_api.get('properties?postcode=A1 1AA')
-
-      expect(a_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
-        .with(
-          headers: {
-            'X-Api-Key' => 'foobar',
-          }
-        )).to have_been_made.once
-
-      ENV['HACKNEY_API_TOKEN'] = cached_api_token
+        expect(a_request(:get, 'http://hackney.api:8000/properties?postcode=A1%201AA')
+          .with(
+            headers: {
+              'X-Api-Key' => 'foobar',
+            }
+          )).to have_been_made.once
+      end
     end
 
     it 'parses a JSON response' do
@@ -280,24 +277,21 @@ RSpec.describe JsonApi do
 
   describe '#post' do
     it 'adds the API token to the header of the request' do
-      cached_api_token = ENV['HACKNEY_API_TOKEN']
-      ENV['HACKNEY_API_TOKEN'] = 'foobar'
+      ClimateControl.modify(HACKNEY_API_TOKEN: 'foobar') do
+        stub_request(:post, "http://hackney.api:8000/repairs/v1/repairs")
 
-      stub_request(:post, "http://hackney.api:8000/hackneyrepairs/v1/repairs")
+        json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
 
-      json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
+        json_api.post('repairs/v1/repairs', {})
 
-      json_api.post('hackneyrepairs/v1/repairs', {})
-
-      expect(a_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
-        .with(
-          headers: {
-            content_type: 'application/json',
-            'X-Api-Key' => 'foobar',
-          }
-        )).to have_been_made.once
-
-      ENV['HACKNEY_API_TOKEN'] = cached_api_token
+        expect(a_request(:post, 'http://hackney.api:8000/repairs/v1/repairs')
+          .with(
+            headers: {
+              content_type: 'application/json',
+              'X-Api-Key' => 'foobar',
+            }
+          )).to have_been_made.once
+      end
     end
 
     it 'sends a JSON payload' do
