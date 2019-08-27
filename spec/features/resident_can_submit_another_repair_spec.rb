@@ -12,10 +12,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/repairs', anything)
+      .with('repairs/v1/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -23,7 +23,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/repairs/00367923')
+      .with('repairs/v1/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -89,7 +89,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     end
 
     expect(fake_api).to have_received(:post).with(
-      'hackneyrepairs/v1/repairs',
+      'repairs/v1/repairs',
       priority: 'N',
       problemDescription: "Callback requested: between 8am and 5pm\n\nMy sink is blocked",
       propertyReference: '00000503',
@@ -145,7 +145,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     end
 
     expect(fake_api).to have_received(:post).with(
-      'hackneyrepairs/v1/repairs',
+      'repairs/v1/repairs',
       priority: 'N',
       problemDescription: "Room: Bathroom\nCallback requested: between 8am and 5pm\n\nMy sink is leaking",
       propertyReference: '00000503',
@@ -165,10 +165,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'address' => 'Ross Court 22',
         'postcode' => 'E5 8TE',
       }
-      allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-      allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000504').and_return(property)
+      allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+      allow(fake_api).to receive(:get).with('repairs/v1/properties/00000504').and_return(property)
       allow(fake_api).to receive(:post)
-        .with('hackneyrepairs/v1/repairs', anything)
+        .with('repairs/v1/repairs', anything)
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
@@ -182,7 +182,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           ]
         )
       allow(fake_api).to receive(:get)
-        .with('hackneyrepairs/v1/repairs/00367923')
+        .with('repairs/v1/repairs/00367923')
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
@@ -196,7 +196,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           ]
         )
       allow(fake_api).to receive(:get)
-        .with('hackneyrepairs/v1/work_orders/09124578/available_appointments')
+        .with('repairs/v1/work_orders/09124578/available_appointments')
         .and_return(
           'results' => [
             { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true },
@@ -205,7 +205,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         )
       allow(fake_api).to receive(:post)
         .with(
-          'hackneyrepairs/v1/work_orders/09124578/appointments',
+          'repairs/v1/work_orders/09124578/appointments',
           beginDate: '2017-10-11T12:00:00Z',
           endDate: '2017-10-11T17:00:00Z',
         )
@@ -276,7 +276,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       end
 
       expect(fake_api).to have_received(:post).with(
-        'hackneyrepairs/v1/repairs',
+        'repairs/v1/repairs',
         priority: 'N',
         problemDescription: "Room: Kitchen\n\nMy sink is blocked",
         propertyReference: '00000504',
@@ -285,12 +285,15 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           telephoneNumber: '078 98765 432',
         },
         workOrders: [
-          { sorCode: '0078965' },
+          {
+            sorCode: '0078965',
+            estimatedunits: '1'
+          },
         ]
       )
 
       expect(fake_api).to have_received(:post).with(
-        'hackneyrepairs/v1/work_orders/09124578/appointments',
+        'repairs/v1/work_orders/09124578/appointments',
         beginDate: '2017-10-11T12:00:00Z',
         endDate: '2017-10-11T17:00:00Z',
       )

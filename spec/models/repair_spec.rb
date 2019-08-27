@@ -70,4 +70,19 @@ RSpec.describe Repair do
       expect { Repair.new(repair_data).request_reference }.to raise_error(KeyError)
     end
   end
+
+  describe '#supplier_reference' do
+    it 'returns the supplier reference from the repair' do
+      repair_data = {
+        'repairRequestReference' => '00004578',
+        'problemDescription' => 'My bath is broken',
+        'priority' => 'N',
+        'propertyReference' => '00034713',
+        'workOrders' => [
+          'supplierRef' => '123'
+        ]
+      }
+      expect(Repair.new(repair_data).supplier_reference).to eq '123'
+    end
+  end
 end

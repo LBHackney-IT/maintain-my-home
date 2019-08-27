@@ -78,39 +78,25 @@ class JsonApi
   class ConnectionBuilder
     def build(
       logger,
-      api_root: ENV['HACKNEY_API_ROOT'],
-      api_cert: ENV['PROXY_API_CERT'],
-      api_key: ENV['PROXY_API_KEY']
+      api_root: ENV['HACKNEY_API_URL']
     )
       raise InvalidApiRootError, 'API root was nil or empty' if api_root.blank?
 
       build_connection(
         root: api_root,
-        ssl: ssl_options(
-          cert: api_cert,
-          key: api_key,
-        ),
         logger: logger,
       )
     end
 
     private
 
-    def build_connection(root:, ssl:, logger:)
-      Faraday.new root, ssl: ssl do |conn|
+    def build_connection(root:, logger:)
+      Faraday.new root do |conn|
         conn.adapter Faraday.default_adapter
+        conn.headers["x-api-key"] = ENV['HACKNEY_API_TOKEN']
         conn.response :json
         conn.response :logger, logger, headers: true, bodies: true
       end
-    end
-
-    def ssl_options(cert:, key:)
-      return {} if cert.nil?
-      raise MissingPrivateKeyError if key.nil?
-      {
-        client_cert: OpenSSL::X509::Certificate.new(cert),
-        client_key:  OpenSSL::PKey::RSA.new(key),
-      }
     end
   end
 end

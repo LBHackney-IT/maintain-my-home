@@ -9,13 +9,13 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
     }
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/properties?postcode=E5 8TE')
+      .with('repairs/v1/properties?postcode=E5 8TE')
       .and_return('results' => [property])
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/properties/00000512')
+      .with('repairs/v1/properties/00000512')
       .and_return(property)
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/repairs', anything)
+      .with('repairs/v1/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -29,7 +29,7 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
         ],
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/repairs/00367923')
+      .with('repairs/v1/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'orderReference' => '09124578',
@@ -44,7 +44,7 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
         ],
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/work_orders/09124578/available_appointments')
+      .with('repairs/v1/work_orders/09124578/available_appointments')
       .and_return(
         'results' => [
           {
@@ -55,7 +55,7 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
         ]
       )
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/work_orders/09124578/appointments', anything)
+      .with('repairs/v1/work_orders/09124578/appointments', anything)
       .and_return(
         'beginDate' => '2017-11-27T10:00:00Z',
         'endDate' => '2017-11-27T12:00:00Z'
