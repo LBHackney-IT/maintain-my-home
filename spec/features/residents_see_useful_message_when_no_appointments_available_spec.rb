@@ -10,6 +10,8 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
     fake_api = instance_double(JsonApi)
     allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
     allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000503')
+      .and_return({'results'=>{'alertCodes'=>[nil], 'callerNotes'=>[nil]}})
     allow(fake_api).to receive(:post)
       .with('repairs/v1/repairs', anything)
       .and_return(
