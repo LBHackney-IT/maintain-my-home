@@ -265,11 +265,11 @@ RSpec.describe JsonApi do
         json_api = JsonApi.new(
           api_root: 'http://hackney.api:8000',
         )
-        stub_request(:get, 'http://hackney.api:8000/hackneyrepairs/v1/repairs/00012345')
+        stub_request(:get, 'http://hackney.api:8000/repairs/v1/repairs/00012345')
 
-        json_api.get('hackneyrepairs/v1/repairs/00012345')
+        json_api.get('repairs/v1/repairs/00012345')
 
-        expect(a_request(:get, 'http://hackney.api:8000/hackneyrepairs/v1/repairs/00012345'))
+        expect(a_request(:get, 'http://hackney.api:8000/repairs/v1/repairs/00012345'))
           .to have_been_made.once
       end
     end
@@ -279,6 +279,7 @@ RSpec.describe JsonApi do
     it 'adds the API token to the header of the request' do
       ClimateControl.modify(HACKNEY_API_TOKEN: 'foobar') do
         stub_request(:post, "http://hackney.api:8000/repairs/v1/repairs")
+
 
         json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
 
@@ -298,12 +299,12 @@ RSpec.describe JsonApi do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       request_params = { priority: 'N', problemDescription: 'It is broken', propertyReference: '00001234' }
       request_json = request_params.to_json
-      stub_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
+      stub_request(:post, 'http://hackney.api:8000/repairs/v1/repairs')
         .with(body: request_json)
 
-      json_api.post('hackneyrepairs/v1/repairs', request_params)
+      json_api.post('repairs/v1/repairs', request_params)
 
-      expect(a_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
+      expect(a_request(:post, 'http://hackney.api:8000/repairs/v1/repairs')
         .with(
           body: request_json,
           headers: { content_type: 'application/json' }
@@ -313,20 +314,20 @@ RSpec.describe JsonApi do
     it 'parses a JSON response' do
       json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
       response_params = { repair_request_id: '00045678' }
-      stub_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
+      stub_request(:post, 'http://hackney.api:8000/repairs/v1/repairs')
         .to_return(body: response_params.to_json)
 
-      result = json_api.post('hackneyrepairs/v1/repairs', {})
+      result = json_api.post('repairs/v1/repairs', {})
       expect(result).to eq('repair_request_id' => '00045678')
     end
 
     context 'when the response was not valid JSON' do
       it 'raises an exception' do
         json_api = JsonApi.new(api_root: 'http://hackney.api:8000')
-        stub_request(:post, 'http://hackney.api:8000/hackneyrepairs/v1/repairs')
+        stub_request(:post, 'http://hackney.api:8000/repairs/v1/repairs')
           .to_return(body: 'not found')
 
-        expect { json_api.post('/hackneyrepairs/v1/repairs', {}) }
+        expect { json_api.post('/repairs/v1/repairs', {}) }
           .to raise_error(JsonApi::InvalidResponseError, "765: unexpected token at 'not found'")
       end
     end
