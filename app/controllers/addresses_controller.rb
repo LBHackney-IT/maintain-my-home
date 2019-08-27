@@ -36,13 +36,7 @@ class AddressesController < ApplicationController
   end
 
   def continue_to_appointment_booking?
-    RepairParams.new(selected_answer_store.selected_answers).diagnosed? && !cautionary_contact?
-  end
-
-  def cautionary_contact?
-    result = HackneyApi.new.get_cautionary_contacts(property_reference: property_reference)
-    return true unless result['results']['alertCodes'] == [nil] && result['results']['callerNotes'] == [nil]
-
-    false
+    RepairParams.new(selected_answer_store.selected_answers).diagnosed? &&
+      FindCautionaryContact.new(property_reference: property_reference).not_present?
   end
 end
