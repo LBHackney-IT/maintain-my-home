@@ -31,7 +31,8 @@ root of the application containing environment variable assignments.
 
 The following environment variables are required to run the site:
 
-- `HACKNEY_API_URL` - the root of the Hackney API which is used by the site
+- `HACKNEY_API_URL` - the root of the Hackney Repairs API which is used by the site. Development and staging use the same credentials and they can be sourced from the Hackney team or from the environment variables of the staging Heroku account
+- `HACKNEY_API_TOKEN` - the API token for the Hackney Repairs API. Development and staging use the same credentials and they can be sourced from the Hackney team or from the environment variables of the staging Heroku account
 - `ENCRYPTION_SECRET` - secret used to prevent parameter tampering. Generate
   one with e.g. `rake secret`
 
