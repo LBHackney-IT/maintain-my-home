@@ -11,6 +11,7 @@ gem 'business_time'
 gem 'faker' # Use in all environments until we have a real API
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'ffi', '>= 1.9.24'
 gem 'flipper'
 gem 'flipper-redis'
 gem 'flipper-ui'
