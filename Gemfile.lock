@@ -83,7 +83,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.11.0.1)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.9.18)
+    ffi (1.11.1)
     flipper (0.10.2)
     flipper-redis (0.10.2)
       flipper (~> 0.10.2)
@@ -174,7 +174,7 @@ GEM
     multi_json (1.12.2)
     multipart-post (2.0.0)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     os (0.9.6)
     parallel (1.12.0)
@@ -343,6 +343,7 @@ DEPENDENCIES
   faker
   faraday
   faraday_middleware
+  ffi (>= 1.9.24)
   flipper
   flipper-redis
   flipper-ui
@@ -355,6 +356,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   listen (>= 3.0.5, < 3.2)
+  nokogiri (>= 1.10.4)
   pg (~> 0.18)
   poltergeist
   pry-rails
@@ -373,5 +375,8 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webmock
 
+RUBY VERSION
+   ruby 2.4.6p354
+
 BUNDLED WITH
-   1.16.0
+   2.0.2

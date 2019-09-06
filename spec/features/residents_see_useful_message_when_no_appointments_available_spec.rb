@@ -8,10 +8,12 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000503')
+      .and_return({'results'=>{'alertCodes'=>[nil], 'callerNotes'=>[nil]}})
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/repairs', anything)
+      .with('repairs/v1/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -25,7 +27,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/repairs/00367923')
+      .with('repairs/v1/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -39,7 +41,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
         ]
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/work_orders/09124578/available_appointments')
+      .with('repairs/v1/work_orders/09124578/available_appointments')
       .and_return(
         'results' => []
       )
@@ -118,7 +120,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
     end
 
     expect(fake_api).to have_received(:post).with(
-      'hackneyrepairs/v1/repairs',
+      'repairs/v1/repairs',
       priority: 'N',
       problemDescription: "Room: Kitchen\n\nMy sink is blocked",
       propertyReference: '00000503',
@@ -127,7 +129,10 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
         telephoneNumber: '078 98765 432',
       },
       workOrders: [
-        { sorCode: '0078965' },
+        {
+          sorCode: '0078965',
+          estimatedunits: '1'
+        },
       ]
     )
   end

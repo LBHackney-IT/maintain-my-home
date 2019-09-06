@@ -23,11 +23,20 @@ class AddressesController < ApplicationController
     params.require(:address_form).permit(:property_reference, :postcode)
   end
 
+  def property_reference
+    address_form_params[:property_reference]
+  end
+
   def address_success_path
-    if RepairParams.new(selected_answer_store.selected_answers).diagnosed?
+    if continue_to_appointment_booking?
       contact_details_path
     else
       contact_details_with_callback_path
     end
+  end
+
+  def continue_to_appointment_booking?
+    RepairParams.new(selected_answer_store.selected_answers).diagnosed? &&
+      FindCautionaryContact.new(property_reference: property_reference).not_present?
   end
 end

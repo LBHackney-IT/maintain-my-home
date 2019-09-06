@@ -127,7 +127,10 @@ RSpec.describe CreateRepair do
             telephoneNumber: '020 8534 1234',
           },
           workOrders: [
-            { sorCode: '002034' },
+            {
+              sorCode: '002034',
+              estimatedunits: '1'
+            },
           ],
         )
     end

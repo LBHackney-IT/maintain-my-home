@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.4.6'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
@@ -9,6 +11,7 @@ gem 'business_time'
 gem 'faker' # Use in all environments until we have a real API
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'ffi', '>= 1.9.24'
 gem 'flipper'
 gem 'flipper-redis'
 gem 'flipper-ui'
@@ -18,6 +21,7 @@ gem 'govuk_frontend_toolkit'
 gem 'haml-rails'
 gem 'high_voltage', '~> 3.0.0'
 gem 'jquery-rails'
+gem 'nokogiri', '>= 1.10.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rack-timeout'

@@ -26,6 +26,7 @@ class CreateRepair
     [
       {
         sorCode: params.sor_code,
+        estimatedunits: '1'
       },
     ]
   end

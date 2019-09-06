@@ -12,10 +12,10 @@ RSpec.feature 'RCC operative can see spreadsheet log of repairs' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/repairs', anything)
+      .with('repairs/v1/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -23,7 +23,7 @@ RSpec.feature 'RCC operative can see spreadsheet log of repairs' do
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/repairs/00367923')
+      .with('repairs/v1/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',

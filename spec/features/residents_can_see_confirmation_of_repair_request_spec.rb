@@ -15,10 +15,12 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'postcode' => 'E5 8TE',
       }
       fake_api = instance_double(JsonApi)
-      allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-      allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000503').and_return(property)
+      allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+      allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
+      allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000503')
+        .and_return({'results'=>{'alertCodes'=>[nil], 'callerNotes'=>[nil]}})
       allow(fake_api).to receive(:post)
-        .with('hackneyrepairs/v1/repairs', anything)
+        .with('repairs/v1/repairs', anything)
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
@@ -32,7 +34,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           ]
         )
       allow(fake_api).to receive(:get)
-        .with('hackneyrepairs/v1/repairs/00367923')
+        .with('repairs/v1/repairs/00367923')
         .and_return(
           'repairRequestReference' => '00367923',
           'priority' => 'N',
@@ -46,7 +48,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           ]
         )
       allow(fake_api).to receive(:get)
-        .with('hackneyrepairs/v1/work_orders/09124578/available_appointments')
+        .with('repairs/v1/work_orders/09124578/available_appointments')
         .and_return(
           'results' => [
             { 'beginDate' => '2017-10-11T10:00:00Z', 'endDate' => '2017-10-11T12:00:00Z', 'bestSlot' => true },
@@ -55,7 +57,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         )
       allow(fake_api).to receive(:post)
         .with(
-          'hackneyrepairs/v1/work_orders/09124578/appointments',
+          'repairs/v1/work_orders/09124578/appointments',
           beginDate: '2017-10-11T12:00:00Z',
           endDate: '2017-10-11T17:00:00Z',
         )
@@ -152,7 +154,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       end
 
       expect(fake_api).to have_received(:post).with(
-        'hackneyrepairs/v1/repairs',
+        'repairs/v1/repairs',
         priority: 'N',
         problemDescription: "Room: Kitchen\n\nMy sink is blocked",
         propertyReference: '00000503',
@@ -161,12 +163,15 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
           telephoneNumber: '078 98765 432',
         },
         workOrders: [
-          { sorCode: '0078965' },
+          {
+            sorCode: '0078965',
+            estimatedunits: '1'
+          },
         ]
       )
 
       expect(fake_api).to have_received(:post).with(
-        'hackneyrepairs/v1/work_orders/09124578/appointments',
+        'repairs/v1/work_orders/09124578/appointments',
         beginDate: '2017-10-11T12:00:00Z',
         endDate: '2017-10-11T17:00:00Z',
       )
@@ -180,10 +185,10 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
       'postcode' => 'E5 8TE',
     }
     fake_api = instance_double(JsonApi)
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
-    allow(fake_api).to receive(:get).with('hackneyrepairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
     allow(fake_api).to receive(:post)
-      .with('hackneyrepairs/v1/repairs', anything)
+      .with('repairs/v1/repairs', anything)
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -191,7 +196,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         'propertyReference' => '00000503',
       )
     allow(fake_api).to receive(:get)
-      .with('hackneyrepairs/v1/repairs/00367923')
+      .with('repairs/v1/repairs/00367923')
       .and_return(
         'repairRequestReference' => '00367923',
         'priority' => 'N',
@@ -267,7 +272,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
     end
 
     expect(fake_api).to have_received(:post).with(
-      'hackneyrepairs/v1/repairs',
+      'repairs/v1/repairs',
       priority: 'N',
       problemDescription: "Callback requested: between 8am and 5pm\n\nMy sink is blocked",
       propertyReference: '00000503',
@@ -275,6 +280,152 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
         name: 'John Evans',
         telephoneNumber: '078 98765 432',
       },
+    )
+  end
+
+  scenario 'when the issue was diagnosed but the property has a cautionary contact assigned' do
+    property = {
+      'propertyReference' => '00000503',
+      'address' => 'Ross Court 23',
+      'postcode' => 'E5 8TE',
+    }
+    fake_api = instance_double(JsonApi)
+    allow(fake_api).to receive(:get).with('repairs/v1/properties?postcode=E5 8TE').and_return('results' => [property])
+    allow(fake_api).to receive(:get).with('repairs/v1/properties/00000503').and_return(property)
+    allow(fake_api).to receive(:post)
+      .with('repairs/v1/repairs', anything)
+      .and_return(
+        'repairRequestReference' => '00367923',
+        'priority' => 'N',
+        'problem' => "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other",
+        'propertyReference' => '00000503',
+        'workOrders' => [
+          {
+            'sorCode' => '0078965',
+            'workOrderReference' => '09124578',
+          },
+        ]
+      )
+    allow(fake_api).to receive(:get)
+      .with('repairs/v1/repairs/00367923')
+      .and_return(
+        'repairRequestReference' => '00367923',
+        'priority' => 'N',
+        'problem' => "My sink is blocked\n\nRoom: Other\n\nLast question: \"Which room?\" -> Other",
+        'propertyReference' => '00000503',
+        'workOrders' => [
+          {
+            'sorCode' => '0078965',
+            'workOrderReference' => '09124578',
+          },
+        ]
+      )
+    allow(fake_api).to receive(:get).with('repairs/v1/cautionary_contact/?reference=00000503')
+      .and_return({'results'=>{'alertCodes'=>['CV'], 'callerNotes'=>[nil]}})
+
+    allow(JsonApi).to receive(:new).and_return(fake_api)
+
+    stub_google_sheets_logger
+
+    fake_question_set = instance_double(QuestionSet)
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('which_room')
+      .and_return(
+        Question.new(
+          'id' => 'which_room',
+          'question' => 'Which room?',
+          'answers' => [
+            { 'text' => 'Kitchen', 'next' => 'kitchen' },
+            { 'text' => 'Bathroom' },
+            { 'text' => 'Other' },
+          ],
+        )
+      )
+    allow(fake_question_set)
+      .to receive(:find)
+      .with('kitchen')
+      .and_return(
+        Question.new(
+          'id' => 'kitchen',
+          'question' => 'Is your tap broken?',
+          'answers' => [
+            { 'text' => 'Yes', 'sor_code' => '0078965', 'desc' => 'kitchen_problem' },
+            { 'text' => 'No' },
+          ],
+        )
+      )
+    allow(QuestionSet).to receive(:new).and_return(fake_question_set)
+
+    visit '/'
+    click_on 'Start'
+
+    # Emergency page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Filter page:
+    choose_radio_button 'No'
+    click_on 'Continue'
+
+    # Fake decision tree
+    choose_radio_button 'Kitchen'
+    click_on 'Continue'
+
+    choose_radio_button 'Yes'
+    click_on 'Continue'
+
+    # Describe problem:
+    fill_in 'describe_repair_form_description', with: 'My sink is blocked'
+    click_on 'Continue'
+
+    # Address search:
+    fill_in 'Postcode', with: 'E5 8TE'
+    click_on 'Find my address'
+
+    # Address selection:
+    choose_radio_button 'Ross Court 23'
+    click_on 'Continue'
+
+    # Contact details - last page before confirmation:
+    fill_in 'Full name', with: 'John Evans'
+    fill_in 'Telephone number', with: '078 98765 432'
+    check 'morning (8am to midday)'
+    check 'afternoon (midday to 5pm)'
+    click_on 'Continue'
+
+    aggregate_failures do
+      within '#confirmation' do
+        expect(page).to have_content 'Your reference number is 09124578'
+        expect(page).to have_content 'between 8am and 5pm'
+      end
+
+      within '#summary' do
+        expect(page).to have_content t('confirmation.summary.name', name: 'John Evans')
+        expect(page).to have_content t('confirmation.summary.phone', phone: '07898765432')
+        expect(page).to have_content t('confirmation.summary.address', address: 'Ross Court 23, E5 8TE')
+      end
+    end
+
+    expect(fake_api).to have_received(:post).with(
+      'repairs/v1/repairs',
+      priority: 'N',
+      problemDescription: "Room: Kitchen\nCallback requested: between 8am and 5pm\n\nMy sink is blocked",
+      propertyReference: '00000503',
+      contact: {
+        name: 'John Evans',
+        telephoneNumber: '078 98765 432',
+      },
+      workOrders: [
+        {
+          sorCode: '0078965',
+          estimatedunits: '1',
+        }
+      ]
+    )
+
+    expect(fake_api).not_to have_received(:post).with(
+      'repairs/v1/work_orders/09124578/appointments', anything, anything
     )
   end
 end

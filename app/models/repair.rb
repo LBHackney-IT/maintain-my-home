@@ -21,8 +21,7 @@ class Repair
 
   def supplier_reference
     return nil unless @repair_data.key?('workOrders')
-
-    @repair_data.fetch('workOrders')&.first&.fetch('supplierReference')
+    @repair_data.fetch('workOrders')&.first&.fetch('supplierRef')
   end
 
   def priority

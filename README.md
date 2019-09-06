@@ -1,5 +1,25 @@
 # Hackney - Report a Repair
 
+## How to start the application
+
+```bash
+$ rails server
+```
+
+## How to run the test suite
+
+```bash
+$ rspec spec
+```
+
+## System dependencies
+
+PhantomJS is required on the host machine when running the test suite:
+
+```bash
+$ brew cask install phantomjs
+```
+
 ## Configuration
 
 The application is configured using environment variables. On production these
@@ -11,7 +31,8 @@ root of the application containing environment variable assignments.
 
 The following environment variables are required to run the site:
 
-- `HACKNEY_API_ROOT` - the root of the Hackney API which is used by the site
+- `HACKNEY_API_URL` - the root of the Hackney Repairs API which is used by the site. Development and staging use the same credentials and they can be sourced from the Hackney team or from the environment variables of the staging Heroku account
+- `HACKNEY_API_TOKEN` - the API token for the Hackney Repairs API. Development and staging use the same credentials and they can be sourced from the Hackney team or from the environment variables of the staging Heroku account
 - `ENCRYPTION_SECRET` - secret used to prevent parameter tampering. Generate
   one with e.g. `rake secret`
 
@@ -44,8 +65,6 @@ The app should run successfully without these environment variables:
 - `HTTP_AUTH_USER` / `HTTP_AUTH_PASSWORD` - Set these to protect the site with
    [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 - `FLIPPER_AUTH_USER` / `FLIPPER_AUTH_PASSWORD` - As above, but for feature flag UI
-- `PROXY_API_CERT` / `PROXY_API_KEY` - Client SSL certificate and associated
-  private key - used if connecting to the Hackney API via a proxy server
 
 #### Miscellaneous
 
@@ -68,18 +87,16 @@ should be created via the Flipper UI:
   pages will return a message prompting users to call the Repairs Contact
   Centre. This is to be used when Hackney back-end systems are unavailable.
 
+## Deployment instructions
+
+This application is hosted on Heroku and configured with webhooks so that when GitHub receives a push to *origin/develop* it will automatically attempt a staging deployment, and when it receives a push to *origin/master* it will automatically attempt a production deployment.
+
 ## TODO:
 
 * Ruby version
-
-* System dependencies
 
 * Database creation
 
 * Database initialization
 
-* How to run the test suite
-
 * Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
