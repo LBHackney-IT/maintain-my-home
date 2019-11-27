@@ -183,6 +183,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
             {
               'sorCode' => '0078965',
               'workOrderReference' => '09124578',
+              'supplierRef' => 'A3'
             },
           ]
         )
@@ -197,6 +198,7 @@ RSpec.feature 'Resident can see a confirmation of their repair request' do
             {
               'sorCode' => '0078965',
               'workOrderReference' => '09124578',
+              'supplierRef' => 'A3'
             },
           ]
         )

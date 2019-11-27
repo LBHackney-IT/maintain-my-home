@@ -33,9 +33,8 @@ class ContactDetailsController < ApplicationController
   end
 
   def save_and_log_repair
-    result =
-      CreateRepair.new.call(answers: selected_answer_store.selected_answers)
-    GoogleSheetLogger.new.call(result, 'booking')
+    result = CreateRepair.new.call(answers: selected_answer_store.selected_answers)
+    GoogleSheetLoggingJob.perform_later(result.attributes, 'booking')
     result
   end
 end
