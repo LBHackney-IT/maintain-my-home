@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'business_time'
+gem 'delayed_job_active_record'
 gem 'faker' # Use in all environments until we have a real API
 gem 'faraday'
 gem 'faraday_middleware'
