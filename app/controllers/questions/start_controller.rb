@@ -1,7 +1,8 @@
 module Questions
   class StartController < ApplicationController
     def index
-      if params[:keep_address]
+      if params[:keep_address] && session[:selected_answers]
+
         selected_answer_store.reset_repair_questions!
       else
         reset_session
