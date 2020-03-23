@@ -15,6 +15,7 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: HackneyRepairs_development
+          POSTGRES_HOST_AUTH_METHOD: trust
       - image: circleci/redis:4.0.14
 
     working_directory: ~/repo
