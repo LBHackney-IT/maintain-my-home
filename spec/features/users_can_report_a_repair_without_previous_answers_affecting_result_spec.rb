@@ -25,6 +25,7 @@ RSpec.feature 'Users can report a repair without previous answers affecting the 
           {
             'sorCode' => '0078965',
             'workOrderReference' => '09124578',
+            'supplierRef' => 'A3'
           },
         ],
       )

@@ -10,13 +10,13 @@ class GoogleSheetLogger
     @worksheet = @spreadsheet.worksheets[0]
   end
 
-  def call(repair, callback)
+  def call(repair_attributes, callback)
     row = @worksheet.num_rows + 1
-    @worksheet[row, 1] = Time.zone.now.strftime('%F %R')
-    @worksheet[row, 2] = repair.request_reference
-    @worksheet[row, 3] = repair.sor_code
-    @worksheet[row, 4] = repair.supplier_reference
-    @worksheet[row, 5] = repair.priority
+    @worksheet[row, 1] = repair_attributes[:requested_at]
+    @worksheet[row, 2] = repair_attributes[:request_reference]
+    @worksheet[row, 3] = repair_attributes[:sor_code]
+    @worksheet[row, 4] = repair_attributes[:supplier_reference]
+    @worksheet[row, 5] = repair_attributes[:priority]
     @worksheet[row, 6] = callback
     @worksheet.save
   end

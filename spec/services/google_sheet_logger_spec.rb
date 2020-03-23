@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe GoogleSheetLogger do
   describe '#call' do
     it 'posts details to the sheet' do
-      fake_repair = instance_double(Repair)
-      allow(fake_repair).to receive(:request_reference).and_return('01234')
-      allow(fake_repair).to receive(:sor_code).and_return('5678')
-      allow(fake_repair).to receive(:supplier_reference).and_return('W1')
-      allow(fake_repair).to receive(:priority).and_return('N')
+      repair_attributes = {
+        requested_at: '2019-11-27 14:25',
+        request_reference: '01234',
+        sor_code: '5678',
+        supplier_reference: 'W1',
+        priority: 'N'
+      }
 
       fake_session = double
       fake_spreadsheet = double
@@ -27,8 +29,9 @@ RSpec.describe GoogleSheetLogger do
       allow(GoogleDrive::Session).to receive(:from_service_account_key)
         .and_return(fake_session)
 
-      GoogleSheetLogger.new.call(fake_repair, 'callback')
+      GoogleSheetLogger.new.call(repair_attributes, 'callback')
 
+      expect(fake_worksheet).to have_received(:[]=).with(2, 1, '2019-11-27 14:25')
       expect(fake_worksheet).to have_received(:[]=).with(2, 2, '01234')
       expect(fake_worksheet).to have_received(:[]=).with(2, 3, '5678')
       expect(fake_worksheet).to have_received(:[]=).with(2, 4, 'W1')

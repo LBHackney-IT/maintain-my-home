@@ -27,4 +27,14 @@ class Repair
   def priority
     @repair_data.fetch('priority')
   end
+
+  def attributes
+    {
+      requested_at: Time.zone.now.strftime('%F %R'),
+      request_reference: request_reference,
+      sor_code: sor_code,
+      supplier_reference: supplier_reference,
+      priority: priority
+    }
+  end
 end

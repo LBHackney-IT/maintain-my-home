@@ -23,6 +23,7 @@ RSpec.feature 'Residents see a useful message when no appointments available' do
           {
             'sorCode' => '0078965',
             'workOrderReference' => '09124578',
+            'supplierRef' => 'A3'
           },
         ]
       )
