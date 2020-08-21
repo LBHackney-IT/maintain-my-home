@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Questions::StartController do
+  describe '#index' do
+    it 'only resets the questions if there are answers in the session' do
+      get :index, params: { keep_address: true }, session: nil
+
+      expect(response).to have_http_status 200
+    end
+  end
+
   describe '#submit' do
     context 'shows different content based on user choice' do
       it 'shows the gas page' do
